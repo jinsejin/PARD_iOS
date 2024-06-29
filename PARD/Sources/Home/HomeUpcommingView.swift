@@ -10,6 +10,7 @@ import Then
 import SnapKit
 
 class HomeUpcommingView : UIView {
+    private weak var viewController : UIViewController?
     private let upcommingLabel = UILabel().then {
         $0.font = .pardFont.head2
         $0.text = "🗓️ UPCOMMING EVENT 🗓️"
@@ -62,11 +63,15 @@ class HomeUpcommingView : UIView {
         $0.font = .pardFont.body3
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(viewController : UIViewController) {
+        self.init(frame: .zero)
+        self.viewController = viewController
         setUpUI()
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -129,6 +134,7 @@ class HomeUpcommingView : UIView {
     }
     
     @objc private func tappedmoreButton() {
-        
+        let nextViewController = CalendarViewController()
+        viewController?.navigationController?.setViewControllers([nextViewController], animated: false)
     }
 }
