@@ -14,6 +14,7 @@
 		0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */; };
 		0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */; };
 		0D70EC4B2C2E7F8800FDE559 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */; };
+		0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */; };
 		0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */; };
 		0DAFA0E22BA74EF30092FEB0 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */; };
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
@@ -63,6 +64,7 @@
 		0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUpcommingView.swift; sourceTree = "<group>"; };
 		0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
+		0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamBurgerTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CDF22B96DA67007A21E4 /* CalendarView.swift */,
+				0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				0D0ADFDB2BAADD1A00094D08 /* PardNotionLinkCollectionViewCell.swift in Sources */,
 				2176515B2B947ABE00121AB2 /* +Font.swift in Sources */,
 				0DC5CE012B96DBA4007A21E4 /* PopUpModalViewController.swift in Sources */,
+				0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */,
 				0DC5CDFD2B96DB28007A21E4 /* PardAppModel.swift in Sources */,
 				21A6857A2B9C893E006F6D9E /* AppleLoginViewController.swift in Sources */,
 				0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */,

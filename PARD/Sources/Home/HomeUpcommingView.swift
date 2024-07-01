@@ -135,6 +135,6 @@ class HomeUpcommingView : UIView {
     
     @objc private func tappedmoreButton() {
         let nextViewController = CalendarViewController()
-        viewController?.navigationController?.setViewControllers([nextViewController], animated: false)
+        viewController?.navigationController?.pushViewController(nextViewController, animated: false)
     }
 }
