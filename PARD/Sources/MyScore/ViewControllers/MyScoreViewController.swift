@@ -365,7 +365,7 @@ class MyScoreViewController: UIViewController {
     private func setupScoreStatusView() {
         let scoreStatusLabel = UILabel().then {
             $0.text = "내 점수 현황"
-            $0.font = UIFont.pardFont.head2
+            $0.font = UIFont.pardFont.head1
             $0.textColor = .white
             $0.textAlignment = .left
         }
@@ -419,6 +419,19 @@ class MyScoreViewController: UIViewController {
             $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-228)
         }
         
+        let separatorView = UIView().then {
+            $0.backgroundColor = .pard.gray30
+        }
+        
+        scoreStatusView.addSubview(separatorView)
+        
+        separatorView.snp.makeConstraints {
+            $0.centerX.equalTo(scoreStatusView)
+            $0.centerY.equalTo(scoreStatusView)
+            $0.width.equalTo(1)
+            $0.height.equalTo(44)
+        }
+    
         let penaltyPointsLabel = UILabel().then {
             $0.text = "벌점"
             $0.font = UIFont.pardFont.body3
