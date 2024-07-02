@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PARD_DesignSystem
 
 class MyScoreViewController: UIViewController {
     
@@ -21,9 +22,10 @@ class MyScoreViewController: UIViewController {
         setupRankingButton()
         setupCrownImages()
         setupScoreView()
+        setupScoreStatusView() // 내 점수 현황 추가
+
     }
     
-    // Navigation 설정
     private func setNavigation() {
         self.navigationItem.title = "내 점수"
         if let navigationBar = self.navigationController?.navigationBar {
@@ -127,7 +129,6 @@ class MyScoreViewController: UIViewController {
         }
         view.addSubview(goldNameLabel)
         
-        // Silver Medal
         let silverRingImageView = UIImageView(image: UIImage(named: "silverRing"))
         view.addSubview(silverRingImageView)
         
@@ -361,6 +362,93 @@ class MyScoreViewController: UIViewController {
         }
     }
 
+    private func setupScoreStatusView() {
+        let scoreStatusLabel = UILabel().then {
+            $0.text = "내 점수 현황"
+            $0.font = UIFont.pardFont.head2
+            $0.textColor = .white
+            $0.textAlignment = .left
+        }
+        view.addSubview(scoreStatusLabel)
+        
+        scoreStatusLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(367)
+            $0.leading.equalToSuperview().offset(28)
+            $0.trailing.equalToSuperview().offset(260)
+        }
+        
+        let scoreStatusView = UIView().then {
+            $0.backgroundColor = UIColor.pard.blackCard
+            $0.layer.cornerRadius = 8
+        }
+        view.addSubview(scoreStatusView)
+        
+        scoreStatusView.snp.makeConstraints {
+            $0.top.equalTo(scoreStatusLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().offset(-24)
+            $0.height.equalTo(92)
+            $0.width.equalTo(327)
+        }
+        
+        let partPointsLabel = UILabel().then {
+            $0.text = "파트 포인트"
+            $0.font = UIFont.pardFont.body2
+            $0.textColor = .pard.gray10
+            $0.textAlignment = .center
+        }
+        scoreStatusView.addSubview(partPointsLabel)
+        
+        partPointsLabel.snp.makeConstraints {
+            $0.top.equalTo(scoreStatusView.snp.top).offset(24)
+            $0.leading.equalTo(scoreStatusView.snp.leading).offset(54.5)
+            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-217.5)
+        }
+        
+        let partPointsValueLabel = UILabel().then {
+            $0.text = "+7점"
+            $0.font = UIFont.pardFont.head2
+            $0.textColor = UIColor.pard.primaryGreen
+            $0.textAlignment = .center
+        }
+        scoreStatusView.addSubview(partPointsValueLabel)
+        
+        partPointsValueLabel.snp.makeConstraints {
+            $0.top.equalTo(scoreStatusView.snp.top).offset(48)
+            $0.leading.equalTo(scoreStatusView.snp.leading).offset(65)
+            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-228)
+        }
+        
+        let penaltyPointsLabel = UILabel().then {
+            $0.text = "벌점"
+            $0.font = UIFont.pardFont.body3
+            $0.textColor = .pard.gray10
+            $0.textAlignment = .center
+        }
+        scoreStatusView.addSubview(penaltyPointsLabel)
+        
+        penaltyPointsLabel.snp.makeConstraints {
+            $0.top.equalTo(scoreStatusView.snp.top).offset(24)
+            $0.leading.equalTo(scoreStatusView.snp.leading).offset(234.5)
+            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-71.5)
+        }
+        
+        let penaltyPointsValueLabel = UILabel().then {
+            $0.text = "-1점"
+            $0.font = UIFont.pardFont.head2
+            $0.textColor = UIColor.pard.errorRed
+            $0.textAlignment = .center
+            
+        }
+        scoreStatusView.addSubview(penaltyPointsValueLabel)
+        
+        penaltyPointsValueLabel.snp.makeConstraints {
+            $0.top.equalTo(scoreStatusView.snp.top).offset(48)
+            $0.leading.equalTo(scoreStatusView.snp.leading).offset(230.5)
+            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-67.5)
+        }
+    }
+    
     @objc private func rankingButtonTapped() {
         let rankingViewController = RankingViewController()
         navigationController?.pushViewController(rankingViewController, animated: true)

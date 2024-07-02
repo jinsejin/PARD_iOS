@@ -111,7 +111,6 @@ class MyPageViewController: UIViewController {
             make.leading.equalTo(feedbackView.snp.leading).offset(363)
             make.top.equalTo(feedbackActionView.snp.top).offset(33)
             make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
-           
         }
 
         feedbackArrowImageView2.snp.makeConstraints { make in
@@ -282,11 +281,14 @@ class MyPageViewController: UIViewController {
     }
     
     @objc private func arrowButton2Tapped() {
-        if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
-            UIApplication.shared.open(url)
-        }
+        let myScoreViewController = MyScoreViewController()
+        navigationController?.pushViewController(myScoreViewController, animated: true)
+    //  if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
+//            UIApplication.shared.open(url)
+//        }
     }
     
+   
     private let myPageLabel: UILabel = {
         let myPageLabel = UILabel()
         myPageLabel.text = "마이 페이지"
