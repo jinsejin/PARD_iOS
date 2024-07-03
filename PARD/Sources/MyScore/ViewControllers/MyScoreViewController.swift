@@ -15,10 +15,10 @@ class MyScoreViewController: UIViewController {
     private var toolTipView: ToolTipView?
     
     var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
-        ("스터디", "AI 스터디\n참여", "08.23(토)", "+1점", UIColor.pard.gray30),
-        ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토)", "+5점", UIColor.pard.gray30),
-        ("벌점", "2차 세미나\n결석", "08.16(토)", "-1점", UIColor.pard.gray30),
-        ("정보", "슬랙\n정보 공유", "08.09(토)", "+1점", UIColor.pard.gray30)
+        ("스터디", "AI 스터디\n참여", "08.23(토) |", "+1점", UIColor.pard.gray30),
+        ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토) | ", "+5점", UIColor.pard.gray30),
+        ("벌점", "2차 세미나\n결석", "08.16(토) | ", "-1점", UIColor.pard.gray30),
+        ("정보", "슬랙\n정보 공유", "08.09(토) | ", "+1점", UIColor.pard.gray30)
     ]
     
     override func viewDidLoad() {
@@ -564,73 +564,71 @@ class MyScoreViewController: UIViewController {
         
         private func setupUI() {
             contentView.backgroundColor = .clear
-
+            
             backgroundCardView.backgroundColor = .pard.blackCard
             backgroundCardView.layer.borderWidth = 1
             backgroundCardView.layer.borderColor = UIColor.pard.blackBackground.cgColor
             contentView.addSubview(backgroundCardView)
-
+            
             tagLabel.font = UIFont.pardFont.body2
             tagLabel.textAlignment = .center
             tagLabel.layer.cornerRadius = 8
             tagLabel.layer.borderWidth = 1
             tagLabel.layer.masksToBounds = true
-
+            
             titleLabel.font = UIFont.pardFont.body4
             titleLabel.textColor = .pard.gray10
             titleLabel.textAlignment = .center
             titleLabel.numberOfLines = 0
-
+            
             dateLabel.font = UIFont.pardFont.body3
             dateLabel.textColor = .pard.gray30
             dateLabel.textAlignment = .left
-
+            
             pointsLabel.font = UIFont.pardFont.body3
             pointsLabel.textColor = .pard.gray30
-            pointsLabel.textAlignment = .left
-
+            pointsLabel.textAlignment = .right
+            
             backgroundCardView.addSubview(tagLabel)
             backgroundCardView.addSubview(titleLabel)
             backgroundCardView.addSubview(dateLabel)
             backgroundCardView.addSubview(pointsLabel)
-
+            
             backgroundCardView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
-
+            
             tagLabel.snp.makeConstraints { make in
                 make.top.equalTo(backgroundCardView).offset(24)
                 make.centerX.equalTo(backgroundCardView)
                 make.width.equalTo(56)
                 make.height.equalTo(24)
             }
-
+            
             titleLabel.snp.makeConstraints { make in
                 make.top.equalTo(tagLabel.snp.bottom).offset(12)
                 make.leading.equalTo(backgroundCardView).offset(12)
                 make.trailing.equalTo(backgroundCardView).offset(-12)
             }
-
+            
             dateLabel.snp.makeConstraints { make in
                 make.top.equalTo(titleLabel.snp.bottom).offset(8)
                 make.leading.equalTo(backgroundCardView).offset(28)
-                make.trailing.equalTo(backgroundCardView).offset(64)
             }
-
+            
             pointsLabel.snp.makeConstraints { make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(8)
-                make.leading.equalTo(backgroundCardView).offset(92)
+                make.top.equalTo(dateLabel.snp.top)
                 make.trailing.equalTo(backgroundCardView).offset(-28)
             }
         }
-
+        
         func configure(with record: (tag: String, title: String, date: String, points: String, pointsColor: UIColor)) {
             tagLabel.text = record.tag
             titleLabel.text = record.title
             dateLabel.text = record.date
             pointsLabel.text = record.points
             pointsLabel.textColor = record.pointsColor
-
+            
             if record.tag == "벌점" {
                 tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
                 tagLabel.textColor = .pard.errorRed
@@ -642,7 +640,6 @@ class MyScoreViewController: UIViewController {
             }
         }
     }
-
 
     
     @objc private func rankingButtonTapped() {
