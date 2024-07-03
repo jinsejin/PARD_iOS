@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
         view.layer.masksToBounds = true
     }
     
-    private let upcommingView = HomeUpcommingView().then {
+    private lazy var upcommingView = HomeUpcommingView(viewController : self).then {
         view in
         view.backgroundColor = .pard.blackCard
         view.layer.cornerRadius = 8.0

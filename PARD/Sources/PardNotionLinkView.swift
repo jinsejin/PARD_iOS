@@ -62,6 +62,13 @@ extension PardNotionLinkView : UICollectionViewDataSource, UICollectionViewDeleg
         cell.backgroundColor = .pard.gra
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       let pardNotionData = PardNotionLinkData.menuTableModel[indexPath.row]
+       if let url = URL(string: pardNotionData.notionLink) {
+           UIApplication.shared.open(url, options: [:], completionHandler: nil)
+       }
+   }
 }
 
 extension PardNotionLinkView : UICollectionViewDelegateFlowLayout {
@@ -78,11 +85,11 @@ struct PardNotionLinkData {
 
 extension PardNotionLinkData {
    static let menuTableModel = [
-        PardNotionLinkData(title: "전체", notionLink: "PARD 노션"),
-        PardNotionLinkData(title: "기획", notionLink: "PARD 노션"),
-        PardNotionLinkData(title: "디자인", notionLink: "PARD 노션"),
-        PardNotionLinkData(title: "웹", notionLink: "PARD 노션"),
-        PardNotionLinkData(title: "서버", notionLink: "PARD 노션"),
-        PardNotionLinkData(title: "iOS", notionLink: "PARD 노션")
+        PardNotionLinkData(title: "전체", notionLink: "https://www.notion.so/we-pard/PARD-3-40d40282e3f3431aa70bea7ab740ee21?pvs=4"),
+        PardNotionLinkData(title: "기획", notionLink: "https://www.notion.so/we-pard/ac25d42d9b3646079f67e312a3071e2a?pvs=4"),
+        PardNotionLinkData(title: "디자인", notionLink: "https://www.notion.so/we-pard/cbc88d0f2f9845de855b6070e8eeda86?pvs=4"),
+        PardNotionLinkData(title: "웹", notionLink: "https://www.notion.so/we-pard/e759b19bcff74d5985208258e958fc07?pvs=4"),
+        PardNotionLinkData(title: "서버", notionLink: "https://www.notion.so/we-pard/38ab70a2d2cd441a905e0a6953a10367?pvs=4"),
+        PardNotionLinkData(title: "iOS", notionLink: "https://www.notion.so/we-pard/iOS-e4c415e2e9c447f3ba5ab2747a613d00?pvs=4")
     ]
 }
