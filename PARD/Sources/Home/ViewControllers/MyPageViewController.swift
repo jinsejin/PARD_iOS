@@ -12,7 +12,6 @@ class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         setupConstraints()
         setupGestureRecognizers()
@@ -375,7 +374,7 @@ class MyPageViewController: UIViewController {
     
     private let statusLabel1: UILabel = {
         let label = UILabel()
-        label.text = "2기"
+        label.text = "\(userGeneration)기"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
@@ -388,7 +387,7 @@ class MyPageViewController: UIViewController {
 
     private let statusLabel2: UILabel = {
         let label = UILabel()
-        label.text = "디자인 파트"
+        label.text = userPart
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
@@ -400,7 +399,7 @@ class MyPageViewController: UIViewController {
     
     private let statusLabel3: UILabel = {
         let label = UILabel()
-        label.text = "거친파도"
+        label.text = userRole
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
@@ -423,7 +422,7 @@ class MyPageViewController: UIViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "김파드 님"
+        label.text = "\(userName) 님"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
