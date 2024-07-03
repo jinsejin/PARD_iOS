@@ -15,7 +15,7 @@ class MyScoreViewController: UIViewController {
     private var toolTipView: ToolTipView?
     
     var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
-        ("스터디", "AI 스터디 참여", "08.23(토)", "+1점", UIColor.pard.gray30),
+        ("스터디", "AI 스터디\n참여", "08.23(토)", "+1점", UIColor.pard.gray30),
         ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토)", "+5점", UIColor.pard.gray30),
         ("벌점", "2차 세미나\n결석", "08.16(토)", "-1점", UIColor.pard.gray30),
         ("정보", "슬랙\n정보 공유", "08.09(토)", "+1점", UIColor.pard.gray30)
@@ -542,8 +542,8 @@ class MyScoreViewController: UIViewController {
         
         scoreRecordsView.configure(with: scoreRecords)
     }
-
-
+    
+    
     
     class ScoreRecordCell: UICollectionViewCell {
         
@@ -573,16 +573,15 @@ class MyScoreViewController: UIViewController {
             contentView.addSubview(backgroundCardView)
             
             tagLabel.font = UIFont.pardFont.body2
-            tagLabel.textColor = .pard.primaryPurple
             tagLabel.textAlignment = .center
             tagLabel.layer.cornerRadius = 8
             tagLabel.layer.borderWidth = 1
-            tagLabel.layer.borderColor = UIColor.pard.primaryPurple.cgColor
             tagLabel.layer.masksToBounds = true
             
             titleLabel.font = UIFont.pardFont.body4
             titleLabel.textColor = .pard.gray10
             titleLabel.textAlignment = .center
+            titleLabel.numberOfLines = 0
             
             dateLabel.font = UIFont.pardFont.body3
             dateLabel.textColor = .pard.gray10
@@ -602,26 +601,27 @@ class MyScoreViewController: UIViewController {
             }
             
             tagLabel.snp.makeConstraints { make in
-                make.top.equalTo(backgroundCardView).offset(20)
-                make.leading.equalTo(backgroundCardView).offset(44)
-                make.trailing.equalTo(backgroundCardView).offset(-44)
+                make.top.equalTo(backgroundCardView).offset(24)
+                make.centerX.equalTo(backgroundCardView)
+                make.width.equalTo(56)
+                make.height.equalTo(24)
             }
             
             titleLabel.snp.makeConstraints { make in
-                make.top.equalTo(backgroundCardView).offset(56)
+                make.top.equalTo(tagLabel.snp.bottom).offset(12)
                 make.leading.equalTo(backgroundCardView).offset(12)
                 make.trailing.equalTo(backgroundCardView).offset(-12)
             }
             
             dateLabel.snp.makeConstraints { make in
-                make.top.equalTo(backgroundCardView).offset(100)
+                make.top.equalTo(titleLabel.snp.bottom).offset(8)
                 make.leading.equalTo(backgroundCardView).offset(28)
                 make.trailing.equalTo(backgroundCardView).offset(-64)
             }
             
             pointsLabel.snp.makeConstraints { make in
-                make.top.equalTo(backgroundCardView).offset(100)
-                make.leading.equalTo(backgroundCardView).offset(92)
+                make.top.equalTo(dateLabel.snp.top)
+                make.leading.equalTo(dateLabel.snp.trailing).offset(8)
                 make.trailing.equalTo(backgroundCardView).offset(-28)
             }
         }
@@ -632,8 +632,19 @@ class MyScoreViewController: UIViewController {
             dateLabel.text = record.date
             pointsLabel.text = record.points
             pointsLabel.textColor = record.pointsColor
+            
+            if record.tag == "벌점" {
+                tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
+                tagLabel.textColor = .pard.errorRed
+                tagLabel.backgroundColor = .clear
+            } else {
+                tagLabel.layer.borderColor = UIColor.pard.primaryPurple.cgColor
+                tagLabel.textColor = .pard.primaryPurple
+                tagLabel.backgroundColor = .clear
+            }
         }
     }
+
 
     
     @objc private func rankingButtonTapped() {
