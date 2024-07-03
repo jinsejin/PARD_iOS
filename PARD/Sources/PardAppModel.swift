@@ -33,11 +33,11 @@ struct User: Codable {
     let generation: String
     
     init(part: String, name: String, role: String, generation: String) {
-            self.part = part
-            self.name = name
-            self.role = role
-            self.generation = generation
-        }
+        self.part = part
+        self.name = name
+        self.role = role
+        self.generation = generation
+    }
 }
 
 let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
