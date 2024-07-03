@@ -45,6 +45,7 @@
 		21A6857A2B9C893E006F6D9E /* AppleLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A685792B9C893E006F6D9E /* AppleLoginViewController.swift */; };
 		21A6857C2B9C8967006F6D9E /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */; };
 		21A6857E2B9CBFC6006F6D9E /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */; };
+		9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */; };
 		90C007C52B95D24C0056D724 /* MainLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007C42B95D24C0056D724 /* MainLoginViewController.swift */; };
 		90C007C72B95D2670056D724 /* UserInfoPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007C62B95D2670056D724 /* UserInfoPolicyViewController.swift */; };
 		90C007CA2B95D2890056D724 /* UserAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007C92B95D2890056D724 /* UserAuthenticationViewController.swift */; };
@@ -96,6 +97,7 @@
 		21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		42AEE204550D4434A7D54FD5 /* Pods_PARD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PARD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		552E28987AB486312261E2E4 /* Pods-PARD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PARD.debug.xcconfig"; path = "Target Support Files/Pods-PARD/Pods-PARD.debug.xcconfig"; sourceTree = "<group>"; };
+		9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRecordsView.swift; sourceTree = "<group>"; };
 		90C007C42B95D24C0056D724 /* MainLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginViewController.swift; sourceTree = "<group>"; };
 		90C007C62B95D2670056D724 /* UserInfoPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPolicyViewController.swift; sourceTree = "<group>"; };
 		90C007C92B95D2890056D724 /* UserAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CDF42B96DA9B007A21E4 /* MyScoreView.swift */,
+				9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				90C007CC2B95D2A40056D724 /* HomeTabBarViewController.swift in Sources */,
 				2123A97F2BA73640009C60BF /* ReaderViewController.swift in Sources */,
 				0DC5CDF12B96DA05007A21E4 /* HomeTopView.swift in Sources */,
+				9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */,
 				0D0ADFD92BAAD8EC00094D08 /* PardNotionLinkView.swift in Sources */,
 				0DC5CE042B96DBC8007A21E4 /* PopUpModalView.swift in Sources */,
 				0DC5CDF92B96DAF0007A21E4 /* HamburgerBarViewController.swift in Sources */,

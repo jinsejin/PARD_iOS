@@ -11,6 +11,15 @@ import PARD_DesignSystem
 class MyScoreViewController: UIViewController {
     
     let pardnerShipLabel = UILabel()
+    let scoreRecordsView = ScoreRecordsView()
+    private var toolTipView: ToolTipView?
+    
+    var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
+        ("스터디", "AI 스터디 참여", "08.23(토)", "+1점", UIColor.pard.gray30),
+        ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토)", "+5점", UIColor.pard.gray30),
+        ("벌점", "2차 세미나\n결석", "08.16(토)", "-1점", UIColor.pard.gray30),
+        ("정보", "슬랙\n정보 공유", "08.09(토)", "+1점", UIColor.pard.gray30)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +31,8 @@ class MyScoreViewController: UIViewController {
         setupRankingButton()
         setupCrownImages()
         setupScoreView()
-        setupScoreStatusView() // 내 점수 현황 추가
-
+        setupScoreStatusView()
+        setupScoreRecordsView()
     }
     
     private func setNavigation() {
@@ -37,6 +46,8 @@ class MyScoreViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
+        
+        
     }
     
     @objc func backButtonTapped(){
@@ -72,8 +83,8 @@ class MyScoreViewController: UIViewController {
             $0.height.equalTo(36)
         }
     }
-
-
+    
+    
     
     private func setupRankingButton() {
         let rankingButton = UIButton(type: .system).then {
@@ -98,8 +109,8 @@ class MyScoreViewController: UIViewController {
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         rankingButton.setAttributedTitle(attributedString, for: .normal)
     }
-
-
+    
+    
     private func setupRankingMedals() {
         // Gold Medal
         let goldRingImageView = UIImageView(image: UIImage(named: "goldRing"))
@@ -198,7 +209,7 @@ class MyScoreViewController: UIViewController {
             $0.leading.equalToSuperview().offset(62)
             $0.top.equalToSuperview().offset(179)
         }
-
+        
         
         goldNameLabel.snp.makeConstraints {
             $0.leading.equalTo(goldRingImageView.snp.trailing).offset(8)
@@ -311,7 +322,7 @@ class MyScoreViewController: UIViewController {
         
         let myScoreLabel = UILabel().then {
             $0.text = "파트 내 랭킹"
-            $0.font = UIFont.pardFont.body1
+            $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
@@ -337,7 +348,7 @@ class MyScoreViewController: UIViewController {
         
         let totalScoreLabel = UILabel().then {
             $0.text = "전체 랭킹"
-            $0.font = UIFont.pardFont.body1
+            $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
@@ -361,7 +372,7 @@ class MyScoreViewController: UIViewController {
             $0.centerX.equalTo(totalScoreBorderView.snp.centerX)
         }
     }
-
+    
     private func setupScoreStatusView() {
         let scoreStatusLabel = UILabel().then {
             $0.text = "내 점수 현황"
@@ -431,7 +442,7 @@ class MyScoreViewController: UIViewController {
             $0.width.equalTo(1)
             $0.height.equalTo(44)
         }
-    
+        
         let penaltyPointsLabel = UILabel().then {
             $0.text = "벌점"
             $0.font = UIFont.pardFont.body3
@@ -460,7 +471,170 @@ class MyScoreViewController: UIViewController {
             $0.leading.equalTo(scoreStatusView.snp.leading).offset(230.5)
             $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-67.5)
         }
+        
+        let questionImageButton = UIButton().then {
+            $0.setImage(UIImage(named: "question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        view.addSubview(questionImageButton)
+        
+        questionImageButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(257)
+            $0.top.equalToSuperview().offset(538)
+            $0.trailing.equalToSuperview().offset(-104)
+            $0.width.height.equalTo(24)
+        }
+        
+        questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
     }
+    
+    
+    
+    @objc private func tappedQuestionButton() {
+        
+    }
+    
+    private func setupScoreRecordsView() {
+        let scoreRecordsTitleLabel = UILabel().then {
+            $0.text = "점수 기록"
+            $0.font = UIFont.pardFont.head1
+            $0.textColor = .white
+            $0.textAlignment = .left
+        }
+        view.addSubview(scoreRecordsTitleLabel)
+        
+        let scorePolicyLabel = UILabel().then {
+            $0.text = "점수정책 확인하기"
+            $0.font = UIFont.pardFont.body2
+            $0.textColor = .pard.primaryPurple
+            $0.textAlignment = .right
+        }
+        view.addSubview(scorePolicyLabel)
+        
+        let questionImageView = UIImageView(image: UIImage(named: "questionImageMark"))
+        view.addSubview(questionImageView)
+        
+        scoreRecordsTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(531)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().offset(-280)
+        }
+        
+        questionImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(538)
+            $0.leading.equalToSuperview().offset(257)
+            $0.trailing.equalToSuperview().offset(-104)
+        }
+        
+        scorePolicyLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(537)
+            $0.leading.equalToSuperview().offset(273)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        view.addSubview(scoreRecordsView)
+        
+        scoreRecordsView.snp.makeConstraints {
+            $0.top.equalTo(scoreRecordsTitleLabel.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(136)
+            $0.width.equalTo(144)
+        }
+        
+        scoreRecordsView.configure(with: scoreRecords)
+    }
+
+
+    
+    class ScoreRecordCell: UICollectionViewCell {
+        
+        static let identifier = "ScoreRecordCell"
+        
+        let tagLabel = UILabel()
+        let titleLabel = UILabel()
+        let dateLabel = UILabel()
+        let pointsLabel = UILabel()
+        let backgroundCardView = UIView()
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            setupUI()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        private func setupUI() {
+            contentView.backgroundColor = .clear
+            
+            backgroundCardView.backgroundColor = .pard.blackCard
+            backgroundCardView.layer.borderWidth = 1
+            backgroundCardView.layer.borderColor = UIColor.pard.blackBackground.cgColor
+            contentView.addSubview(backgroundCardView)
+            
+            tagLabel.font = UIFont.pardFont.body2
+            tagLabel.textColor = .pard.primaryPurple
+            tagLabel.textAlignment = .center
+            tagLabel.layer.cornerRadius = 8
+            tagLabel.layer.borderWidth = 1
+            tagLabel.layer.borderColor = UIColor.pard.primaryPurple.cgColor
+            tagLabel.layer.masksToBounds = true
+            
+            titleLabel.font = UIFont.pardFont.body4
+            titleLabel.textColor = .pard.gray10
+            titleLabel.textAlignment = .center
+            
+            dateLabel.font = UIFont.pardFont.body3
+            dateLabel.textColor = .pard.gray10
+            dateLabel.textAlignment = .center
+            
+            pointsLabel.font = UIFont.pardFont.body3
+            pointsLabel.textColor = .pard.gray10
+            pointsLabel.textAlignment = .center
+            
+            backgroundCardView.addSubview(tagLabel)
+            backgroundCardView.addSubview(titleLabel)
+            backgroundCardView.addSubview(dateLabel)
+            backgroundCardView.addSubview(pointsLabel)
+            
+            backgroundCardView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            
+            tagLabel.snp.makeConstraints { make in
+                make.top.equalTo(backgroundCardView).offset(20)
+                make.leading.equalTo(backgroundCardView).offset(44)
+                make.trailing.equalTo(backgroundCardView).offset(-44)
+            }
+            
+            titleLabel.snp.makeConstraints { make in
+                make.top.equalTo(backgroundCardView).offset(56)
+                make.leading.equalTo(backgroundCardView).offset(12)
+                make.trailing.equalTo(backgroundCardView).offset(-12)
+            }
+            
+            dateLabel.snp.makeConstraints { make in
+                make.top.equalTo(backgroundCardView).offset(100)
+                make.leading.equalTo(backgroundCardView).offset(28)
+                make.trailing.equalTo(backgroundCardView).offset(-64)
+            }
+            
+            pointsLabel.snp.makeConstraints { make in
+                make.top.equalTo(backgroundCardView).offset(100)
+                make.leading.equalTo(backgroundCardView).offset(92)
+                make.trailing.equalTo(backgroundCardView).offset(-28)
+            }
+        }
+        
+        func configure(with record: (tag: String, title: String, date: String, points: String, pointsColor: UIColor)) {
+            tagLabel.text = record.tag
+            titleLabel.text = record.title
+            dateLabel.text = record.date
+            pointsLabel.text = record.points
+            pointsLabel.textColor = record.pointsColor
+        }
+    }
+
     
     @objc private func rankingButtonTapped() {
         let rankingViewController = RankingViewController()
