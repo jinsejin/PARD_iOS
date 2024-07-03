@@ -9,30 +9,33 @@ class CalendarViewController: UIViewController {
         $0.shadowColor = .pard.blackBackground
     }
     
-    private let upcomingEvents: [Event] = [
-        Event(category: "전체", title: "3차 세미나", dDay: "D-DAY", date: "9월 20일 토요일 13:00", location: "한동대학교 에벤에셀 헤브론홀"),
-        Event(category: "기획", title: "과제 제출", dDay: "D-7", date: "9월 20일 토요일 13:00", location: "한동대학교 에벤에셀 헤브론홀"),
-        Event(category: "기획", title: "과제 제출", dDay: "D-14", date: "9월 27일 토요일 13:00", location: "기획 파트 4차 세미나 일정 공지합니다.")
-    ]
+    private let upcomingEvents: [Event] = Event.upcomingEvents
     
-    private let pastEvents: [Event] = [
-        Event(category: "기획", title: "3차 세미나", dDay: "", date: "9월 20일 토요일 14:00-18:00", location: "한동대학교 에벤에셀 헤브론홀"),
-        Event(category: "기획", title: "2차 세미나", dDay: "", date: "9월 13일 토요일 14:00-18:00", location: "한동대학교 에벤에셀 헤브론홀")
-    ]
+    private let pastEvents: [Event] = Event.pastEvents
     
-    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let tableView = UITableView(frame: .zero, style: .grouped).then { tableView in
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.backgroundColor = .pard.blackBackground
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .pard.blackBackground
         setNavigation()
         setupTableView()
+        
     }
     
     private func setNavigation() {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withRenderingMode(.automatic), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .pard.gray10
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         self.title = "일정"
         self.navigationItem.leftBarButtonItem = backButton
     }
@@ -45,43 +48,36 @@ class CalendarViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: "EventCell")
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .pard.blackBackground
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(24)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.bottom.equalToSuperview()
         }
     }
 }
 
-extension CalendarViewController : UITableViewDelegate, UITableViewDataSource {
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return upcomingEvents.count
-        } else {
-            return pastEvents.count
-        }
+        return section == 0 ? upcomingEvents.count : pastEvents.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 10 : 0
-    }
+    } 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = .pard.blackBackground
         let label = UILabel()
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .pard.white100
+        label.font = .pardFont.head2
         label.text = section == 0 ? "다가오는 일정" : "지난 일정"
         headerView.addSubview(label)
         label.snp.makeConstraints { make in
@@ -96,7 +92,7 @@ extension CalendarViewController : UITableViewDelegate, UITableViewDataSource {
             let separatorView = UIView()
             separatorView.backgroundColor = .pard.blackBackground
             let separator = UIView()
-            separator.backgroundColor = .gray
+            separator.backgroundColor = .pard.gray10
             separatorView.addSubview(separator)
             separator.snp.makeConstraints { make in
                 make.height.equalTo(1)
@@ -108,12 +104,23 @@ extension CalendarViewController : UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150  // 각 셀의 높이를 100으로 설정
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as? EventTableViewCell else {
             return UITableViewCell()
         }
         let event = indexPath.section == 0 ? upcomingEvents[indexPath.row] : pastEvents[indexPath.row]
-        cell.configure(with: event)
+        cell.selectionStyle = .none
+        if indexPath.section == 0 && indexPath.row == 0 {
+            cell.categoryLabelConfigure(textColor: .pard.gray10, backGroundColor: .pard.gra)
+        } else {
+            cell.categoryLabelConfigure(textColor: .pard.gra, backGroundColor: .pard.blackCard)
+        }
+       
+        cell.dataConfigure(with: event)
         return cell
     }
 }
@@ -124,4 +131,17 @@ struct Event {
     let dDay: String
     let date: String
     let location: String
+}
+
+extension Event {
+    static let upcomingEvents: [Event] = [
+        Event(category: "전체", title: "3차 세미나", dDay: "D-DAY", date: "9월 20일 토요일 13:00", location: "한동대학교 에벤에셀 헤브론홀"),
+        Event(category: "기획", title: "과제 제출", dDay: "D-7", date: "9월 20일 토요일 13:00", location: "한동대학교 에벤에셀 헤브론홀"),
+        Event(category: "기획", title: "과제 제출", dDay: "D-14", date: "9월 27일 토요일 13:00", location: "기획 파트 4차 세미나 일정 공지합니다.")
+    ]
+    
+    static let pastEvents: [Event] = [
+        Event(category: "기획", title: "3차 세미나", dDay: "", date: "9월 20일 토요일 14:00-18:00", location: "한동대학교 에벤에셀 헤브론홀"),
+        Event(category: "기획", title: "2차 세미나", dDay: "", date: "9월 13일 토요일 14:00-18:00", location: "한동대학교 에벤에셀 헤브론홀")
+    ]
 }
