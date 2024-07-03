@@ -103,6 +103,7 @@ func getUsersMe() {
                 UserDefaults.standard.set(user.part, forKey: "userPart")
                 UserDefaults.standard.set(user.role, forKey: "userRole")
                 UserDefaults.standard.set(user.generation, forKey: "userGeneration")
+                print("===> \(user.name)")
             } catch {
                 print("🚨 Decoding Error:", error)
             }
