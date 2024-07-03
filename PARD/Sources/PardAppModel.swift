@@ -25,3 +25,23 @@ struct PardAppModel {
         
     ]
 }
+
+struct User: Codable {
+    let part: String
+    let name: String
+    let role: String
+    let generation: String
+    
+    init(part: String, name: String, role: String, generation: String) {
+            self.part = part
+            self.name = name
+            self.role = role
+            self.generation = generation
+        }
+}
+
+let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
+let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "failed"
+let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
+let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "failed"
+

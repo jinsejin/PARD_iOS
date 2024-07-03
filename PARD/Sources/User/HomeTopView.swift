@@ -8,10 +8,12 @@
 import UIKit
 import SnapKit
 import Then
+
+
 // - MARK: 원하는 View Class 사용하면 됩니다. (이름도 알맞게 변경, 추가해서 사용해주세요)
 class HomeTopView : UIView {
-    private var toolTipView: ToolTipView?
     
+    private var toolTipView: ToolTipView?
     private let reuseIdentifier = "StatusCell"
     private var isSelected : Bool = false {
         didSet {
@@ -23,10 +25,11 @@ class HomeTopView : UIView {
         $0.numberOfLines = 3
         $0.attributedText = NSMutableAttributedString()
             .head1MutableAttribute(string: "안녕하세요, ", fontSize: 18, fontColor: UIColor.pard.white100)
-            .blueHighlight("진세진", font: .pardFont.body1)
+            .blueHighlight(userName, font: .pardFont.body1)
             .head1MutableAttribute(string: "님\n", fontSize: 18, fontColor: UIColor.pard.white100)
             .head1MutableAttribute(string: "오늘도 PARD에서 함께 협업해요!", fontSize: 18, fontColor: UIColor.pard.white100)
     }
+    
     private let collectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
     }
@@ -61,6 +64,7 @@ class HomeTopView : UIView {
         super.init(frame: frame)
         setUpUI()
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -93,6 +97,7 @@ class HomeTopView : UIView {
             make.top.equalTo(collectionView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
+        
         pangulStackView.addArrangedSubview(currentPangulImage)
         pangulStackView.addArrangedSubview(nextImage)
         pangulStackView.addArrangedSubview(pangulNextLevelImge)
@@ -191,9 +196,9 @@ struct UserDataInHome {
 
 extension UserDataInHome {
     static let userDatas = [
-        UserDataInHome(userData: "3기"),
-        UserDataInHome(userData: "진세진"),
-        UserDataInHome(userData: "운영진"),
+        UserDataInHome(userData: "\(userGeneration)기"),
+        UserDataInHome(userData: userName),
+        UserDataInHome(userData: userRole),
     ]
 }
 

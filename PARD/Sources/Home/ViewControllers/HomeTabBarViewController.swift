@@ -8,6 +8,7 @@
 import UIKit
 
 class HomeTabBarViewController: UITabBarController {
+    let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
     private let floatingButton = UIButton().then { button in
         button.layer.cornerRadius = 40
         button.backgroundColor = .pard.gra
@@ -23,8 +24,10 @@ class HomeTabBarViewController: UITabBarController {
         setUpTabBarColor()
         setUpTabBarLayout()
         setUpTabBarItems()
+        getUsersMe()
         delegate = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)

@@ -14,6 +14,7 @@
 		0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */; };
 		0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */; };
 		0D70EC4B2C2E7F8800FDE559 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */; };
+		0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */; };
 		0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */; };
 		0DAFA0E22BA74EF30092FEB0 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */; };
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
@@ -38,11 +39,17 @@
 		2123A97D2BA73634009C60BF /* QrReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2123A97C2BA73634009C60BF /* QrReaderView.swift */; };
 		2123A97F2BA73640009C60BF /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2123A97E2BA73640009C60BF /* ReaderViewController.swift */; };
 		2128D7942B9991B6000F573C /* PardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2128D7932B9991B6000F573C /* PardTextField.swift */; };
+		21702BF12C3458A100134681 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF02C3458A100134681 /* APICaller.swift */; };
+		21702BF32C345AAD00134681 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF22C345AAD00134681 /* UserController.swift */; };
+		21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF42C345ABA00134681 /* ScheduleController.swift */; };
+		21702BF72C345AC600134681 /* ReasonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF62C345AC600134681 /* ReasonController.swift */; };
+		21702BF92C345AD300134681 /* QrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF82C345AD300134681 /* QrController.swift */; };
+		21702BFB2C345ADF00134681 /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFA2C345ADF00134681 /* ProjectController.swift */; };
+		21702BFD2C353E0C00134681 /* GoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */; };
 		217651512B94738800121AB2 /* PARD_DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 217651502B94738800121AB2 /* PARD_DesignSystem */; };
 		217651542B94778600121AB2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 217651532B94778600121AB2 /* SnapKit */; };
 		217651592B94779600121AB2 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 217651582B94779600121AB2 /* Then */; };
 		2176515B2B947ABE00121AB2 /* +Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176515A2B947ABE00121AB2 /* +Font.swift */; };
-		21A6857A2B9C893E006F6D9E /* AppleLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A685792B9C893E006F6D9E /* AppleLoginViewController.swift */; };
 		21A6857C2B9C8967006F6D9E /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */; };
 		21A6857E2B9CBFC6006F6D9E /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */; };
 		9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */; };
@@ -64,6 +71,7 @@
 		0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUpcommingView.swift; sourceTree = "<group>"; };
 		0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
+		0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamBurgerTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
@@ -90,9 +98,15 @@
 		2123A97C2BA73634009C60BF /* QrReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrReaderView.swift; sourceTree = "<group>"; };
 		2123A97E2BA73640009C60BF /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewController.swift; sourceTree = "<group>"; };
 		2128D7932B9991B6000F573C /* PardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PardTextField.swift; sourceTree = "<group>"; };
+		21702BF02C3458A100134681 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		21702BF22C345AAD00134681 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		21702BF42C345ABA00134681 /* ScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleController.swift; sourceTree = "<group>"; };
+		21702BF62C345AC600134681 /* ReasonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonController.swift; sourceTree = "<group>"; };
+		21702BF82C345AD300134681 /* QrController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrController.swift; sourceTree = "<group>"; };
+		21702BFA2C345ADF00134681 /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
+		21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginManager.swift; sourceTree = "<group>"; };
 		2176515A2B947ABE00121AB2 /* +Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Font.swift"; sourceTree = "<group>"; };
 		21A685772B9C84EB006F6D9E /* PARD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PARD.entitlements; sourceTree = "<group>"; };
-		21A685792B9C893E006F6D9E /* AppleLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginViewController.swift; sourceTree = "<group>"; };
 		21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		42AEE204550D4434A7D54FD5 /* Pods_PARD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PARD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +203,19 @@
 			path = Qr;
 			sourceTree = "<group>";
 		};
+		21702BEF2C34589400134681 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				21702BF02C3458A100134681 /* APICaller.swift */,
+				21702BF22C345AAD00134681 /* UserController.swift */,
+				21702BF42C345ABA00134681 /* ScheduleController.swift */,
+				21702BF62C345AC600134681 /* ReasonController.swift */,
+				21702BF82C345AD300134681 /* QrController.swift */,
+				21702BFA2C345ADF00134681 /* ProjectController.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		2176515C2B94827100121AB2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +229,7 @@
 		2176515D2B94829400121AB2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				21702BEF2C34589400134681 /* API */,
 				2123A97B2BA73626009C60BF /* Qr */,
 				0DC5CDFE2B96DB7F007A21E4 /* PopUpModal */,
 				90C007AE2B95D0C30056D724 /* User */,
@@ -228,8 +256,8 @@
 		21A685782B9C8930006F6D9E /* AppleLogin */ = {
 			isa = PBXGroup;
 			children = (
-				21A685792B9C893E006F6D9E /* AppleLoginViewController.swift */,
 				21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */,
+				21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */,
 			);
 			path = AppleLogin;
 			sourceTree = "<group>";
@@ -347,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CDF22B96DA67007A21E4 /* CalendarView.swift */,
+				0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -560,7 +589,10 @@
 				90C007CC2B95D2A40056D724 /* HomeTabBarViewController.swift in Sources */,
 				2123A97F2BA73640009C60BF /* ReaderViewController.swift in Sources */,
 				0DC5CDF12B96DA05007A21E4 /* HomeTopView.swift in Sources */,
+
+				21702BFD2C353E0C00134681 /* GoogleLoginManager.swift in Sources */,
 				9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */,
+        
 				0D0ADFD92BAAD8EC00094D08 /* PardNotionLinkView.swift in Sources */,
 				0DC5CE042B96DBC8007A21E4 /* PopUpModalView.swift in Sources */,
 				0DC5CDF92B96DAF0007A21E4 /* HamburgerBarViewController.swift in Sources */,
@@ -571,13 +603,16 @@
 				21A6857C2B9C8967006F6D9E /* AppleLoginManager.swift in Sources */,
 				0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */,
 				0D0ADFDB2BAADD1A00094D08 /* PardNotionLinkCollectionViewCell.swift in Sources */,
+				21702BF92C345AD300134681 /* QrController.swift in Sources */,
 				2176515B2B947ABE00121AB2 /* +Font.swift in Sources */,
 				0DC5CE012B96DBA4007A21E4 /* PopUpModalViewController.swift in Sources */,
+				0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */,
 				0DC5CDFD2B96DB28007A21E4 /* PardAppModel.swift in Sources */,
-				21A6857A2B9C893E006F6D9E /* AppleLoginViewController.swift in Sources */,
 				0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */,
+				21702BF32C345AAD00134681 /* UserController.swift in Sources */,
 				0DC5CDF52B96DA9B007A21E4 /* MyScoreView.swift in Sources */,
 				0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */,
+				21702BFB2C345ADF00134681 /* ProjectController.swift in Sources */,
 				90C007D22B95D2CF0056D724 /* CalendarViewController.swift in Sources */,
 				0D70EC452C2D3FFA00FDE559 /* HomePardnerShipView.swift in Sources */,
 				0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */,
@@ -586,10 +621,13 @@
 				2106ADB12B92D6A000CDA462 /* ViewController.swift in Sources */,
 				0DC5CE0A2BA0B9D1007A21E4 /* NSMutableAttributedStringExtension.swift in Sources */,
 				90C007D02B95D2BF0056D724 /* MyPageViewController.swift in Sources */,
+				21702BF12C3458A100134681 /* APICaller.swift in Sources */,
 				90C007CE2B95D2B40056D724 /* HomeViewController.swift in Sources */,
 				2106ADAD2B92D6A000CDA462 /* AppDelegate.swift in Sources */,
 				2106ADAF2B92D6A000CDA462 /* SceneDelegate.swift in Sources */,
+				21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */,
 				90C007C72B95D2670056D724 /* UserInfoPolicyViewController.swift in Sources */,
+				21702BF72C345AC600134681 /* ReasonController.swift in Sources */,
 				0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */,
 				0DC5CDFB2B96DB11007A21E4 /* PardAppManager.swift in Sources */,
 				0DC5CE082BA0B97F007A21E4 /* UIButtonExtension.swift in Sources */,
