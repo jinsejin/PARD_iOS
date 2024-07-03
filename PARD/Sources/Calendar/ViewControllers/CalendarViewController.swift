@@ -9,6 +9,12 @@ class CalendarViewController: UIViewController {
         $0.shadowColor = .pard.blackBackground
     }
     
+    private let previousAppearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackCard
+        $0.shadowColor = .pard.blackCard
+    }
+    
     private let upcomingEvents: [Event] = Event.upcomingEvents
     
     private let pastEvents: [Event] = Event.pastEvents
@@ -18,7 +24,6 @@ class CalendarViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.backgroundColor = .pard.blackBackground
-        
     }
     
     override func viewDidLoad() {
@@ -26,22 +31,25 @@ class CalendarViewController: UIViewController {
         view.backgroundColor = .pard.blackBackground
         setNavigation()
         setupTableView()
-        
     }
     
     private func setNavigation() {
+        navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withRenderingMode(.automatic), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .pard.gray10
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         self.title = "일정"
         self.navigationItem.leftBarButtonItem = backButton
     }
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.standardAppearance = previousAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
     }
     
     private func setupTableView() {
@@ -70,7 +78,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    } 
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
@@ -105,7 +113,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150  // 각 셀의 높이를 100으로 설정
+        return 150  // 각 셀의 높이를 150으로 설정
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,7 +127,6 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.categoryLabelConfigure(textColor: .pard.gra, backGroundColor: .pard.blackCard)
         }
-       
         cell.dataConfigure(with: event)
         return cell
     }
