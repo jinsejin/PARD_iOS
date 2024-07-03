@@ -18,20 +18,20 @@ class ViewController: UIViewController {
         setUi()
     }
     
-    private func showCancellablePopup(title: String, body: String, cancelHandler: (() -> Void)? = nil) {
-        ModalBuilder()
-            .add(title: title)
-            .add(body: body)
-            .add(
-                button: .cancellable(
-                    cancelButtonTitle: "예",
-                    confirmButtonTitle: "아니요",
-                    cancelButtonAction: cancelHandler,
-                    confirmButtonAction: nil
-                )
-            )
-            .show(on: self)
-    }
+//    private func showCancellablePopup(title: String, body: String, cancelHandler: (() -> Void)? = nil) {
+//        ModalBuilder()
+//            .add(title: title)
+//            .add(body: body)
+//            .add(
+//                button: .cancellable(
+//                    cancelButtonTitle: "예",
+//                    confirmButtonTitle: "아니요",
+//                    cancelButtonAction: cancelHandler,
+//                    confirmButtonAction: nil
+//                )
+//            )
+//            .show(on: self)
+//    }
     
     private lazy var titleLabel = UILabel().then{
         view.addSubview($0)
@@ -122,7 +122,7 @@ class ViewController: UIViewController {
     @objc func normalButtonTapped() {
         print("🌱 normal tapped !")
         print("change normal !")
-        showCancellablePopup(title: "test", body: "body hello")
+//        showCancellablePopup(title: "test", body: "body hello")
     }
     
     @objc func changeNormalEnable() {

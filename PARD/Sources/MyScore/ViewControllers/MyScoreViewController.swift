@@ -397,7 +397,6 @@ class MyScoreViewController: UIViewController {
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalToSuperview().offset(-24)
             $0.height.equalTo(92)
-            $0.width.equalTo(327)
         }
         
         let partPointsLabel = UILabel().then {
@@ -479,7 +478,6 @@ class MyScoreViewController: UIViewController {
             $0.leading.equalToSuperview().offset(257)
             $0.top.equalToSuperview().offset(538)
             $0.trailing.equalToSuperview().offset(-104)
-            $0.width.height.equalTo(24)
         }
         
         questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
@@ -535,7 +533,6 @@ class MyScoreViewController: UIViewController {
             $0.top.equalTo(scoreRecordsTitleLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(136)
-            $0.width.equalTo(144)
         }
         
         scoreRecordsView.configure(with: scoreRecords)
