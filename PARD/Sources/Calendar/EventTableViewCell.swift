@@ -4,17 +4,49 @@
 //
 //  Created by 진세진 on 6/30/24.
 //
-
 import UIKit
-
+import SnapKit
+import Then
 
 class EventTableViewCell: UITableViewCell {
+    private let categoryLabel = UILabel().then { label in
+        label.font = .pardFont.body2
+        label.textAlignment = .center
+        label.layer.cornerRadius = 4
+        label.layer.borderWidth = 1.0
+        label.layer.borderColor = UIColor.pard.gra.cgColor
+        label.layer.masksToBounds = true
+    }
     
-    private let categoryLabel = UILabel()
-    private let titleLabel = UILabel()
-    private let dDayLabel = UILabel()
-    private let dateLabel = UILabel()
-    private let locationLabel = UILabel()
+    private let titleLabel = UILabel().then { label in
+        label.textColor = .pard.gray10
+        label.textAlignment = .center
+        label.font = .pardFont.head2
+    }
+    
+    private let dDayLabel = UILabel().then { label in
+        label.font = .pardFont.body1
+        label.textColor = .pard.gray30
+    }
+    
+    private let dateLabel = UILabel().then { label in
+        label.font = .pardFont.body5
+        label.textColor = .pard.gray10
+    }
+    
+    private let locationLabel = UILabel().then { label in
+        label.font = .pardFont.body5
+        label.textColor = .pard.gray10
+    }
+    
+    private let stackView = UIStackView().then { stak in
+        stak.axis = .vertical
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8.0, left: 0, bottom: 8.0, right: 0))
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,41 +58,58 @@ class EventTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        backgroundColor = .darkGray
-        layer.cornerRadius = 10
-        layer.masksToBounds = true
+        backgroundColor = .pard.blackBackground
+        contentView.backgroundColor = .pard.blackCard
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
         
-        categoryLabel.textColor = .blue
-        categoryLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        stackView.addArrangedSubview(dateLabel)
+        stackView.addArrangedSubview(locationLabel)
         
-        titleLabel.textColor = .white
-        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        contentView.addSubview(stackView)
+        contentView.addSubview(categoryLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(dDayLabel)
         
-        dDayLabel.textColor = .white
-        dDayLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        categoryLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(24)
+            make.width.equalTo(45)
+            make.bottom.equalTo(stackView.snp.top).offset(-16)
+        }
         
-        dateLabel.textColor = .white
-        dateLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(23)
+            make.leading.equalTo(categoryLabel.snp.trailing).offset(8)
+        }
         
-        locationLabel.textColor = .white
-        locationLabel.font = UIFont.systemFont(ofSize: 14)
+        dDayLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(23)
+            make.trailing.equalToSuperview().offset(-24)
+            make.bottom.equalTo(stackView.snp.top).offset(-19)
+        }
         
-        let stackView = UIStackView(arrangedSubviews: [categoryLabel, titleLabel, dDayLabel, dateLabel, locationLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 4
-        stackView.alignment = .leading
-        
-        addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().offset(24)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     
-    func configure(with event: Event) {
+    func titleLabelConfigure(titleColor : UIColor , backgroundColor : UIColor) {
+        titleLabel.backgroundColor = backgroundColor
+        titleLabel.textColor = titleColor
+    }
+    
+    func dataConfigure(with event: Event) {
         categoryLabel.text = event.category
         titleLabel.text = event.title
         dDayLabel.text = event.dDay
         dateLabel.text = "일시 : \(event.date)"
         locationLabel.text = "장소 : \(event.location)"
+    }
+    
+    func categoryLabelConfigure(textColor : UIColor, backGroundColor : UIColor) {
+        categoryLabel.textColor = textColor
+        categoryLabel.backgroundColor = backGroundColor
     }
 }
