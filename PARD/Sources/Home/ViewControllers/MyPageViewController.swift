@@ -15,20 +15,35 @@ class MyPageViewController: UIViewController {
         
         setupUI()
         setupConstraints()
+        setupGestureRecognizers()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        feedbackView.layer.sublayers?.first?.frame = feedbackView.bounds
+    }
+
+
     private func setupUI() {
         view.addSubview(myPageLabel)
         
         view.addSubview(feedbackView)
         feedbackView.addSubview(feedbackLabel)
+        feedbackView.layer.insertSublayer(gradientLayer(), at: 0)
         feedbackView.addSubview(feedbackActionLabel)
-        
+        feedbackView.addSubview(feedbackActionView)
+        feedbackActionView.addSubview(feedbackActionLabel)
+        feedbackActionView.addSubview(feedbackArrowImageView)
+        feedbackActionView.addSubview(feedbackArrowImageView2)
+
         view.addSubview(infoView)
+        infoView.addSubview(statusStackView)
         view.addSubview(infoLabel)
-        view.addSubview(statusLabel1)
-        view.addSubview(statusLabel2)
-        view.addSubview(statusLabel3)
+        
+        statusLabel2.backgroundColor = UIColor(patternImage: gradientImage())
+        statusStackView.addArrangedSubview(statusLabel1)
+        statusStackView.addArrangedSubview(statusLabel2)
+        statusStackView.addArrangedSubview(statusLabel3)
         view.addSubview(nameLabel)
         
         view.addSubview(settingsLabel)
@@ -42,6 +57,8 @@ class MyPageViewController: UIViewController {
         usageGuideView.addSubview(termsOfServiceLabel)
         usageGuideView.addSubview(arrowImageView1)
         usageGuideView.addSubview(arrowImageView2)
+        usageGuideView.addSubview(arrowButton1)
+        usageGuideView.addSubview(arrowButton2)
         
         view.addSubview(accountLabel)
         view.addSubview(accountView)
@@ -54,152 +71,224 @@ class MyPageViewController: UIViewController {
     
     private func setupConstraints() {
         myPageLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(58)
+            make.left.equalTo(view.snp.left).offset(151)
+            make.right.equalTo(view.snp.right).offset(-151)
         }
         
         feedbackView.snp.makeConstraints { make in
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.height.equalTo(76)
-            make.top.equalTo(myPageLabel.snp.bottom).offset(20)
+            make.top.equalTo(myPageLabel.snp.bottom).offset(26)
         }
-
+        
         feedbackLabel.snp.makeConstraints { make in
             make.top.equalTo(feedbackView.snp.top).offset(16)
-            make.leading.equalTo(feedbackView.snp.leading).offset(16)
-            make.trailing.equalTo(feedbackActionLabel.snp.leading).offset(-10)
+            make.leading.equalTo(feedbackView.snp.leading).offset(24)
+            make.bottom.equalTo(feedbackView.snp.bottom).offset(-16)
+        }
+        
+        feedbackActionLabel.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(14)
+            make.top.equalTo(view.snp.top).offset(135)
+            make.left.equalTo(view.snp.left).offset(276)
+            make.bottom.equalTo(view.snp.bottom).offset(-663)
+        }
+        
+        feedbackActionView.snp.makeConstraints { make in
+            make.trailing.equalTo(feedbackView.snp.trailing).offset(-24)
+            make.centerY.equalTo(feedbackView.snp.centerY)
         }
 
         feedbackActionLabel.snp.makeConstraints { make in
-            make.top.equalTo(feedbackView.snp.top).offset(16)
-            make.trailing.equalTo(feedbackView.snp.trailing).offset(-16)
+            make.leading.equalTo(feedbackActionView.snp.leading)
+            make.centerY.equalTo(feedbackActionView.snp.centerY)
         }
 
+        feedbackArrowImageView.snp.makeConstraints { make in
+            make.leading.equalTo(feedbackView.snp.leading).offset(363)
+            make.top.equalTo(feedbackActionView.snp.top).offset(33)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+        }
+
+        feedbackArrowImageView2.snp.makeConstraints { make in
+            make.leading.equalTo(feedbackView.snp.leading).offset(370)
+            make.top.equalTo(feedbackActionView.snp.top).offset(33)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+        }
+        
         infoView.snp.makeConstraints { make in
-            make.width.equalTo(327)
-            make.height.equalTo(96)
-            make.top.equalTo(feedbackView.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(236)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
-
+        
         infoLabel.snp.makeConstraints { make in
             make.bottom.equalTo(infoView.snp.top).offset(-8)
             make.leading.equalTo(infoView.snp.leading)
         }
         
+        statusStackView.snp.makeConstraints { make in
+            make.top.equalTo(infoView.snp.top).offset(20)
+            make.leading.equalTo(infoView.snp.leading).offset(24)
+            make.bottom.equalTo(infoView.snp.bottom).offset(-52)
+        }
+        
         statusLabel1.snp.makeConstraints { make in
-            make.top.equalTo(infoView.snp.top).offset(8)
-            make.leading.equalTo(infoView.snp.leading).offset(16)
             make.height.equalTo(24)
+            make.width.equalTo(42)
         }
         
         statusLabel2.snp.makeConstraints { make in
-            make.top.equalTo(infoView.snp.top).offset(8)
-            make.leading.equalTo(statusLabel1.snp.trailing).offset(8)
             make.height.equalTo(24)
+            make.width.equalTo(79)
         }
         
         statusLabel3.snp.makeConstraints { make in
-            make.top.equalTo(infoView.snp.top).offset(8)
-            make.leading.equalTo(statusLabel2.snp.trailing).offset(8)
             make.height.equalTo(24)
+            make.width.equalTo(66)
         }
+    
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(statusLabel1.snp.bottom).offset(8)
-            make.leading.equalTo(infoView.snp.leading).offset(16)
-            make.bottom.equalTo(infoView.snp.bottom).offset(-8)
+            make.top.equalTo(infoView.snp.top).offset(52)
+            make.leading.equalTo(infoView.snp.leading).offset(24)
+            make.bottom.equalTo(infoView.snp.bottom).offset(-20)
         }
         
         settingsLabel.snp.makeConstraints { make in
-            make.top.equalTo(infoView.snp.bottom).offset(20)
-            make.leading.equalTo(view.snp.leading).offset(24)
+            make.top.equalTo(infoView.snp.bottom).offset(24)
+            make.leading.equalTo(infoView.snp.leading)
         }
         
         notificationSettingView.snp.makeConstraints { make in
-            make.width.equalTo(327)
-            make.height.equalTo(60)
-            make.top.equalTo(settingsLabel.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(388)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         notificationSettingLabel.snp.makeConstraints { make in
             make.centerY.equalTo(notificationSettingView)
-            make.leading.equalTo(notificationSettingView.snp.leading).offset(16)
+            make.leading.equalTo(notificationSettingView.snp.leading).offset(24)
+            make.top.equalTo(notificationSettingView.snp.top).offset(16)
+            make.bottom.equalTo(notificationSettingView.snp.bottom).offset(-16)
+            
         }
         
         notificationSwitch.snp.makeConstraints { make in
             make.centerY.equalTo(notificationSettingLabel.snp.centerY)
-            make.trailing.equalTo(notificationSettingView.snp.trailing).offset(-16)
+            make.trailing.equalTo(notificationSettingView.snp.trailing).offset(-24)
         }
-
+        
         usageGuideLabel.snp.makeConstraints { make in
-            make.top.equalTo(notificationSettingView.snp.bottom).offset(20)
-            make.leading.equalTo(view.snp.leading).offset(24)
+            make.top.equalTo(notificationSettingView.snp.bottom).offset(24)
+            make.leading.equalTo(infoView.snp.leading)
         }
         
         usageGuideView.snp.makeConstraints { make in
-            make.width.equalTo(327)
-            make.height.equalTo(100)
-            make.top.equalTo(usageGuideLabel.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(494)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         privacyPolicyLabel.snp.makeConstraints { make in
-            make.top.equalTo(usageGuideView.snp.top).offset(16)
-            make.leading.equalTo(usageGuideView.snp.leading).offset(16)
+            make.top.equalTo(usageGuideView.snp.top).offset(17)
+            make.leading.equalTo(usageGuideView.snp.leading).offset(24)
+            make.bottom.equalTo(usageGuideView.snp.bottom).offset(-61)
         }
         
         termsOfServiceLabel.snp.makeConstraints { make in
-            make.top.equalTo(privacyPolicyLabel.snp.bottom).offset(16)
-            make.leading.equalTo(usageGuideView.snp.leading).offset(16)
+            make.top.equalTo(usageGuideView.snp.top).offset(61)
+            make.leading.equalTo(usageGuideView.snp.leading).offset(24)
+            make.bottom.equalTo(usageGuideView.snp.bottom).offset(-17)
+            
         }
         
         arrowImageView1.snp.makeConstraints { make in
             make.centerY.equalTo(privacyPolicyLabel)
-            make.trailing.equalTo(usageGuideView.snp.trailing).offset(-16)
+            make.trailing.equalTo(usageGuideView.snp.trailing).offset(-24)
         }
         
         arrowImageView2.snp.makeConstraints { make in
             make.centerY.equalTo(termsOfServiceLabel)
-            make.trailing.equalTo(usageGuideView.snp.trailing).offset(-16)
+            make.trailing.equalTo(usageGuideView.snp.trailing).offset(-24)
         }
         
+        arrowButton1.snp.makeConstraints { make in
+            make.edges.equalTo(arrowImageView1).inset(-10)
+        }
+        
+        arrowButton2.snp.makeConstraints { make in
+            make.edges.equalTo(arrowImageView2).inset(-10)
+        }
+    
         accountLabel.snp.makeConstraints { make in
-            make.top.equalTo(usageGuideView.snp.bottom).offset(20)
-            make.leading.equalTo(view.snp.leading).offset(24)
+            make.top.equalTo(usageGuideView.snp.bottom).offset(24)
+            make.leading.equalTo(infoView.snp.leading)
         }
         
         accountView.snp.makeConstraints { make in
-            make.width.equalTo(327)
-            make.height.equalTo(100)
-            make.top.equalTo(accountLabel.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(646)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         logoutLabel.snp.makeConstraints { make in
-            make.top.equalTo(accountView.snp.top).offset(16)
-            make.leading.equalTo(accountView.snp.leading).offset(16)
+            make.top.equalTo(accountView.snp.top).offset(17)
+            make.leading.equalTo(accountView.snp.leading).offset(24)
+            make.bottom.equalTo(accountView.snp.bottom).offset(-61)
         }
         
         deleteAccountLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoutLabel.snp.bottom).offset(16)
-            make.leading.equalTo(accountView.snp.leading).offset(16)
+            make.top.equalTo(accountView.snp.top).offset(61)
+            make.leading.equalTo(accountView.snp.leading).offset(24)
+            make.bottom.equalTo(accountView.snp.bottom).offset(-17)
         }
         
         arrowImageView3.snp.makeConstraints { make in
             make.centerY.equalTo(logoutLabel)
-            make.trailing.equalTo(accountView.snp.trailing).offset(-16)
+            make.trailing.equalTo(accountView.snp.trailing).offset(-24)
         }
         
         arrowImageView4.snp.makeConstraints { make in
             make.centerY.equalTo(deleteAccountLabel)
-            make.trailing.equalTo(accountView.snp.trailing).offset(-16)
+            make.trailing.equalTo(accountView.snp.trailing).offset(-24)
         }
     }
 
+    private func setupGestureRecognizers() {
+        let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
+        feedbackView.addGestureRecognizer(feedbackTapGestureRecognizer)
+        feedbackView.isUserInteractionEnabled = true
+        
+        
+        arrowButton1.addTarget(self, action: #selector(arrowButton1Tapped), for: .touchUpInside)
+        arrowButton2.addTarget(self, action: #selector(arrowButton2Tapped), for: .touchUpInside)
+    }
+
+    @objc private func feedbackViewTapped() {
+        if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfFMK14a9BwcRPR2z6uuhQ_Cleg0povmGpcJwpAMLm-nWYp7A/viewform") {
+            UIApplication.shared.open(url)
+        }
+    }
     
+    @objc private func arrowButton1Tapped() {
+        if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-fc37c472e47941d3958765587b57e21f") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @objc private func arrowButton2Tapped() {
+        let myScoreViewController = MyScoreViewController()
+        navigationController?.pushViewController(myScoreViewController, animated: true)
+    //  if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
+//            UIApplication.shared.open(url)
+//        }
+    }
+    
+   
     private let myPageLabel: UILabel = {
         let myPageLabel = UILabel()
         myPageLabel.text = "마이 페이지"
@@ -234,20 +323,43 @@ class MyPageViewController: UIViewController {
 
     private let feedbackActionLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백 남기기 >>"
+        label.text = "피드백 남기기"
         label.textColor = .pard.gray10
-        label.textAlignment = .right
+
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         return label
     }()
-
     
+    private let feedbackArrowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "chevron.right")
+        imageView.tintColor = .white
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    private let feedbackArrowImageView2: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "chevron.right")
+        imageView.tintColor = .white
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    private let feedbackActionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private let infoView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.pard.primaryBlue.cgColor
         view.layer.cornerRadius = 8
+
         return view
     }()
     
@@ -270,20 +382,19 @@ class MyPageViewController: UIViewController {
         label.backgroundColor = UIColor.pard.primaryBlue
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        
+        label.sizeToFit()
         return label
     }()
-    
+
     private let statusLabel2: UILabel = {
         let label = UILabel()
         label.text = "디자인 파트"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
-        label.backgroundColor = .pard.gra
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        
+        label.sizeToFit()
         return label
     }()
     
@@ -296,9 +407,19 @@ class MyPageViewController: UIViewController {
         label.backgroundColor = UIColor.pard.primaryPurple
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        
+        label.sizeToFit()
         return label
     }()
+
+
+    private let statusStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 8
+        return stackView
+    }()
+
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -322,7 +443,7 @@ class MyPageViewController: UIViewController {
     private let notificationSettingView: UIView = {
         let view = UIView()
         view.backgroundColor = .pard.blackCard
-        view.layer.cornerRadius = 8
+
         return view
     }()
         
@@ -356,7 +477,7 @@ class MyPageViewController: UIViewController {
     private let usageGuideView: UIView = {
         let view = UIView()
         view.backgroundColor = .pard.blackCard
-        view.layer.cornerRadius = 8
+        
         return view
     }()
 
@@ -394,6 +515,18 @@ class MyPageViewController: UIViewController {
         return imageView
     }()
     
+    private let arrowButton1: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        return button
+    }()
+
+    private let arrowButton2: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        return button
+    }()
+
     private let accountLabel: UILabel = {
         let label = UILabel()
         label.text = "계정"
@@ -408,7 +541,6 @@ class MyPageViewController: UIViewController {
     private let accountView: UIView = {
         let view = UIView()
         view.backgroundColor = .pard.blackCard
-        view.layer.cornerRadius = 8
         return view
     }()
 
@@ -446,5 +578,28 @@ class MyPageViewController: UIViewController {
         return imageView
     }()
 
+    func gradientLayer() -> CAGradientLayer {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1).cgColor,
+            UIColor(red: 123/255, green: 63/255, blue: 239/255, alpha: 1).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        return gradientLayer
+    }
 
+    private func gradientImage() -> UIImage {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        gradientLayer.colors = [UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1).cgColor, UIColor(red: 123/255, green: 63/255, blue: 239/255, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
 }
