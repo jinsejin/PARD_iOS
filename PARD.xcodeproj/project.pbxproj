@@ -14,6 +14,7 @@
 		0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */; };
 		0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */; };
 		0D70EC4B2C2E7F8800FDE559 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */; };
+		0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */; };
 		0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */; };
 		0DAFA0E22BA74EF30092FEB0 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */; };
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
@@ -51,6 +52,7 @@
 		2176515B2B947ABE00121AB2 /* +Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2176515A2B947ABE00121AB2 /* +Font.swift */; };
 		21A6857C2B9C8967006F6D9E /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */; };
 		21A6857E2B9CBFC6006F6D9E /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */; };
+		9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */; };
 		90C007C52B95D24C0056D724 /* MainLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007C42B95D24C0056D724 /* MainLoginViewController.swift */; };
 		90C007C72B95D2670056D724 /* UserInfoPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007C62B95D2670056D724 /* UserInfoPolicyViewController.swift */; };
 		90C007CA2B95D2890056D724 /* UserAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007C92B95D2890056D724 /* UserAuthenticationViewController.swift */; };
@@ -69,6 +71,7 @@
 		0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUpcommingView.swift; sourceTree = "<group>"; };
 		0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
+		0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamBurgerTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 		21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		42AEE204550D4434A7D54FD5 /* Pods_PARD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PARD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		552E28987AB486312261E2E4 /* Pods-PARD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PARD.debug.xcconfig"; path = "Target Support Files/Pods-PARD/Pods-PARD.debug.xcconfig"; sourceTree = "<group>"; };
+		9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRecordsView.swift; sourceTree = "<group>"; };
 		90C007C42B95D24C0056D724 /* MainLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginViewController.swift; sourceTree = "<group>"; };
 		90C007C62B95D2670056D724 /* UserInfoPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPolicyViewController.swift; sourceTree = "<group>"; };
 		90C007C92B95D2890056D724 /* UserAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CDF22B96DA67007A21E4 /* CalendarView.swift */,
+				0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CDF42B96DA9B007A21E4 /* MyScoreView.swift */,
+				9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -583,7 +589,10 @@
 				90C007CC2B95D2A40056D724 /* HomeTabBarViewController.swift in Sources */,
 				2123A97F2BA73640009C60BF /* ReaderViewController.swift in Sources */,
 				0DC5CDF12B96DA05007A21E4 /* HomeTopView.swift in Sources */,
+
 				21702BFD2C353E0C00134681 /* GoogleLoginManager.swift in Sources */,
+				9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */,
+        
 				0D0ADFD92BAAD8EC00094D08 /* PardNotionLinkView.swift in Sources */,
 				0DC5CE042B96DBC8007A21E4 /* PopUpModalView.swift in Sources */,
 				0DC5CDF92B96DAF0007A21E4 /* HamburgerBarViewController.swift in Sources */,
@@ -597,6 +606,7 @@
 				21702BF92C345AD300134681 /* QrController.swift in Sources */,
 				2176515B2B947ABE00121AB2 /* +Font.swift in Sources */,
 				0DC5CE012B96DBA4007A21E4 /* PopUpModalViewController.swift in Sources */,
+				0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */,
 				0DC5CDFD2B96DB28007A21E4 /* PardAppModel.swift in Sources */,
 				0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */,
 				21702BF32C345AAD00134681 /* UserController.swift in Sources */,

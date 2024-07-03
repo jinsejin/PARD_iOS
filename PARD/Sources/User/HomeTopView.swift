@@ -29,6 +29,7 @@ class HomeTopView : UIView {
             .head1MutableAttribute(string: "님\n", fontSize: 18, fontColor: UIColor.pard.white100)
             .head1MutableAttribute(string: "오늘도 PARD에서 함께 협업해요!", fontSize: 18, fontColor: UIColor.pard.white100)
     }
+    
     private let collectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
     }
@@ -63,6 +64,7 @@ class HomeTopView : UIView {
         super.init(frame: frame)
         setUpUI()
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -95,6 +97,7 @@ class HomeTopView : UIView {
             make.top.equalTo(collectionView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
+        
         pangulStackView.addArrangedSubview(currentPangulImage)
         pangulStackView.addArrangedSubview(nextImage)
         pangulStackView.addArrangedSubview(pangulNextLevelImge)
