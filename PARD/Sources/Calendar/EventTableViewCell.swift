@@ -100,12 +100,12 @@ class EventTableViewCell: UITableViewCell {
         titleLabel.textColor = titleColor
     }
     
-    func dataConfigure(with event: Event) {
-        categoryLabel.text = event.category
-        titleLabel.text = event.title
-        dDayLabel.text = event.dDay
-        dateLabel.text = "일시 : \(event.date)"
-        locationLabel.text = "장소 : \(event.location)"
+    func dataConfigure(with schedule: ScheduleModel) {
+        categoryLabel.text = schedule.part
+        titleLabel.text = schedule.title
+        dDayLabel.text = "D-\(schedule.remaingDay)"
+        dateLabel.text = "일시 : \(schedule.date)"
+        locationLabel.text = "장소 : \(schedule.contentsLocation)"
     }
     
     func categoryLabelConfigure(textColor : UIColor, backGroundColor : UIColor) {

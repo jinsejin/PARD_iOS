@@ -3,6 +3,7 @@ import SnapKit
 import Then
 
 class CalendarViewController: UIViewController {
+    var schedules: [ScheduleModel] = []
     private let appearance = UINavigationBarAppearance().then {
         $0.configureWithOpaqueBackground()
         $0.backgroundColor = .pard.blackBackground
@@ -15,9 +16,8 @@ class CalendarViewController: UIViewController {
         $0.shadowColor = .pard.blackCard
     }
     
-    private let upcomingEvents: [Event] = Event.upcomingEvents
-    
-    private let pastEvents: [Event] = Event.pastEvents
+    private var upcomingEvents: [ScheduleModel] = []
+    private var pastEvents: [ScheduleModel] = []
     
     private let tableView = UITableView(frame: .zero, style: .grouped).then { tableView in
         tableView.separatorStyle = .none
@@ -31,6 +31,7 @@ class CalendarViewController: UIViewController {
         view.backgroundColor = .pard.blackBackground
         setNavigation()
         setupTableView()
+        getSchedule(for: self)
     }
     
     private func setNavigation() {
@@ -64,6 +65,15 @@ class CalendarViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
+    func updateEvents() {
+            upcomingEvents = schedules.filter { !$0.isPastEvent }.map {
+                ScheduleModel(scheduleId: $0.scheduleId, title: $0.title, date: $0.date, content: $0.content, part: $0.part, contentsLocation: $0.contentsLocation, notice: $0.notice, remaingDay: $0.remaingDay, isPastEvent: $0.isPastEvent)
+            }
+            pastEvents = schedules.filter { $0.isPastEvent }.map {
+                ScheduleModel(scheduleId: $0.scheduleId, title: $0.title, date: $0.date, content: $0.content, part: $0.part, contentsLocation: $0.contentsLocation, notice: $0.notice, remaingDay: $0.remaingDay, isPastEvent: $0.isPastEvent)
+            }
+            tableView.reloadData()
+        }
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
@@ -130,25 +140,4 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         cell.dataConfigure(with: event)
         return cell
     }
-}
-
-struct Event {
-    let category: String
-    let title: String
-    let dDay: String
-    let date: String
-    let location: String
-}
-
-extension Event {
-    static let upcomingEvents: [Event] = [
-        Event(category: "전체", title: "3차 세미나", dDay: "D-DAY", date: "9월 20일 토요일 13:00", location: "한동대학교 에벤에셀 헤브론홀"),
-        Event(category: "기획", title: "과제 제출", dDay: "D-7", date: "9월 20일 토요일 13:00", location: "한동대학교 에벤에셀 헤브론홀"),
-        Event(category: "기획", title: "과제 제출", dDay: "D-14", date: "9월 27일 토요일 13:00", location: "기획 파트 4차 세미나 일정 공지합니다.")
-    ]
-    
-    static let pastEvents: [Event] = [
-        Event(category: "기획", title: "3차 세미나", dDay: "", date: "9월 20일 토요일 14:00-18:00", location: "한동대학교 에벤에셀 헤브론홀"),
-        Event(category: "기획", title: "2차 세미나", dDay: "", date: "9월 13일 토요일 14:00-18:00", location: "한동대학교 에벤에셀 헤브론홀")
-    ]
 }

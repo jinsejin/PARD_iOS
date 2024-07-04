@@ -46,6 +46,7 @@
 		21702BF92C345AD300134681 /* QrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF82C345AD300134681 /* QrController.swift */; };
 		21702BFB2C345ADF00134681 /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFA2C345ADF00134681 /* ProjectController.swift */; };
 		21702BFD2C353E0C00134681 /* GoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */; };
+		21702BFF2C3562C700134681 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFE2C3562C700134681 /* ScheduleModel.swift */; };
 		217651512B94738800121AB2 /* PARD_DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 217651502B94738800121AB2 /* PARD_DesignSystem */; };
 		217651542B94778600121AB2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 217651532B94778600121AB2 /* SnapKit */; };
 		217651592B94779600121AB2 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 217651582B94779600121AB2 /* Then */; };
@@ -105,6 +106,7 @@
 		21702BF82C345AD300134681 /* QrController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrController.swift; sourceTree = "<group>"; };
 		21702BFA2C345ADF00134681 /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
 		21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginManager.swift; sourceTree = "<group>"; };
+		21702BFE2C3562C700134681 /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		2176515A2B947ABE00121AB2 /* +Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Font.swift"; sourceTree = "<group>"; };
 		21A685772B9C84EB006F6D9E /* PARD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PARD.entitlements; sourceTree = "<group>"; };
 		21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CDFC2B96DB28007A21E4 /* PardAppModel.swift */,
+				21702BFE2C3562C700134681 /* ScheduleModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -589,10 +592,8 @@
 				90C007CC2B95D2A40056D724 /* HomeTabBarViewController.swift in Sources */,
 				2123A97F2BA73640009C60BF /* ReaderViewController.swift in Sources */,
 				0DC5CDF12B96DA05007A21E4 /* HomeTopView.swift in Sources */,
-
 				21702BFD2C353E0C00134681 /* GoogleLoginManager.swift in Sources */,
 				9067A1C92C33EB20001E506A /* ScoreRecordsView.swift in Sources */,
-        
 				0D0ADFD92BAAD8EC00094D08 /* PardNotionLinkView.swift in Sources */,
 				0DC5CE042B96DBC8007A21E4 /* PopUpModalView.swift in Sources */,
 				0DC5CDF92B96DAF0007A21E4 /* HamburgerBarViewController.swift in Sources */,
@@ -627,6 +628,7 @@
 				2106ADAF2B92D6A000CDA462 /* SceneDelegate.swift in Sources */,
 				21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */,
 				90C007C72B95D2670056D724 /* UserInfoPolicyViewController.swift in Sources */,
+				21702BFF2C3562C700134681 /* ScheduleModel.swift in Sources */,
 				21702BF72C345AC600134681 /* ReasonController.swift in Sources */,
 				0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */,
 				0DC5CDFB2B96DB11007A21E4 /* PardAppManager.swift in Sources */,
