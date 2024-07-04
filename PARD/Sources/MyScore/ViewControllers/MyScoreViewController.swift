@@ -470,14 +470,15 @@ class MyScoreViewController: UIViewController {
         }
         
         let questionImageButton = UIButton().then {
-            $0.setImage(UIImage(named: "question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            $0.setImage(UIImage(named: "myscore-question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         view.addSubview(questionImageButton)
         
         questionImageButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(257)
             $0.top.equalToSuperview().offset(538)
-            $0.trailing.equalToSuperview().offset(-104)
+            $0.width.equalTo(14)
+            $0.height.equalTo(14)
         }
         
         questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
@@ -501,7 +502,7 @@ class MyScoreViewController: UIViewController {
         let scorePolicyLabel = UILabel().then {
             $0.text = "점수정책 확인하기"
             $0.font = UIFont.pardFont.body2
-            $0.textColor = .pard.primaryPurple
+            $0.textColor = .pard.primaryBlue
             $0.textAlignment = .right
         }
         view.addSubview(scorePolicyLabel)
@@ -518,13 +519,11 @@ class MyScoreViewController: UIViewController {
         questionImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(538)
             $0.leading.equalToSuperview().offset(257)
-            $0.trailing.equalToSuperview().offset(-104)
         }
         
         scorePolicyLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(537)
             $0.leading.equalToSuperview().offset(273)
-            $0.trailing.equalToSuperview().offset(-16)
         }
         
         view.addSubview(scoreRecordsView)
