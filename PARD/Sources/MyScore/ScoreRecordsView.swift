@@ -37,6 +37,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         
         addSubview(collectionView)
         
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),

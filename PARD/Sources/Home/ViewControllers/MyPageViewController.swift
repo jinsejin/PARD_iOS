@@ -90,11 +90,12 @@ class MyPageViewController: UIViewController {
         
         feedbackActionLabel.snp.makeConstraints { make in
             make.width.equalTo(100)
-            make.height.equalTo(14)
-            make.top.equalTo(view.snp.top).offset(135)
-            make.left.equalTo(view.snp.left).offset(276)
-            make.bottom.equalTo(view.snp.bottom).offset(-663)
+            make.height.equalTo(14).priority(.low)
+            make.top.equalTo(feedbackView.snp.top).offset(16)
+            make.leading.equalTo(feedbackActionView.snp.leading)
+            make.trailing.equalTo(feedbackActionView.snp.trailing)
         }
+
         
         feedbackActionView.snp.makeConstraints { make in
             make.trailing.equalTo(feedbackView.snp.trailing).offset(-24)
