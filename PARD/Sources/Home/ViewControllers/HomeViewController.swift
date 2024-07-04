@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
         
     }
     
-    private let pardnerShipView = HomePardnerShipView().then {
+    private lazy var pardnerShipView = HomePardnerShipView(viewController: self).then {
         view in
         view.backgroundColor = .pard.blackCard
         view.layer.cornerRadius = 8.0

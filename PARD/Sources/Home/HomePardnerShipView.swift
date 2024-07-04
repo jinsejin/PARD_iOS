@@ -10,6 +10,8 @@ import SnapKit
 import Then
 
 class HomePardnerShipView : UIView {
+    private weak var viewController: UIViewController?
+    
     private let pardnerShipLabel = UILabel().then {
         $0.text = "🏄‍♂️ PARDNERSHIP 🏄‍♂️"
         $0.font = .pardFont.head2
@@ -57,6 +59,11 @@ class HomePardnerShipView : UIView {
         view.backgroundColor = .pard.gray10
     }
     
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+        super.init(frame: .zero)
+        setUpUI()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +75,8 @@ class HomePardnerShipView : UIView {
     }
     
     @objc private func tappedmoreButton() {
-        print("tappedmoreButton")
+        let myScoreViewController = MyScoreViewController()
+        viewController?.navigationController?.pushViewController(myScoreViewController, animated: true)
     }
     
     private func setUpUI() {
@@ -124,4 +132,5 @@ class HomePardnerShipView : UIView {
             make.width.equalTo(1)
         }
     }
+    
 }
