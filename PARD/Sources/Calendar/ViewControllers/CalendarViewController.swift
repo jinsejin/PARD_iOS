@@ -65,6 +65,15 @@ class CalendarViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
+    func updateEvents() {
+            upcomingEvents = schedules.filter { !$0.isPastEvent }.map {
+                ScheduleModel(scheduleId: $0.scheduleId, title: $0.title, date: $0.date, content: $0.content, part: $0.part, contentsLocation: $0.contentsLocation, notice: $0.notice, remaingDay: $0.remaingDay, isPastEvent: $0.isPastEvent)
+            }
+            pastEvents = schedules.filter { $0.isPastEvent }.map {
+                ScheduleModel(scheduleId: $0.scheduleId, title: $0.title, date: $0.date, content: $0.content, part: $0.part, contentsLocation: $0.contentsLocation, notice: $0.notice, remaingDay: $0.remaingDay, isPastEvent: $0.isPastEvent)
+            }
+            tableView.reloadData()
+        }
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
