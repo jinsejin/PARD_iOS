@@ -103,7 +103,7 @@ class EventTableViewCell: UITableViewCell {
     func dataConfigure(with schedule: ScheduleModel) {
         categoryLabel.text = schedule.part
         titleLabel.text = schedule.title
-        dDayLabel.text = "D-\(schedule.remaingDay)"
+        dDayLabel.text = schedule.remaingDay > 0 ? "D-\(schedule.remaingDay)" : ""
         dateLabel.text = "일시 : \(schedule.date)"
         locationLabel.text = "장소 : \(schedule.contentsLocation)"
     }
