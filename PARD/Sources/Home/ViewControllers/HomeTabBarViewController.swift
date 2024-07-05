@@ -23,7 +23,6 @@ class HomeTabBarViewController: UITabBarController {
         setUpTabBarColor()
         setUpTabBarLayout()
         setUpTabBarItems()
-        getUsersMe()
         delegate = self
     }
     
