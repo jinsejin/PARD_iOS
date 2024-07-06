@@ -82,7 +82,7 @@ func getUsersMe() {
                 return
             }
             guard let JSONdata = data, !JSONdata.isEmpty else {
-                print("🚨 Error: No data or empty data")
+                print("🚨 [getuserMe] Error: No data or empty data")
                 return
             }
             
