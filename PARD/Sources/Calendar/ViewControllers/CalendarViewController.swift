@@ -25,15 +25,7 @@ class CalendarViewController: UIViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.backgroundColor = .pard.blackBackground
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .pard.blackBackground
-        setNavigation()
-        setupTableView()
-        getSchedule(for: self)
-    }
-    
+        
     private func setNavigation() {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -47,11 +39,7 @@ class CalendarViewController: UIViewController {
         navigationController?.popViewController(animated: false)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.standardAppearance = previousAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
-    }
+    
     
     private func setupTableView() {
         tableView.delegate = self
@@ -73,6 +61,32 @@ class CalendarViewController: UIViewController {
             ScheduleModel(scheduleId: $0.scheduleId, title: $0.title, date: $0.date, content: $0.content, part: $0.part, contentsLocation: $0.contentsLocation, notice: $0.notice, remaingDay: $0.remaingDay, isPastEvent: $0.isPastEvent)
         }
         tableView.reloadData()
+    }
+}
+// - MARK: CalendarViewController의 생태주기
+extension CalendarViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .pard.blackBackground
+        setNavigation()
+        setupTableView()
+        getSchedule(for: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.standardAppearance = previousAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = true
+        }
     }
 }
 
