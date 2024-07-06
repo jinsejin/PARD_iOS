@@ -93,9 +93,9 @@ extension ReaderViewController: ReaderViewDelegate {
                 message = "QR코드 or 바코드를 인식하지 못했습니다.\n다시 시도해주세요."
                 break
             }
-            
             title = "알림"
             message = "인식성공\n\(code)"
+            getValidQR(with: code)
         case .fail:
             title = "에러"
             message = "QR코드 or 바코드를 인식하지 못했습니다.\n다시 시도해주세요."
