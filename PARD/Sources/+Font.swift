@@ -24,7 +24,7 @@ extension UIFont {
         let head2 = UIFont.systemFont(ofSize: 16, weight: .bold).withLineHeight(20)
         
         // - MARK: Pretendard/Body
-        let body1 = UIFont.systemFont(ofSize: 18, weight: .semibold).withLineHeight(14)
+        let body1 = UIFont.systemFont(ofSize: 12, weight: .semibold).withLineHeight(14)
         let body2 = UIFont.systemFont(ofSize: 12, weight: .bold).withLineHeight(16)
         let body3 = UIFont.systemFont(ofSize: 12, weight: .medium).withLineHeight(18)
         let body4 = UIFont.systemFont(ofSize: 14, weight: .semibold).withLineHeight(18)
