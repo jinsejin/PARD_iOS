@@ -37,6 +37,8 @@ class HomeTopView : UIView {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout).then {
         $0.register(StatusCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         $0.backgroundColor = .pard.blackCard
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
     }
     
     private let questionimageButton = UIButton().then {
@@ -86,7 +88,7 @@ class HomeTopView : UIView {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(24)
-            make.width.equalTo(250)
+            make.trailing.equalTo(questionimageButton.snp.leading).offset(-10)
             make.height.equalTo(24)
         }
         questionimageButton.snp.makeConstraints { make in

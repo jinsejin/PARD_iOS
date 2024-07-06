@@ -19,24 +19,20 @@ class EventTableViewCell: UITableViewCell {
     }
     
     private let titleLabel = UILabel().then { label in
-        label.textColor = .pard.gray10
         label.textAlignment = .center
         label.font = .pardFont.head2
     }
     
     private let dDayLabel = UILabel().then { label in
-        label.font = .pardFont.body1
-        label.textColor = .pard.gray30
+        label.font = .pardFont.body5
     }
     
     private let dateLabel = UILabel().then { label in
         label.font = .pardFont.body5
-        label.textColor = .pard.gray10
     }
     
     private let locationLabel = UILabel().then { label in
         label.font = .pardFont.body5
-        label.textColor = .pard.gray10
     }
     
     private let stackView = UIStackView().then { stak in
@@ -75,6 +71,7 @@ class EventTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
             make.width.equalTo(45)
+            make.height.equalTo(25)
             make.bottom.equalTo(stackView.snp.top).offset(-16)
         }
         
@@ -100,16 +97,45 @@ class EventTableViewCell: UITableViewCell {
         titleLabel.textColor = titleColor
     }
     
-    func dataConfigure(with schedule: ScheduleModel) {
+    func labelConfigure(with schedule: ScheduleModel) {
         categoryLabel.text = schedule.part
         titleLabel.text = schedule.title
-        dDayLabel.text = "D-\(schedule.remaingDay)"
-        dateLabel.text = "일시 : \(schedule.date)"
+        let date = formattedDateString(
+            from : dateFromString(schedule.date) ?? Date()
+        )
+        dateLabel.text = "일시 : \(date)"
         locationLabel.text = "장소 : \(schedule.contentsLocation)"
+        
+        if schedule.remaingDay < 0 {
+            titleLabel.textColor = .pard.gray30
+            dateLabel.textColor = .pard.gray30
+            locationLabel.textColor = .pard.gray30
+            dDayLabel.text = ""
+        } else {
+            titleLabel.textColor = .pard.gray10
+            dateLabel.textColor = .pard.gray10
+            locationLabel.textColor = .pard.gray10
+            dDayLabel.text = "D-\(schedule.remaingDay)"
+        }
+        
     }
     
     func categoryLabelConfigure(textColor : UIColor, backGroundColor : UIColor) {
         categoryLabel.textColor = textColor
         categoryLabel.backgroundColor = backGroundColor
+    }
+    
+    private func dateFromString(_ dateString: String) -> Date? {
+       let dateFormatter = DateFormatter()
+       dateFormatter.locale = Locale(identifier: "ko_KR")
+       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+       return dateFormatter.date(from: dateString)
+    }
+    
+    private func formattedDateString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "MM월 dd일 EEEE HH:mm"
+        return dateFormatter.string(from: date)
     }
 }
