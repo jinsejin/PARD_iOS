@@ -97,16 +97,45 @@ class EventTableViewCell: UITableViewCell {
         titleLabel.textColor = titleColor
     }
     
-    func dataConfigure(with schedule: ScheduleModel) {
+    func labelConfigure(with schedule: ScheduleModel) {
         categoryLabel.text = schedule.part
         titleLabel.text = schedule.title
-        dDayLabel.text = schedule.remaingDay > 0 ? "D-\(schedule.remaingDay)" : ""
-        dateLabel.text = "일시 : \(schedule.date)"
+        let date = formattedDateString(
+            from : dateFromString(schedule.date) ?? Date()
+        )
+        dateLabel.text = "일시 : \(date)"
         locationLabel.text = "장소 : \(schedule.contentsLocation)"
+        
+        if schedule.remaingDay < 0 {
+            titleLabel.textColor = .pard.gray30
+            dateLabel.textColor = .pard.gray30
+            locationLabel.textColor = .pard.gray30
+            dDayLabel.text = ""
+        } else {
+            titleLabel.textColor = .pard.gray10
+            dateLabel.textColor = .pard.gray10
+            locationLabel.textColor = .pard.gray10
+            dDayLabel.text = "D-\(schedule.remaingDay)"
+        }
+        
     }
     
     func categoryLabelConfigure(textColor : UIColor, backGroundColor : UIColor) {
         categoryLabel.textColor = textColor
         categoryLabel.backgroundColor = backGroundColor
+    }
+    
+    private func dateFromString(_ dateString: String) -> Date? {
+       let dateFormatter = DateFormatter()
+       dateFormatter.locale = Locale(identifier: "ko_KR")
+       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+       return dateFormatter.date(from: dateString)
+    }
+    
+    private func formattedDateString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "MM월 dd일 EEEE HH:mm"
+        return dateFormatter.string(from: date)
     }
 }
