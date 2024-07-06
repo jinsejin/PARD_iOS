@@ -12,6 +12,7 @@ class MyScoreViewController: UIViewController {
     
     let pardnerShipLabel = UILabel()
     let scoreRecordsView = ScoreRecordsView()
+    
     private var toolTipView: ToolTipView?
     
     var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
@@ -470,24 +471,38 @@ class MyScoreViewController: UIViewController {
         }
         
         let questionImageButton = UIButton().then {
-            $0.setImage(UIImage(named: "question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            $0.setImage(UIImage(named: "myscore-question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         view.addSubview(questionImageButton)
         
         questionImageButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(257)
             $0.top.equalToSuperview().offset(538)
-            $0.trailing.equalToSuperview().offset(-104)
+            $0.width.equalTo(14)
+            $0.height.equalTo(14)
         }
         
         questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
     }
     
-    
-    
     @objc private func tappedQuestionButton() {
-        
+        toggleToolTip()
     }
+
+    @objc private func scorePolicyTapped() {
+        toggleToolTip()
+    }
+
+    private func toggleToolTip() {
+        if toolTipView == nil {
+            toolTipView = ToolTipView(frame: CGRect(x: 24, y: 367, width: view.frame.width - 48, height: 200))
+            view.addSubview(toolTipView!)
+        } else {
+            toolTipView?.removeFromSuperview()
+            toolTipView = nil
+        }
+    }
+
     
     private func setupScoreRecordsView() {
         let scoreRecordsTitleLabel = UILabel().then {
@@ -501,13 +516,18 @@ class MyScoreViewController: UIViewController {
         let scorePolicyLabel = UILabel().then {
             $0.text = "점수정책 확인하기"
             $0.font = UIFont.pardFont.body2
-            $0.textColor = .pard.primaryPurple
+            $0.textColor = .pard.primaryBlue
             $0.textAlignment = .right
+            $0.isUserInteractionEnabled = true
+
         }
         view.addSubview(scorePolicyLabel)
         
         let questionImageView = UIImageView(image: UIImage(named: "questionImageMark"))
         view.addSubview(questionImageView)
+        
+        let scorePolicyTapGesture = UITapGestureRecognizer(target: self, action: #selector(scorePolicyTapped))
+        scorePolicyLabel.addGestureRecognizer(scorePolicyTapGesture)
         
         scoreRecordsTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(531)
@@ -518,13 +538,11 @@ class MyScoreViewController: UIViewController {
         questionImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(538)
             $0.leading.equalToSuperview().offset(257)
-            $0.trailing.equalToSuperview().offset(-104)
         }
         
         scorePolicyLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(537)
             $0.leading.equalToSuperview().offset(273)
-            $0.trailing.equalToSuperview().offset(-16)
         }
         
         view.addSubview(scoreRecordsView)
@@ -635,6 +653,94 @@ class MyScoreViewController: UIViewController {
                 tagLabel.textColor = .pard.primaryPurple
                 tagLabel.backgroundColor = .clear
             }
+        }
+    }
+
+    class ToolTipView: UIView {
+        
+        private let closeButton = UIButton()
+        private let contentView = UIView()
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            setupUI()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        private func setupUI() {
+            backgroundColor = .pard.blackCard
+            layer.cornerRadius = 8
+            layer.borderWidth = 1
+            layer.borderColor = UIColor.pard.primaryPurple.cgColor
+            
+            let mvpLabel = createLabel(text: "MVP", color: .pard.primaryPurple)
+            let studyLabel = createLabel(text: "스터디", color: .pard.primaryPurple)
+            let communicationLabel = createLabel(text: "소통", color: .pard.primaryPurple)
+            let reportLabel = createLabel(text: "회고", color: .pard.primaryPurple)
+            let penaltyLabel = createLabel(text: "벌점", color: .pard.errorRed)
+            
+            let mvpDetail = createDetailLabel(text: "주요 행사 MVP 5점\n세미나 파트별 MVP 3점")
+            let studyDetail = createDetailLabel(text: "개최 및 수료 5점\n참여 및 수료 3점")
+            let communicationDetail = createDetailLabel(text: "파드 구성원과의 만남 후 사진을 슬랙에 인증 1점/주 1회")
+            let reportDetail = createDetailLabel(text: "디스코이엇 작성 후 파트장에게 공유 3점/필수과제 제외")
+            let penaltyDetail = createDetailLabel(text: "세미나 지각(10분 이내) -1점\n세미나 결석 -2점\n과제 지각 -0.5점\n과제 미제출 -1점")
+            
+            let stackView = UIStackView(arrangedSubviews: [
+                mvpLabel, mvpDetail,
+                studyLabel, studyDetail,
+                communicationLabel, communicationDetail,
+                reportLabel, reportDetail,
+                penaltyLabel, penaltyDetail
+            ])
+            
+            stackView.axis = .vertical
+            stackView.spacing = 8
+            stackView.alignment = .leading
+            
+            contentView.addSubview(stackView)
+            addSubview(contentView)
+            
+            contentView.snp.makeConstraints { make in
+                make.edges.equalToSuperview().inset(16)
+            }
+            
+            stackView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            
+            closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+            closeButton.tintColor = .white
+            closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+            addSubview(closeButton)
+            
+            closeButton.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(8)
+                make.trailing.equalToSuperview().offset(-8)
+            }
+        }
+        
+        private func createLabel(text: String, color: UIColor) -> UILabel {
+            let label = UILabel()
+            label.text = text
+            label.textColor = color
+            label.font = UIFont.boldSystemFont(ofSize: 16)
+            return label
+        }
+        
+        private func createDetailLabel(text: String) -> UILabel {
+            let label = UILabel()
+            label.text = text
+            label.textColor = .white
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.numberOfLines = 0
+            return label
+        }
+        
+        @objc private func closeTapped() {
+            removeFromSuperview()
         }
     }
 

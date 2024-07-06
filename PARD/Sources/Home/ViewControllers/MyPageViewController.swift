@@ -281,11 +281,9 @@ class MyPageViewController: UIViewController {
     }
     
     @objc private func arrowButton2Tapped() {
-        let myScoreViewController = MyScoreViewController()
-        navigationController?.pushViewController(myScoreViewController, animated: true)
-    //  if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
-//            UIApplication.shared.open(url)
-//        }
+        if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
+            UIApplication.shared.open(url)
+        }
     }
     
    
