@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeTabBarViewController: UITabBarController {
-    private let floatingButton = UIButton().then { button in
+    let floatingButton = UIButton().then { button in
         button.layer.cornerRadius = 40
         button.backgroundColor = .pard.gra
         button.setImage(UIImage(named: "scan")?.withRenderingMode(.alwaysOriginal), for: .normal)
