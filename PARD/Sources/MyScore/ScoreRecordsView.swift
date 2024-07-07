@@ -30,10 +30,13 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         layout.itemSize = CGSize(width: 144, height: 136)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .pard.blackBackground 
+        collectionView.backgroundColor = .pard.blackBackground
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MyScoreViewController.ScoreRecordCell.self, forCellWithReuseIdentifier: MyScoreViewController.ScoreRecordCell.identifier)
+        
+        collectionView.layer.cornerRadius = 12
+        collectionView.layer.masksToBounds = true
         
         addSubview(collectionView)
         
@@ -46,12 +49,11 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         ])
     }
 
-
     func configure(with records: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)]) {
         self.scoreRecords = records
         collectionView.reloadData()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return scoreRecords.count
     }

@@ -561,8 +561,12 @@ class MyScoreViewController: UIViewController {
             $0.height.equalTo(136)
         }
         
+        scoreRecordsView.layer.cornerRadius = 12
+        scoreRecordsView.layer.masksToBounds = true
+        
         scoreRecordsView.configure(with: scoreRecords)
     }
+
 
     
     
@@ -613,7 +617,7 @@ class MyScoreViewController: UIViewController {
             pointsLabel.textColor = .pard.gray30
             pointsLabel.textAlignment = .right
             
-            separatorView.backgroundColor = .pard.gray30  // Configure separator color
+            separatorView.backgroundColor = .pard.gray30  
             contentView.addSubview(separatorView)
             
             backgroundCardView.addSubview(tagLabel)
@@ -663,7 +667,7 @@ class MyScoreViewController: UIViewController {
             pointsLabel.text = record.points
             pointsLabel.textColor = record.pointsColor
             
-            separatorView.isHidden = isLastItem  // 마지막 셀의 구분선 숨김
+            separatorView.isHidden = isLastItem
             
             if record.tag == "벌점" {
                 tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
