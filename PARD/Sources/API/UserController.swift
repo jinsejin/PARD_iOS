@@ -98,10 +98,14 @@ func getUsersMe() {
                 // JSON 데이터를 User 구조체로 디코딩
                 let user = try decoder.decode(User.self, from: JSONdata)
                 print("✅ Success: \(user)")
+
+                // userRole에서 "ROLE_" 부분을 제거
+                let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
+
                 // MARK: - debuging을 위한 코드입니다.
                 UserDefaults.standard.set(user.name, forKey: "userName")
                 UserDefaults.standard.set(user.part, forKey: "userPart")
-                UserDefaults.standard.set(user.role, forKey: "userRole")
+                UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")
                 UserDefaults.standard.set(user.generation, forKey: "userGeneration")
                 print("===> \(user.name)")
             } catch {
