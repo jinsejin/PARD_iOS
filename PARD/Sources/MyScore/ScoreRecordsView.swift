@@ -25,18 +25,20 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 1
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: 144, height: 136) // 셀 크기 조정
+        layout.itemSize = CGSize(width: 144, height: 136)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .pard.blackBackground
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MyScoreViewController.ScoreRecordCell.self, forCellWithReuseIdentifier: MyScoreViewController.ScoreRecordCell.identifier)
         
-        addSubview(collectionView)
+        collectionView.layer.cornerRadius = 12
+        collectionView.layer.masksToBounds = true
         
+        addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -46,7 +48,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
+
     func configure(with records: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)]) {
         self.scoreRecords = records
         collectionView.reloadData()
@@ -55,11 +57,13 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return scoreRecords.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyScoreViewController.ScoreRecordCell.identifier, for: indexPath) as! MyScoreViewController.ScoreRecordCell
         let record = scoreRecords[indexPath.item]
-        cell.configure(with: record)
+        let isLastItem = indexPath.item == scoreRecords.count - 1
+        cell.configure(with: record, isLastItem: isLastItem)
         return cell
     }
+
 }

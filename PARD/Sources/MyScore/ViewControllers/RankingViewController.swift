@@ -85,7 +85,8 @@ class RankingViewController: UIViewController {
     }
     
     @objc func backButtonTapped(){
-        print("go to back !!!")
+        let myscoreViewController = MyScoreViewController()
+        navigationController?.setViewControllers([myscoreViewController], animated: true)
     }
     
     // 그라데이션 이미지 생성
@@ -110,13 +111,12 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell").then {
             $0.textLabel?.text = rankings[indexPath.row]
             $0.textLabel?.textColor = .white
             $0.backgroundColor = indexPath.row < 7 ? UIColor.pard.blackCard : .clear
             $0.selectionStyle = .none
-            $0.contentView.layer.cornerRadius = 5
+            $0.contentView.layer.cornerRadius = 10
             $0.contentView.layer.masksToBounds = true
         }
         
@@ -209,15 +209,23 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
                 make.centerY.equalTo(cell.contentView.snp.centerY)
                 make.trailing.equalTo(cell.contentView.snp.trailing).offset(-16)
             }
-
         }
 
+        // Set rounded corners for the first cell
+        if indexPath.row == 0 {
+            cell.contentView.layer.cornerRadius = 10
+            cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+
+        // Set rounded corners for the last cell
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         }
         
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // 각 셀마다 구분선을 추가하는 부분
@@ -233,6 +241,12 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
 
+        // 첫 번째 셀에 대한 처리
+        if indexPath.row == 0 {
+            cell.contentView.layer.cornerRadius = 10
+            cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
         // 마지막 셀에 대한 처리
         if indexPath.row == rankings.count - 1 {
             cell.contentView.layer.cornerRadius = 10
@@ -266,4 +280,3 @@ private func determineLabelColor(for rank: Int) -> UIColor {
         return UIColor.pard.gray30
     }
 }
-
