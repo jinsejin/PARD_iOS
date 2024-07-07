@@ -568,7 +568,6 @@ class MyScoreViewController: UIViewController {
     
     
     class ScoreRecordCell: UICollectionViewCell {
-        
         static let identifier = "ScoreRecordCell"
         
         let tagLabel = UILabel()
@@ -576,6 +575,7 @@ class MyScoreViewController: UIViewController {
         let dateLabel = UILabel()
         let pointsLabel = UILabel()
         let backgroundCardView = UIView()
+        let separatorView = UIView()  // Separator view
         
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -613,6 +613,9 @@ class MyScoreViewController: UIViewController {
             pointsLabel.textColor = .pard.gray30
             pointsLabel.textAlignment = .right
             
+            separatorView.backgroundColor = .pard.gray30  // Configure separator color
+            contentView.addSubview(separatorView)
+            
             backgroundCardView.addSubview(tagLabel)
             backgroundCardView.addSubview(titleLabel)
             backgroundCardView.addSubview(dateLabel)
@@ -644,14 +647,23 @@ class MyScoreViewController: UIViewController {
                 make.top.equalTo(dateLabel.snp.top)
                 make.trailing.equalTo(backgroundCardView).offset(-28)
             }
+            
+            separatorView.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.width.equalTo(1)
+            }
         }
         
-        func configure(with record: (tag: String, title: String, date: String, points: String, pointsColor: UIColor)) {
+        func configure(with record: (tag: String, title: String, date: String, points: String, pointsColor: UIColor), isLastItem: Bool) {
             tagLabel.text = record.tag
             titleLabel.text = record.title
             dateLabel.text = record.date
             pointsLabel.text = record.points
             pointsLabel.textColor = record.pointsColor
+            
+            separatorView.isHidden = isLastItem  // 마지막 셀의 구분선 숨김
             
             if record.tag == "벌점" {
                 tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
@@ -664,6 +676,8 @@ class MyScoreViewController: UIViewController {
             }
         }
     }
+
+
 
     class ToolTipView: UIView {
 
