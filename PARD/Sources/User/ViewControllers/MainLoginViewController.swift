@@ -40,7 +40,6 @@ class MainLoginViewController: UIViewController {
         view.addSubview($0)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
