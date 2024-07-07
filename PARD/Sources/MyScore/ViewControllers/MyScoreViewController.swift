@@ -51,9 +51,11 @@ class MyScoreViewController: UIViewController {
         
     }
     
-    @objc func backButtonTapped(){
-        print("go to back !!!")
+    @objc func backButtonTapped() {
+        let homeViewController = HomeViewController()
+        navigationController?.setViewControllers([homeViewController], animated: true)
     }
+
     
     private func setupTextLabel() {
         let padding: CGFloat = 8
