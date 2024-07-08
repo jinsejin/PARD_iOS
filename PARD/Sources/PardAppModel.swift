@@ -26,6 +26,7 @@ struct PardAppModel {
     ]
 }
 
+// MARK: - User 데이터 관리
 struct User: Codable {
     let part: String
     let name: String
@@ -51,3 +52,21 @@ let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "
 let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus") 
 let totalMinus = UserDefaults.standard.float(forKey: "userTotalMinus") 
 
+
+// MARK: - rank 데이터 관리
+struct Rank: Codable {
+    let part: String
+    let name: String
+    
+    init(part: String, name: String){
+        self.part = part
+        self.name = name
+    }
+}
+
+class RankManager {
+    static let shared = RankManager()
+    private init() {}
+
+    var rankList: [Rank] = []
+}

@@ -75,6 +75,16 @@ class HomePardnerShipView : UIView {
     }
     
     @objc private func tappedmoreButton() {
+        getRankTop3 { ranks in
+                    guard let ranks = ranks else { return }
+                    DispatchQueue.main.async {
+                        RankManager.shared.rankList = ranks
+                        // 데이터를 받은 후 필요한 처리를 합니다.
+                    }
+                }
+//        getRankTop3()
+        
+        
         let myScoreViewController = MyScoreViewController()
         viewController?.navigationController?.pushViewController(myScoreViewController, animated: true)
     }
