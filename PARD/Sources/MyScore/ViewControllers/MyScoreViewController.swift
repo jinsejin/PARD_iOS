@@ -39,17 +39,22 @@ class MyScoreViewController: UIViewController {
     private func setNavigation() {
         self.navigationItem.title = "내 점수"
         if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.titleTextAttributes = [
-                .font:  UIFont.pardFont.head2,
+            let appearance = UINavigationBarAppearance()
+            appearance.titleTextAttributes = [
+                .font: UIFont.pardFont.head2,
                 .foregroundColor: UIColor.white
             ]
+            
+            navigationBar.standardAppearance = appearance
+            navigationBar.scrollEdgeAppearance = appearance
+            navigationBar.compactAppearance = appearance
         }
         let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
-        
-        
     }
+
+
     
     @objc func backButtonTapped() {
         let homeViewController = HomeViewController()
