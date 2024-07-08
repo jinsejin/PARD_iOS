@@ -69,6 +69,8 @@ class MyPageViewController: UIViewController {
         accountView.addSubview(deleteAccountLabel)
         accountView.addSubview(arrowImageView3)
         accountView.addSubview(arrowImageView4)
+        
+        
     }
 
     
@@ -263,7 +265,8 @@ class MyPageViewController: UIViewController {
         feedbackView.addGestureRecognizer(feedbackTapGestureRecognizer)
         feedbackView.isUserInteractionEnabled = true
         
-        
+        notificationSwitch.addTarget(self, action: #selector(notificationSwitchChanged), for: .valueChanged)
+
         arrowButton1.addTarget(self, action: #selector(arrowButton1Tapped), for: .touchUpInside)
         arrowButton2.addTarget(self, action: #selector(arrowButton2Tapped), for: .touchUpInside)
     }
@@ -457,6 +460,25 @@ class MyPageViewController: UIViewController {
         toggleSwitch.onTintColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
         return toggleSwitch
     }()
+    
+    @objc private func notificationSwitchChanged() {
+        if notificationSwitch.isOn {
+            openNotificationSettings()
+        } else {
+            print("Notifications disabled")
+        }
+    }
+
+    private func openNotificationSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+    }
+
     
     private let usageGuideLabel: UILabel = {
         let label = UILabel()
