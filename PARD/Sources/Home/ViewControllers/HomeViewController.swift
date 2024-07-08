@@ -33,14 +33,14 @@ class HomeViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-   
-    
     private func setNavigation() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .pard.blackCard
         appearance.shadowColor = .pard.blackCard
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+        
         let homeButton = UIBarButtonItem(image: UIImage(named: "pardHomeLogo")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(homeLogoTapped))
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuButtonTapped))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)

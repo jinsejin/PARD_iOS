@@ -40,6 +40,8 @@ class MyScoreViewController: UIViewController {
         self.navigationItem.title = "내 점수"
         if let navigationBar = self.navigationController?.navigationBar {
             let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = UIColor.pard.blackBackground
+            appearance.shadowColor = .clear 
             appearance.titleTextAttributes = [
                 .font: UIFont.pardFont.head2,
                 .foregroundColor: UIColor.white
@@ -48,6 +50,9 @@ class MyScoreViewController: UIViewController {
             navigationBar.standardAppearance = appearance
             navigationBar.scrollEdgeAppearance = appearance
             navigationBar.compactAppearance = appearance
+            navigationBar.tintColor = .white
+            
+            appearance.shadowColor = .clear
         }
         let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .white
