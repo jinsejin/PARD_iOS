@@ -39,6 +39,10 @@ class MyPageViewController: UIViewController {
         infoView.addSubview(statusStackView)
         view.addSubview(infoLabel)
         
+        statusLabel1.sizeToFit()
+        statusLabel2.sizeToFit()
+        statusLabel3.sizeToFit()
+        
         statusLabel2.backgroundColor = UIColor(patternImage: gradientImage())
         statusStackView.addArrangedSubview(statusLabel1)
         statusStackView.addArrangedSubview(statusLabel2)
@@ -95,24 +99,24 @@ class MyPageViewController: UIViewController {
             make.leading.equalTo(feedbackActionView.snp.leading)
             make.trailing.equalTo(feedbackActionView.snp.trailing)
         }
-
+        
         
         feedbackActionView.snp.makeConstraints { make in
             make.trailing.equalTo(feedbackView.snp.trailing).offset(-24)
             make.centerY.equalTo(feedbackView.snp.centerY)
         }
-
+        
         feedbackActionLabel.snp.makeConstraints { make in
             make.leading.equalTo(feedbackActionView.snp.leading)
             make.centerY.equalTo(feedbackActionView.snp.centerY)
         }
-
+        
         feedbackArrowImageView.snp.makeConstraints { make in
             make.leading.equalTo(feedbackView.snp.leading).offset(363)
             make.top.equalTo(feedbackActionView.snp.top).offset(33)
             make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
         }
-
+        
         feedbackArrowImageView2.snp.makeConstraints { make in
             make.leading.equalTo(feedbackView.snp.leading).offset(370)
             make.top.equalTo(feedbackActionView.snp.top).offset(33)
@@ -138,19 +142,15 @@ class MyPageViewController: UIViewController {
         
         statusLabel1.snp.makeConstraints { make in
             make.height.equalTo(24)
-            make.width.equalTo(42)
         }
         
         statusLabel2.snp.makeConstraints { make in
             make.height.equalTo(24)
-            make.width.equalTo(79)
         }
         
         statusLabel3.snp.makeConstraints { make in
             make.height.equalTo(24)
-            make.width.equalTo(66)
         }
-    
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.top).offset(52)
@@ -380,7 +380,6 @@ class MyPageViewController: UIViewController {
         label.backgroundColor = UIColor.pard.primaryBlue
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        label.sizeToFit()
         return label
     }()
 
@@ -392,7 +391,6 @@ class MyPageViewController: UIViewController {
         label.font = UIFont.pardFont.body2
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        label.sizeToFit()
         return label
     }()
     
@@ -405,7 +403,6 @@ class MyPageViewController: UIViewController {
         label.backgroundColor = UIColor.pard.primaryPurple
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        label.sizeToFit()
         return label
     }()
 
@@ -413,7 +410,7 @@ class MyPageViewController: UIViewController {
     private let statusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.spacing = 8
         return stackView
     }()
