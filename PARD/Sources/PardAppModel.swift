@@ -33,10 +33,10 @@ struct User: Codable {
     let role: String
     let generation: String
     let totalBonus: Int
-    let totalMinus: Float
+    let totalMinus: Double
     let pangoolPoint: Float
 
-    init(part: String, name: String, role: String, generation: String, totalBonus: Int, totalMinus: Float, pangoolPoint: Float) {
+    init(part: String, name: String, role: String, generation: String, totalBonus: Int, totalMinus: Double, pangoolPoint: Float) {
         self.part = part
         self.name = name
         self.role = role
@@ -63,7 +63,7 @@ let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "failed"
 let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
 let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "failed"
 let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus")
-let totalMinus = UserDefaults.standard.float(forKey: "userTotalMinus")
+let totalMinus = UserDefaults.standard.double(forKey: "userTotalMinus")
 let partRanking = UserDefaults.standard.integer(forKey: "partRanking")
 let totalRanking = UserDefaults.standard.integer(forKey: "totalRanking")
 let pangoolPoint = UserDefaults.standard.float(forKey: "pangoolPoint") 
@@ -84,4 +84,30 @@ class RankManager {
     private init() {}
 
     var rankList: [Rank] = []
+}
+
+// MARK: - reason 데이터 관리
+struct Reason: Codable {
+    let reasonId: Int
+    let point: Float
+    let reason: String
+    let detail: String
+    let createAt: String
+    let bonus: Bool
+    
+    init(reasonId: Int, point: Float, reason: String, detail: String, createAt: String, bonus: Bool) {
+        self.reasonId = reasonId
+        self.point = point
+        self.reason = reason
+        self.detail = detail
+        self.createAt = createAt
+        self.bonus = bonus
+    }
+}
+
+class ReasonManager {
+    static let shared = ReasonManager()
+    private init() {}
+
+    var reasonList: [Reason] = []
 }
