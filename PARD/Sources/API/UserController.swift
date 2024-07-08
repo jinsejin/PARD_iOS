@@ -70,13 +70,13 @@ func getUsersMe() {
                 // userRole에서 "ROLE_" 부분을 제거
                 let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
 
-                // MARK: - debuging을 위한 코드입니다.
                 UserDefaults.standard.set(user.name, forKey: "userName")
                 UserDefaults.standard.set(user.part, forKey: "userPart")
                 UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")
                 UserDefaults.standard.set(user.generation, forKey: "userGeneration")
                 UserDefaults.standard.setValue(user.totalBonus, forKey: "userTotalBonus")
                 UserDefaults.standard.setValue(user.totalMinus, forKey: "userTotalMinus")
+                UserDefaults.standard.setValue(user.pangoolPoint, forKey: "pangoolPoint")
             } catch {
                 print("🚨 Decoding Error:", error)
             }
