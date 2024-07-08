@@ -51,7 +51,6 @@ class MyScoreViewController: UIViewController {
             navigationBar.scrollEdgeAppearance = appearance
             navigationBar.compactAppearance = appearance
             navigationBar.tintColor = .white
-            
             appearance.shadowColor = .clear
         }
         let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backButtonTapped))
