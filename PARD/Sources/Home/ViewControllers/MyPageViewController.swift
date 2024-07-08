@@ -491,6 +491,25 @@ class MyPageViewController: UIViewController {
         return toggleSwitch
     }()
     
+    @objc private func notificationSwitchChanged() {
+        if notificationSwitch.isOn {
+            openNotificationSettings()
+        } else {
+            print("Notifications disabled")
+        }
+    }
+
+    private func openNotificationSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+    }
+
+    
     private let usageGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "이용 안내"
