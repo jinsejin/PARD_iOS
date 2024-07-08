@@ -10,38 +10,6 @@ import UIKit
 let url = "https://we-pard.store/v1"
 var currentUser: User?
 
-func getUsers() {
-    if let urlLink = URL(string: url + "/users") {
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: urlLink) { data, response, error in
-            if let error = error {
-                print("🚨 Error:", error)
-                return
-            }
-            if let JSONdata = data {
-                // 응답 데이터를 문자열로 변환하여 출력
-                if let dataString = String(data: JSONdata, encoding: .utf8) {
-                    print("Response Data String: \(dataString)")
-                }
-                
-                let decoder = JSONDecoder()
-                do {
-                    // JSON 데이터 디코딩을 시도하기 전에, 데이터가 JSON 형식인지 확인
-                    let jsonObject = try JSONSerialization.jsonObject(with: JSONdata, options: [])
-                    print("Valid JSON Object: \(jsonObject)")
-                    DispatchQueue.main.async {
-                        // self.tableView.reloadData()
-                    }
-                    print("✅ Success")
-                } catch {
-                    print("🚨 Decoding Error:", error)
-                }
-            }
-        }
-        task.resume()
-    }
-}
-
 extension MainLoginViewController {
     func postLogin(with email: String) {
         guard let url = URL(string: "\(url)/users/login") else {
@@ -107,7 +75,8 @@ func getUsersMe() {
                 UserDefaults.standard.set(user.part, forKey: "userPart")
                 UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")
                 UserDefaults.standard.set(user.generation, forKey: "userGeneration")
-                print("===> \(user.name)")
+                UserDefaults.standard.setValue(user.totalBonus, forKey: "userTotalBonus")
+                UserDefaults.standard.setValue(user.totalMinus, forKey: "userTotalMinus")
             } catch {
                 print("🚨 Decoding Error:", error)
             }

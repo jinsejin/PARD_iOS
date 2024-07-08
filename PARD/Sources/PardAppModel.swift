@@ -31,12 +31,16 @@ struct User: Codable {
     let name: String
     let role: String
     let generation: String
+    let totalBonus: Int
+    let totalMinus: Float
     
-    init(part: String, name: String, role: String, generation: String) {
+    init(part: String, name: String, role: String, generation: String, totalBonus: Int, totalMinus: Float) {
         self.part = part
         self.name = name
         self.role = role
         self.generation = generation
+        self.totalBonus = totalBonus
+        self.totalMinus = totalMinus
     }
 }
 
@@ -44,4 +48,6 @@ let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
 let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "failed"
 let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
 let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "failed"
+let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus") 
+let totalMinus = UserDefaults.standard.float(forKey: "userTotalMinus") 
 
