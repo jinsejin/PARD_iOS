@@ -26,22 +26,62 @@ struct PardAppModel {
     ]
 }
 
+// MARK: - User 데이터 관리
 struct User: Codable {
     let part: String
     let name: String
     let role: String
     let generation: String
-    
-    init(part: String, name: String, role: String, generation: String) {
+    let totalBonus: Int
+    let totalMinus: Float
+    let pangoolPoint: Float
+
+    init(part: String, name: String, role: String, generation: String, totalBonus: Int, totalMinus: Float, pangoolPoint: Float) {
         self.part = part
         self.name = name
         self.role = role
         self.generation = generation
+        self.totalBonus = totalBonus
+        self.totalMinus = totalMinus
+        self.pangoolPoint = pangoolPoint
     }
 }
+
+struct UserRank: Codable {
+    let partRanking: Int
+    let totalRanking: Int
+
+    init(partRanking: Int, totalRanking: Int) {
+        self.partRanking = partRanking
+        self.totalRanking = totalRanking
+    }
+}
+
 
 let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
 let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "failed"
 let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
 let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "failed"
+let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus")
+let totalMinus = UserDefaults.standard.float(forKey: "userTotalMinus")
+let partRanking = UserDefaults.standard.integer(forKey: "partRanking")
+let totalRanking = UserDefaults.standard.integer(forKey: "totalRanking")
+let pangoolPoint = UserDefaults.standard.float(forKey: "pangoolPoint") 
 
+// MARK: - rank 데이터 관리
+struct Rank: Codable {
+    let part: String
+    let name: String
+    
+    init(part: String, name: String){
+        self.part = part
+        self.name = name
+    }
+}
+
+class RankManager {
+    static let shared = RankManager()
+    private init() {}
+
+    var rankList: [Rank] = []
+}

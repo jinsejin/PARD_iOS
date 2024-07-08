@@ -195,7 +195,9 @@ extension UserInfoPolicyViewController {
         self.navigationController?.isNavigationBarHidden = false
         view.backgroundColor = UIColor.pard.blackBackground
         setUpUI()
-        getUsersMe()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            getUsersMe()
+        }
     }
     
     private func setUpUI() {

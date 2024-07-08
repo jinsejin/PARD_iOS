@@ -12,6 +12,9 @@ class MyScoreViewController: UIViewController {
     
     let pardnerShipLabel = UILabel()
     let scoreRecordsView = ScoreRecordsView()
+    private var rank1: Rank?
+    private var rank2: Rank?
+    private var rank3: Rank?
     
     private var toolTipView: ToolTipView?
     
@@ -25,9 +28,40 @@ class MyScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .pard.blackBackground
-        
+        //        setNavigation()
+        //        setupTextLabel()
+        //        setupRankingMedals()
+        //        setupRankingButton()
+        //        setupCrownImages()
+        //        setupScoreView()
+        //        setupScoreStatusView()
+        //        setupScoreRecordsView()
         setNavigation()
         setupTextLabel()
+        
+        loadData()
+    }
+    
+    private func loadData() {
+        getRankTop3 { [weak self] ranks in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                RankManager.shared.rankList = ranks ?? []
+                self.updateUIWithRanks()
+            }
+        }
+        getRankMe()
+    }
+    
+    private func updateUIWithRanks() {
+        if RankManager.shared.rankList.count >= 3 {
+            rank1 = RankManager.shared.rankList[0]
+            rank2 = RankManager.shared.rankList[1]
+            rank3 = RankManager.shared.rankList[2]
+        } else {
+            print("Not enough data in rankList")
+        }
+        
         setupRankingMedals()
         setupRankingButton()
         setupCrownImages()
@@ -35,7 +69,6 @@ class MyScoreViewController: UIViewController {
         setupScoreStatusView()
         setupScoreRecordsView()
     }
-    
     private func setNavigation() {
         self.navigationItem.title = "내 점수"
         if let navigationBar = self.navigationController?.navigationBar {
@@ -64,7 +97,7 @@ class MyScoreViewController: UIViewController {
         let homeViewController = HomeViewController()
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
-
+    
     
     private func setupTextLabel() {
         let padding: CGFloat = 8
@@ -124,6 +157,7 @@ class MyScoreViewController: UIViewController {
     
     
     private func setupRankingMedals() {
+        guard let rank1 = rank1, let rank2 = rank2, let rank3 = rank3 else { return }
         let goldRingImageView = UIImageView(image: UIImage(named: "goldRing"))
         view.addSubview(goldRingImageView)
         
@@ -136,7 +170,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(goldRankLabel)
         
         let goldPartLabel = UILabel().then {
-            $0.text = "디자인파트"
+            $0.text = "\(rank1.part)"
             $0.font = UIFont.pardFont.body3
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
@@ -144,7 +178,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(goldPartLabel)
         
         let goldNameLabel = UILabel().then {
-            $0.text = "김민섭"
+            $0.text = "\(rank1.name)"
             $0.font = UIFont.pardFont.body4
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
@@ -163,7 +197,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(silverRankLabel)
         
         let silverPartLabel = UILabel().then {
-            $0.text = "디자인파트"
+            $0.text = "\(rank2.part)"
             $0.font = UIFont.pardFont.body3
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
@@ -171,7 +205,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(silverPartLabel)
         
         let silverNameLabel = UILabel().then {
-            $0.text = "손동우"
+            $0.text = "\(rank2.name)"
             $0.font = UIFont.pardFont.body4
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
@@ -190,7 +224,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(bronzeRankLabel)
         
         let bronzePartLabel = UILabel().then {
-            $0.text = "디자인파트"
+            $0.text = "\(rank3.part)"
             $0.font = UIFont.pardFont.body3
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
@@ -198,7 +232,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(bronzePartLabel)
         
         let bronzeNameLabel = UILabel().then {
-            $0.text = "윤성익"
+            $0.text = "\(rank3.name)"
             $0.font = UIFont.pardFont.body4
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
@@ -344,7 +378,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let myRankLabel = UILabel().then {
-            $0.text = "3위"
+            $0.text = "\(partRanking)위"
             $0.font = UIFont.pardFont.head2
             $0.textAlignment = .center
             $0.textColor = .white
@@ -370,7 +404,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let totalRankLabel = UILabel().then {
-            $0.text = "13위"
+            $0.text = "\(totalRanking)위"
             $0.font = UIFont.pardFont.head2
             $0.textAlignment = .center
             $0.textColor = .white
@@ -426,7 +460,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let partPointsValueLabel = UILabel().then {
-            $0.text = "+7점"
+            $0.text = "+\(totalBonus)점"
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.primaryGreen
             $0.textAlignment = .center
@@ -467,7 +501,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let penaltyPointsValueLabel = UILabel().then {
-            $0.text = "-1점"
+            $0.text = "-\(totalMinus)점"
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.errorRed
             $0.textAlignment = .center
@@ -499,11 +533,11 @@ class MyScoreViewController: UIViewController {
     @objc private func tappedQuestionButton() {
         toggleToolTip()
     }
-
+    
     @objc private func scorePolicyTapped() {
         toggleToolTip()
     }
-
+    
     private func toggleToolTip() {
         if toolTipView == nil {
             let toolTip = ToolTipView()
@@ -520,7 +554,7 @@ class MyScoreViewController: UIViewController {
             toolTipView = nil
         }
     }
-
+    
     
     private func setupScoreRecordsView() {
         let scoreRecordsTitleLabel = UILabel().then {
@@ -575,8 +609,8 @@ class MyScoreViewController: UIViewController {
         
         scoreRecordsView.configure(with: scoreRecords)
     }
-
-
+    
+    
     
     
     
@@ -626,7 +660,7 @@ class MyScoreViewController: UIViewController {
             pointsLabel.textColor = .pard.gray30
             pointsLabel.textAlignment = .right
             
-            separatorView.backgroundColor = .pard.gray30  
+            separatorView.backgroundColor = .pard.gray30
             contentView.addSubview(separatorView)
             
             backgroundCardView.addSubview(tagLabel)
@@ -689,51 +723,51 @@ class MyScoreViewController: UIViewController {
             }
         }
     }
-
-
-
+    
+    
+    
     class ToolTipView: UIView {
-
+        
         private let closeButton = UIButton()
         private let contentView = UIView()
-
+        
         override init(frame: CGRect) {
             super.init(frame: frame)
             setupUI()
         }
-
+        
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-
+        
         private func setupUI() {
             backgroundColor = .pard.blackBackground
             layer.cornerRadius = 8
             layer.borderWidth = 1
             layer.borderColor = UIColor.pard.primaryPurple.cgColor
-
+            
             let mvpLabel = createLabel(text: "MVP", color: .pard.primaryPurple)
             let mvpDetail = createDetailLabel(text: "주요 행사 MVP", details: [("5점", .gray)])
             let mvpSubDetail = createDetailLabel(text: "세미나 파트별 MVP", details: [("3점", .gray)])
-
+            
             let studyLabel = createLabel(text: "스터디", color: .pard.primaryPurple)
             let studyDetail = createDetailLabel(text: "개최 및 수료", details: [("5점", .gray)])
             let studySubDetail = createDetailLabel(text: "참여 및 수료", details: [("3점", .gray)])
-
+            
             let communicationLabel = createLabel(text: "소통", color: .pard.primaryPurple)
             let communicationDetail = createDetailLabel(text: "파드 구성원과의 만남 후 사진을 슬랙에 인증", details: [("1점/주 1회", .gray)])
-
+            
             let reportLabel = createLabel(text: "회고", color: .pard.primaryPurple)
             let reportDetail = createDetailLabel(text: "디스코이엇 작성 후 파트장에게 공유", details: [("3점/필수과제 제외", .gray)])
-
+            
             let penaltyLabel = createLabel(text: "벌점", color: .pard.errorRed)
             
             let penaltyDetail = createDetailLabel(text: "세미나 지각(10분 이내)", details: [("-1점", .gray)])
-        
+            
             let penaltyDetail1 = createDetailLabel(text: "세미나 결석", details: [("-2점", .gray)])
             
             let penaltyDetail2 = createDetailLabel(text: "과제 지각", details: [("-0.5점", .gray)])
-
+            
             let penaltyDetail3 = createDetailLabel(text: "과제 미제출", details: [("-1점", .gray)])
             
             let mvpStackView = createStackView(arrangedSubviews: [mvpLabel, mvpDetail, mvpSubDetail])
@@ -741,7 +775,7 @@ class MyScoreViewController: UIViewController {
             let communicationStackView = createStackView(arrangedSubviews: [communicationLabel, communicationDetail])
             let reportStackView = createStackView(arrangedSubviews: [reportLabel, reportDetail])
             let penaltyStackView = createStackView(arrangedSubviews: [penaltyLabel, penaltyDetail, penaltyDetail1,penaltyDetail2, penaltyDetail3])
-
+            
             let stackView = UIStackView(arrangedSubviews: [
                 mvpStackView,
                 studyStackView,
@@ -749,33 +783,33 @@ class MyScoreViewController: UIViewController {
                 reportStackView,
                 penaltyStackView
             ])
-
+            
             stackView.axis = .vertical
             stackView.spacing = 8
             stackView.alignment = .leading
-
+            
             contentView.addSubview(stackView)
             addSubview(contentView)
-
+            
             contentView.snp.makeConstraints { make in
                 make.edges.equalToSuperview().inset(16)
             }
-
+            
             stackView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
-
+            
             closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
             closeButton.tintColor = .white
             closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
             addSubview(closeButton)
-
+            
             closeButton.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(8)
                 make.trailing.equalToSuperview().offset(-8)
             }
         }
-
+        
         private func createLabel(text: String, color: UIColor) -> UILabel {
             let label = UILabel()
             label.text = text
@@ -791,7 +825,7 @@ class MyScoreViewController: UIViewController {
             }
             return label
         }
-
+        
         private func createDetailLabel(text: String, details: [(String, UIColor)]) -> UIStackView {
             let label = UILabel()
             label.text = text
@@ -799,9 +833,9 @@ class MyScoreViewController: UIViewController {
             label.font = UIFont.systemFont(ofSize: 10)
             label.numberOfLines = 1
             label.textAlignment = .left
-
+            
             var views: [UIView] = [label]
-
+            
             for (point, color) in details {
                 let pointLabel = UILabel()
                 pointLabel.text = point
@@ -817,15 +851,15 @@ class MyScoreViewController: UIViewController {
                 }
                 views.append(pointLabel)
             }
-
+            
             let stackView = UIStackView(arrangedSubviews: views)
             stackView.axis = .horizontal
             stackView.spacing = 4
             stackView.alignment = .center
-
+            
             return stackView
         }
-
+        
         private func createSubDetailLabel(text: String) -> UILabel {
             let label = UILabel()
             label.text = text
@@ -833,31 +867,31 @@ class MyScoreViewController: UIViewController {
             label.font = UIFont.systemFont(ofSize: 10)
             label.numberOfLines = 1
             label.textAlignment = .left
-
+            
             return label
         }
-
+        
         private func createStackView(arrangedSubviews: [UIView]) -> UIStackView {
             let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
             stackView.axis = .horizontal
             stackView.spacing = 8
             stackView.alignment = .center
-
+            
             arrangedSubviews.forEach { subview in
                 if let label = subview as? UILabel {
                     label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
                 }
             }
-
+            
             return stackView
         }
-
+        
         @objc private func closeTapped() {
             removeFromSuperview()
         }
     }
-
-
+    
+    
     @objc private func rankingButtonTapped() {
         let rankingViewController = RankingViewController()
         navigationController?.pushViewController(rankingViewController, animated: true)
