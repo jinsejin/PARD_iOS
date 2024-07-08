@@ -43,7 +43,6 @@ class MyScoreViewController: UIViewController {
     }
     
     private func loadData() {
-        // 네트워크 요청 등 데이터 로드 후 rankList 설정
         getRankTop3 { [weak self] ranks in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -51,6 +50,7 @@ class MyScoreViewController: UIViewController {
                 self.updateUIWithRanks()
             }
         }
+        getRankMe()
     }
     
     private func updateUIWithRanks() {
@@ -369,7 +369,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let myRankLabel = UILabel().then {
-            $0.text = "3위"
+            $0.text = "\(partRanking)위"
             $0.font = UIFont.pardFont.head2
             $0.textAlignment = .center
             $0.textColor = .white
@@ -395,7 +395,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let totalRankLabel = UILabel().then {
-            $0.text = "13위"
+            $0.text = "\(totalRanking)위"
             $0.font = UIFont.pardFont.head2
             $0.textAlignment = .center
             $0.textColor = .white
@@ -451,7 +451,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let partPointsValueLabel = UILabel().then {
-            $0.text = "+7점"
+            $0.text = "+\(totalBonus)점"
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.primaryGreen
             $0.textAlignment = .center
@@ -492,7 +492,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let penaltyPointsValueLabel = UILabel().then {
-            $0.text = "-1점"
+            $0.text = "-\(totalMinus)점"
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.errorRed
             $0.textAlignment = .center

@@ -34,24 +34,39 @@ struct User: Codable {
     let generation: String
     let totalBonus: Int
     let totalMinus: Float
-    
-    init(part: String, name: String, role: String, generation: String, totalBonus: Int, totalMinus: Float) {
+    let pangoolPoint: Float
+
+    init(part: String, name: String, role: String, generation: String, totalBonus: Int, totalMinus: Float, pangoolPoint: Float) {
         self.part = part
         self.name = name
         self.role = role
         self.generation = generation
         self.totalBonus = totalBonus
         self.totalMinus = totalMinus
+        self.pangoolPoint = pangoolPoint
     }
 }
+
+struct UserRank: Codable {
+    let partRanking: Int
+    let totalRanking: Int
+
+    init(partRanking: Int, totalRanking: Int) {
+        self.partRanking = partRanking
+        self.totalRanking = totalRanking
+    }
+}
+
 
 let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
 let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "failed"
 let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
 let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "failed"
-let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus") 
-let totalMinus = UserDefaults.standard.float(forKey: "userTotalMinus") 
-
+let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus")
+let totalMinus = UserDefaults.standard.float(forKey: "userTotalMinus")
+let partRanking = UserDefaults.standard.integer(forKey: "partRanking")
+let totalRanking = UserDefaults.standard.integer(forKey: "totalRanking")
+let pangoolPoint = UserDefaults.standard.float(forKey: "pangoolPoint") 
 
 // MARK: - rank 데이터 관리
 struct Rank: Codable {
