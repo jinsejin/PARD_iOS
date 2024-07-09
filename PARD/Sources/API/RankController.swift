@@ -81,3 +81,43 @@ func getRankMe() {
         task.resume()
     }
 }
+
+func getTotalRank() {
+    if let urlLink = URL(string: url + "/rank/total") {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: urlLink) { data, response, error in
+            if let error = error {
+                print("🚨 Error:", error)
+                return
+            }
+            guard let JSONdata = data, !JSONdata.isEmpty else {
+                print("🚨 [getTotalRank] Error: No data or empty data")
+                return
+            }
+            if let dataString = String(data: JSONdata, encoding: .utf8) {
+                print("Response Data String: \(dataString)")
+            } else {
+                print("🚨 Error: Unable to convert data to string")
+            }
+            
+            let decoder = JSONDecoder()
+            do {
+                let totalRankList = try decoder.decode([TotalRank].self, from: JSONdata)
+                TotalRankManager.shared.totalRankList = totalRankList
+                print("✅ Success: \(totalRankList)")
+                
+                // MARK: - Debugging code
+                for totalRank in totalRankList {
+                    print("---> \(totalRank.name)")
+                    print("---> \(totalRank.part)")
+                    print("---> \(totalRank.totalBonus)")
+                }
+                
+            } catch {
+                print("🚨 Decoding Error:", error)
+            }
+        }
+        task.resume()
+    }
+}
+
