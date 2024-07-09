@@ -44,7 +44,6 @@
 		21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF42C345ABA00134681 /* ScheduleController.swift */; };
 		21702BF72C345AC600134681 /* ReasonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF62C345AC600134681 /* ReasonController.swift */; };
 		21702BF92C345AD300134681 /* QrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF82C345AD300134681 /* QrController.swift */; };
-		21702BFB2C345ADF00134681 /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFA2C345ADF00134681 /* ProjectController.swift */; };
 		21702BFD2C353E0C00134681 /* GoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */; };
 		21702BFF2C3562C700134681 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BFE2C3562C700134681 /* ScheduleModel.swift */; };
 		217651512B94738800121AB2 /* PARD_DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 217651502B94738800121AB2 /* PARD_DesignSystem */; };
@@ -105,7 +104,6 @@
 		21702BF42C345ABA00134681 /* ScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleController.swift; sourceTree = "<group>"; };
 		21702BF62C345AC600134681 /* ReasonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonController.swift; sourceTree = "<group>"; };
 		21702BF82C345AD300134681 /* QrController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrController.swift; sourceTree = "<group>"; };
-		21702BFA2C345ADF00134681 /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
 		21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginManager.swift; sourceTree = "<group>"; };
 		21702BFE2C3562C700134681 /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		2176515A2B947ABE00121AB2 /* +Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Font.swift"; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				21702BF42C345ABA00134681 /* ScheduleController.swift */,
 				21702BF62C345AC600134681 /* ReasonController.swift */,
 				21702BF82C345AD300134681 /* QrController.swift */,
-				21702BFA2C345ADF00134681 /* ProjectController.swift */,
 				21AAAA4B2C3BC0FD00F080A0 /* RankController.swift */,
 			);
 			path = API;
@@ -617,7 +614,6 @@
 				21702BF32C345AAD00134681 /* UserController.swift in Sources */,
 				0DC5CDF52B96DA9B007A21E4 /* MyScoreView.swift in Sources */,
 				0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */,
-				21702BFB2C345ADF00134681 /* ProjectController.swift in Sources */,
 				90C007D22B95D2CF0056D724 /* CalendarViewController.swift in Sources */,
 				0D70EC452C2D3FFA00FDE559 /* HomePardnerShipView.swift in Sources */,
 				0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */,

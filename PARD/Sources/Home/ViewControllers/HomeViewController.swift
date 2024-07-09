@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
+  
     private func setNavigation() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()

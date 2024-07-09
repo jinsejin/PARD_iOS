@@ -15,7 +15,24 @@ class MyScoreViewController: UIViewController {
     private var rank1: Rank?
     private var rank2: Rank?
     private var rank3: Rank?
+    private var reasons: Reason?
     
+    private let appearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackBackground
+        $0.shadowColor = .pard.blackBackground
+        $0.titleTextAttributes = [
+            .foregroundColor: UIColor.pard.white100,
+            .font: UIFont.pardFont.head1
+        ]
+    }
+    
+    private let previousAppearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackCard
+        $0.shadowColor = .pard.blackCard
+    }
+  
     private var toolTipView: ToolTipView?
     
     var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
@@ -28,14 +45,6 @@ class MyScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .pard.blackBackground
-        //        setNavigation()
-        //        setupTextLabel()
-        //        setupRankingMedals()
-        //        setupRankingButton()
-        //        setupCrownImages()
-        //        setupScoreView()
-        //        setupScoreStatusView()
-        //        setupScoreRecordsView()
         setNavigation()
         setupTextLabel()
         
@@ -50,8 +59,14 @@ class MyScoreViewController: UIViewController {
                 self.updateUIWithRanks()
             }
         }
-        getRankMe()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getRankMe()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getReason()
+        }
     }
+    
     
     private func updateUIWithRanks() {
         if RankManager.shared.rankList.count >= 3 {
@@ -61,7 +76,6 @@ class MyScoreViewController: UIViewController {
         } else {
             print("Not enough data in rankList")
         }
-        
         setupRankingMedals()
         setupRankingButton()
         setupCrownImages()
@@ -69,12 +83,31 @@ class MyScoreViewController: UIViewController {
         setupScoreStatusView()
         setupScoreRecordsView()
     }
+   
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.standardAppearance = previousAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance  = previousAppearance
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = true
+        }
+    }
+    
     private func setNavigation() {
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         self.navigationItem.title = "내 점수"
         if let navigationBar = self.navigationController?.navigationBar {
             let appearance = UINavigationBarAppearance()
             appearance.backgroundColor = UIColor.pard.blackBackground
-            appearance.shadowColor = .clear 
+            appearance.shadowColor = .clear
             appearance.titleTextAttributes = [
                 .font: UIFont.pardFont.head2,
                 .foregroundColor: UIColor.white
@@ -90,12 +123,10 @@ class MyScoreViewController: UIViewController {
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
     }
-
-
     
     @objc func backButtonTapped() {
         let homeViewController = HomeViewController()
-        navigationController?.setViewControllers([homeViewController], animated: true)
+        navigationController?.popViewController(animated: false)
     }
     
     
@@ -254,7 +285,6 @@ class MyScoreViewController: UIViewController {
             $0.leading.equalToSuperview().offset(62)
             $0.top.equalToSuperview().offset(179)
         }
-        
         
         goldNameLabel.snp.makeConstraints {
             $0.leading.equalTo(goldRingImageView.snp.trailing).offset(8)
@@ -723,8 +753,6 @@ class MyScoreViewController: UIViewController {
             }
         }
     }
-    
-    
     
     class ToolTipView: UIView {
         
