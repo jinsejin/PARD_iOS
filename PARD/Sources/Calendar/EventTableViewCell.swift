@@ -25,6 +25,7 @@ class EventTableViewCell: UITableViewCell {
     
     private let dDayLabel = UILabel().then { label in
         label.font = .pardFont.body5
+        label.textColor = .pard.white100
     }
     
     private let dateLabel = UILabel().then { label in
