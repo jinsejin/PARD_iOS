@@ -10,6 +10,7 @@ import SnapKit
 import Then
 
 
+
 // - MARK: 원하는 View Class 사용하면 됩니다. (이름도 알맞게 변경, 추가해서 사용해주세요)
 class HomeTopView : UIView {
     
@@ -44,17 +45,36 @@ class HomeTopView : UIView {
     private let questionimageButton = UIButton().then {
         $0.setImage(UIImage(named: "question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
-    private let currentPangulImage = UIImageView().then {
-        $0.image = UIImage(named: "level2")?.withRenderingMode(.alwaysOriginal)
-    }
+    
+    
+    private let currentPangulImage = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        getPangulImg()
         setUpUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func getPangulImg() {
+        let totalPangul = Float(totalBonus) + pangoolPoint
+        let imageName : String
+        switch totalBonus {
+        case 0..<26:
+            imageName = "level1"
+        case 26..<51:
+            imageName = "level2"
+        case 51..<76:
+            imageName = "level3"
+        case 76...90:
+            imageName = "level4"
+        default:
+            imageName = "level5"
+        }
+        currentPangulImage.image = UIImage(named: imageName)
     }
     
     func setUpUI() {
@@ -185,6 +205,3 @@ extension UserDataInHome {
         UserDataInHome(userData: userRole),
     ]
 }
-
-
-
