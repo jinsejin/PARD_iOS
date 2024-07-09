@@ -15,6 +15,7 @@ class MyScoreViewController: UIViewController {
     private var rank1: Rank?
     private var rank2: Rank?
     private var rank3: Rank?
+    private var reasons: Reason?
     
     private var toolTipView: ToolTipView?
     
@@ -49,6 +50,7 @@ class MyScoreViewController: UIViewController {
             getReason()
         }
     }
+    
     
     private func updateUIWithRanks() {
         if RankManager.shared.rankList.count >= 3 {
