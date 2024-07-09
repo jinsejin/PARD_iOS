@@ -44,22 +44,8 @@ class HomeTopView : UIView {
     private let questionimageButton = UIButton().then {
         $0.setImage(UIImage(named: "question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
-    
-    private let pangulStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.alignment = .center
-        $0.spacing = 22
-    }
     private let currentPangulImage = UIImageView().then {
-        $0.image = UIImage(named: "Panul_image")?.withRenderingMode(.alwaysOriginal)
-    }
-    
-    private let pangulNextLevelImge = UIImageView().then {
-        $0.image = UIImage(named: "next_Pangul")?.withRenderingMode(.alwaysOriginal)
-    }
-    
-    private let nextImage = UIImageView().then {
-        $0.image = UIImage(named: "nextImage")?.withRenderingMode(.alwaysOriginal)
+        $0.image = UIImage(named: "level2")?.withRenderingMode(.alwaysOriginal)
     }
     
     override init(frame: CGRect) {
@@ -75,7 +61,7 @@ class HomeTopView : UIView {
         self.addSubview(nameLabel)
         self.addSubview(collectionView)
         self.addSubview(questionimageButton)
-        self.addSubview(pangulStackView)
+        self.addSubview(currentPangulImage)
         
         questionimageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
         collectionView.delegate = self
@@ -95,14 +81,10 @@ class HomeTopView : UIView {
             make.trailing.equalToSuperview().offset(-28)
             make.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
-        pangulStackView.snp.makeConstraints { make in
+        currentPangulImage.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
-        
-        pangulStackView.addArrangedSubview(currentPangulImage)
-        pangulStackView.addArrangedSubview(nextImage)
-        pangulStackView.addArrangedSubview(pangulNextLevelImge)
     }
     
     @objc private func tappedQuestionButton() {
