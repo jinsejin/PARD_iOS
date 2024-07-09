@@ -774,7 +774,7 @@ class MyScoreViewController: UIViewController {
             let studyStackView = createStackView(arrangedSubviews: [studyLabel, studyDetail, studySubDetail])
             let communicationStackView = createStackView(arrangedSubviews: [communicationLabel, communicationDetail])
             let reportStackView = createStackView(arrangedSubviews: [reportLabel, reportDetail])
-            let penaltyStackView = createStackView(arrangedSubviews: [penaltyLabel, penaltyDetail, penaltyDetail1,penaltyDetail2, penaltyDetail3])
+            let penaltyStackView = createStackView(arrangedSubviews: [penaltyLabel, penaltyDetail, penaltyDetail1, penaltyDetail2, penaltyDetail3])
             
             let stackView = UIStackView(arrangedSubviews: [
                 mvpStackView,
@@ -807,6 +807,7 @@ class MyScoreViewController: UIViewController {
             closeButton.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(8)
                 make.trailing.equalToSuperview().offset(-8)
+                make.width.height.equalTo(24)
             }
         }
         
@@ -860,17 +861,6 @@ class MyScoreViewController: UIViewController {
             return stackView
         }
         
-        private func createSubDetailLabel(text: String) -> UILabel {
-            let label = UILabel()
-            label.text = text
-            label.textColor = .white
-            label.font = UIFont.systemFont(ofSize: 10)
-            label.numberOfLines = 1
-            label.textAlignment = .left
-            
-            return label
-        }
-        
         private func createStackView(arrangedSubviews: [UIView]) -> UIStackView {
             let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
             stackView.axis = .horizontal
@@ -890,6 +880,7 @@ class MyScoreViewController: UIViewController {
             removeFromSuperview()
         }
     }
+
     
     
     @objc private func rankingButtonTapped() {
