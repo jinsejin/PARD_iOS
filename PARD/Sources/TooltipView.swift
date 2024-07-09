@@ -71,7 +71,7 @@ class ToolTipView : UIView {
         $0.backgroundColor = .pard.blackCard
         $0.layer.cornerRadius = 8
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.pard.gra.cgColor
+        $0.layer.borderColor = UIColor.GradientColor.gra.cgColor
     }
     private let messageLabel = UILabel().then {
         $0.numberOfLines = 0

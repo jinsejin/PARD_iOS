@@ -51,6 +51,7 @@ func getRankMe() {
                 print("🚨 Error:", error)
                 return
             }
+            
             guard let JSONdata = data, !JSONdata.isEmpty else {
                 print("🚨 [getuserMe] Error: No data or empty data")
                 return

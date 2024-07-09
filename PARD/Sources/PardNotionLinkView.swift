@@ -59,7 +59,7 @@ extension PardNotionLinkView : UICollectionViewDataSource, UICollectionViewDeleg
         }
         let pardNotionData = PardNotionLinkData.menuTableModel[indexPath.row]
         cell.configuarePardNotionCell(partName: pardNotionData.title)
-        cell.backgroundColor = .pard.gra
+        cell.backgroundColor = .GradientColor.gra
         return cell
     }
     

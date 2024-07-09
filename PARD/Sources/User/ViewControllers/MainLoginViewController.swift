@@ -10,7 +10,6 @@ import AuthenticationServices
 import GoogleSignIn
 
 class MainLoginViewController: UIViewController {
-    
     let authorizationAppleIDButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     private let semiTitleLabel = UILabel().then {
         $0.font = UIFont.pardFont.body3
