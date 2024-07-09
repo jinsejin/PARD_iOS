@@ -111,3 +111,24 @@ class ReasonManager {
 
     var reasonList: [Reason] = []
 }
+
+
+// MARK: - total rank
+struct TotalRank: Codable {
+    let name: String
+    let part: String
+    let totalBonus: Int
+    
+    init(name: String, part: String, totalBonus: Int){
+        self.name = name
+        self.part = part
+        self.totalBonus = totalBonus
+    }
+}
+
+class TotalRankManager {
+    static let shared = TotalRankManager()
+    private init() {}
+
+    var totalRankList: [TotalRank] = []
+}

@@ -17,9 +17,13 @@ class RankingViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .pard.blackBackground
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getTotalRank()
+        }
         setNavigation()
         setupTextLabel()
         setupTableView()
+        
     }
 
     private func setupTextLabel() {
