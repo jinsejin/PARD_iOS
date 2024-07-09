@@ -12,7 +12,7 @@ extension NSMutableAttributedString {
     -> NSMutableAttributedString {
         let attributes:[NSAttributedString.Key : Any] = [
             .font: font,
-            .foregroundColor: UIColor.pard.gra,
+            .foregroundColor: UIColor.GradientColor.gra,
             .backgroundColor: UIColor.pard.blackCard
         ]
         self.append(NSAttributedString(string: value, attributes:attributes))

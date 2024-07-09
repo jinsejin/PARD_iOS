@@ -44,13 +44,13 @@ class RankingViewController: UIViewController {
         let labelContainerView = UIView()
         labelContainerView.backgroundColor = .clear
         labelContainerView.layer.borderWidth = 1
-        labelContainerView.layer.borderColor = UIColor.gradientColro.cgColor
+        labelContainerView.layer.borderColor = UIColor.GradientColor.gra.cgColor
         labelContainerView.layer.cornerRadius = 18
         view.addSubview(labelContainerView)
 
         textLabel.text = "🏆 PARDNERSHIP 🏆"
         textLabel.font = UIFont.pardFont.head2
-        textLabel.textColor = .gradientColro
+        textLabel.textColor = .GradientColor.gra
         textLabel.textAlignment = .center
         labelContainerView.addSubview(textLabel)
 

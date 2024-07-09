@@ -161,9 +161,9 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         let event = indexPath.section == 0 ? upcomingEvents[indexPath.row] : pastEvents[indexPath.row]
         cell.selectionStyle = .none
         if indexPath.section == 0 && indexPath.row == 0 {
-            cell.categoryLabelConfigure(textColor: .pard.gray10, backGroundColor: .pard.gra)
+            cell.categoryLabelConfigure(textColor: .pard.gray10, backGroundColor: .GradientColor.gra)
         } else {
-            cell.categoryLabelConfigure(textColor: .pard.gra, backGroundColor: .pard.blackCard)
+            cell.categoryLabelConfigure(textColor: .GradientColor.gra, backGroundColor: .pard.blackCard)
         }
         cell.labelConfigure(with: event)
         return cell
