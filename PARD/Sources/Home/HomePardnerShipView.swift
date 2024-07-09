@@ -11,7 +11,6 @@ import Then
 
 class HomePardnerShipView : UIView {
     private weak var viewController: UIViewController?
-    
     private let pardnerShipLabel = UILabel().then {
         $0.text = "🏄‍♂️ PARDNERSHIP 🏄‍♂️"
         $0.font = .pardFont.head2
@@ -59,9 +58,9 @@ class HomePardnerShipView : UIView {
         view.backgroundColor = .pard.gray10
     }
     
-    init(viewController: UIViewController) {
+    convenience init(viewController: UIViewController) {
+        self.init(frame: .zero)
         self.viewController = viewController
-        super.init(frame: .zero)
         setUpUI()
     }
     

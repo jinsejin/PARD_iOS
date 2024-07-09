@@ -6,16 +6,28 @@
 //
 
 import UIKit
+import Then
+import SnapKit
+import PARD_DesignSystem
 
 class RankingViewController: UIViewController {
-    let rankings = ["", "", "", "", "", "", ""]
-    let tableView = UITableView()
-    var userInfos: [UserInfo] = PardAppModel.userInfos
-    let textLabel = UILabel()
+    private let appearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackBackground
+        $0.shadowColor = .pard.blackBackground
+        $0.titleTextAttributes = [
+            .font: UIFont.pardFont.head1,
+            .foregroundColor : UIColor.pard.white100,
+        ]
+    }
+    
+    private let rankings = ["", "", "", "", "", "", ""]
+    private let tableView = UITableView()
+    private var userInfos: [UserInfo] = PardAppModel.userInfos
+    private let textLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .pard.blackBackground
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             getTotalRank()
@@ -32,13 +44,13 @@ class RankingViewController: UIViewController {
         let labelContainerView = UIView()
         labelContainerView.backgroundColor = .clear
         labelContainerView.layer.borderWidth = 1
-        labelContainerView.layer.borderColor = UIColor(patternImage: gradientImage()).cgColor
+        labelContainerView.layer.borderColor = UIColor.gradientColro.cgColor
         labelContainerView.layer.cornerRadius = 18
         view.addSubview(labelContainerView)
 
         textLabel.text = "🏆 PARDNERSHIP 🏆"
         textLabel.font = UIFont.pardFont.head2
-        textLabel.textColor = UIColor(patternImage: gradientImage())
+        textLabel.textColor = .gradientColro
         textLabel.textAlignment = .center
         labelContainerView.addSubview(textLabel)
 
@@ -77,35 +89,38 @@ class RankingViewController: UIViewController {
 
     private func setNavigation() {
         self.navigationItem.title = "전체 랭킹"
-        if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.titleTextAttributes = [
-                .font:  UIFont.pardFont.head2,
-                .foregroundColor: UIColor.white
-            ]
-        }
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
         let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
     }
     
     @objc func backButtonTapped(){
-        let myscoreViewController = MyScoreViewController()
-        navigationController?.setViewControllers([myscoreViewController], animated: true)
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+// - MARK: RankingViewController의 생태주기
+extension RankingViewController {
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        removeTabBarFAB(bool: true)
     }
     
-    // 그라데이션 이미지 생성
-    func gradientImage() -> UIImage {
-        let gradientLayer = CAGradientLayer().then {
-            $0.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-            $0.colors = [UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1).cgColor, UIColor(red: 123/255, green: 63/255, blue: 239/255, alpha: 1).cgColor]
-            $0.startPoint = CGPoint(x: 0, y: 0)
-            $0.endPoint = CGPoint(x: 1, y: 1)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.standardAppearance = appearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func removeTabBarFAB(bool : Bool) {
+        tabBarController?.setTabBarVisible(visible: !bool, animated: false)
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = bool
         }
-        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
     }
 }
 
@@ -215,13 +230,11 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
 
-        // Set rounded corners for the first cell
         if indexPath.row == 0 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
 
-        // Set rounded corners for the last cell
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -232,7 +245,6 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // 각 셀마다 구분선을 추가하는 부분
         if indexPath.row < 6 {
             let separatorView = UIView()
             separatorView.backgroundColor = UIColor.pard.gray30
@@ -245,13 +257,11 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
 
-        // 첫 번째 셀에 대한 처리
         if indexPath.row == 0 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
-        // 마지막 셀에 대한 처리
         if indexPath.row == rankings.count - 1 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]

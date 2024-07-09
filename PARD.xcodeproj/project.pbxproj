@@ -15,6 +15,8 @@
 		0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */; };
 		0D70EC4B2C2E7F8800FDE559 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */; };
 		0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */; };
+		0D70EC4F2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */; };
+		0D70EC512C3D148C00FDE559 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC502C3D148C00FDE559 /* UITabBarController.swift */; };
 		0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */; };
 		0DAFA0E22BA74EF30092FEB0 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */; };
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
@@ -73,6 +75,8 @@
 		0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUpcommingView.swift; sourceTree = "<group>"; };
 		0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTIpViewInMyScore.swift; sourceTree = "<group>"; };
+		0D70EC502C3D148C00FDE559 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamBurgerTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
@@ -397,6 +401,7 @@
 			children = (
 				0DC5CDF42B96DA9B007A21E4 /* MyScoreView.swift */,
 				9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */,
+				0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 				0DD2B1102BB063DC0050A0E1 /* ToastBarView.swift */,
 				0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */,
 				0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */,
+				0D70EC502C3D148C00FDE559 /* UITabBarController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */,
 				0DC5CDFD2B96DB28007A21E4 /* PardAppModel.swift in Sources */,
 				21AAAA4C2C3BC0FD00F080A0 /* RankController.swift in Sources */,
+				0D70EC4F2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift in Sources */,
 				0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */,
 				21702BF32C345AAD00134681 /* UserController.swift in Sources */,
 				0DC5CDF52B96DA9B007A21E4 /* MyScoreView.swift in Sources */,
@@ -628,6 +635,7 @@
 				2106ADAF2B92D6A000CDA462 /* SceneDelegate.swift in Sources */,
 				21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */,
 				90C007C72B95D2670056D724 /* UserInfoPolicyViewController.swift in Sources */,
+				0D70EC512C3D148C00FDE559 /* UITabBarController.swift in Sources */,
 				21702BFF2C3562C700134681 /* ScheduleModel.swift in Sources */,
 				21702BF72C345AC600134681 /* ReasonController.swift in Sources */,
 				0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */,

@@ -51,11 +51,10 @@ class HomeViewController: UIViewController {
     
     @objc private func homeLogoTapped() {
         print("home")
-        // FIXME: - ram test code
+        
     }
    
     @objc private func menuButtonTapped() {
-        print("sese")
         let menuBar = HamburgerBarViewController()
         menuBar.modalPresentationStyle = .overCurrentContext
         menuBar.modalTransitionStyle = .crossDissolve
