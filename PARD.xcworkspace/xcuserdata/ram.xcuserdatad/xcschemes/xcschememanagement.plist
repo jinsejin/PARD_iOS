@@ -27,8 +27,24 @@
 		</dict>
 		<key>SnapKitPlayground (Playground) 12.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>21</integer>
+		</dict>
+		<key>SnapKitPlayground (Playground) 13.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>SnapKitPlayground (Playground) 14.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>23</integer>
 		</dict>
 		<key>SnapKitPlayground (Playground) 13.xcscheme</key>
 		<dict>
