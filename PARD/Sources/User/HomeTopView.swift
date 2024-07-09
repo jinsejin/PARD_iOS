@@ -10,6 +10,7 @@ import SnapKit
 import Then
 
 
+
 // - MARK: 원하는 View Class 사용하면 됩니다. (이름도 알맞게 변경, 추가해서 사용해주세요)
 class HomeTopView : UIView {
     
@@ -45,25 +46,12 @@ class HomeTopView : UIView {
         $0.setImage(UIImage(named: "question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
-    private let pangulStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.alignment = .center
-        $0.spacing = 22
-    }
-    private let currentPangulImage = UIImageView().then {
-        $0.image = UIImage(named: "Panul_image")?.withRenderingMode(.alwaysOriginal)
-    }
     
-    private let pangulNextLevelImge = UIImageView().then {
-        $0.image = UIImage(named: "next_Pangul")?.withRenderingMode(.alwaysOriginal)
-    }
-    
-    private let nextImage = UIImageView().then {
-        $0.image = UIImage(named: "nextImage")?.withRenderingMode(.alwaysOriginal)
-    }
+    private let currentPangulImage = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        getPangulImg()
         setUpUI()
     }
     
@@ -71,11 +59,29 @@ class HomeTopView : UIView {
         super.init(coder: coder)
     }
     
+    func getPangulImg() {
+        let totalPangul = Float(totalBonus) + pangoolPoint
+        let imageName : String
+        switch totalBonus {
+        case 0..<26:
+            imageName = "level1"
+        case 26..<51:
+            imageName = "level2"
+        case 51..<76:
+            imageName = "level3"
+        case 76...90:
+            imageName = "level4"
+        default:
+            imageName = "level5"
+        }
+        currentPangulImage.image = UIImage(named: imageName)
+    }
+    
     func setUpUI() {
         self.addSubview(nameLabel)
         self.addSubview(collectionView)
         self.addSubview(questionimageButton)
-        self.addSubview(pangulStackView)
+        self.addSubview(currentPangulImage)
         
         questionimageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
         collectionView.delegate = self
@@ -95,14 +101,10 @@ class HomeTopView : UIView {
             make.trailing.equalToSuperview().offset(-28)
             make.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
-        pangulStackView.snp.makeConstraints { make in
+        currentPangulImage.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
-        
-        pangulStackView.addArrangedSubview(currentPangulImage)
-        pangulStackView.addArrangedSubview(nextImage)
-        pangulStackView.addArrangedSubview(pangulNextLevelImge)
     }
     
     @objc private func tappedQuestionButton() {
@@ -203,6 +205,3 @@ extension UserDataInHome {
         UserDataInHome(userData: userRole),
     ]
 }
-
-
-
