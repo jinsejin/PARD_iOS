@@ -15,6 +15,7 @@ class MyScoreViewController: UIViewController {
     private var rank1: Rank?
     private var rank2: Rank?
     private var rank3: Rank?
+    private var reasons: Reason?
     
     private let appearance = UINavigationBarAppearance().then {
         $0.configureWithOpaqueBackground()
@@ -44,14 +45,6 @@ class MyScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .pard.blackBackground
-        //        setNavigation()
-        //        setupTextLabel()
-        //        setupRankingMedals()
-        //        setupRankingButton()
-        //        setupCrownImages()
-        //        setupScoreView()
-        //        setupScoreStatusView()
-        //        setupScoreRecordsView()
         setNavigation()
         setupTextLabel()
         
@@ -66,8 +59,14 @@ class MyScoreViewController: UIViewController {
                 self.updateUIWithRanks()
             }
         }
-        getRankMe()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getRankMe()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getReason()
+        }
     }
+    
     
     private func updateUIWithRanks() {
         if RankManager.shared.rankList.count >= 3 {
@@ -77,7 +76,6 @@ class MyScoreViewController: UIViewController {
         } else {
             print("Not enough data in rankList")
         }
-        
         setupRankingMedals()
         setupRankingButton()
         setupCrownImages()
@@ -85,7 +83,7 @@ class MyScoreViewController: UIViewController {
         setupScoreStatusView()
         setupScoreRecordsView()
     }
-    
+   
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.standardAppearance = previousAppearance
@@ -109,7 +107,7 @@ class MyScoreViewController: UIViewController {
         if let navigationBar = self.navigationController?.navigationBar {
             let appearance = UINavigationBarAppearance()
             appearance.backgroundColor = UIColor.pard.blackBackground
-            appearance.shadowColor = .clear 
+            appearance.shadowColor = .clear
             appearance.titleTextAttributes = [
                 .font: UIFont.pardFont.head2,
                 .foregroundColor: UIColor.white
@@ -125,8 +123,6 @@ class MyScoreViewController: UIViewController {
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
     }
-
-
     
     @objc func backButtonTapped() {
         let homeViewController = HomeViewController()
