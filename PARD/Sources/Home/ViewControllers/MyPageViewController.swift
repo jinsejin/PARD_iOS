@@ -9,7 +9,6 @@ import UIKit
 import PARD_DesignSystem
 
 class MyPageViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

@@ -15,6 +15,9 @@
 		0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */; };
 		0D70EC4B2C2E7F8800FDE559 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */; };
 		0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */; };
+		0D70EC4F2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */; };
+		0D70EC512C3D148C00FDE559 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC502C3D148C00FDE559 /* UITabBarController.swift */; };
+		0D70EC532C3D2B0300FDE559 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC522C3D2B0300FDE559 /* UIColor.swift */; };
 		0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */; };
 		0DAFA0E22BA74EF30092FEB0 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */; };
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
@@ -32,7 +35,7 @@
 		0DD2B1112BB063DC0050A0E1 /* ToastBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD2B1102BB063DC0050A0E1 /* ToastBarView.swift */; };
 		2106ADAD2B92D6A000CDA462 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADAC2B92D6A000CDA462 /* AppDelegate.swift */; };
 		2106ADAF2B92D6A000CDA462 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADAE2B92D6A000CDA462 /* SceneDelegate.swift */; };
-		2106ADB12B92D6A000CDA462 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADB02B92D6A000CDA462 /* ViewController.swift */; };
+		2106ADB12B92D6A000CDA462 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADB02B92D6A000CDA462 /* SplashViewController.swift */; };
 		2106ADB42B92D6A000CDA462 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2106ADB22B92D6A000CDA462 /* Main.storyboard */; };
 		2106ADB62B92D6A200CDA462 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2106ADB52B92D6A200CDA462 /* Assets.xcassets */; };
 		2106ADB92B92D6A200CDA462 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2106ADB72B92D6A200CDA462 /* LaunchScreen.storyboard */; };
@@ -73,6 +76,9 @@
 		0D70EC482C2E4E5B00FDE559 /* HomeUpcommingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUpcommingView.swift; sourceTree = "<group>"; };
 		0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		0D70EC4C2C31382200FDE559 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTIpViewInMyScore.swift; sourceTree = "<group>"; };
+		0D70EC502C3D148C00FDE559 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
+		0D70EC522C3D2B0300FDE559 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamBurgerTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
@@ -91,7 +97,7 @@
 		2106ADA92B92D6A000CDA462 /* PARD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2106ADAC2B92D6A000CDA462 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2106ADAE2B92D6A000CDA462 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2106ADB02B92D6A000CDA462 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2106ADB02B92D6A000CDA462 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		2106ADB32B92D6A000CDA462 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2106ADB52B92D6A200CDA462 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2106ADB82B92D6A200CDA462 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -191,7 +197,7 @@
 				2106ADBA2B92D6A200CDA462 /* Info.plist */,
 				2176515C2B94827100121AB2 /* Resources */,
 				2176515D2B94829400121AB2 /* Sources */,
-				2106ADB02B92D6A000CDA462 /* ViewController.swift */,
+				2106ADB02B92D6A000CDA462 /* SplashViewController.swift */,
 			);
 			path = PARD;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 			children = (
 				0DC5CDF42B96DA9B007A21E4 /* MyScoreView.swift */,
 				9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */,
+				0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -432,6 +439,8 @@
 				0DD2B1102BB063DC0050A0E1 /* ToastBarView.swift */,
 				0D70EC4A2C2E7F8700FDE559 /* TooltipView.swift */,
 				0D70EC462C2DB1C500FDE559 /* UIViewExtension.swift */,
+				0D70EC502C3D148C00FDE559 /* UITabBarController.swift */,
+				0D70EC522C3D2B0300FDE559 /* UIColor.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -603,6 +612,7 @@
 				90C007D62B95D2EA0056D724 /* RankingViewController.swift in Sources */,
 				21A6857C2B9C8967006F6D9E /* AppleLoginManager.swift in Sources */,
 				0D70EC492C2E4E5B00FDE559 /* HomeUpcommingView.swift in Sources */,
+				0D70EC532C3D2B0300FDE559 /* UIColor.swift in Sources */,
 				0D0ADFDB2BAADD1A00094D08 /* PardNotionLinkCollectionViewCell.swift in Sources */,
 				21702BF92C345AD300134681 /* QrController.swift in Sources */,
 				2176515B2B947ABE00121AB2 /* +Font.swift in Sources */,
@@ -610,6 +620,7 @@
 				0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */,
 				0DC5CDFD2B96DB28007A21E4 /* PardAppModel.swift in Sources */,
 				21AAAA4C2C3BC0FD00F080A0 /* RankController.swift in Sources */,
+				0D70EC4F2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift in Sources */,
 				0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */,
 				21702BF32C345AAD00134681 /* UserController.swift in Sources */,
 				0DC5CDF52B96DA9B007A21E4 /* MyScoreView.swift in Sources */,
@@ -619,7 +630,7 @@
 				0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */,
 				0DD2B1112BB063DC0050A0E1 /* ToastBarView.swift in Sources */,
 				90C007CA2B95D2890056D724 /* UserAuthenticationViewController.swift in Sources */,
-				2106ADB12B92D6A000CDA462 /* ViewController.swift in Sources */,
+				2106ADB12B92D6A000CDA462 /* SplashViewController.swift in Sources */,
 				0DC5CE0A2BA0B9D1007A21E4 /* NSMutableAttributedStringExtension.swift in Sources */,
 				90C007D02B95D2BF0056D724 /* MyPageViewController.swift in Sources */,
 				21702BF12C3458A100134681 /* APICaller.swift in Sources */,
@@ -628,6 +639,7 @@
 				2106ADAF2B92D6A000CDA462 /* SceneDelegate.swift in Sources */,
 				21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */,
 				90C007C72B95D2670056D724 /* UserInfoPolicyViewController.swift in Sources */,
+				0D70EC512C3D148C00FDE559 /* UITabBarController.swift in Sources */,
 				21702BFF2C3562C700134681 /* ScheduleModel.swift in Sources */,
 				21702BF72C345AC600134681 /* ReasonController.swift in Sources */,
 				0D70EC472C2DB1C500FDE559 /* UIViewExtension.swift in Sources */,

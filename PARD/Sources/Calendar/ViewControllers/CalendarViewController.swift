@@ -8,6 +8,10 @@ class CalendarViewController: UIViewController {
         $0.configureWithOpaqueBackground()
         $0.backgroundColor = .pard.blackBackground
         $0.shadowColor = .pard.blackBackground
+        $0.titleTextAttributes = [
+            .foregroundColor: UIColor.pard.white100,
+            .font: UIFont.pardFont.head1
+        ]
     }
     
     private let previousAppearance = UINavigationBarAppearance().then {
@@ -29,6 +33,12 @@ class CalendarViewController: UIViewController {
     private func setNavigation() {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.titleTextAttributes = [
+                .font:  UIFont.pardFont.head2,
+                .foregroundColor: UIColor.pard.white100
+            ]
+        }
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withRenderingMode(.automatic), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .pard.gray10
         self.title = "일정"
@@ -67,6 +77,7 @@ class CalendarViewController: UIViewController {
 extension CalendarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .pard.blackBackground
         setNavigation()
         setupTableView()
@@ -77,21 +88,24 @@ extension CalendarViewController {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.standardAppearance = previousAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
-        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
-            tabBarViewController.floatingButton.isHidden = false
-        }
+        removeTabBarFAB(bool: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        removeTabBarFAB(bool: true)
+    }
+    
+    private func removeTabBarFAB(bool : Bool) {
+        tabBarController?.setTabBarVisible(visible: !bool, animated: false)
         if let tabBarViewController = tabBarController as? HomeTabBarViewController {
-            tabBarViewController.floatingButton.isHidden = true
+            tabBarViewController.floatingButton.isHidden = bool
         }
     }
 }
 
+// - MARK: CalendarViewControllerd의 UITableViewDelegate, UITableViewDataSource
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -147,9 +161,9 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         let event = indexPath.section == 0 ? upcomingEvents[indexPath.row] : pastEvents[indexPath.row]
         cell.selectionStyle = .none
         if indexPath.section == 0 && indexPath.row == 0 {
-            cell.categoryLabelConfigure(textColor: .pard.gray10, backGroundColor: .pard.gra)
+            cell.categoryLabelConfigure(textColor: .pard.gray10, backGroundColor: .GradientColor.gra)
         } else {
-            cell.categoryLabelConfigure(textColor: .pard.gra, backGroundColor: .pard.blackCard)
+            cell.categoryLabelConfigure(textColor: .GradientColor.gra, backGroundColor: .pard.blackCard)
         }
         cell.labelConfigure(with: event)
         return cell

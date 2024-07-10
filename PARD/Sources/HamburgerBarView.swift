@@ -132,7 +132,7 @@ extension HamburgerBarView : MenuTableViewCellButtonTapedDelegate {
 // - MARK: HamburgerBar HeaderView
 class HeaderView : UIView {
     private let label = UILabel().then { label in
-        label.textColor = .pard.gra
+        label.textColor = .GradientColor.gra
         label.textAlignment = .center
     }
     

@@ -14,7 +14,7 @@ class EventTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.layer.cornerRadius = 4
         label.layer.borderWidth = 1.0
-        label.layer.borderColor = UIColor.pard.gra.cgColor
+        label.layer.borderColor = UIColor.GradientColor.gra.cgColor
         label.layer.masksToBounds = true
     }
     
@@ -25,6 +25,7 @@ class EventTableViewCell: UITableViewCell {
     
     private let dDayLabel = UILabel().then { label in
         label.font = .pardFont.body5
+        label.textColor = .pard.white100
     }
     
     private let dateLabel = UILabel().then { label in

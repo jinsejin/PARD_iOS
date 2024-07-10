@@ -9,8 +9,9 @@ import UIKit
 
 class HomeTabBarViewController: UITabBarController {
     let floatingButton = UIButton().then { button in
+        button.isHidden = false
         button.layer.cornerRadius = 40
-        button.backgroundColor = .pard.gra
+        button.backgroundColor = .GradientColor.gra
         button.setImage(UIImage(named: "scan")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
     }
@@ -74,7 +75,7 @@ class HomeTabBarViewController: UITabBarController {
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = .pard.blackCard
         tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .pard.gray30
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .pard.gra
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .GradientColor.gra
         
         if #available(iOS 15.0, *) {
             tabBar.standardAppearance = tabBarAppearance
@@ -84,7 +85,7 @@ class HomeTabBarViewController: UITabBarController {
         tabBar.isTranslucent = false
         tabBar.backgroundColor = .pard.blackCard
         tabBar.unselectedItemTintColor = .pard.gray30
-        tabBar.selectedItem?.badgeColor = .pard.gra
+        tabBar.selectedItem?.badgeColor = .GradientColor.gra
     }
     
     private func setUpTabBarLayout() {

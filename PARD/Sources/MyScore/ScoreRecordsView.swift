@@ -8,7 +8,6 @@
 import UIKit
 
 class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = []
     private var collectionView: UICollectionView!
     

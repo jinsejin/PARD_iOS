@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SplashViewController.swift
 //  PARD
 //
 //  Created by 김하람 on 3/2/24.
@@ -10,29 +10,67 @@ import PARD_DesignSystem
 import SnapKit
 import Then
 
-class ViewController: UIViewController {
+class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .pard.errorRed
-        setUi()
+        setUpUI()
     }
     
-//    private func showCancellablePopup(title: String, body: String, cancelHandler: (() -> Void)? = nil) {
-//        ModalBuilder()
-//            .add(title: title)
-//            .add(body: body)
-//            .add(
-//                button: .cancellable(
-//                    cancelButtonTitle: "예",
-//                    confirmButtonTitle: "아니요",
-//                    cancelButtonAction: cancelHandler,
-//                    confirmButtonAction: nil
-//                )
-//            )
-//            .show(on: self)
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.showMainViewController()
+            }
+        }
     
+    func showMainViewController() {
+        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            navigationController?.pushViewController(HomeTabBarViewController(), animated: true)
+        } else {
+            navigationController?.pushViewController(MainLoginViewController(), animated: true)
+        }
+    }
+    
+    private let semiTitleLabel = UILabel().then {
+        $0.font = UIFont.pardFont.body3
+        $0.textColor = UIColor.pard.gray10
+        $0.text =  "Pay it Forward를 실천하는 IT 협업 동아리"
+        $0.textAlignment = .center
+    }
+    
+    private let pardLabelImageView = UIImageView().then {
+        $0.image = UIImage(named: "pardMainLogo")
+    }
+    
+    private let pardMainImageView = UIImageView().then {
+        $0.image = UIImage(named: "pardMainLogin")
+    }
+    
+    private func setUpUI() {
+        view.addSubview(semiTitleLabel)
+        view.addSubview(pardLabelImageView)
+        view.addSubview(pardMainImageView)
+        semiTitleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(146)
+        }
+        
+        pardLabelImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(semiTitleLabel.snp.bottom).offset(12)
+        }
+        pardMainImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+    }
+    
+    
+    
+    
+    
+    // MARK: - Pard Design System 사용 방법을 알려주기 위한 코드들 입니다.
     private lazy var titleLabel = UILabel().then{
         view.addSubview($0)
         $0.text = "< Test >"
