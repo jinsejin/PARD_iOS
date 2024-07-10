@@ -189,6 +189,7 @@ class MyScoreViewController: UIViewController {
     
     private func setupRankingMedals() {
         guard let rank1 = rank1, let rank2 = rank2, let rank3 = rank3 else { return }
+        
         let goldRingImageView = UIImageView(image: UIImage(named: "goldRing"))
         view.addSubview(goldRingImageView)
         
@@ -282,13 +283,13 @@ class MyScoreViewController: UIViewController {
         }
         
         goldPartLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(62)
-            $0.top.equalToSuperview().offset(179)
+            $0.centerX.equalTo(goldNameLabel.snp.centerX)
+            $0.bottom.equalTo(goldNameLabel.snp.top).offset(-2)
         }
         
         goldNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(goldRingImageView.snp.trailing).offset(8)
-            $0.top.equalTo(goldPartLabel.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(197)
+            $0.leading.equalToSuperview().offset(70)
         }
         
         silverRingImageView.snp.makeConstraints {
@@ -303,13 +304,13 @@ class MyScoreViewController: UIViewController {
         }
         
         silverPartLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(178)
-            $0.top.equalToSuperview().offset(179)
+            $0.centerX.equalTo(silverNameLabel.snp.centerX)
+            $0.bottom.equalTo(silverNameLabel.snp.top).offset(-2)
         }
         
         silverNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(silverRingImageView.snp.trailing).offset(8)
-            $0.top.equalTo(silverPartLabel.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(197)
+            $0.leading.equalToSuperview().offset(186)
         }
         
         bronzeRingImageView.snp.makeConstraints {
@@ -324,15 +325,16 @@ class MyScoreViewController: UIViewController {
         }
         
         bronzePartLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(294)
-            $0.top.equalToSuperview().offset(179)
+            $0.centerX.equalTo(bronzeNameLabel.snp.centerX)
+            $0.bottom.equalTo(bronzeNameLabel.snp.top).offset(-2)
         }
         
         bronzeNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(bronzeRingImageView.snp.trailing).offset(8)
-            $0.top.equalTo(bronzePartLabel.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(197)
+            $0.leading.equalToSuperview().offset(302)
         }
     }
+
     
     private func setupCrownImages() {
         let goldCrownImageView = UIImageView(image: UIImage(named: "gold"))
@@ -796,6 +798,7 @@ class MyScoreViewController: UIViewController {
                 make.top.equalToSuperview().offset(20)
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalTo(closeButton.snp.leading).offset(-8)
+//                make.bottom.equalToSuperview().offset(-16)
             }
 
             // Create each row
