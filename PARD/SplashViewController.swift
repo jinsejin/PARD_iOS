@@ -14,14 +14,61 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .pard.errorRed
-        let navController : UIViewController
+        setUpUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.showMainViewController()
+            }
+        }
+    
+    func showMainViewController() {
         if UserDefaults.standard.bool(forKey: "isLoggedIn") {
             navigationController?.pushViewController(HomeTabBarViewController(), animated: true)
         } else {
             navigationController?.pushViewController(MainLoginViewController(), animated: true)
         }
     }
+    
+    private let semiTitleLabel = UILabel().then {
+        $0.font = UIFont.pardFont.body3
+        $0.textColor = UIColor.pard.gray10
+        $0.text =  "Pay it Forward를 실천하는 IT 협업 동아리"
+        $0.textAlignment = .center
+    }
+    
+    private let pardLabelImageView = UIImageView().then {
+        $0.image = UIImage(named: "pardMainLogo")
+    }
+    
+    private let pardMainImageView = UIImageView().then {
+        $0.image = UIImage(named: "pardMainLogin")
+    }
+    
+    private func setUpUI() {
+        view.addSubview(semiTitleLabel)
+        view.addSubview(pardLabelImageView)
+        view.addSubview(pardMainImageView)
+        semiTitleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(146)
+        }
+        
+        pardLabelImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(semiTitleLabel.snp.bottom).offset(12)
+        }
+        pardMainImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+    }
+    
+    
+    
+    
     
     // MARK: - Pard Design System 사용 방법을 알려주기 위한 코드들 입니다.
     private lazy var titleLabel = UILabel().then{
