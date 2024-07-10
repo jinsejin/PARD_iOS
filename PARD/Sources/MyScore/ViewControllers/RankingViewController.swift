@@ -86,7 +86,7 @@ class RankingViewController: UIViewController {
     
     @objc func backButtonTapped(){
         let myscoreViewController = MyScoreViewController()
-        navigationController?.setViewControllers([myscoreViewController], animated: true)
+        navigationController?.popViewController(animated: false)
     }
     
     // 그라데이션 이미지 생성

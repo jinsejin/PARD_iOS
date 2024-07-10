@@ -160,8 +160,6 @@ class MyScoreViewController: UIViewController {
         }
     }
     
-    
-    
     private func setupRankingButton() {
         let rankingButton = UIButton(type: .system).then {
             $0.setTitle("전체랭킹 확인하기", for: .normal)
