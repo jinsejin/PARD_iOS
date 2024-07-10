@@ -23,8 +23,6 @@ class SplashViewController: UIViewController {
         }
     }
     
-    
-
     // MARK: - Pard Design System 사용 방법을 알려주기 위한 코드들 입니다.
     private lazy var titleLabel = UILabel().then{
         view.addSubview($0)
