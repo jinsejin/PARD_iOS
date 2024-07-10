@@ -34,7 +34,7 @@
 		0DD2B1112BB063DC0050A0E1 /* ToastBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD2B1102BB063DC0050A0E1 /* ToastBarView.swift */; };
 		2106ADAD2B92D6A000CDA462 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADAC2B92D6A000CDA462 /* AppDelegate.swift */; };
 		2106ADAF2B92D6A000CDA462 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADAE2B92D6A000CDA462 /* SceneDelegate.swift */; };
-		2106ADB12B92D6A000CDA462 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADB02B92D6A000CDA462 /* ViewController.swift */; };
+		2106ADB12B92D6A000CDA462 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106ADB02B92D6A000CDA462 /* SplashViewController.swift */; };
 		2106ADB42B92D6A000CDA462 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2106ADB22B92D6A000CDA462 /* Main.storyboard */; };
 		2106ADB62B92D6A200CDA462 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2106ADB52B92D6A200CDA462 /* Assets.xcassets */; };
 		2106ADB92B92D6A200CDA462 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2106ADB72B92D6A200CDA462 /* LaunchScreen.storyboard */; };
@@ -95,7 +95,7 @@
 		2106ADA92B92D6A000CDA462 /* PARD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2106ADAC2B92D6A000CDA462 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2106ADAE2B92D6A000CDA462 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2106ADB02B92D6A000CDA462 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2106ADB02B92D6A000CDA462 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		2106ADB32B92D6A000CDA462 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2106ADB52B92D6A200CDA462 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2106ADB82B92D6A200CDA462 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 				2106ADBA2B92D6A200CDA462 /* Info.plist */,
 				2176515C2B94827100121AB2 /* Resources */,
 				2176515D2B94829400121AB2 /* Sources */,
-				2106ADB02B92D6A000CDA462 /* ViewController.swift */,
+				2106ADB02B92D6A000CDA462 /* SplashViewController.swift */,
 			);
 			path = PARD;
 			sourceTree = "<group>";
@@ -626,7 +626,7 @@
 				0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */,
 				0DD2B1112BB063DC0050A0E1 /* ToastBarView.swift in Sources */,
 				90C007CA2B95D2890056D724 /* UserAuthenticationViewController.swift in Sources */,
-				2106ADB12B92D6A000CDA462 /* ViewController.swift in Sources */,
+				2106ADB12B92D6A000CDA462 /* SplashViewController.swift in Sources */,
 				0DC5CE0A2BA0B9D1007A21E4 /* NSMutableAttributedStringExtension.swift in Sources */,
 				90C007D02B95D2BF0056D724 /* MyPageViewController.swift in Sources */,
 				21702BF12C3458A100134681 /* APICaller.swift in Sources */,

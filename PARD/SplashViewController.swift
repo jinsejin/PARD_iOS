@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SplashViewController.swift
 //  PARD
 //
 //  Created by 김하람 on 3/2/24.
@@ -10,29 +10,22 @@ import PARD_DesignSystem
 import SnapKit
 import Then
 
-class ViewController: UIViewController {
+class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .pard.errorRed
-        setUi()
+        let navController : UIViewController
+        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            navigationController?.pushViewController(HomeTabBarViewController(), animated: true)
+        } else {
+            navigationController?.pushViewController(MainLoginViewController(), animated: true)
+        }
     }
     
-//    private func showCancellablePopup(title: String, body: String, cancelHandler: (() -> Void)? = nil) {
-//        ModalBuilder()
-//            .add(title: title)
-//            .add(body: body)
-//            .add(
-//                button: .cancellable(
-//                    cancelButtonTitle: "예",
-//                    confirmButtonTitle: "아니요",
-//                    cancelButtonAction: cancelHandler,
-//                    confirmButtonAction: nil
-//                )
-//            )
-//            .show(on: self)
-//    }
     
+
+    // MARK: - Pard Design System 사용 방법을 알려주기 위한 코드들 입니다.
     private lazy var titleLabel = UILabel().then{
         view.addSubview($0)
         $0.text = "< Test >"

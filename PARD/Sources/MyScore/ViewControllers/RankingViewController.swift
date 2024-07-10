@@ -35,7 +35,6 @@ class RankingViewController: UIViewController {
         setNavigation()
         setupTextLabel()
         setupTableView()
-        
     }
 
     private func setupTextLabel() {
