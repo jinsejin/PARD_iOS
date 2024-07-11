@@ -7,6 +7,7 @@
 
 import UIKit
 import PARD_DesignSystem
+import GoogleSignIn
 
 class MyPageViewController: UIViewController {
     override func viewDidLoad() {
@@ -57,9 +58,9 @@ class MyPageViewController: UIViewController {
         view.addSubview(usageGuideView)
         usageGuideView.addSubview(privacyPolicyLabel)
         usageGuideView.addSubview(termsOfServiceLabel)
-        usageGuideView.addSubview(arrowImageView1)
+        usageGuideView.addSubview(personalInfoView)
         usageGuideView.addSubview(arrowImageView2)
-        usageGuideView.addSubview(arrowButton1)
+        usageGuideView.addSubview(personalInfoButton)
         usageGuideView.addSubview(arrowButton2)
         
         view.addSubview(accountLabel)
@@ -205,7 +206,7 @@ class MyPageViewController: UIViewController {
             
         }
         
-        arrowImageView1.snp.makeConstraints { make in
+        personalInfoView.snp.makeConstraints { make in
             make.centerY.equalTo(privacyPolicyLabel)
             make.trailing.equalTo(usageGuideView.snp.trailing).offset(-24)
         }
@@ -215,8 +216,8 @@ class MyPageViewController: UIViewController {
             make.trailing.equalTo(usageGuideView.snp.trailing).offset(-24)
         }
         
-        arrowButton1.snp.makeConstraints { make in
-            make.edges.equalTo(arrowImageView1).inset(-10)
+        personalInfoButton.snp.makeConstraints { make in
+            make.edges.equalTo(personalInfoView).inset(-10)
         }
         
         arrowButton2.snp.makeConstraints { make in
@@ -263,8 +264,8 @@ class MyPageViewController: UIViewController {
         feedbackView.isUserInteractionEnabled = true
         
         
-        arrowButton1.addTarget(self, action: #selector(arrowButton1Tapped), for: .touchUpInside)
-        arrowButton2.addTarget(self, action: #selector(arrowButton2Tapped), for: .touchUpInside)
+        personalInfoButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
+        arrowButton2.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
     }
 
     @objc private func feedbackViewTapped() {
@@ -273,18 +274,30 @@ class MyPageViewController: UIViewController {
         }
     }
     
-    @objc private func arrowButton1Tapped() {
+    @objc private func personalInfoTapped() {
         if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-fc37c472e47941d3958765587b57e21f") {
             UIApplication.shared.open(url)
         }
     }
     
-    @objc private func arrowButton2Tapped() {
+    @objc private func aboutServiceTapped() {
         if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
             UIApplication.shared.open(url)
         }
     }
     
+    @objc private func logoutTapped() {
+        // 구글 로그아웃
+        GIDSignIn.sharedInstance.signOut()
+        GIDSignIn.sharedInstance.disconnect()
+        print("User has been logged out")
+        
+        // userDefault에 있는 정보 모두 clear
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+            print("All UserDefaults have been cleared")
+        }
+    }
    
     private let myPageLabel: UILabel = {
         let myPageLabel = UILabel()
@@ -495,7 +508,7 @@ class MyPageViewController: UIViewController {
         return label
     }()
 
-    private let arrowImageView1: UIImageView = {
+    private let personalInfoView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
@@ -505,11 +518,11 @@ class MyPageViewController: UIViewController {
     private let arrowImageView2: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
-        imageView.tintColor = .white
+        imageView.tintColor = .black
         return imageView
     }()
     
-    private let arrowButton1: UIButton = {
+    private let personalInfoButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
         return button
