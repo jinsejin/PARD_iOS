@@ -58,19 +58,20 @@ class MyPageViewController: UIViewController {
         view.addSubview(usageGuideView)
         usageGuideView.addSubview(privacyPolicyLabel)
         usageGuideView.addSubview(termsOfServiceLabel)
-        usageGuideView.addSubview(personalInfoView)
-        usageGuideView.addSubview(arrowImageView2)
-        usageGuideView.addSubview(personalInfoButton)
-        usageGuideView.addSubview(arrowButton2)
+        usageGuideView.addSubview(personalInfoArrowView)
+        usageGuideView.addSubview(serviceInfoArrowView)
+        usageGuideView.addSubview(personalInfoArrowButton)
+        usageGuideView.addSubview(serviceInfoArrowButton)
         
         view.addSubview(accountLabel)
         view.addSubview(accountView)
         accountView.addSubview(logoutLabel)
         accountView.addSubview(deleteAccountLabel)
-        accountView.addSubview(arrowImageView3)
-        accountView.addSubview(arrowImageView4)
+        accountView.addSubview(logoutArrowView)
+        accountView.addSubview(deleteAccountArrowView)
+        accountView.addSubview(logoutArrowButton)
+        accountView.addSubview(deleteAccountArrowButton)
     }
-
     
     private func setupConstraints() {
         myPageLabel.snp.makeConstraints { make in
@@ -206,22 +207,22 @@ class MyPageViewController: UIViewController {
             
         }
         
-        personalInfoView.snp.makeConstraints { make in
+        personalInfoArrowView.snp.makeConstraints { make in
             make.centerY.equalTo(privacyPolicyLabel)
             make.trailing.equalTo(usageGuideView.snp.trailing).offset(-24)
         }
         
-        arrowImageView2.snp.makeConstraints { make in
+        serviceInfoArrowView.snp.makeConstraints { make in
             make.centerY.equalTo(termsOfServiceLabel)
             make.trailing.equalTo(usageGuideView.snp.trailing).offset(-24)
         }
         
-        personalInfoButton.snp.makeConstraints { make in
-            make.edges.equalTo(personalInfoView).inset(-10)
+        personalInfoArrowButton.snp.makeConstraints { make in
+            make.edges.equalTo(personalInfoArrowView).inset(-10)
         }
         
-        arrowButton2.snp.makeConstraints { make in
-            make.edges.equalTo(arrowImageView2).inset(-10)
+        serviceInfoArrowButton.snp.makeConstraints { make in
+            make.edges.equalTo(serviceInfoArrowView).inset(-10)
         }
     
         accountLabel.snp.makeConstraints { make in
@@ -247,14 +248,21 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(accountView.snp.bottom).offset(-17)
         }
         
-        arrowImageView3.snp.makeConstraints { make in
+        logoutArrowView.snp.makeConstraints { make in
             make.centerY.equalTo(logoutLabel)
             make.trailing.equalTo(accountView.snp.trailing).offset(-24)
         }
         
-        arrowImageView4.snp.makeConstraints { make in
+        logoutArrowButton.snp.makeConstraints { make in
+            make.edges.equalTo(logoutArrowView).inset(-10)
+        }
+        
+        deleteAccountArrowView.snp.makeConstraints { make in
             make.centerY.equalTo(deleteAccountLabel)
             make.trailing.equalTo(accountView.snp.trailing).offset(-24)
+        }
+        deleteAccountArrowButton.snp.makeConstraints { make in
+            make.edges.equalTo(deleteAccountArrowView).inset(-10)
         }
     }
 
@@ -264,8 +272,9 @@ class MyPageViewController: UIViewController {
         feedbackView.isUserInteractionEnabled = true
         
         
-        personalInfoButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
-        arrowButton2.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
+        personalInfoArrowButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
+        serviceInfoArrowButton.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
+        logoutArrowButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
     }
 
     @objc private func feedbackViewTapped() {
@@ -287,6 +296,7 @@ class MyPageViewController: UIViewController {
     }
     
     @objc private func logoutTapped() {
+        print("logout tapped")
         // 구글 로그아웃
         GIDSignIn.sharedInstance.signOut()
         GIDSignIn.sharedInstance.disconnect()
@@ -508,27 +518,27 @@ class MyPageViewController: UIViewController {
         return label
     }()
 
-    private let personalInfoView: UIImageView = {
+    private let personalInfoArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         return imageView
     }()
 
-    private let arrowImageView2: UIImageView = {
+    private let serviceInfoArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
-        imageView.tintColor = .black
+        imageView.tintColor = .white
         return imageView
     }()
     
-    private let personalInfoButton: UIButton = {
+    private let personalInfoArrowButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
         return button
     }()
 
-    private let arrowButton2: UIButton = {
+    private let serviceInfoArrowButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
         return button
@@ -571,20 +581,32 @@ class MyPageViewController: UIViewController {
         return label
     }()
 
-    private let arrowImageView3: UIImageView = {
+    private let logoutArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         return imageView
     }()
 
-    private let arrowImageView4: UIImageView = {
+    private let deleteAccountArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         return imageView
     }()
 
+    private let logoutArrowButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    private let deleteAccountArrowButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        return button
+    }()
+    
     func gradientLayer() -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
