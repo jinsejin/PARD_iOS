@@ -298,15 +298,15 @@ class MyPageViewController: UIViewController {
     @objc private func logoutTapped() {
         print("logout tapped")
         // 구글 로그아웃
-//        GIDSignIn.sharedInstance.signOut()
-//        GIDSignIn.sharedInstance.disconnect()
-//        print("User has been logged out")
-//        
-//        // userDefault에 있는 정보 모두 clear
-//        if let appDomain = Bundle.main.bundleIdentifier {
-//            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-//            print("All UserDefaults have been cleared")
-//        }
+        GIDSignIn.sharedInstance.signOut()
+        GIDSignIn.sharedInstance.disconnect()
+        print("User has been logged out")
+        
+        // userDefault에 있는 정보 모두 clear
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+            print("All UserDefaults have been cleared")
+        }
     }
    
     private let myPageLabel: UILabel = {
