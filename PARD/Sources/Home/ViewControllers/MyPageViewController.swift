@@ -275,6 +275,7 @@ class MyPageViewController: UIViewController {
         personalInfoArrowButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
         serviceInfoArrowButton.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
         logoutArrowButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
+        deleteAccountArrowButton.addTarget(self, action: #selector(deleteAccountTapped), for: .touchUpInside)
     }
 
     @objc private func feedbackViewTapped() {
@@ -307,6 +308,16 @@ class MyPageViewController: UIViewController {
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
             print("All UserDefaults have been cleared")
         }
+    }
+    
+    @objc private func deleteAccountTapped() {
+        print("deleteAccount tapped")
+        
+        // userDefault에 있는 정보 모두 clear
+//        if let appDomain = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+//            print("All UserDefaults have been cleared")
+//        }
     }
    
     private let myPageLabel: UILabel = {
