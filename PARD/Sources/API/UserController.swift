@@ -10,35 +10,37 @@ import UIKit
 let url = "https://we-pard.store/v1"
 var currentUser: User?
 
-extension MainLoginViewController {
-    func postLogin(with email: String) {
-        guard let url = URL(string: "\(url)/users/login") else {
-            print("🚨 Invalid URL")
+//extension MainLoginViewController {
+//
+//}
+
+func postLogin(with email: String) {
+    guard let url = URL(string: "\(url)/users/login") else {
+        print("🚨 Invalid URL")
+        return
+    }
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let body: [String: AnyHashable] = [
+        "email": email
+    ]
+    request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, _, error in
+        guard let data = data, error == nil else {
+            print("🚨 Error: \(error?.localizedDescription ?? "Unknown error")")
             return
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let body: [String: AnyHashable] = [
-            "email": email
-        ]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil else {
-                print("🚨 Error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            if let responseString = String(data: data, encoding: .utf8) {
-                print("✅ success: \(responseString)")
-            } else {
-                
-                print("🚨 Error: Unable to convert data to string")
-            }
+        if let responseString = String(data: data, encoding: .utf8) {
+            print("✅ success: \(responseString)")
+        } else {
+            
+            print("🚨 Error: Unable to convert data to string")
         }
-        task.resume()
     }
+    task.resume()
 }
 
 func getUsersMe() {
@@ -60,7 +62,6 @@ func getUsersMe() {
             } else {
                 print("🚨 Error: Unable to convert data to string")
             }
-            
             let decoder = JSONDecoder()
             do {
                 // JSON 데이터를 User 구조체로 디코딩
@@ -69,7 +70,6 @@ func getUsersMe() {
 
                 // userRole에서 "ROLE_" 부분을 제거
                 let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
-
                 UserDefaults.standard.set(user.name, forKey: "userName")
                 UserDefaults.standard.set(user.part, forKey: "userPart")
                 UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")

@@ -26,8 +26,8 @@ extension MainLoginViewController {
             let profilePicUrl = user.profile?.imageURL(withDimension: 320)
             print("profilePicUrl = \(String(describing: profilePicUrl))")
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
-            
-            self.postLogin(with: emailAddress ?? "google login failed")
+            UserDefaults.standard.setValue(emailAddress, forKey: "userEmail")
+            postLogin(with: emailAddress ?? "google login failed")
             let userInfoViewController = UserInfoPolicyViewController()
             self.navigationController?.pushViewController(userInfoViewController, animated: true)
         }

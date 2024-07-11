@@ -57,7 +57,7 @@ struct UserRank: Codable {
     }
 }
 
-
+let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "failed"
 let userName = UserDefaults.standard.string(forKey: "userName") ?? "failed"
 let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "failed"
 let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
