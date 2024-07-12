@@ -29,18 +29,16 @@ class MyScoreViewController: UIViewController {
         $0.backgroundColor = .pard.blackCard
         $0.shadowColor = .pard.blackCard
     }
-    
+  
     private var toolTipView: ToolTIpViewInMyScore?
     
-    private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = []
-    
-    //    private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
-    //        ("스터디", "AI 스터디\n참여", "08.23(토) |", "+1점", UIColor.pard.gray30),
-    //        ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토) | ", "+5점", UIColor.pard.gray30),
-    //        ("벌점", "2차 세미나\n결석", "08.16(토) | ", "-1점", UIColor.pard.gray30),
-    //        ("정보", "슬랙\n정보 공유", "08.09(토) | ", "+1점", UIColor.pard.gray30)
-    //    ]
-    
+    private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
+        ("스터디", "AI 스터디\n참여", "08.23(토) |", "+1점", UIColor.pard.gray30),
+        ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토) | ", "+5점", UIColor.pard.gray30),
+        ("벌점", "2차 세미나\n결석", "08.16(토) | ", "-1점", UIColor.pard.gray30),
+        ("정보", "슬랙\n정보 공유", "08.09(토) | ", "+1점", UIColor.pard.gray30)
+    ]
+
     private func loadData() {
         getRankTop3 { [weak self] ranks in
             guard let self = self else { return }
@@ -52,16 +50,8 @@ class MyScoreViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             getRankMe()
         }
-        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            getReason { [weak self] reasons in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-                    print("✅ getReason Completion: \(String(describing: reasons))")
-                    ReasonManager.shared.reasonList = reasons ?? []
-                    self.updateScoreRecords()
-                }
-            }
+            getReason()
         }
     }
     
@@ -81,23 +71,7 @@ class MyScoreViewController: UIViewController {
         setupScoreStatusView()
         setupScoreRecordsView()
     }
-    
-    private func updateScoreRecords() {
-        let reasons = ReasonManager.shared.reasonList
-        print("✅ updateScoreRecords - Reasons: \(reasons)")
-        scoreRecords = reasons.map { reason in
-            let tag = reason.bonus ? "보너스" : "벌점"
-            let title = reason.reason
-            let date = reason.createAt
-            let points = reason.bonus ? "+\(reason.point)점" : "-\(reason.point)점"
-            let pointsColor = reason.bonus ? UIColor.pard.primaryGreen : UIColor.pard.errorRed
-            return (tag, title, date, points, pointsColor)
-        }
-        print("✅ updateScoreRecords - Score Records: \(scoreRecords)")
-        scoreRecordsView.configure(with: scoreRecords)
-    }
 
-    
     private func setNavigation() {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
