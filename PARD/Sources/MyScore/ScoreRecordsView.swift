@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UIKit
+
 class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = []
     private var collectionView: UICollectionView!
@@ -50,6 +52,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
 
     func configure(with records: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)]) {
         self.scoreRecords = records
+        print("✅ ScoreRecordsView - Configure: \(records)")
         collectionView.reloadData()
     }
     
@@ -64,5 +67,4 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         cell.configure(with: record, isLastItem: isLastItem)
         return cell
     }
-
 }
