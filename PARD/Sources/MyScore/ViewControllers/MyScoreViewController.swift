@@ -13,7 +13,6 @@ class MyScoreViewController: UIViewController {
     private var rank1: Rank?
     private var rank2: Rank?
     private var rank3: Rank?
-    private var reasons: Reason?
     
     private let appearance = UINavigationBarAppearance().then {
         $0.configureWithOpaqueBackground()
@@ -237,7 +236,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(bronzeNameLabel)
         
         goldRingImageView.snp.makeConstraints {
-            $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(25)
+            $0.top.equalToSuperview().offset(181)
             $0.leading.equalToSuperview().offset(22)
             $0.width.height.equalTo(40)
         }
