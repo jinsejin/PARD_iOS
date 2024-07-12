@@ -97,6 +97,7 @@ class RankingViewController: UIViewController {
     }
     
     @objc func backButtonTapped(){
+
         navigationController?.popViewController(animated: true)
     }
 }

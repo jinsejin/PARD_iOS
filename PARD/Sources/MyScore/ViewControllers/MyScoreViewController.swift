@@ -13,7 +13,6 @@ class MyScoreViewController: UIViewController {
     private var rank1: Rank?
     private var rank2: Rank?
     private var rank3: Rank?
-    private var reasons: Reason?
     
     private let appearance = UINavigationBarAppearance().then {
         $0.configureWithOpaqueBackground()
@@ -31,7 +30,7 @@ class MyScoreViewController: UIViewController {
         $0.shadowColor = .pard.blackCard
     }
   
-    private var toolTipView: ToolTipViewInMyScore?
+    private var toolTipView: ToolTIpViewInMyScore?
     
     private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
         ("스터디", "AI 스터디\n참여", "08.23(토) |", "+1점", UIColor.pard.gray30),
@@ -127,8 +126,6 @@ class MyScoreViewController: UIViewController {
         }
     }
     
-    
-    
     private func setupRankingButton() {
         let rankingButton = UIButton(type: .system).then {
             $0.setTitle("전체랭킹 확인하기", for: .normal)
@@ -156,6 +153,7 @@ class MyScoreViewController: UIViewController {
     
     private func setupRankingMedals() {
         guard let rank1 = rank1, let rank2 = rank2, let rank3 = rank3 else { return }
+        
         let goldRingImageView = UIImageView(image: UIImage(named: "goldRing"))
         view.addSubview(goldRingImageView)
         
@@ -238,7 +236,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(bronzeNameLabel)
         
         goldRingImageView.snp.makeConstraints {
-            $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(25)
+            $0.top.equalToSuperview().offset(181)
             $0.leading.equalToSuperview().offset(22)
             $0.width.height.equalTo(40)
         }
@@ -249,13 +247,13 @@ class MyScoreViewController: UIViewController {
         }
         
         goldPartLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(62)
-            $0.top.equalToSuperview().offset(179)
+            $0.centerX.equalTo(goldNameLabel.snp.centerX)
+            $0.bottom.equalTo(goldNameLabel.snp.top).offset(-2)
         }
         
         goldNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(goldRingImageView.snp.trailing).offset(8)
-            $0.top.equalTo(goldPartLabel.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(197)
+            $0.leading.equalToSuperview().offset(70)
         }
         
         silverRingImageView.snp.makeConstraints {
@@ -270,13 +268,13 @@ class MyScoreViewController: UIViewController {
         }
         
         silverPartLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(178)
-            $0.top.equalToSuperview().offset(179)
+            $0.centerX.equalTo(silverNameLabel.snp.centerX)
+            $0.bottom.equalTo(silverNameLabel.snp.top).offset(-2)
         }
         
         silverNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(silverRingImageView.snp.trailing).offset(8)
-            $0.top.equalTo(silverPartLabel.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(197)
+            $0.leading.equalToSuperview().offset(186)
         }
         
         bronzeRingImageView.snp.makeConstraints {
@@ -291,15 +289,16 @@ class MyScoreViewController: UIViewController {
         }
         
         bronzePartLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(294)
-            $0.top.equalToSuperview().offset(179)
+            $0.centerX.equalTo(bronzeNameLabel.snp.centerX)
+            $0.bottom.equalTo(bronzeNameLabel.snp.top).offset(-2)
         }
         
         bronzeNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(bronzeRingImageView.snp.trailing).offset(8)
-            $0.top.equalTo(bronzePartLabel.snp.bottom).offset(2)
+            $0.top.equalToSuperview().offset(197)
+            $0.leading.equalToSuperview().offset(302)
         }
     }
+
     
     private func setupCrownImages() {
         let goldCrownImageView = UIImageView(image: UIImage(named: "gold"))
@@ -537,7 +536,7 @@ class MyScoreViewController: UIViewController {
     
     private func toggleToolTip() {
         if toolTipView == nil {
-            let toolTip = ToolTipViewInMyScore()
+            let toolTip = ToolTIpViewInMyScore()
             view.addSubview(toolTip)
             toolTip.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(563)
@@ -606,10 +605,6 @@ class MyScoreViewController: UIViewController {
         
         scoreRecordsView.configure(with: scoreRecords)
     }
-    
-    
-    
-    
     
     class ScoreRecordCell: UICollectionViewCell {
         static let identifier = "ScoreRecordCell"
