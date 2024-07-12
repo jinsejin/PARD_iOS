@@ -51,7 +51,34 @@ class HomeViewController: UIViewController {
     
     @objc private func homeLogoTapped() {
         print("home")
+//        let modal = ModalBuilder()
+//            .add(title: "모달 제목")
+//            .add(body: "모달 내용")
+//            .add(button: .cancellable(
+//                cancelButtonTitle: "취소",
+//                confirmButtonTitle: "확인",
+//                cancelButtonAction: {
+//                    print("취소 버튼 클릭")
+//                },
+//                confirmButtonAction: {
+//                    print("확인 버튼 클릭")
+//                }
+//            )).show(on: self)
         
+//        let modal2 = ModalBuilder()
+//            .add(title: "모달 제목")
+//            .add(body: "모달 내용")
+//            .add(button: .confirm(title: "확인", action: {
+//                print("확인 버튼")
+//            })).show(on: self)
+// 이미지 이름을 추가
+                ModalBuilder()
+                    .add(title: "출석 체크")
+                    .add(image: "alreadyAttendance")
+                    .add(button: .confirm(title: "확인", action: {
+                        print("sejin")
+                    }))
+                    .show(on: self)
     }
    
     @objc private func menuButtonTapped() {
