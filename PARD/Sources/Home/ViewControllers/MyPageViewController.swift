@@ -144,14 +144,20 @@ class MyPageViewController: UIViewController {
         
         statusLabel1.snp.makeConstraints { make in
             make.height.equalTo(24)
+            make.width.greaterThanOrEqualTo(42)
+
         }
         
         statusLabel2.snp.makeConstraints { make in
             make.height.equalTo(24)
+            make.width.greaterThanOrEqualTo(66)
+
         }
         
         statusLabel3.snp.makeConstraints { make in
             make.height.equalTo(24)
+            make.width.greaterThanOrEqualTo(66)
+
         }
         
         nameLabel.snp.makeConstraints { make in
