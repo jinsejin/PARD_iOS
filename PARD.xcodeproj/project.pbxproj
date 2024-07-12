@@ -19,6 +19,7 @@
 		0D70EC512C3D148C00FDE559 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC502C3D148C00FDE559 /* UITabBarController.swift */; };
 		0D70EC532C3D2B0300FDE559 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC522C3D2B0300FDE559 /* UIColor.swift */; };
 		0D70EC552C40EA9E00FDE559 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC542C40EA9E00FDE559 /* RankingTableViewCell.swift */; };
+		0D70EC572C4123A300FDE559 /* PopUpModalBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC562C4123A300FDE559 /* PopUpModalBuilder.swift */; };
 		0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */; };
 		0DAFA0E22BA74EF30092FEB0 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */; };
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
@@ -81,6 +82,7 @@
 		0D70EC502C3D148C00FDE559 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		0D70EC522C3D2B0300FDE559 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0D70EC542C40EA9E00FDE559 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
+		0D70EC562C4123A300FDE559 /* PopUpModalBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpModalBuilder.swift; sourceTree = "<group>"; };
 		0DAFA0DF2BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamBurgerTableViewCell.swift; sourceTree = "<group>"; };
 		0DAFA0E12BA74EF30092FEB0 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC5CE032B96DBC8007A21E4 /* PopUpModalView.swift */,
+				0D70EC562C4123A300FDE559 /* PopUpModalBuilder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				21702BF92C345AD300134681 /* QrController.swift in Sources */,
 				0D70EC552C40EA9E00FDE559 /* RankingTableViewCell.swift in Sources */,
 				2176515B2B947ABE00121AB2 /* +Font.swift in Sources */,
+				0D70EC572C4123A300FDE559 /* PopUpModalBuilder.swift in Sources */,
 				0DC5CE012B96DBA4007A21E4 /* PopUpModalViewController.swift in Sources */,
 				0D70EC4D2C31382200FDE559 /* EventTableViewCell.swift in Sources */,
 				0DC5CDFD2B96DB28007A21E4 /* PardAppModel.swift in Sources */,
