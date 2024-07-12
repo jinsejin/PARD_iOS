@@ -84,3 +84,47 @@ func getUsersMe() {
         task.resume()
     }
 }
+
+func deleteUser(userEmail: String) {
+    guard var urlComponents = URLComponents(string: "\(url)/users") else {
+        print("🚨 Invalid URL")
+        return
+    }
+    
+    // 이메일 쿼리 파라미터 추가
+    urlComponents.queryItems = [
+        URLQueryItem(name: "email", value: userEmail)
+    ]
+    
+    // URLComponents로 URL 생성
+    guard let url = urlComponents.url else {
+        print("🚨 Invalid URL")
+        return
+    }
+    
+    // DELETE 요청 설정
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+    
+    // URLSession으로 비동기 네트워크 요청 수행
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        if let error = error {
+            print("🚨 Error: \(error.localizedDescription)")
+            return
+        }
+
+        guard let data = data else {
+            print("🚨 Error: No data received")
+            return
+        }
+
+        // 서버 응답을 텍스트 형식으로 처리
+        if let responseString = String(data: data, encoding: .utf8) {
+            print("✅ Delete success: \(responseString)")
+        } else {
+            print("🚨 Error: Unable to convert data to string")
+        }
+    }
+    task.resume()
+}
+

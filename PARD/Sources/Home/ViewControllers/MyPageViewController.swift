@@ -312,7 +312,7 @@ class MyPageViewController: UIViewController {
     
     @objc private func deleteAccountTapped() {
         print("deleteAccount tapped")
-        
+        deleteUser(userEmail: userEmail)
         // userDefault에 있는 정보 모두 clear
 //        if let appDomain = Bundle.main.bundleIdentifier {
 //            UserDefaults.standard.removePersistentDomain(forName: appDomain)
