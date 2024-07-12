@@ -158,7 +158,7 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row < 6 {
+        if indexPath.row < rankingData.count - 1 {
             let separatorView = UIView()
             separatorView.backgroundColor = UIColor.pard.gray30
             cell.contentView.addSubview(separatorView)
@@ -169,7 +169,7 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
                 make.height.equalTo(1)
             }
         }
-
+       
         if indexPath.row == 0 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
