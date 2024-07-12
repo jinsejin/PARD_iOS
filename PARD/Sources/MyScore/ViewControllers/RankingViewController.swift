@@ -94,14 +94,17 @@ class RankingViewController: UIViewController {
     }
     
     private func getRankAllData() {
-        DispatchQueue.global().async {
-            getTotalRank()
-            self.rankingData = self.rankingsManager.totalRankList
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        getTotalRank { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                self.rankingData = self.rankingsManager.totalRankList
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else {
+                print("Failed to load rank data.")
             }
         }
-        
     }
 }
 
