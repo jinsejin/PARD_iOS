@@ -48,7 +48,6 @@ class ToolTIpViewInMyScore: UIView {
         contentStack.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(16)
-            make.trailing.equalTo(closeButton.snp.leading).offset(-8)
         }
         
         // 각 행 생성
@@ -221,10 +220,16 @@ class ToolTIpViewInMyScore: UIView {
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.backgroundColor = .pard.blackCard
         label.layer.masksToBounds = true
-
+        
         label.snp.makeConstraints { make in
             make.height.equalTo(19)
-            make.width.greaterThanOrEqualTo(27)
+            if text.count > 8 {
+                make.width.greaterThanOrEqualTo(82)
+            } else if text.count > 5 {
+                make.width.greaterThanOrEqualTo(50)
+            } else {
+                make.width.greaterThanOrEqualTo(27)
+            }
         }
         
         return label
