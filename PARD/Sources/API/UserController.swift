@@ -10,10 +10,6 @@ import UIKit
 let url = "https://we-pard.store/v1"
 var currentUser: User?
 
-//extension MainLoginViewController {
-//
-//}
-
 func postLogin(with email: String) {
     guard let url = URL(string: "\(url)/users/login") else {
         print("🚨 Invalid URL")

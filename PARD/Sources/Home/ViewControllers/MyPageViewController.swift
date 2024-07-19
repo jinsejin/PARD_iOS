@@ -512,17 +512,6 @@ class MyPageViewController: UIViewController {
         }
     }
     
-//    @objc private func requestNotificationPermission(){
-//        print("toggle pressed")
-//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {didAllow,Error in
-//                if didAllow {
-//                    print("Push: 권한 허용")
-//                } else {
-//                    print("Push: 권한 거부")
-//                }
-//            })
-//        }
-    
     private let usageGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "이용 안내"
