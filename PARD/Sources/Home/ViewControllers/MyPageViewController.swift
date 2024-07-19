@@ -281,6 +281,7 @@ class MyPageViewController: UIViewController {
         personalInfoArrowButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
         serviceInfoArrowButton.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
         logoutArrowButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
+        deleteAccountArrowButton.addTarget(self, action: #selector(deleteAccountTapped), for: .touchUpInside)
     }
 
     @objc private func feedbackViewTapped() {
@@ -313,6 +314,16 @@ class MyPageViewController: UIViewController {
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
             print("All UserDefaults have been cleared")
         }
+    }
+    
+    @objc private func deleteAccountTapped() {
+        print("deleteAccount tapped")
+        deleteUser(userEmail: userEmail)
+        // userDefault에 있는 정보 모두 clear
+//        if let appDomain = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+//            print("All UserDefaults have been cleared")
+//        }
     }
    
     private let myPageLabel: UILabel = {
@@ -483,10 +494,12 @@ class MyPageViewController: UIViewController {
     private let notificationSwitch: UISwitch = {
         let toggleSwitch = UISwitch()
         toggleSwitch.onTintColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
+        toggleSwitch.addTarget(self, action: #selector(openNotificationSettings), for: .touchUpInside)
         return toggleSwitch
     }()
     
     @objc private func notificationSwitchChanged() {
+
         if notificationSwitch.isOn {
             openNotificationSettings()
         } else {
@@ -494,7 +507,9 @@ class MyPageViewController: UIViewController {
         }
     }
 
-    private func openNotificationSettings() {
+
+    @objc private func openNotificationSettings() {
+
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
@@ -503,7 +518,6 @@ class MyPageViewController: UIViewController {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
         }
     }
-
     
     private let usageGuideLabel: UILabel = {
         let label = UILabel()

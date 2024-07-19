@@ -48,6 +48,7 @@ class ToolTIpViewInMyScore: UIView {
         contentStack.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(16)
+
         }
         
         // 각 행 생성
@@ -64,7 +65,7 @@ class ToolTIpViewInMyScore: UIView {
         addPenaltyRows(to: contentStack, title: "벌점", details: [
             ("세미나 지각(10분 이내)", "-1점"),
             ("세미나 결석", "-2점"),
-            ("과제 지각", "-0.5점"),
+            ("과제 지각", "-0.5점    "),
             ("과제 미제출", "-1점")
         ])
     }
@@ -125,6 +126,7 @@ class ToolTIpViewInMyScore: UIView {
         rowStack.addArrangedSubview(pointLabel)
         
         stackView.addArrangedSubview(rowStack)
+
     }
     
     private func addPenaltyRows(to stackView: UIStackView, title: String, details: [(String, String)]) {
@@ -220,7 +222,7 @@ class ToolTIpViewInMyScore: UIView {
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.backgroundColor = .pard.blackCard
         label.layer.masksToBounds = true
-        
+
         label.snp.makeConstraints { make in
             make.height.equalTo(19)
             if text.count > 8 {
@@ -230,6 +232,7 @@ class ToolTIpViewInMyScore: UIView {
             } else {
                 make.width.greaterThanOrEqualTo(27)
             }
+
         }
         
         return label
