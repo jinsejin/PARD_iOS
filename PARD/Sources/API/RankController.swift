@@ -7,8 +7,6 @@
 
 import UIKit
 
-import Foundation
-
 func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
     guard let url = URL(string: url + "/rank/top3") else {
         print("Invalid URL")
