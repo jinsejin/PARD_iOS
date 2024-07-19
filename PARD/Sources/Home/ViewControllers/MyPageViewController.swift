@@ -67,6 +67,7 @@ class MyPageViewController: UIViewController {
         view.addSubview(accountView)
         accountView.addSubview(logoutLabel)
         accountView.addSubview(deleteAccountLabel)
+
         accountView.addSubview(logoutArrowView)
         accountView.addSubview(deleteAccountArrowView)
         accountView.addSubview(logoutArrowButton)
@@ -276,7 +277,6 @@ class MyPageViewController: UIViewController {
         let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
         feedbackView.addGestureRecognizer(feedbackTapGestureRecognizer)
         feedbackView.isUserInteractionEnabled = true
-        
         
         personalInfoArrowButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
         serviceInfoArrowButton.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
@@ -499,16 +499,17 @@ class MyPageViewController: UIViewController {
     }()
     
     @objc private func notificationSwitchChanged() {
-//        requestNotificationPermission()
+
         if notificationSwitch.isOn {
-//            openNotificationSettings()
-//            requestNotificationPermission()
+            openNotificationSettings()
         } else {
             print("Notifications disabled")
         }
     }
 
+
     @objc private func openNotificationSettings() {
+
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
             return
         }

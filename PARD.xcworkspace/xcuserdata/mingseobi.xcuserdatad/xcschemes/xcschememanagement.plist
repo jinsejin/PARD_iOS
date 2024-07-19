@@ -106,6 +106,7 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
@@ -113,6 +114,7 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
@@ -120,6 +122,7 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
@@ -127,6 +130,7 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>

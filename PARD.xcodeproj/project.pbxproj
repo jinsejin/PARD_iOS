@@ -805,7 +805,9 @@
 				CODE_SIGN_ENTITLEMENTS = PARD/PARD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+
 				DEVELOPMENT_TEAM = 3XQ8HFGAQN;
+
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PARD/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"camera access\"";
@@ -837,7 +839,9 @@
 				CODE_SIGN_ENTITLEMENTS = PARD/PARD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+
 				DEVELOPMENT_TEAM = 3XQ8HFGAQN;
+
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PARD/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"camera access\"";

@@ -88,8 +88,8 @@ class RankingViewController: UIViewController {
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
     }
-    
-    @objc func backButtonTapped(){
+
+    @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
     
