@@ -488,18 +488,21 @@ class MyPageViewController: UIViewController {
     private let notificationSwitch: UISwitch = {
         let toggleSwitch = UISwitch()
         toggleSwitch.onTintColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
+        toggleSwitch.addTarget(self, action: #selector(openNotificationSettings), for: .touchUpInside)
         return toggleSwitch
     }()
     
     @objc private func notificationSwitchChanged() {
+//        requestNotificationPermission()
         if notificationSwitch.isOn {
-            openNotificationSettings()
+//            openNotificationSettings()
+//            requestNotificationPermission()
         } else {
             print("Notifications disabled")
         }
     }
 
-    private func openNotificationSettings() {
+    @objc private func openNotificationSettings() {
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
@@ -508,7 +511,17 @@ class MyPageViewController: UIViewController {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
         }
     }
-
+    
+//    @objc private func requestNotificationPermission(){
+//        print("toggle pressed")
+//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {didAllow,Error in
+//                if didAllow {
+//                    print("Push: 권한 허용")
+//                } else {
+//                    print("Push: 권한 거부")
+//                }
+//            })
+//        }
     
     private let usageGuideLabel: UILabel = {
         let label = UILabel()

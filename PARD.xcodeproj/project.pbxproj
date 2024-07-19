@@ -801,9 +801,10 @@
 				CODE_SIGN_ENTITLEMENTS = PARD/PARD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7YG4RD83Q9;
+				DEVELOPMENT_TEAM = 3XQ8HFGAQN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PARD/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"camera access\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -815,7 +816,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.one.ram.PARD-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.one.ram2.PARD-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -832,9 +833,10 @@
 				CODE_SIGN_ENTITLEMENTS = PARD/PARD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7YG4RD83Q9;
+				DEVELOPMENT_TEAM = 3XQ8HFGAQN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PARD/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"camera access\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -846,7 +848,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.one.ram.PARD-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.one.ram2.PARD-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
