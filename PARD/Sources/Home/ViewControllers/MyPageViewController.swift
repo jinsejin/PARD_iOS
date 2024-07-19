@@ -499,8 +499,10 @@ class MyPageViewController: UIViewController {
     }()
     
     @objc private func notificationSwitchChanged() {
+//        requestNotificationPermission()
         if notificationSwitch.isOn {
-            openNotificationSettings()
+//            openNotificationSettings()
+//            requestNotificationPermission()
         } else {
             print("Notifications disabled")
         }
