@@ -105,7 +105,6 @@ class MyScoreViewController: UIViewController {
         
         pardnerShipLabel.text = "🏆 PARDNERSHIP TOP 3 🏆"
         pardnerShipLabel.font = UIFont.pardFont.head2
-        pardnerShipLabel.font = UIFont.boldSystemFont(ofSize: 16)
         pardnerShipLabel.textColor = UIColor(patternImage: gradientImage())
         pardnerShipLabel.textAlignment = .center
         labelContainerView.addSubview(pardnerShipLabel)
@@ -143,7 +142,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let attributedString = NSMutableAttributedString(string: "전체랭킹 확인하기", attributes: [
-            .font: UIFont.systemFont(ofSize: 12),
+            .font: UIFont.pardFont.body3,
             .foregroundColor: UIColor.pard.gray30
         ])
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
