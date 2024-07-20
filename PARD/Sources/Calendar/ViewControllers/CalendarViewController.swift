@@ -128,7 +128,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         label.text = section == 0 ? "다가오는 일정" : "지난 일정"
         headerView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(2)
+            make.leading.equalToSuperview().offset(4)
             make.centerY.equalToSuperview()
         }
         return headerView
@@ -143,8 +143,8 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
             separatorView.addSubview(separator)
             separator.snp.makeConstraints { make in
                 make.height.equalTo(1)
-                make.leading.equalToSuperview().offset(1)
-                make.trailing.equalToSuperview().offset(-1)
+                make.leading.equalToSuperview().offset(2)
+                make.trailing.equalToSuperview().offset(-2)
                 make.centerY.equalToSuperview()
             }
             return separatorView

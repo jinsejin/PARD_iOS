@@ -331,7 +331,6 @@ class MyPageViewController: UIViewController {
         myPageLabel.text = "마이 페이지"
         myPageLabel.textColor = .white
         myPageLabel.font = UIFont.pardFont.head2
-        myPageLabel.font = UIFont.boldSystemFont(ofSize: 16)
         myPageLabel.textAlignment = .center
         
         return myPageLabel
@@ -352,7 +351,7 @@ class MyPageViewController: UIViewController {
         if let pretendardFont = UIFont(name: "Pretendard-SemiBold", size: 14) {
             label.font = pretendardFont
         } else {
-            label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            label.font = UIFont.pardFont.body4
         }
         return label
     }()
@@ -364,7 +363,7 @@ class MyPageViewController: UIViewController {
         label.textColor = .pard.gray10
 
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.font = UIFont.pardFont.body4
         return label
     }()
     
@@ -460,7 +459,7 @@ class MyPageViewController: UIViewController {
         label.text = "\(userName) 님"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = UIFont.pardFont.head1
         return label
     }()
     
@@ -525,7 +524,7 @@ class MyPageViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.head1
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.pardFont.head1
         
         return label
     }()
@@ -589,8 +588,6 @@ class MyPageViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.head1
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        
         return label
     }()
 

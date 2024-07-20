@@ -127,15 +127,15 @@ final class PopUpModalView: UIView {
     private func setupLabels() {
         titleLabel.numberOfLines = 0
         bodyLabel.numberOfLines = 0
-        titleLabel.font = .systemFont(ofSize: 20)
-        bodyLabel.font = .systemFont(ofSize: 18)
+        titleLabel.font = .pardFont.head1
+        bodyLabel.font = .pardFont.body5
     }
 
     private func configureButtonAppearance(button: UIButton, backgroundColor: UIColor, titleColor: UIColor, action: Selector) {
         button.layer.cornerRadius = 22
         button.backgroundColor = backgroundColor
         button.setTitleColor(titleColor, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.titleLabel?.font = .pardFont.body6
         button.addTarget(self, action: action, for: .touchUpInside)
     }
     
