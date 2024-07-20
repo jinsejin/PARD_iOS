@@ -50,6 +50,24 @@ extension ReaderViewController {
                             }))
                             .show(on: self)
                     }
+                } else if responseString.contains("false") {
+                    DispatchQueue.main.async {
+                        ModalBuilder()
+                            .add(title: "출석 체크")
+                            .add(image: "late")
+                            .add(button: .confirm(title: "다음부터 안그럴게요", action: {
+                            }))
+                            .show(on: self)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        ModalBuilder()
+                            .add(title: "출석 체크")
+                            .add(image: "complete")
+                            .add(button: .confirm(title: "세미나 입장하기", action: {
+                            }))
+                            .show(on: self)
+                    }
                 }
             } else {
                 print("🚨 Error: Unable to convert data to string")
