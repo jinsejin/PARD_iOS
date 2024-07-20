@@ -18,12 +18,11 @@ class SplashViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.showMainViewController()
-                
-            }
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showMainViewController()
         }
+    }
     
     func showMainViewController() {
         if UserDefaults.standard.bool(forKey: "isLoggedIn") {

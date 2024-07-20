@@ -21,9 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         postLogin(with: userEmail)
         window?.windowScene = windowScene
 
-        window?.rootViewController = UINavigationController(rootViewController: SplashViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: SplashViewController())
+        setRootViewController()
         window?.makeKeyAndVisible()
     }
+    
+    func setRootViewController() {
+            // 초기 화면을 설정하는 로직
+            let initialViewController = UINavigationController(rootViewController: SplashViewController())
+            window?.rootViewController = initialViewController
+        }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

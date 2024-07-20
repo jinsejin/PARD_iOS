@@ -38,10 +38,17 @@ extension ReaderViewController {
                             .add(title: "출석 체크")
                             .add(content: "유효하지 않은 QR 코드입니다.\n다시 시도해주세요.")
                             .add(button: .confirm(title: "확인", action: {
-                                // 버튼 클릭 시의 동작
                             }))
                             .show(on: self)
-                        print("잘못된 큐알임임임임")
+                    }
+                } else if responseString.contains("이미") {
+                    DispatchQueue.main.async {
+                        ModalBuilder()
+                            .add(title: "출석 체크")
+                            .add(image: "alreadyAttendance")
+                            .add(button: .confirm(title: "세미나 입장하기", action: {
+                            }))
+                            .show(on: self)
                     }
                 }
             } else {

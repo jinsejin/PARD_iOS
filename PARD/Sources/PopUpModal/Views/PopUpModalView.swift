@@ -132,7 +132,7 @@ final class PopUpModalView: UIView {
         bodyLabel.numberOfLines = 0
         contentLabel.numberOfLines = 0
         titleLabel.font = .pardFont.head1
-        contentLabel.font = .pardFont.head1
+        contentLabel.font = .pardFont.body5
         contentLabel.textColor = .pard.white100
         contentLabel.textAlignment = .center
         bodyLabel.font = .pardFont.body5
