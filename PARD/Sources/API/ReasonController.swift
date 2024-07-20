@@ -32,10 +32,11 @@ func getReason() {
                 // 먼저 JSON 데이터를 단일 객체로 디코딩 시도
                 if let reason = try? decoder.decode(Reason.self, from: JSONdata) {
                     print("✅ Success: \(reason)")
-                } else {
-                    // 단일 객체로 디코딩이 실패하면 배열로 디코딩 시도
-                    let reasonArray = try decoder.decode([Reason].self, from: JSONdata)
+                } else if let reasonArray = try? decoder.decode([Reason].self, from: JSONdata) {
+                    ReasonManager.shared.reasonList = reasonArray
                     print("✅ Success: \(reasonArray)")
+                } else {
+                    print("🚨 Decoding Error: Unable to decode data")
                 }
             } catch {
                 print("🚨 Decoding Error:", error)

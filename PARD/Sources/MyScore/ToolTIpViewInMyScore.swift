@@ -50,7 +50,6 @@ class ToolTIpViewInMyScore: UIView {
             make.leading.equalToSuperview().offset(16)
         }
         
-        // 각 행 생성
         addMVPRow(to: contentStack, title: "MVP", details: [
             ("주요 행사 MVP", "5점"),
             ("세미나 파트별 MVP", "3점")
