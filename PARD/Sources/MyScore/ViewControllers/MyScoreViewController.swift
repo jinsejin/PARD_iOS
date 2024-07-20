@@ -106,7 +106,6 @@ class MyScoreViewController: UIViewController {
         
         pardnerShipLabel.text = "🏆 PARDNERSHIP TOP 3 🏆"
         pardnerShipLabel.font = UIFont.pardFont.head2
-        pardnerShipLabel.font = UIFont.boldSystemFont(ofSize: 16)
         pardnerShipLabel.textColor = UIColor(patternImage: gradientImage())
         pardnerShipLabel.textAlignment = .center
         labelContainerView.addSubview(pardnerShipLabel)
