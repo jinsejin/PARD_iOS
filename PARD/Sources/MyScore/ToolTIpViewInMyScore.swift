@@ -26,7 +26,6 @@ class ToolTIpViewInMyScore: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.pard.primaryPurple.cgColor
         
-        // 닫기 버튼
         closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         closeButton.tintColor = UIColor.pard.gray30
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
