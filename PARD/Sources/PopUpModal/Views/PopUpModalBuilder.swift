@@ -11,6 +11,7 @@ final class ModalBuilder {
     private var title: String?
     private var body: String?
     private var image: String?
+    private var content: String?
     private var buttonType: ModalButtonType?
 
     init() {}
@@ -29,6 +30,11 @@ final class ModalBuilder {
         self.image = image
         return self
     }
+    
+    func add(content: String) -> Self {
+        self.content = content
+        return self
+    }
 
     func add(button: ModalButtonType) -> Self {
         self.buttonType = button
@@ -37,7 +43,7 @@ final class ModalBuilder {
     
     func show(on viewController: UIViewController) {
         let modal = PopUpModalViewController()
-        modal.configurePopup(title: title, body: body, image: image, button: buttonType)
+        modal.configurePopup(title: title, body: body, image: image, content: content, button: buttonType)
         modal.modalPresentationStyle = .overCurrentContext
         modal.modalTransitionStyle = .crossDissolve
 

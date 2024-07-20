@@ -23,6 +23,7 @@ enum ModalButtonType {
 
 final class PopUpModalView: UIView {
     private let titleLabel = UILabel()
+    private let contentLabel = UILabel()
     private let bodyLabel = UILabel()
     private let bodyImageView = UIImageView()
     private let cancelButton = UIButton()
@@ -46,6 +47,7 @@ final class PopUpModalView: UIView {
         title: String,
         body: String,
         image: String?,
+        content: String?,
         button: ModalButtonType?,
         dismissAction: (() -> Void)?
     ) {
@@ -59,6 +61,7 @@ final class PopUpModalView: UIView {
         } else {
             self.bodyImageView.isHidden = true
         }
+        self.contentLabel.text = content
         self.dismissAction = dismissAction
         configureButtons(button)
         
@@ -97,7 +100,7 @@ final class PopUpModalView: UIView {
     }
 
     private func setupSubviews() {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, bodyImageView, bodyLabel, buttonsStackView])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, bodyImageView, contentLabel, bodyLabel, buttonsStackView])
         stackView.axis = .vertical
         stackView.spacing = 32
         stackView.alignment = .center
@@ -127,7 +130,11 @@ final class PopUpModalView: UIView {
     private func setupLabels() {
         titleLabel.numberOfLines = 0
         bodyLabel.numberOfLines = 0
+        contentLabel.numberOfLines = 0
         titleLabel.font = .pardFont.head1
+        contentLabel.font = .pardFont.body5
+        contentLabel.textColor = .pard.white100
+        contentLabel.textAlignment = .center
         bodyLabel.font = .pardFont.body5
     }
 
