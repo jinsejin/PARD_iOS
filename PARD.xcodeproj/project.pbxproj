@@ -25,6 +25,7 @@
 		0DC5CDEF2B96D998007A21E4 /* UserViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDEE2B96D998007A21E4 /* UserViews.swift */; };
 		0DC5CDF12B96DA05007A21E4 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDF02B96DA05007A21E4 /* HomeTopView.swift */; };
 		0DC5CDF32B96DA67007A21E4 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDF22B96DA67007A21E4 /* CalendarView.swift */; };
+		0DC5CDF52B96DA9B007A21E4 /* ScoreRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDF42B96DA9B007A21E4 /* ScoreRecordCell.swift */; };
 		0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDF62B96DAD9007A21E4 /* HamburgerBarView.swift */; };
 		0DC5CDF92B96DAF0007A21E4 /* HamburgerBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDF82B96DAF0007A21E4 /* HamburgerBarViewController.swift */; };
 		0DC5CDFB2B96DB11007A21E4 /* PardAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC5CDFA2B96DB11007A21E4 /* PardAppManager.swift */; };
@@ -87,6 +88,7 @@
 		0DC5CDEE2B96D998007A21E4 /* UserViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViews.swift; sourceTree = "<group>"; };
 		0DC5CDF02B96DA05007A21E4 /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeTopView.swift; path = ../User/HomeTopView.swift; sourceTree = "<group>"; };
 		0DC5CDF22B96DA67007A21E4 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		0DC5CDF42B96DA9B007A21E4 /* ScoreRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRecordCell.swift; sourceTree = "<group>"; };
 		0DC5CDF62B96DAD9007A21E4 /* HamburgerBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerBarView.swift; sourceTree = "<group>"; };
 		0DC5CDF82B96DAF0007A21E4 /* HamburgerBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerBarViewController.swift; sourceTree = "<group>"; };
 		0DC5CDFA2B96DB11007A21E4 /* PardAppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PardAppManager.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		90C007BD2B95D1E60056D724 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0DC5CDF42B96DA9B007A21E4 /* ScoreRecordCell.swift */,
 				9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */,
 				0D70EC4E2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift */,
 				0D70EC542C40EA9E00FDE559 /* RankingTableViewCell.swift */,
@@ -628,6 +631,7 @@
 				0D70EC4F2C3CFF1C00FDE559 /* ToolTIpViewInMyScore.swift in Sources */,
 				0DC5CDF72B96DAD9007A21E4 /* HamburgerBarView.swift in Sources */,
 				21702BF32C345AAD00134681 /* UserController.swift in Sources */,
+				0DC5CDF52B96DA9B007A21E4 /* ScoreRecordCell.swift in Sources */,
 				0DAFA0E02BA70F3C0092FEB0 /* HamBurgerTableViewCell.swift in Sources */,
 				90C007D22B95D2CF0056D724 /* CalendarViewController.swift in Sources */,
 				0D70EC452C2D3FFA00FDE559 /* HomePardnerShipView.swift in Sources */,

@@ -71,7 +71,6 @@ class HomeViewController: UIViewController {
 //            .add(button: .confirm(title: "확인", action: {
 //                print("확인 버튼")
 //            })).show(on: self)
-// 이미지 이름을 추가
                 ModalBuilder()
                     .add(title: "출석 체크")
                     .add(image: "alreadyAttendance")
