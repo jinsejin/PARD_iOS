@@ -4,12 +4,15 @@
 //
 //  Created by 김민섭 on 3/4/24.
 //
+
 import UIKit
 import PARD_DesignSystem
 
 class MyScoreViewController: UIViewController {
     private let pardnerShipLabel = UILabel()
     private let scoreRecordsView = ScoreRecordsView()
+    private var toolTipView: ToolTIpViewInMyScore?
+    private var scoreRecords: [ReasonPardnerShip] = []
     private var rank1: Rank?
     private var rank2: Rank?
     private var rank3: Rank?
@@ -30,15 +33,6 @@ class MyScoreViewController: UIViewController {
         $0.shadowColor = .pard.blackCard
     }
   
-    private var toolTipView: ToolTIpViewInMyScore?
-    
-    private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = [
-        ("스터디", "AI 스터디\n참여", "08.23(토) |", "+1점", UIColor.pard.gray30),
-        ("MVP", "기디 연합 세미나\nMVP 선발", "08.16(토) | ", "+5점", UIColor.pard.gray30),
-        ("벌점", "2차 세미나\n결석", "08.16(토) | ", "-1점", UIColor.pard.gray30),
-        ("정보", "슬랙\n정보 공유", "08.09(토) | ", "+1점", UIColor.pard.gray30)
-    ]
-
     private func loadData() {
         getRankTop3 { [weak self] ranks in
             guard let self = self else { return }
@@ -50,9 +44,15 @@ class MyScoreViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             getRankMe()
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            getReason()
+    }
+    
+    private func loadToReasonData() {
+        ReasonManager.shared.fetchReasons { [weak self] reasons in
+            guard let self = self else { return }
+            self.scoreRecords = reasons
+            print("loadToReasonData  : \(scoreRecords)")
         }
+        
     }
     
     
@@ -105,7 +105,6 @@ class MyScoreViewController: UIViewController {
         
         pardnerShipLabel.text = "🏆 PARDNERSHIP TOP 3 🏆"
         pardnerShipLabel.font = UIFont.pardFont.head2
-        pardnerShipLabel.font = UIFont.boldSystemFont(ofSize: 16)
         pardnerShipLabel.textColor = UIColor(patternImage: gradientImage())
         pardnerShipLabel.textAlignment = .center
         labelContainerView.addSubview(pardnerShipLabel)
@@ -606,116 +605,6 @@ class MyScoreViewController: UIViewController {
         scoreRecordsView.configure(with: scoreRecords)
     }
     
-    class ScoreRecordCell: UICollectionViewCell {
-        static let identifier = "ScoreRecordCell"
-        
-        let tagLabel = UILabel()
-        let titleLabel = UILabel()
-        let dateLabel = UILabel()
-        let pointsLabel = UILabel()
-        let backgroundCardView = UIView()
-        let separatorView = UIView()  // Separator view
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            setupUI()
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
-        private func setupUI() {
-            contentView.backgroundColor = .clear
-            
-            backgroundCardView.backgroundColor = .pard.blackCard
-            backgroundCardView.layer.borderWidth = 1
-            backgroundCardView.layer.borderColor = UIColor.pard.blackBackground.cgColor
-            contentView.addSubview(backgroundCardView)
-            
-            tagLabel.font = UIFont.pardFont.body2
-            tagLabel.textAlignment = .center
-            tagLabel.layer.cornerRadius = 8
-            tagLabel.layer.borderWidth = 1
-            tagLabel.layer.masksToBounds = true
-            
-            titleLabel.font = UIFont.pardFont.body4
-            titleLabel.textColor = .pard.gray10
-            titleLabel.textAlignment = .center
-            titleLabel.numberOfLines = 0
-            
-            dateLabel.font = UIFont.pardFont.body3
-            dateLabel.textColor = .pard.gray30
-            dateLabel.textAlignment = .left
-            
-            pointsLabel.font = UIFont.pardFont.body3
-            pointsLabel.textColor = .pard.gray30
-            pointsLabel.textAlignment = .right
-            
-            separatorView.backgroundColor = .pard.gray30
-            contentView.addSubview(separatorView)
-            
-            backgroundCardView.addSubview(tagLabel)
-            backgroundCardView.addSubview(titleLabel)
-            backgroundCardView.addSubview(dateLabel)
-            backgroundCardView.addSubview(pointsLabel)
-            
-            backgroundCardView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-            
-            tagLabel.snp.makeConstraints { make in
-                make.top.equalTo(backgroundCardView).offset(24)
-                make.centerX.equalTo(backgroundCardView)
-                make.width.equalTo(56)
-                make.height.equalTo(24)
-            }
-            
-            titleLabel.snp.makeConstraints { make in
-                make.top.equalTo(tagLabel.snp.bottom).offset(12)
-                make.leading.equalTo(backgroundCardView).offset(12)
-                make.trailing.equalTo(backgroundCardView).offset(-12)
-            }
-            
-            dateLabel.snp.makeConstraints { make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(8)
-                make.leading.equalTo(backgroundCardView).offset(28)
-            }
-            
-            pointsLabel.snp.makeConstraints { make in
-                make.top.equalTo(dateLabel.snp.top)
-                make.trailing.equalTo(backgroundCardView).offset(-28)
-            }
-            
-            separatorView.snp.makeConstraints { make in
-                make.top.equalToSuperview()
-                make.bottom.equalToSuperview()
-                make.trailing.equalToSuperview()
-                make.width.equalTo(1)
-            }
-        }
-        
-        func configure(with record: (tag: String, title: String, date: String, points: String, pointsColor: UIColor), isLastItem: Bool) {
-            tagLabel.text = record.tag
-            titleLabel.text = record.title
-            dateLabel.text = record.date
-            pointsLabel.text = record.points
-            pointsLabel.textColor = record.pointsColor
-            
-            separatorView.isHidden = isLastItem
-            
-            if record.tag == "벌점" {
-                tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
-                tagLabel.textColor = .pard.errorRed
-                tagLabel.backgroundColor = .clear
-            } else {
-                tagLabel.layer.borderColor = UIColor.pard.primaryPurple.cgColor
-                tagLabel.textColor = .pard.primaryPurple
-                tagLabel.backgroundColor = .clear
-            }
-        }
-    }
-    
     @objc private func rankingButtonTapped() {
         let rankingViewController = RankingViewController()
         navigationController?.pushViewController(rankingViewController, animated: true)
@@ -744,8 +633,10 @@ extension MyScoreViewController {
         setNavigation()
         setupTextLabel()
         loadData()
+        loadToReasonData()
         
     }
+    
     
     private func removeTabBarFAB(bool : Bool) {
         tabBarController?.setTabBarVisible(visible: !bool, animated: false)
@@ -754,3 +645,4 @@ extension MyScoreViewController {
         }
     }
 }
+

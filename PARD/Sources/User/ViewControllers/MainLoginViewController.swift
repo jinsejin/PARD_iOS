@@ -44,6 +44,7 @@ class MainLoginViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         setUpUI()
         setAdditionalPropertyAttributes()
+        requestNotificationPermission()
     }
     
     private func setUpUI() {
@@ -106,5 +107,16 @@ class MainLoginViewController: UIViewController {
         controller.performRequests()
         controller.delegate = self
         controller.presentationContextProvider = self
+    }
+    
+    private func requestNotificationPermission(){
+        print("toggle pressed")
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {didAllow,Error in
+            if didAllow {
+                print("Push: 권한 허용")
+            } else {
+                print("Push: 권한 거부")
+            }
+        })
     }
 }

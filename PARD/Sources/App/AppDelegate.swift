@@ -28,6 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                    if error != nil || user == nil {
+                        // 로그인이 안된 상태
+                    } else {
+                        // 로그인이 된 상태
+                    }
+                }
         return true
     }
 

@@ -87,7 +87,7 @@ class RankManager {
 }
 
 // MARK: - reason 데이터 관리
-struct Reason: Codable {
+struct ReasonPardnerShip: Codable {
     let reasonId: Int
     let point: Float
     let reason: String
@@ -108,10 +108,15 @@ struct Reason: Codable {
 class ReasonManager {
     static let shared = ReasonManager()
     private init() {}
-
-    var reasonList: [Reason] = []
+    var reasonList: [ReasonPardnerShip] = []
+    
+    func fetchReasons(completion: @escaping ([ReasonPardnerShip]) -> Void) {
+        getReason { reasons in
+            self.reasonList = reasons
+            completion(reasons)
+        }
+    }
 }
-
 
 // MARK: - total rank
 struct TotalRank: Codable {

@@ -21,8 +21,8 @@ class MyPageViewController: UIViewController {
         super.viewDidLayoutSubviews()
         feedbackView.layer.sublayers?.first?.frame = feedbackView.bounds
     }
-
-
+    
+    
     private func setupUI() {
         view.addSubview(myPageLabel)
         
@@ -34,7 +34,7 @@ class MyPageViewController: UIViewController {
         feedbackActionView.addSubview(feedbackActionLabel)
         feedbackActionView.addSubview(feedbackArrowImageView)
         feedbackActionView.addSubview(feedbackArrowImageView2)
-
+        
         view.addSubview(infoView)
         infoView.addSubview(statusStackView)
         view.addSubview(infoLabel)
@@ -67,7 +67,7 @@ class MyPageViewController: UIViewController {
         view.addSubview(accountView)
         accountView.addSubview(logoutLabel)
         accountView.addSubview(deleteAccountLabel)
-
+        
         accountView.addSubview(logoutArrowView)
         accountView.addSubview(deleteAccountArrowView)
         accountView.addSubview(logoutArrowButton)
@@ -145,19 +145,19 @@ class MyPageViewController: UIViewController {
         statusLabel1.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.greaterThanOrEqualTo(42)
-
+            
         }
         
         statusLabel2.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.greaterThanOrEqualTo(66)
-
+            
         }
         
         statusLabel3.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.greaterThanOrEqualTo(66)
-
+            
         }
         
         nameLabel.snp.makeConstraints { make in
@@ -231,7 +231,7 @@ class MyPageViewController: UIViewController {
         serviceInfoArrowButton.snp.makeConstraints { make in
             make.edges.equalTo(serviceInfoArrowView).inset(-10)
         }
-    
+        
         accountLabel.snp.makeConstraints { make in
             make.top.equalTo(usageGuideView.snp.bottom).offset(24)
             make.leading.equalTo(infoView.snp.leading)
@@ -272,7 +272,7 @@ class MyPageViewController: UIViewController {
             make.edges.equalTo(deleteAccountArrowView).inset(-10)
         }
     }
-
+    
     private func setupGestureRecognizers() {
         let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
         feedbackView.addGestureRecognizer(feedbackTapGestureRecognizer)
@@ -281,8 +281,9 @@ class MyPageViewController: UIViewController {
         personalInfoArrowButton.addTarget(self, action: #selector(personalInfoTapped), for: .touchUpInside)
         serviceInfoArrowButton.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
         logoutArrowButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
+        deleteAccountArrowButton.addTarget(self, action: #selector(deleteAccountTapped), for: .touchUpInside)
     }
-
+    
     @objc private func feedbackViewTapped() {
         if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfFMK14a9BwcRPR2z6uuhQ_Cleg0povmGpcJwpAMLm-nWYp7A/viewform") {
             UIApplication.shared.open(url)
@@ -303,24 +304,110 @@ class MyPageViewController: UIViewController {
     
     @objc private func logoutTapped() {
         print("logout tapped")
-        // 구글 로그아웃
-        GIDSignIn.sharedInstance.signOut()
-        GIDSignIn.sharedInstance.disconnect()
-        print("User has been logged out")
-        
-        // userDefault에 있는 정보 모두 clear
-        if let appDomain = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-            print("All UserDefaults have been cleared")
-        }
+        ModalBuilder()
+            .add(title: "로그아웃")
+            .add(content: "로그아웃 하시겠습니까?")
+            .add(button: .cancellable(
+                cancelButtonTitle: "취소",
+                confirmButtonTitle: "확인",
+                cancelButtonAction: .none,
+                confirmButtonAction: {
+                    // 구글 로그아웃
+                    GIDSignIn.sharedInstance.signOut()
+                    GIDSignIn.sharedInstance.disconnect()
+                    print("User has been logged out")
+                    
+                    // userDefault에 있는 정보 모두 clear
+                    if let appDomain = Bundle.main.bundleIdentifier {
+                        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+                        print("All UserDefaults have been cleared")
+                    }
+                    
+                    // 로그인 화면으로 다시 돌아가기
+                    DispatchQueue.main.async {
+                        if let window = UIApplication.shared.windows.first {
+                            let splashViewController = SplashViewController()
+                            window.rootViewController = splashViewController
+                            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+                        }
+                    }
+                }))
+            .show(on: self)
     }
-   
+    @objc private func deleteAccountTapped() {
+            print("deleteAccount tapped")
+            ModalBuilder()
+                .add(title: "회원 탈퇴")
+                .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
+                .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
+                    self.deleteUser(userEmail: userEmail)
+                    
+                    // 구글 로그아웃
+                    GIDSignIn.sharedInstance.signOut()
+                    GIDSignIn.sharedInstance.disconnect()
+                    
+                    // userDefault에 있는 정보 모두 clear
+                    self.clearUserDefaults()
+                    
+                    // 로그인 화면으로 다시 돌아가기
+                    DispatchQueue.main.async {
+                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                            sceneDelegate.setRootViewController()
+                        }
+                    }
+                }))
+                .show(on: self)
+        }
+        
+        private func clearUserDefaults() {
+            DispatchQueue.main.async {
+                if let appDomain = Bundle.main.bundleIdentifier {
+                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
+                    UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
+                    print("All UserDefaults have been cleared")
+                }
+            }
+        }
+        
+        private func deleteUser(userEmail: String) {
+            // 여기에 사용자 삭제 로직을 추가하세요
+            print("User \(userEmail) deleted.")
+        }
+//    @objc private func deleteAccountTapped() {
+//        print("deleteAccount tapped")
+//        ModalBuilder()
+//            .add(title: "회원 탈퇴")
+//            .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
+//            .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
+//                deleteUser(userEmail: userEmail)
+//                
+//                // 구글 로그아웃
+//                GIDSignIn.sharedInstance.signOut()
+//                GIDSignIn.sharedInstance.disconnect()
+//                
+//                // userDefault에 있는 정보 모두 clear
+//                if let appDomain = Bundle.main.bundleIdentifier {
+//                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
+//                    UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
+//                    print("All UserDefaults have been cleared")
+//                }
+//                
+//                // 로그인 화면으로 다시 돌아가기
+//                DispatchQueue.main.async {
+//                    if let sceneDelegate = UIApplication.shared.connectedScenes
+//                        .first?.delegate as? SceneDelegate {
+//                        sceneDelegate.setRootViewController()
+//                    }
+//                }
+//            }))
+//            .show(on: self)
+//    }
+    
     private let myPageLabel: UILabel = {
         let myPageLabel = UILabel()
         myPageLabel.text = "마이 페이지"
         myPageLabel.textColor = .white
         myPageLabel.font = UIFont.pardFont.head2
-        myPageLabel.font = UIFont.boldSystemFont(ofSize: 16)
         myPageLabel.textAlignment = .center
         
         return myPageLabel
@@ -331,7 +418,7 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
         return view
     }()
-
+    
     private let feedbackLabel: UILabel = {
         let label = UILabel()
         label.text = "운영진에게 전달하고 싶은 의견이 있나요?\n피드백 창구를 활용해보세요!"
@@ -341,19 +428,19 @@ class MyPageViewController: UIViewController {
         if let pretendardFont = UIFont(name: "Pretendard-SemiBold", size: 14) {
             label.font = pretendardFont
         } else {
-            label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            label.font = UIFont.pardFont.body4
         }
         return label
     }()
-
-
+    
+    
     private let feedbackActionLabel: UILabel = {
         let label = UILabel()
         label.text = "피드백 남기기"
         label.textColor = .pard.gray10
-
+        
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.font = UIFont.pardFont.body4
         return label
     }()
     
@@ -364,7 +451,7 @@ class MyPageViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     private let feedbackArrowImageView2: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
@@ -372,20 +459,20 @@ class MyPageViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     private let feedbackActionView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private let infoView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.pard.primaryBlue.cgColor
         view.layer.cornerRadius = 8
-
+        
         return view
     }()
     
@@ -410,7 +497,7 @@ class MyPageViewController: UIViewController {
         label.layer.masksToBounds = true
         return label
     }()
-
+    
     private let statusLabel2: UILabel = {
         let label = UILabel()
         label.text = userPart
@@ -433,8 +520,8 @@ class MyPageViewController: UIViewController {
         label.layer.masksToBounds = true
         return label
     }()
-
-
+    
+    
     private let statusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -442,14 +529,14 @@ class MyPageViewController: UIViewController {
         stackView.spacing = 8
         return stackView
     }()
-
+    
     
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "\(userName) 님"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = UIFont.pardFont.head1
         return label
     }()
     
@@ -462,39 +549,43 @@ class MyPageViewController: UIViewController {
         
         return label
     }()
-        
+    
     private let notificationSettingView: UIView = {
         let view = UIView()
         view.backgroundColor = .pard.blackCard
-
+        
         return view
     }()
-        
+    
     private let notificationSettingLabel: UILabel = {
         let label = UILabel()
         label.text = "알림 설정"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.body4
-            
+        
         return label
     }()
-        
+    
     private let notificationSwitch: UISwitch = {
         let toggleSwitch = UISwitch()
         toggleSwitch.onTintColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
+        toggleSwitch.addTarget(self, action: #selector(openNotificationSettings), for: .touchUpInside)
         return toggleSwitch
     }()
     
     @objc private func notificationSwitchChanged() {
+        
         if notificationSwitch.isOn {
             openNotificationSettings()
         } else {
             print("Notifications disabled")
         }
     }
-
-    private func openNotificationSettings() {
+    
+    
+    @objc private func openNotificationSettings() {
+        
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
@@ -503,7 +594,6 @@ class MyPageViewController: UIViewController {
             UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
         }
     }
-
     
     private let usageGuideLabel: UILabel = {
         let label = UILabel()
@@ -511,18 +601,18 @@ class MyPageViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.head1
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.pardFont.head1
         
         return label
     }()
-
+    
     private let usageGuideView: UIView = {
         let view = UIView()
         view.backgroundColor = .pard.blackCard
         
         return view
     }()
-
+    
     private let privacyPolicyLabel: UILabel = {
         let label = UILabel()
         label.text = "개인정보 처리방침"
@@ -532,24 +622,24 @@ class MyPageViewController: UIViewController {
         
         return label
     }()
-
+    
     private let termsOfServiceLabel: UILabel = {
         let label = UILabel()
         label.text = "서비스 이용약관"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.body4
-
+        
         return label
     }()
-
+    
     private let personalInfoArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         return imageView
     }()
-
+    
     private let serviceInfoArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
@@ -562,64 +652,62 @@ class MyPageViewController: UIViewController {
         button.backgroundColor = .clear
         return button
     }()
-
+    
     private let serviceInfoArrowButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
         return button
     }()
-
+    
     private let accountLabel: UILabel = {
         let label = UILabel()
         label.text = "계정"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.head1
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        
         return label
     }()
-
+    
     private let accountView: UIView = {
         let view = UIView()
         view.backgroundColor = .pard.blackCard
         return view
     }()
-
+    
     private let logoutLabel: UILabel = {
         let label = UILabel()
         label.text = "로그아웃"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.body4
-
+        
         return label
     }()
-
+    
     private let deleteAccountLabel: UILabel = {
         let label = UILabel()
         label.text = "탈퇴하기"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.body4
-
+        
         return label
     }()
-
+    
     private let logoutArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         return imageView
     }()
-
+    
     private let deleteAccountArrowView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         return imageView
     }()
-
+    
     private let logoutArrowButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -642,7 +730,7 @@ class MyPageViewController: UIViewController {
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         return gradientLayer
     }
-
+    
     private func gradientImage() -> UIImage {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)

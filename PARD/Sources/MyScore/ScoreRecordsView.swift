@@ -10,7 +10,7 @@ import UIKit
 import UIKit
 
 class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    private var scoreRecords: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)] = []
+    private var scoreRecords: [ReasonPardnerShip] = []
     private var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
@@ -34,7 +34,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         collectionView.backgroundColor = .pard.blackBackground
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MyScoreViewController.ScoreRecordCell.self, forCellWithReuseIdentifier: MyScoreViewController.ScoreRecordCell.identifier)
+        collectionView.register(ScoreRecordCell.self, forCellWithReuseIdentifier: ScoreRecordCell.identifier)
         
         collectionView.layer.cornerRadius = 12
         collectionView.layer.masksToBounds = true
@@ -50,7 +50,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         ])
     }
 
-    func configure(with records: [(tag: String, title: String, date: String, points: String, pointsColor: UIColor)]) {
+    func configure(with records: [ReasonPardnerShip]) {
         self.scoreRecords = records
         print("✅ ScoreRecordsView - Configure: \(records)")
         collectionView.reloadData()
@@ -61,7 +61,10 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyScoreViewController.ScoreRecordCell.identifier, for: indexPath) as! MyScoreViewController.ScoreRecordCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScoreRecordCell.identifier, for: indexPath) as? ScoreRecordCell else {
+            return UICollectionViewCell()
+        }
+        
         let record = scoreRecords[indexPath.item]
         let isLastItem = indexPath.item == scoreRecords.count - 1
         cell.configure(with: record, isLastItem: isLastItem)

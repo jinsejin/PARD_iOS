@@ -88,13 +88,16 @@ extension ReaderViewController: ReaderViewDelegate {
         var message = ""
         switch status {
         case let .success(code):
+//            getValidQR(with: code)
+//            ModalBuilder()
+//                .add(title: "출석 체크")
+//                .add(image: "alreadyAttendance")
+//                .add(button: .confirm(title: "확인", action: {
+//                }))
+//                .show(on: self)
             guard let code = code else {
-                title = "에러"
-                message = "QR코드 or 바코드를 인식하지 못했습니다.\n다시 시도해주세요."
                 break
             }
-            title = "알림"
-            message = "인식성공\n\(code)"
             getValidQR(with: code)
         case .fail:
             title = "에러"
@@ -109,12 +112,5 @@ extension ReaderViewController: ReaderViewDelegate {
                 return
             }
         }
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
 }

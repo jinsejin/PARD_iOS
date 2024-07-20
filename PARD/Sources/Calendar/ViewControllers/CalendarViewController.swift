@@ -63,6 +63,7 @@ class CalendarViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
+    
     func updateEvents() {
         upcomingEvents = schedules.filter { !$0.isPastEvent }.map {
             ScheduleModel(scheduleId: $0.scheduleId, title: $0.title, date: $0.date, content: $0.content, part: $0.part, contentsLocation: $0.contentsLocation, notice: $0.notice, remaingDay: $0.remaingDay, isPastEvent: $0.isPastEvent)
@@ -127,7 +128,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         label.text = section == 0 ? "다가오는 일정" : "지난 일정"
         headerView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(4)
             make.centerY.equalToSuperview()
         }
         return headerView
@@ -142,7 +143,8 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
             separatorView.addSubview(separator)
             separator.snp.makeConstraints { make in
                 make.height.equalTo(1)
-                make.leading.trailing.equalToSuperview().inset(16)
+                make.leading.equalToSuperview().offset(2)
+                make.trailing.equalToSuperview().offset(-2)
                 make.centerY.equalToSuperview()
             }
             return separatorView

@@ -26,7 +26,6 @@ class ToolTIpViewInMyScore: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.pard.primaryPurple.cgColor
         
-        // 닫기 버튼
         closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         closeButton.tintColor = UIColor.pard.gray30
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
@@ -48,6 +47,7 @@ class ToolTIpViewInMyScore: UIView {
         contentStack.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(16)
+
         }
         
         addMVPRow(to: contentStack, title: "MVP", details: [
@@ -124,6 +124,7 @@ class ToolTIpViewInMyScore: UIView {
         rowStack.addArrangedSubview(pointLabel)
         
         stackView.addArrangedSubview(rowStack)
+
     }
     
     private func addPenaltyRows(to stackView: UIStackView, title: String, details: [(String, String)]) {
@@ -219,7 +220,7 @@ class ToolTIpViewInMyScore: UIView {
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.backgroundColor = .pard.blackCard
         label.layer.masksToBounds = true
-        
+
         label.snp.makeConstraints { make in
             make.height.equalTo(19)
             if text.count > 8 {
@@ -229,6 +230,7 @@ class ToolTIpViewInMyScore: UIView {
             } else {
                 make.width.greaterThanOrEqualTo(27)
             }
+
         }
         
         return label
