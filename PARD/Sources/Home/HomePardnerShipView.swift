@@ -49,6 +49,24 @@ class HomePardnerShipView : UIView {
         $0.font = .pardFont.head2
     }
     
+    private let topStackView = UIStackView().then { stack in
+        stack.axis = .horizontal
+        stack.distribution = .equalSpacing
+        stack.alignment = .center
+    }
+    
+    private let podPointStackView = UIStackView().then { stack in
+        stack.axis = .vertical
+        stack.spacing = 8.0
+        stack.alignment = .center
+    }
+    
+    private let penaltyStackView = UIStackView().then { stack in
+        stack.axis = .vertical
+        stack.spacing = 8.0
+        stack.alignment = .center
+    }
+    
     
     private let separator = UIView().then { view in
         view.backgroundColor = .pard.gray10
@@ -79,57 +97,56 @@ class HomePardnerShipView : UIView {
         viewController?.navigationController?.pushViewController(myScoreViewController, animated: true)
     }
     
+    
+    private func setUPStackView() {
+        topStackView.addArrangedSubview(pardnerShipLabel)
+        topStackView.addArrangedSubview(moreButton)
+        
+        podPointStackView.addArrangedSubview(podPointLabel)
+        podPointStackView.addArrangedSubview(podPointValueLabel)
+        
+        penaltyStackView.addArrangedSubview(penaltyLabel)
+        penaltyStackView.addArrangedSubview(penaltyValueLabel)
+    }
+    
     private func setUpUI() {
-        addSubview(pardnerShipLabel)
-        addSubview(moreButton)
+        setUPStackView()
+        
+        addSubview(topStackView)
         addSubview(separator)
-        addSubview(podPointLabel)
-        addSubview(podPointValueLabel)
-        addSubview(penaltyLabel)
-        addSubview(penaltyValueLabel)
+        addSubview(podPointStackView)
+        addSubview(penaltyStackView)
         addSubview(verticalSeparator)
-
-        pardnerShipLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(26)
+        
+        topStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(22)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-25)
         }
-
-        moreButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-26)
-        }
-
+        
         separator.snp.makeConstraints { make in
-            make.top.equalTo(pardnerShipLabel.snp.bottom).offset(15.5)
+            make.top.equalTo(topStackView.snp.bottom).offset(17.5)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(1)
         }
 
-        podPointLabel.snp.makeConstraints { make in
+        podPointStackView.snp.makeConstraints { make in
             make.top.equalTo(separator.snp.bottom).offset(20.5)
             make.leading.equalToSuperview().offset(55)
+            make.bottom.equalToSuperview().offset(-20)
         }
-
-        podPointValueLabel.snp.makeConstraints { make in
-            make.top.equalTo(podPointLabel.snp.bottom).offset(8.0)
-            make.leading.equalToSuperview().offset(65.5)
-        }
-
-        penaltyLabel.snp.makeConstraints { make in
-            make.top.equalTo(separator.snp.bottom).offset(20.5)
-            make.trailing.equalToSuperview().offset(-71.5)
-        }
-
-        penaltyValueLabel.snp.makeConstraints { make in
-            make.top.equalTo(penaltyLabel.snp.bottom).offset(8.0)
-            make.trailing.equalToSuperview().offset(-67.5)
-        }
-
+        
         verticalSeparator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(separator.snp.bottom).offset(20.5)
-            make.bottom.equalToSuperview().offset(-20)
+            make.top.equalTo(separator).offset(20.5)
             make.width.equalTo(1)
+            make.height.equalTo(podPointStackView)
+        }
+        
+        penaltyStackView.snp.makeConstraints { make in
+            make.top.equalTo(separator.snp.bottom).offset(20.5)
+            make.trailing.equalToSuperview().inset(55)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     
