@@ -166,7 +166,7 @@ class MyScoreViewController: UIViewController {
         
         let goldPartLabel = UILabel().then {
             $0.text = "\(rank1.part)"
-            $0.font = UIFont.pardFont.body3
+            $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
         }
@@ -193,7 +193,7 @@ class MyScoreViewController: UIViewController {
         
         let silverPartLabel = UILabel().then {
             $0.text = "\(rank2.part)"
-            $0.font = UIFont.pardFont.body3
+            $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
         }
@@ -220,7 +220,7 @@ class MyScoreViewController: UIViewController {
         
         let bronzePartLabel = UILabel().then {
             $0.text = "\(rank3.part)"
-            $0.font = UIFont.pardFont.body3
+            $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
         }
@@ -256,8 +256,10 @@ class MyScoreViewController: UIViewController {
         }
         
         silverRingImageView.snp.makeConstraints {
-            $0.centerY.equalTo(goldRingImageView)
-            $0.trailing.equalToSuperview().offset(-197)
+            $0.top.equalToSuperview().offset(181)
+//            $0.trailing.equalToSuperview().offset(-197)
+            $0.leading.equalToSuperview().offset(146)
+
             $0.width.height.equalTo(40)
         }
         
@@ -273,13 +275,12 @@ class MyScoreViewController: UIViewController {
         
         silverNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(197)
-            $0.trailing.equalToSuperview().offset(-145)
+            $0.leading.equalToSuperview().offset(194)
         }
         
         bronzeRingImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(181)
             $0.trailing.equalToSuperview().offset(-81)
-
             $0.width.height.equalTo(40)
         }
         
@@ -314,7 +315,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(silverCrownImageView)
         
         silverCrownImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-207)
+            $0.leading.equalToSuperview().offset(156)
             $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(16)
             $0.width.height.equalTo(20)
         }
@@ -356,7 +357,7 @@ class MyScoreViewController: UIViewController {
         
         totalScoreBorderView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(245)
-            $0.leading.equalTo(view.snp.centerX).offset(12) 
+            $0.leading.equalTo(view.snp.centerX).offset(12)
             $0.trailing.equalToSuperview().offset(-24)
             $0.width.equalTo(155.5)
             $0.height.equalTo(68)
