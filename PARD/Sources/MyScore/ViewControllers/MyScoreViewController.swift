@@ -257,7 +257,7 @@ class MyScoreViewController: UIViewController {
         
         silverRingImageView.snp.makeConstraints {
             $0.centerY.equalTo(goldRingImageView)
-            $0.leading.equalToSuperview().offset(138)
+            $0.trailing.equalToSuperview().offset(-197)
             $0.width.height.equalTo(40)
         }
         
@@ -273,7 +273,7 @@ class MyScoreViewController: UIViewController {
         
         silverNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(197)
-            $0.leading.equalToSuperview().offset(186)
+            $0.trailing.equalToSuperview().offset(-145)
         }
         
         bronzeRingImageView.snp.makeConstraints {
@@ -314,7 +314,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(silverCrownImageView)
         
         silverCrownImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview().offset(-39)
+            $0.trailing.equalToSuperview().offset(-207)
             $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(16)
             $0.width.height.equalTo(20)
         }
@@ -341,6 +341,7 @@ class MyScoreViewController: UIViewController {
         myScoreBorderView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(245)
             $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalTo(view.snp.centerX).offset(-12)
             $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
@@ -354,8 +355,9 @@ class MyScoreViewController: UIViewController {
         view.addSubview(totalScoreBorderView)
         
         totalScoreBorderView.snp.makeConstraints {
-            $0.top.equalTo(myScoreBorderView.snp.top)
-            $0.leading.equalTo(myScoreBorderView.snp.trailing).offset(16)
+            $0.top.equalToSuperview().offset(245)
+            $0.leading.equalTo(view.snp.centerX).offset(12) 
+            $0.trailing.equalToSuperview().offset(-24)
             $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
