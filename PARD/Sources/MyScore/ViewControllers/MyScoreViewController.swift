@@ -277,8 +277,9 @@ class MyScoreViewController: UIViewController {
         }
         
         bronzeRingImageView.snp.makeConstraints {
-            $0.centerY.equalTo(goldRingImageView)
-            $0.leading.equalToSuperview().offset(254)
+            $0.top.equalToSuperview().offset(181)
+            $0.trailing.equalToSuperview().offset(-81)
+
             $0.width.height.equalTo(40)
         }
         
@@ -294,7 +295,7 @@ class MyScoreViewController: UIViewController {
         
         bronzeNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(197)
-            $0.leading.equalToSuperview().offset(302)
+            $0.trailing.equalToSuperview().offset(-36)
         }
     }
 
@@ -322,7 +323,7 @@ class MyScoreViewController: UIViewController {
         view.addSubview(bronzeCrownImageView)
         
         bronzeCrownImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview().offset(77)
+            $0.trailing.equalToSuperview().offset(-91)
             $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(16)
             $0.width.height.equalTo(20)
         }
