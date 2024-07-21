@@ -227,6 +227,8 @@ class ToolTIpViewInMyScore: UIView {
                 make.width.greaterThanOrEqualTo(82)
             } else if text.count > 5 {
                 make.width.greaterThanOrEqualTo(50)
+            } else if text.count > 4 {
+                make.width.greaterThanOrEqualTo(39)
             } else {
                 make.width.greaterThanOrEqualTo(27)
             }
