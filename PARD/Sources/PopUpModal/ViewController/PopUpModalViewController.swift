@@ -20,12 +20,14 @@ final class PopUpModalViewController: UIViewController {
         title: String?,
         body: String?,
         image : String?,
+        content : String?,
         button: ModalButtonType?
     ) {
         modalView.updateComponents(
             title: title ?? "",
             body: body ?? "", 
             image: image ?? "",
+            content: content ?? "",
             button: button,
             dismissAction: { [weak self] in
                 self?.dismiss(animated: true)

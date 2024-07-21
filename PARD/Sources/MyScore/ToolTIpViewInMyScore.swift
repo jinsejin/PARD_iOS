@@ -64,7 +64,7 @@ class ToolTIpViewInMyScore: UIView {
         addPenaltyRows(to: contentStack, title: "벌점", details: [
             ("세미나 지각(10분 이내)", "-1점"),
             ("세미나 결석", "-2점"),
-            ("과제 지각", "-0.5점    "),
+            ("과제 지각", "-0.5점"),
             ("과제 미제출", "-1점")
         ])
     }
