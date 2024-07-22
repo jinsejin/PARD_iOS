@@ -21,7 +21,6 @@ class HomeTabBarViewController: UITabBarController {
         view.backgroundColor = .pard.blackBackground
         self.navigationController?.navigationBar.isHidden = false
         setUpTabbarView()
-        setUpTabBarColor()
         setUpTabBarLayout()
         setUpTabBarItems()
         delegate = self
@@ -39,18 +38,21 @@ class HomeTabBarViewController: UITabBarController {
     
     private func setUpTabbarView() {
         let homeViewController = HomeViewController()
-        homeViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home"), tag: 0)
+        homeViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home")?.withRenderingMode(.automatic), tag: 0)
         homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
+        homeViewController.tabBarItem.selectedImage = UIImage(named: "home")?.withTintColor(.pard.primaryBlue)
         
         let myPageViewController = MyPageViewController()
-        myPageViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "person"), tag: 1)
+        myPageViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "person")?.withTintColor(.pard.gray30), tag: 1)
         myPageViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
+        myPageViewController.tabBarItem.selectedImage = UIImage(named: "person")?.withTintColor(.pard.primaryBlue)
         
         let navigationHome = UINavigationController(rootViewController: homeViewController)
         let navigationMypage = UINavigationController(rootViewController: myPageViewController)
         setViewControllers([navigationHome, navigationMypage], animated: false)
         
         setUpfloatingQRButton()
+        setUpTabBarAppearance()
     }
     
     private func setUpfloatingQRButton() {
@@ -71,21 +73,28 @@ class HomeTabBarViewController: UITabBarController {
         navigationController?.pushViewController(QRVC, animated: true)
     }
     
-    private func setUpTabBarColor() {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = .pard.blackCard
-        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .pard.gray30
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .GradientColor.gra
+    private func setUpTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .pard.blackCard
+        
+        let itemAppearance = UITabBarItemAppearance()
+        itemAppearance.normal.iconColor = .pard.gray30
+        itemAppearance.selected.iconColor = .pard.primaryBlue
+        
         
         if #available(iOS 15.0, *) {
-            tabBar.standardAppearance = tabBarAppearance
-            tabBar.scrollEdgeAppearance = tabBarAppearance
+            appearance.stackedLayoutAppearance = itemAppearance
+            appearance.inlineLayoutAppearance = itemAppearance
+            appearance.compactInlineLayoutAppearance = itemAppearance
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
+        } else {
+            tabBar.standardAppearance = appearance
         }
         
-        tabBar.isTranslucent = false
-        tabBar.backgroundColor = .pard.blackCard
+        tabBar.tintColor = .GradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
-        tabBar.selectedItem?.badgeColor = .GradientColor.gra
     }
     
     private func setUpTabBarLayout() {
