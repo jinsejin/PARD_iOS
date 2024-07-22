@@ -145,6 +145,7 @@ class HomePardnerShipView : UIView {
         
         penaltyStackView.snp.makeConstraints { make in
             make.top.equalTo(separator.snp.bottom).offset(20.5)
+            make.leading.equalTo(verticalSeparator.snp.trailing).offset(66.5)
             make.trailing.equalToSuperview().inset(55)
             make.bottom.equalToSuperview().offset(-20)
         }
