@@ -473,7 +473,7 @@ class MyPageViewController: UIViewController {
     
     private let statusLabel1: UILabel = {
         let label = UILabel()
-        label.text = "\(userGeneration)기"
+        label.text = "\(UserDefaults.standard.string(forKey: "userGeneration") ?? "oh")기"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
@@ -485,7 +485,7 @@ class MyPageViewController: UIViewController {
     
     private let statusLabel2: UILabel = {
         let label = UILabel()
-        label.text = userPart
+        label.text = UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
@@ -496,7 +496,7 @@ class MyPageViewController: UIViewController {
     
     private let statusLabel3: UILabel = {
         let label = UILabel()
-        label.text = userRole
+        label.text = UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
@@ -518,7 +518,7 @@ class MyPageViewController: UIViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(userName) 님"
+        label.text = "\(UserDefaults.standard.string(forKey: "userName") ?? "하나") 님"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.pardFont.head1
