@@ -66,7 +66,12 @@ class HomePardnerShipView : UIView {
         stack.spacing = 8.0
         stack.alignment = .center
     }
-    
+
+    private let bottomStackView = UIStackView().then { stack in
+        stack.axis = .horizontal
+        stack.spacing = 8.0
+        stack.alignment = .center
+    }
     
     private let separator = UIView().then { view in
         view.backgroundColor = .pard.gray10
@@ -107,6 +112,10 @@ class HomePardnerShipView : UIView {
         
         penaltyStackView.addArrangedSubview(penaltyLabel)
         penaltyStackView.addArrangedSubview(penaltyValueLabel)
+        
+        bottomStackView.addArrangedSubview(podPointStackView)
+        bottomStackView.addArrangedSubview(verticalSeparator)
+        bottomStackView.addArrangedSubview(penaltyStackView)
     }
     
     private func setUpUI() {
@@ -114,10 +123,8 @@ class HomePardnerShipView : UIView {
         
         addSubview(topStackView)
         addSubview(separator)
-        addSubview(podPointStackView)
-        addSubview(penaltyStackView)
-        addSubview(verticalSeparator)
-        
+        addSubview(bottomStackView)
+      
         topStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(22)
             make.leading.equalToSuperview().offset(24)
@@ -130,25 +137,17 @@ class HomePardnerShipView : UIView {
             make.height.equalTo(1)
         }
 
-        podPointStackView.snp.makeConstraints { make in
-            make.top.equalTo(separator.snp.bottom).offset(20.5)
-            make.leading.equalToSuperview().offset(55)
-            make.bottom.equalToSuperview().offset(-20)
-        }
-        
         verticalSeparator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(separator).offset(20.5)
             make.width.equalTo(1)
-            make.height.equalTo(podPointStackView)
+            make.height.equalTo(50)
         }
         
-        penaltyStackView.snp.makeConstraints { make in
+        bottomStackView.snp.makeConstraints { make in
             make.top.equalTo(separator.snp.bottom).offset(20.5)
-            make.leading.equalTo(verticalSeparator.snp.trailing).offset(66.5)
-            make.trailing.equalToSuperview().inset(55)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.bottom.equalToSuperview().offset(-20)
         }
     }
-    
 }
