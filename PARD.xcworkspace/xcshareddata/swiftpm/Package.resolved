@@ -1,4 +1,5 @@
 {
+  "originHash" : "653f4c4851fc25dccc3aba232d962ef27aab5a82b18c1fefaf92a90dc298f06b",
   "pins" : [
     {
       "identity" : "pard_designsystem",
@@ -28,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

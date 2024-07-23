@@ -95,11 +95,9 @@ class MyPageViewController: UIViewController {
         }
         
         feedbackActionLabel.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.height.equalTo(14).priority(.low)
-            make.top.equalTo(feedbackView.snp.top).offset(16)
-            make.leading.equalTo(feedbackActionView.snp.leading)
-            make.trailing.equalTo(feedbackActionView.snp.trailing)
+            make.leading.equalTo(feedbackView.snp.leading).offset(290)
+            make.top.equalTo(feedbackActionView.snp.top).offset(31)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-31)
         }
         
         
@@ -108,19 +106,20 @@ class MyPageViewController: UIViewController {
             make.centerY.equalTo(feedbackView.snp.centerY)
         }
         
-        feedbackActionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(feedbackActionView.snp.leading)
-            make.centerY.equalTo(feedbackActionView.snp.centerY)
-        }
         
         feedbackArrowImageView.snp.makeConstraints { make in
-            make.leading.equalTo(feedbackView.snp.leading).offset(363)
+            make.width.equalTo(16)
+            make.height.equalTo(16)
+            make.leading.equalTo(feedbackView.snp.leading).offset(357)
             make.top.equalTo(feedbackActionView.snp.top).offset(33)
             make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+
         }
         
         feedbackArrowImageView2.snp.makeConstraints { make in
-            make.leading.equalTo(feedbackView.snp.leading).offset(370)
+            make.width.equalTo(16)
+            make.height.equalTo(16)
+            make.leading.equalTo(feedbackView.snp.leading).offset(363)
             make.top.equalTo(feedbackActionView.snp.top).offset(33)
             make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
         }
@@ -452,7 +451,7 @@ class MyPageViewController: UIViewController {
         label.textColor = .pard.gray10
         
         label.textAlignment = .center
-        label.font = UIFont.pardFont.body4
+        label.font = UIFont.pardFont.body1
         return label
     }()
     
@@ -461,6 +460,8 @@ class MyPageViewController: UIViewController {
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        
         return imageView
     }()
     
@@ -469,6 +470,8 @@ class MyPageViewController: UIViewController {
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        
         return imageView
     }()
     

@@ -50,7 +50,6 @@ class ToolTIpViewInMyScore: UIView {
 
         }
         
-        // 각 행 생성
         addMVPRow(to: contentStack, title: "MVP", details: [
             ("주요 행사 MVP", "5점"),
             ("세미나 파트별 MVP", "3점")
@@ -228,6 +227,8 @@ class ToolTIpViewInMyScore: UIView {
                 make.width.greaterThanOrEqualTo(82)
             } else if text.count > 5 {
                 make.width.greaterThanOrEqualTo(50)
+            } else if text.count > 4 {
+                make.width.greaterThanOrEqualTo(39)
             } else {
                 make.width.greaterThanOrEqualTo(27)
             }
