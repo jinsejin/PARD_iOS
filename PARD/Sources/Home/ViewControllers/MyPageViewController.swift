@@ -381,38 +381,8 @@ class MyPageViewController: UIViewController {
     }
     
     private func deleteUser(userEmail: String) {
-        // 여기에 사용자 삭제 로직을 추가하세요
         print("User \(userEmail) deleted.")
     }
-    //    @objc private func deleteAccountTapped() {
-    //        print("deleteAccount tapped")
-    //        ModalBuilder()
-    //            .add(title: "회원 탈퇴")
-    //            .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
-    //            .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
-    //                deleteUser(userEmail: userEmail)
-    //
-    //                // 구글 로그아웃
-    //                GIDSignIn.sharedInstance.signOut()
-    //                GIDSignIn.sharedInstance.disconnect()
-    //
-    //                // userDefault에 있는 정보 모두 clear
-    //                if let appDomain = Bundle.main.bundleIdentifier {
-    //                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
-    //                    UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
-    //                    print("All UserDefaults have been cleared")
-    //                }
-    //
-    //                // 로그인 화면으로 다시 돌아가기
-    //                DispatchQueue.main.async {
-    //                    if let sceneDelegate = UIApplication.shared.connectedScenes
-    //                        .first?.delegate as? SceneDelegate {
-    //                        sceneDelegate.setRootViewController()
-    //                    }
-    //                }
-    //            }))
-    //            .show(on: self)
-    //    }
     
     private let myPageLabel: UILabel = {
         let myPageLabel = UILabel()
