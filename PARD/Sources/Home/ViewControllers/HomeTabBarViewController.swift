@@ -123,8 +123,10 @@ extension HomeTabBarViewController : UITabBarControllerDelegate {
         if let tabBarItemIndex = tabBarController.viewControllers?.firstIndex(of: viewController) {
             if tabBarItemIndex == 0 {
                 floatingButton.isEnabled = true
+                floatingButton.backgroundColor = .GradientColor.gra
             } else {
                 floatingButton.isEnabled = false
+                floatingButton.backgroundColor = .pard.gray30
             }
         }
     }

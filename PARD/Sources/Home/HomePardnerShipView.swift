@@ -66,13 +66,12 @@ class HomePardnerShipView : UIView {
         stack.spacing = 8.0
         stack.alignment = .center
     }
-    
+
     private let bottomStackView = UIStackView().then { stack in
         stack.axis = .horizontal
         stack.spacing = 8.0
         stack.alignment = .center
     }
-    
     
     private let separator = UIView().then { view in
         view.backgroundColor = .pard.gray10
@@ -125,6 +124,7 @@ class HomePardnerShipView : UIView {
         addSubview(topStackView)
         addSubview(separator)
         addSubview(bottomStackView)
+      
         topStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(22)
             make.leading.equalToSuperview().offset(24)
@@ -136,7 +136,7 @@ class HomePardnerShipView : UIView {
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(1)
         }
-        
+
         verticalSeparator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(1)
