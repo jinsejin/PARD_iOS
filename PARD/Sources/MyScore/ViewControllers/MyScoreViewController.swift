@@ -343,7 +343,7 @@ class MyScoreViewController: UIViewController {
             $0.top.equalToSuperview().offset(245)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(view.snp.centerX).offset(-12)
-            $0.width.equalTo(155.5)
+//            $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
         
@@ -359,7 +359,7 @@ class MyScoreViewController: UIViewController {
             $0.top.equalToSuperview().offset(245)
             $0.leading.equalTo(view.snp.centerX).offset(12)
             $0.trailing.equalToSuperview().offset(-24)
-            $0.width.equalTo(155.5)
+//            $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
         
@@ -513,9 +513,9 @@ class MyScoreViewController: UIViewController {
         scoreStatusView.addSubview(penaltyPointsValueLabel)
         
         penaltyPointsValueLabel.snp.makeConstraints {
-            $0.top.equalTo(scoreStatusView.snp.top).offset(48)
-            $0.leading.equalTo(scoreStatusView.snp.leading).offset(230.5)
-            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-67.5)
+            $0.top.equalTo(penaltyPointsLabel.snp.bottom).offset(8)
+            $0.width.equalTo(50)
+            $0.centerX.equalTo(penaltyPointsLabel)
         }
         
         let questionImageButton = UIButton().then {
