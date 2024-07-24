@@ -316,91 +316,103 @@ class MyPageViewController: UIViewController {
                     GIDSignIn.sharedInstance.disconnect()
                     print("User has been logged out")
                     
-                    // userDefault에 있는 정보 모두 clear
-                    if let appDomain = Bundle.main.bundleIdentifier {
-                        UserDefaults.standard.removePersistentDomain(forName: appDomain)
-                        print("All UserDefaults have been cleared")
-                    }
-                    
-                    // 로그인 화면으로 다시 돌아가기
-                    DispatchQueue.main.async {
-                        if let window = UIApplication.shared.windows.first {
-                            let splashViewController = SplashViewController()
-                            window.rootViewController = splashViewController
-                            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+                    self.clearUserDefaults {
+                        // 로그인 화면으로 다시 돌아가기
+                        DispatchQueue.main.async {
+                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                                sceneDelegate.setRootViewController()
+                            }
                         }
                     }
                 }))
             .show(on: self)
     }
-    @objc private func deleteAccountTapped() {
-            print("deleteAccount tapped")
-            ModalBuilder()
-                .add(title: "회원 탈퇴")
-                .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
-                .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
-                    self.deleteUser(userEmail: userEmail)
-                    
-                    // 구글 로그아웃
-                    GIDSignIn.sharedInstance.signOut()
-                    GIDSignIn.sharedInstance.disconnect()
-                    
-                    // userDefault에 있는 정보 모두 clear
-                    self.clearUserDefaults()
-                    
-                    // 로그인 화면으로 다시 돌아가기
-                    DispatchQueue.main.async {
-                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                            sceneDelegate.setRootViewController()
-                        }
-                    }
-                }))
-                .show(on: self)
-        }
-        
-        private func clearUserDefaults() {
+    
+    // UserDefaults에 있는 값 모두 삭제하기
+    private func clearUserDefaults(completion: @escaping () -> Void) {
+        DispatchQueue.global().async {
+            let defaults = UserDefaults.standard
+            if let appDomain = Bundle.main.bundleIdentifier {
+                defaults.removePersistentDomain(forName: appDomain)
+            }
+            
+            // 모든 UserDefaults를 명시적으로 동기화
+            defaults.synchronize()
+            print("All UserDefaults have been cleared")
             DispatchQueue.main.async {
-                if let appDomain = Bundle.main.bundleIdentifier {
-                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
-                    UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
-                    print("All UserDefaults have been cleared")
-                }
+                completion()
             }
         }
-        
-        private func deleteUser(userEmail: String) {
-            // 여기에 사용자 삭제 로직을 추가하세요
-            print("User \(userEmail) deleted.")
+    }
+    
+    @objc private func deleteAccountTapped() {
+        print("deleteAccount tapped")
+        ModalBuilder()
+            .add(title: "회원 탈퇴")
+            .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
+            .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
+                self.deleteUser(userEmail: userEmail)
+                
+                // 구글 로그아웃
+                GIDSignIn.sharedInstance.signOut()
+                GIDSignIn.sharedInstance.disconnect()
+                
+                // userDefault에 있는 정보 모두 clear
+                self.clearUserDefaults()
+                
+                // 로그인 화면으로 다시 돌아가기
+                DispatchQueue.main.async {
+                    if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                        sceneDelegate.setRootViewController()
+                    }
+                }
+            }))
+            .show(on: self)
+    }
+    
+    private func clearUserDefaults() {
+        DispatchQueue.main.async {
+            if let appDomain = Bundle.main.bundleIdentifier {
+                UserDefaults.standard.removePersistentDomain(forName: appDomain)
+                UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
+                print("All UserDefaults have been cleared")
+            }
         }
-//    @objc private func deleteAccountTapped() {
-//        print("deleteAccount tapped")
-//        ModalBuilder()
-//            .add(title: "회원 탈퇴")
-//            .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
-//            .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
-//                deleteUser(userEmail: userEmail)
-//                
-//                // 구글 로그아웃
-//                GIDSignIn.sharedInstance.signOut()
-//                GIDSignIn.sharedInstance.disconnect()
-//                
-//                // userDefault에 있는 정보 모두 clear
-//                if let appDomain = Bundle.main.bundleIdentifier {
-//                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
-//                    UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
-//                    print("All UserDefaults have been cleared")
-//                }
-//                
-//                // 로그인 화면으로 다시 돌아가기
-//                DispatchQueue.main.async {
-//                    if let sceneDelegate = UIApplication.shared.connectedScenes
-//                        .first?.delegate as? SceneDelegate {
-//                        sceneDelegate.setRootViewController()
-//                    }
-//                }
-//            }))
-//            .show(on: self)
-//    }
+    }
+    
+    private func deleteUser(userEmail: String) {
+        // 여기에 사용자 삭제 로직을 추가하세요
+        print("User \(userEmail) deleted.")
+    }
+    //    @objc private func deleteAccountTapped() {
+    //        print("deleteAccount tapped")
+    //        ModalBuilder()
+    //            .add(title: "회원 탈퇴")
+    //            .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
+    //            .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
+    //                deleteUser(userEmail: userEmail)
+    //
+    //                // 구글 로그아웃
+    //                GIDSignIn.sharedInstance.signOut()
+    //                GIDSignIn.sharedInstance.disconnect()
+    //
+    //                // userDefault에 있는 정보 모두 clear
+    //                if let appDomain = Bundle.main.bundleIdentifier {
+    //                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
+    //                    UserDefaults.standard.synchronize() // 명시적으로 동기화 수행
+    //                    print("All UserDefaults have been cleared")
+    //                }
+    //
+    //                // 로그인 화면으로 다시 돌아가기
+    //                DispatchQueue.main.async {
+    //                    if let sceneDelegate = UIApplication.shared.connectedScenes
+    //                        .first?.delegate as? SceneDelegate {
+    //                        sceneDelegate.setRootViewController()
+    //                    }
+    //                }
+    //            }))
+    //            .show(on: self)
+    //    }
     
     private let myPageLabel: UILabel = {
         let myPageLabel = UILabel()

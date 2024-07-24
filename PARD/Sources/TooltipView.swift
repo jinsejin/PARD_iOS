@@ -62,9 +62,10 @@ class TooltipBuilder {
 class ToolTipView : UIView {
     private var touchDismissView = UIView()
     
-    private let closeButton = UIButton().then {
+    private lazy var closeButton = UIButton().then {
         $0.setImage(UIImage(systemName: "xmark"), for: .normal)
         $0.tintColor = .pard.gray30
+        $0.addTarget(self, action: #selector(tappedCloesedButton), for: .touchUpInside)
     }
     
     private let contentView = UIView().then {
@@ -73,10 +74,10 @@ class ToolTipView : UIView {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.GradientColor.gra.cgColor
     }
+    
     private let messageLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.textColor = .white
-        $0.textAlignment = .center
         $0.backgroundColor = .pard.blackCard
         $0.clipsToBounds = true
         $0.font = .pardFont.caption1
@@ -105,21 +106,31 @@ class ToolTipView : UIView {
             make.top.equalTo(contentView.snp.top).offset(12)
             make.leading.equalTo(contentView.snp.leading).offset(12)
             make.bottom.equalTo(contentView.snp.bottom).offset(-14)
+            make.trailing.equalTo(contentView.snp.trailing).inset(30)
         }
         
         closeButton.snp.makeConstraints { make in
-            make.top.equalTo(messageLabel.snp.top).offset(2)
-            make.leading.equalTo(messageLabel.snp.trailing).offset(2)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-8)
+            make.top.equalTo(contentView.snp.top).offset(11)
+            make.leading.equalTo(messageLabel.snp.trailing)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-12)
         }
     }
 
     func setMessage(_ message: String ,_ message2 : String, _ message3 : String) {
-        messageLabel.attributedText = NSMutableAttributedString()
+        let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 3
+        
+        let attributedString = NSMutableAttributedString()
             .small(string: message, fontSize: 0, fontColor: .pard.white100)
             .blueHighlight(message2, font: .pardFont.caption2)
             .small(string: message3, fontSize: 0, fontColor: .pard.white100)
+        
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+
+        messageLabel.attributedText = attributedString
+        messageLabel.textAlignment = .center
     }
+
 
     func show(in view: UIView, targetView: UIView, message: String, message2 : String, message3 : String, offset: CGFloat = 8) {
         setMessage(message, message2, message3)
@@ -135,10 +146,10 @@ class ToolTipView : UIView {
         
         self.snp.makeConstraints { make in
             make.top.equalTo(targetView.snp.bottom).offset(offset)
-            make.trailing.equalTo(view).offset(-24
+            make.trailing.equalToSuperview().offset(-24
             )
-            make.leading.equalTo(view).offset(41)
-            make.height.equalTo(64)
+            make.leading.equalToSuperview().offset(41)
+            make.height.equalTo(60)
         }
         
         animateIn()
@@ -148,6 +159,9 @@ class ToolTipView : UIView {
         touchDismissView.removeFromSuperview()
     }
 
+    @objc private func tappedCloesedButton() {
+        touchDismissView.removeFromSuperview()
+    }
     private func animateIn() {
         UIView.animate(withDuration: 0.3) {
             self.alpha = 1
