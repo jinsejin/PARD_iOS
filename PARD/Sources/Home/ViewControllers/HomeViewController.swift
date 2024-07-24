@@ -41,23 +41,12 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
         
-        let homeButton = UIBarButtonItem(image: UIImage(named: "pardHomeLogo")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(homeLogoTapped))
+        let homeButton = UIBarButtonItem(image: UIImage(named: "pardHomeLogo")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: .none)
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuButtonTapped))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         flexibleSpace.width = 10
         self.navigationItem.leftBarButtonItem = homeButton
         self.navigationItem.rightBarButtonItems = [flexibleSpace,menuButton]
-    }
-    
-    @objc private func homeLogoTapped() {
-        print("home")
-                ModalBuilder()
-                    .add(title: "출석 체크")
-                    .add(image: "alreadyAttendance")
-                    .add(button: .confirm(title: "확인", action: {
-                        print("sejin")
-                    }))
-                    .show(on: self)
     }
    
     @objc private func menuButtonTapped() {

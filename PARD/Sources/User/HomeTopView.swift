@@ -23,10 +23,11 @@ class HomeTopView : UIView {
     }
     
     private let nameLabel = UILabel().then {
+        
         $0.numberOfLines = 3
         $0.attributedText = NSMutableAttributedString()
             .head1MutableAttribute(string: "안녕하세요, ", fontSize: 18, fontColor: UIColor.pard.white100)
-            .blueHighlight(userName, font: .pardFont.head1)
+            .blueHighlight(UserDefaults.standard.string(forKey: "userName") ?? "하나", font: .pardFont.head1)
             .head1MutableAttribute(string: "님\n", fontSize: 18, fontColor: UIColor.pard.white100)
             .head1MutableAttribute(string: "오늘도 PARD에서 함께 협업해요!", fontSize: 18, fontColor: UIColor.pard.white100)
     }
@@ -158,6 +159,7 @@ class StatusCollectionViewCell : UICollectionViewCell {
         contentView.layer.cornerRadius = 12.0
         contentView.layer.masksToBounds = true
         setUpUI()
+        updateUI()
     }
     
     required init?(coder: NSCoder) {
@@ -175,22 +177,17 @@ class StatusCollectionViewCell : UICollectionViewCell {
             $0.centerY.equalToSuperview()
         }
     }
-}
-
-
-struct UserData {
-    let user : String
-    let uid : String
-    let phone : Int
-    let email : Int
-    let part : String
-    let OBorYB : String
-    let generation : Int
-    let name : String
-    let pid : String
-    let attend : [String : String]
-    let isAdmin : Bool
-    let isMaster : Bool
+    func updateUI() {
+            let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"
+            let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"
+            let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "oh"
+           
+            UserDataInHome.updateUserData(with: [
+                "\(userGeneration)기",
+                userPart,
+                userRole
+            ])
+        }
 }
 
 // - TODO: 이후 서버 연동시에 유저에게 알맞은 해당 데이터를 넣어야 합니다.
@@ -199,9 +196,12 @@ struct UserDataInHome {
 }
 
 extension UserDataInHome {
-    static let userDatas = [
-        UserDataInHome(userData: "\(userGeneration)기"),
-        UserDataInHome(userData: userName),
-        UserDataInHome(userData: userRole),
+    static var userDatas = [
+        UserDataInHome(userData: "\(UserDefaults.standard.string(forKey: "userGeneration") ?? "oh")기"),
+        UserDataInHome(userData: UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"),
+        UserDataInHome(userData: UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"),
     ]
+    static func updateUserData(with newUserData: [String]) {
+        userDatas = newUserData.map { UserDataInHome(userData: $0) }
+    }
 }

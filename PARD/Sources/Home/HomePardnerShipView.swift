@@ -38,13 +38,13 @@ class HomePardnerShipView : UIView {
     }
     
     private let podPointValueLabel = UILabel().then {
-        $0.text = "+\(totalBonus)점"
+        $0.text = "+\(UserDefaults.standard.string(forKey: "userTotalBonus") ?? "10")점"
         $0.textColor = .pard.primaryGreen
         $0.font = .pardFont.head2
     }
     
     private let penaltyValueLabel = UILabel().then {
-        $0.text = "-\(totalMinus)점"
+        $0.text = "-\(UserDefaults.standard.string(forKey: "userTotalMinus") ?? "10")점"
         $0.textColor = .pard.errorRed
         $0.font = .pardFont.head2
     }
