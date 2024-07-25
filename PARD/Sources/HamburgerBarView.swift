@@ -126,6 +126,10 @@ extension HamburgerBarView : MenuTableViewCellButtonTapedDelegate {
         selectedNotionView = isHiddenView
         menuTableView.endUpdates()
     }
+    
+    func cellTapped(with url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
 }
 
 

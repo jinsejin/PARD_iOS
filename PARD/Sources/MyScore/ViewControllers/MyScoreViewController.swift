@@ -65,8 +65,6 @@ class MyScoreViewController: UIViewController {
             print("Not enough data in rankList")
         }
         setupRankingMedals()
-        setupRankingButton()
-        setupCrownImages()
         setupScoreView()
         setupScoreStatusView()
         setupScoreRecordsView()
@@ -124,31 +122,6 @@ class MyScoreViewController: UIViewController {
             $0.height.equalTo(36)
         }
     }
-    
-    private func setupRankingButton() {
-        let rankingButton = UIButton(type: .system).then {
-            $0.setTitle("전체랭킹 확인하기", for: .normal)
-            $0.setTitleColor(.pard.gray30, for: .normal)
-            $0.layer.cornerRadius = 10
-            $0.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
-        }
-        view.addSubview(rankingButton)
-        
-        rankingButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(240)
-            $0.top.equalToSuperview().offset(325)
-            $0.width.equalTo(120)
-            $0.height.equalTo(14)
-        }
-        
-        let attributedString = NSMutableAttributedString(string: "전체랭킹 확인하기", attributes: [
-            .font: UIFont.pardFont.body3,
-            .foregroundColor: UIColor.pard.gray30
-        ])
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
-        rankingButton.setAttributedTitle(attributedString, for: .normal)
-    }
-    
     
     private func setupRankingMedals() {
         guard let rank1 = rank1, let rank2 = rank2, let rank3 = rank3 else { return }
@@ -298,16 +271,13 @@ class MyScoreViewController: UIViewController {
             $0.top.equalToSuperview().offset(197)
             $0.trailing.equalToSuperview().offset(-36)
         }
-    }
-
-    
-    private func setupCrownImages() {
+        
         let goldCrownImageView = UIImageView(image: UIImage(named: "gold"))
         view.addSubview(goldCrownImageView)
         
         goldCrownImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview().offset(-155)
-            $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(32)
+            $0.top.equalTo(goldRingImageView.snp.top).offset(-10)
             $0.width.height.equalTo(20)
         }
         
@@ -316,7 +286,7 @@ class MyScoreViewController: UIViewController {
         
         silverCrownImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(156)
-            $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(16)
+            $0.top.equalTo(silverRingImageView.snp.top).offset(-10)
             $0.width.height.equalTo(20)
         }
         
@@ -325,7 +295,7 @@ class MyScoreViewController: UIViewController {
         
         bronzeCrownImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-91)
-            $0.top.equalTo(pardnerShipLabel.snp.bottom).offset(16)
+            $0.top.equalTo(bronzeRingImageView.snp.top).offset(-10)
             $0.width.height.equalTo(20)
         }
     }
@@ -362,6 +332,28 @@ class MyScoreViewController: UIViewController {
 //            $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
+        
+        let rankingButton = UIButton(type: .system).then {
+            $0.setTitle("전체랭킹 확인하기", for: .normal)
+            $0.setTitleColor(.pard.gray30, for: .normal)
+            $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
+        }
+        view.addSubview(rankingButton)
+        
+        rankingButton.snp.makeConstraints {
+            $0.centerX.equalTo(totalScoreBorderView.snp.centerX).offset(33)
+            $0.top.equalTo(totalScoreBorderView.snp.bottom).offset(14)
+            $0.width.equalTo(90)
+            $0.height.equalTo(18)
+        }
+        
+        let attributedString = NSMutableAttributedString(string: "전체랭킹 확인하기", attributes: [
+            .font: UIFont.pardFont.body1,
+            .foregroundColor: UIColor.pard.gray30
+        ])
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
+        rankingButton.setAttributedTitle(attributedString, for: .normal)
         
         let myScoreLabel = UILabel().then {
             $0.text = "파트 내 랭킹"
@@ -443,6 +435,7 @@ class MyScoreViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-24)
             $0.height.equalTo(92)
         }
+        
         
         let partPointsLabel = UILabel().then {
             $0.text = "파트 포인트"
