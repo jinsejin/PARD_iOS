@@ -25,12 +25,21 @@ class HomeTopView : UIView {
     private let nameLabel = UILabel().then {
         
         $0.numberOfLines = 3
-        $0.attributedText = NSMutableAttributedString()
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+
+        let attributedString = NSMutableAttributedString()
             .head1MutableAttribute(string: "안녕하세요, ", fontSize: 18, fontColor: UIColor.pard.white100)
             .blueHighlight(UserDefaults.standard.string(forKey: "userName") ?? "하나", font: .pardFont.head1)
             .head1MutableAttribute(string: "님\n", fontSize: 18, fontColor: UIColor.pard.white100)
             .head1MutableAttribute(string: "오늘도 PARD에서 함께 협업해요!", fontSize: 18, fontColor: UIColor.pard.white100)
+        
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        
+        $0.attributedText = attributedString
     }
+
     
     private let collectionViewFlowLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal

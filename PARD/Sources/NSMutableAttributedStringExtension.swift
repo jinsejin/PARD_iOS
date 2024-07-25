@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import PARD_DesignSystem
 
 extension NSMutableAttributedString {
     func blueHighlight(_ value:String , font : UIFont)
     -> NSMutableAttributedString {
         let attributes:[NSAttributedString.Key : Any] = [
             .font: font,
-            .foregroundColor: UIColor.GradientColor.gra,
+            .foregroundColor: UIColor.pard.primaryBlue,
             .backgroundColor: UIColor.pard.blackCard
         ]
         self.append(NSAttributedString(string: value, attributes:attributes))

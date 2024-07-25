@@ -405,11 +405,8 @@ class MyPageViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 2
-        if let pretendardFont = UIFont(name: "Pretendard-SemiBold", size: 14) {
-            label.font = pretendardFont
-        } else {
-            label.font = UIFont.pardFont.body4
-        }
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.setLineSpacing(spacing: 5)
         return label
     }()
     
