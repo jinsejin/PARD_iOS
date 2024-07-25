@@ -67,7 +67,8 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         
         let record = scoreRecords[indexPath.item]
         let isLastItem = indexPath.item == scoreRecords.count - 1
-        cell.configure(with: record, isLastItem: isLastItem)
+        let isFirstItem = indexPath.item == 0
+        cell.configure(with: record, isLastItem: isLastItem, isFirstItem: isFirstItem)
         return cell
     }
 }

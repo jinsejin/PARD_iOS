@@ -16,6 +16,8 @@ class ScoreRecordCell: UICollectionViewCell {
     let pointsLabel = UILabel()
     let backgroundCardView = UIView()
     let separatorView = UIView()
+    let redDotView = UIView()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +35,12 @@ class ScoreRecordCell: UICollectionViewCell {
         backgroundCardView.layer.borderWidth = 1
         backgroundCardView.layer.borderColor = UIColor.pard.blackBackground.cgColor
         contentView.addSubview(backgroundCardView)
+        
+        redDotView.backgroundColor = .pard.errorRed
+        redDotView.layer.cornerRadius = 3
+        redDotView.isHidden = true 
+        contentView.addSubview(redDotView)
+        
         
         tagLabel.font = UIFont.pardFont.body2
         tagLabel.textAlignment = .center
@@ -71,6 +79,11 @@ class ScoreRecordCell: UICollectionViewCell {
             make.width.equalTo(56)
             make.height.equalTo(24)
         }
+        redDotView.snp.makeConstraints { make in
+            make.top.equalTo(backgroundCardView).offset(13)
+            make.leading.equalTo(backgroundCardView).offset(29)
+            make.width.height.equalTo(5)
+        }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(tagLabel.snp.bottom).offset(12)
@@ -98,13 +111,14 @@ class ScoreRecordCell: UICollectionViewCell {
         }
     }
     
-    func configure(with record: ReasonPardnerShip, isLastItem: Bool) {
+    func configure(with record: ReasonPardnerShip, isLastItem: Bool, isFirstItem: Bool) {
         tagLabel.text = record.reason
         titleLabel.text = record.detail
         dateLabel.text = formatDateString(record.createAt)
         pointsLabel.text = pointConfigure(point: record.point)
         separatorView.isHidden = isLastItem
-        
+        redDotView.isHidden = !isFirstItem
+
         if record.reason == "벌점" {
             tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
             tagLabel.textColor = .pard.errorRed
