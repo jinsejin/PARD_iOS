@@ -377,7 +377,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let myRankLabel = UILabel().then {
-            $0.text = "\(partRanking)위"
+            $0.text = "\(UserDefaults.standard.string(forKey: "partRanking") ?? "-")위"
             $0.font = UIFont.pardFont.head2
             $0.textAlignment = .center
             $0.textColor = .white
@@ -403,7 +403,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let totalRankLabel = UILabel().then {
-            $0.text = "\(totalRanking)위"
+            $0.text = "\(UserDefaults.standard.string(forKey: "totalRanking") ?? "-")위"
             $0.font = UIFont.pardFont.head2
             $0.textAlignment = .center
             $0.textColor = .white
