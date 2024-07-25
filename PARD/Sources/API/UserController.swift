@@ -97,7 +97,7 @@ func deleteUser(userEmail: String) {
         print("🚨 Invalid URL")
         return
     }
-    
+    print("✅ Delete Method started")
     // DELETE 요청 설정
     var request = URLRequest(url: url)
     request.httpMethod = "DELETE"

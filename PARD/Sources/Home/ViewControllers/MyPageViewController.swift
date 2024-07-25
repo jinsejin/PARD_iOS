@@ -351,7 +351,7 @@ class MyPageViewController: UIViewController {
             .add(title: "회원 탈퇴")
             .add(content: "회원 탈퇴 후 개인정보, 점수 등의\n데이터가 삭제되며 복구할 수 없습니다.\n정말 삭제하시겠습니까?")
             .add(button: .cancellable(cancelButtonTitle: "취소", confirmButtonTitle: "확인", cancelButtonAction: .none, confirmButtonAction: {
-                self.deleteUser(userEmail: userEmail)
+                deleteUser(userEmail: userEmail)
                 
                 // 구글 로그아웃
                 GIDSignIn.sharedInstance.signOut()
@@ -361,9 +361,12 @@ class MyPageViewController: UIViewController {
                 self.clearUserDefaults()
                 
                 // 로그인 화면으로 다시 돌아가기
-                DispatchQueue.main.async {
-                    if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                        sceneDelegate.setRootViewController()
+                self.clearUserDefaults {
+                    // 로그인 화면으로 다시 돌아가기
+                    DispatchQueue.main.async {
+                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                            sceneDelegate.setRootViewController()
+                        }
                     }
                 }
             }))
@@ -378,10 +381,6 @@ class MyPageViewController: UIViewController {
                 print("All UserDefaults have been cleared")
             }
         }
-    }
-    
-    private func deleteUser(userEmail: String) {
-        print("User \(userEmail) deleted.")
     }
     
     private let myPageLabel: UILabel = {
@@ -406,11 +405,8 @@ class MyPageViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 2
-        if let pretendardFont = UIFont(name: "Pretendard-SemiBold", size: 14) {
-            label.font = pretendardFont
-        } else {
-            label.font = UIFont.pardFont.body4
-        }
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.setLineSpacing(spacing: 5)
         return label
     }()
     
