@@ -105,7 +105,7 @@ class RankingTableViewCell: UITableViewCell {
         
         userInfoLabel.text = userInfo.name
         userInfoPartLabel.text = userInfo.part
-        userInfoScoreLabel.text = "\(userInfo.totalBonus)"
+        userInfoScoreLabel.text = "\(userInfo.totalBonus)점"
         
         if rank == 1 {
             rankImageView.image = UIImage(named: "gold")
