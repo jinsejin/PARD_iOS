@@ -135,14 +135,14 @@ class MyScoreViewController: UIViewController {
         view.addSubview(rankingButton)
         
         rankingButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(240)
-            $0.top.equalToSuperview().offset(325)
+            $0.leading.equalToSuperview().offset(257)
+            $0.top.equalToSuperview().offset(327)
             $0.width.equalTo(120)
             $0.height.equalTo(14)
         }
         
         let attributedString = NSMutableAttributedString(string: "전체랭킹 확인하기", attributes: [
-            .font: UIFont.pardFont.body3,
+            .font: UIFont.pardFont.body1,
             .foregroundColor: UIColor.pard.gray30
         ])
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
