@@ -17,9 +17,11 @@ class UserInfoPolicyViewController: UIViewController {
             if isTapAgreeButton {
                 agreeButton.tintColor = UIColor.pard.primaryBlue
                 agreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
+                nextBottomButton.isEnabled = true
             } else {
                 agreeButton.tintColor = UIColor.pard.gray30
                 agreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
+                nextBottomButton.isEnabled = false
             }
         }
     }
@@ -83,10 +85,9 @@ class UserInfoPolicyViewController: UIViewController {
         )
     }
     
-    private lazy var nextBottomButton = BottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
+    private lazy var nextBottomButton = NextBottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
         view.addSubview($0)
-        $0.layer.masksToBounds = true
-        $0.backgroundColor = UIColor.pard.gray30
+        $0.isEnabled = false
     }
     
     private lazy var secondCheckAgreeButton = UIButton().then {
@@ -127,9 +128,9 @@ class UserInfoPolicyViewController: UIViewController {
     
     private func setUpserviceInfoLabelText() {
         serviceInfoLabel.attributedText = NSMutableAttributedString()
-            .regular(string: "서비스 이용 및 이용을 위해 \n", fontSize: 13, fontColor: UIColor.pard.gray10)
+            .regular(string: "서비스 이용 및 이용을 위해 \n", fontSize: 14, fontColor: .pard.gray30)
             .blueHighlight("서비스 이용약관", font: .pardFont.body4)
-            .regular(string: "에 동의하세요.", fontSize: 13, fontColor: UIColor.pard.gray10)
+            .regular(string: "에 동의하세요.", fontSize: 14, fontColor: .pard.gray30)
     }
     
     private func configureButton(_ button: UIButton, title: String, image: UIImage?, target: Any?, action: Selector) {
@@ -175,15 +176,13 @@ class UserInfoPolicyViewController: UIViewController {
     }
     
     func showToast(message : String, font: UIFont) {
-        guard let view = self.view else { return } // Ensure the view is available
+        guard let view = self.view else { return }
             let toastBar = ToastBarBuilder()
                 .setMessage("서비스 이용약관에 동의해주세요.")
-                .setSuperview(view) // Set the superview
+                .setSuperview(view)
                 .setWidth(343)
                 .setHeight(52)
                 .build()
-            
-            // Add the tooltip to the view
             toastBar.setUpToastBarUIInSuperView()
     }
 }
@@ -232,6 +231,7 @@ extension UserInfoPolicyViewController {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
         }
+        
         nextBottomButton.snp.makeConstraints{ make in
             make.centerX.equalToSuperview()
             make.width.equalTo(327)
