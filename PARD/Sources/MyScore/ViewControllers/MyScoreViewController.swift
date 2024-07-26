@@ -452,7 +452,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let partPointsValueLabel = UILabel().then {
-            $0.text = "+\(totalBonus)점"
+            $0.text = "+\(UserDefaults.standard.string(forKey: "userTotalBonus") ?? "10")점"
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.primaryGreen
             $0.textAlignment = .center
@@ -497,7 +497,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let penaltyPointsValueLabel = UILabel().then {
-            $0.text = "-\(totalMinus)점"
+            $0.text = "-\(UserDefaults.standard.string(forKey: "userTotalMinus") ?? "10")점"
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.errorRed
             $0.textAlignment = .center
