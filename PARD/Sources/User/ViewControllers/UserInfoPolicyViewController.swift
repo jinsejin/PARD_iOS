@@ -88,9 +88,6 @@ class UserInfoPolicyViewController: UIViewController {
     private lazy var nextBottomButton = NextBottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
         view.addSubview($0)
         $0.isEnabled = false
-        $0.backgroundColor = .pard.blackBackground
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 8
     }
     
     private lazy var secondCheckAgreeButton = UIButton().then {
