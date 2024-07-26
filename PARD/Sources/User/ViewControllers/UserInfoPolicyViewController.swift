@@ -128,9 +128,9 @@ class UserInfoPolicyViewController: UIViewController {
     
     private func setUpserviceInfoLabelText() {
         serviceInfoLabel.attributedText = NSMutableAttributedString()
-            .regular(string: "서비스 이용 및 이용을 위해 \n", fontSize: 13, fontColor: UIColor.pard.gray10)
+            .regular(string: "서비스 이용 및 이용을 위해 \n", fontSize: 14, fontColor: .pard.gray30)
             .blueHighlight("서비스 이용약관", font: .pardFont.body4)
-            .regular(string: "에 동의하세요.", fontSize: 13, fontColor: UIColor.pard.gray10)
+            .regular(string: "에 동의하세요.", fontSize: 14, fontColor: .pard.gray30)
     }
     
     private func configureButton(_ button: UIButton, title: String, image: UIImage?, target: Any?, action: Selector) {
