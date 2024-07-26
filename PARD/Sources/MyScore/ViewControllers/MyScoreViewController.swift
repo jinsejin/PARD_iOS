@@ -578,7 +578,7 @@ class MyScoreViewController: UIViewController {
         
         scoreRecordsTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(531)
-            $0.leading.equalToSuperview().offset(24)
+            $0.leading.equalToSuperview().offset(28)
             $0.trailing.equalToSuperview().offset(-280)
         }
         
