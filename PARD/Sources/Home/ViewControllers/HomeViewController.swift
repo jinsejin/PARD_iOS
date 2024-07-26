@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class HomeViewController: UIViewController {
     private let topView = HomeTopView().then { view in
@@ -108,7 +110,7 @@ extension HomeViewController {
         
         upcommingView.snp.makeConstraints { make in
             make.top.equalTo(pardnerShipView.snp.bottom).offset(24)
-            make.height.equalTo(164)
+//            make.height.equalTo(164)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
             make.bottom.equalToSuperview().offset(-24)
