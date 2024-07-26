@@ -39,10 +39,6 @@ class MyPageViewController: UIViewController {
         infoView.addSubview(statusStackView)
         view.addSubview(infoLabel)
         
-        statusLabel1.sizeToFit()
-        statusLabel2.sizeToFit()
-        statusLabel3.sizeToFit()
-        
         statusLabel2.backgroundColor = UIColor(patternImage: gradientImage())
         statusStackView.addArrangedSubview(statusLabel1)
         statusStackView.addArrangedSubview(statusLabel2)
@@ -138,26 +134,10 @@ class MyPageViewController: UIViewController {
         statusStackView.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.top).offset(20)
             make.leading.equalTo(infoView.snp.leading).offset(24)
+//            make.trailing.equalTo(infoView.snp.trailing).offset(-100)
             make.bottom.equalTo(infoView.snp.bottom).offset(-52)
         }
         
-        statusLabel1.snp.makeConstraints { make in
-            make.height.equalTo(24)
-            make.width.greaterThanOrEqualTo(42)
-            
-        }
-        
-        statusLabel2.snp.makeConstraints { make in
-            make.height.equalTo(24)
-            make.width.greaterThanOrEqualTo(66)
-            
-        }
-        
-        statusLabel3.snp.makeConstraints { make in
-            make.height.equalTo(24)
-            make.width.greaterThanOrEqualTo(66)
-            
-        }
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.top).offset(52)
@@ -467,38 +447,41 @@ class MyPageViewController: UIViewController {
         return infolabel
     }()
     
-    private let statusLabel1: UILabel = {
-        let label = UILabel()
-        label.text = "\(UserDefaults.standard.string(forKey: "userGeneration") ?? "oh")기"
+    private let statusLabel1: PaddedLabel = {
+        let label = PaddedLabel()
+        label.text = "\(UserDefaults.standard.string(forKey: "userGeneration") ?? "oh")기 "
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
         label.backgroundColor = UIColor.pard.primaryBlue
-        label.layer.cornerRadius = 12
+        label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
+        label.textInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
         return label
     }()
-    
-    private let statusLabel2: UILabel = {
-        let label = UILabel()
+
+    private let statusLabel2: PaddedLabel = {
+        let label = PaddedLabel()
         label.text = UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
-        label.layer.cornerRadius = 12
+        label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
+        label.textInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
         return label
     }()
     
-    private let statusLabel3: UILabel = {
-        let label = UILabel()
+    private let statusLabel3: PaddedLabel = {
+        let label = PaddedLabel()
         label.text = UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.pardFont.body2
         label.backgroundColor = UIColor.pard.primaryPurple
-        label.layer.cornerRadius = 12
+        label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
+        label.textInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12) // 패딩 추가
         return label
     }()
     
@@ -506,7 +489,7 @@ class MyPageViewController: UIViewController {
     private let statusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fill/*Proportionally*/
         stackView.spacing = 8
         return stackView
     }()
@@ -725,4 +708,27 @@ class MyPageViewController: UIViewController {
         UIGraphicsEndImageContext()
         return image!
     }
+    
+    class PaddedLabel: UILabel {
+        var textInsets = UIEdgeInsets.zero {
+            didSet { invalidateIntrinsicContentSize() }
+        }
+
+        override func drawText(in rect: CGRect) {
+            super.drawText(in: rect.inset(by: textInsets))
+        }
+
+        override var intrinsicContentSize: CGSize {
+            let size = super.intrinsicContentSize
+            return CGSize(width: size.width + textInsets.left + textInsets.right,
+                          height: size.height + textInsets.top + textInsets.bottom)
+        }
+
+        override var bounds: CGRect {
+            didSet {
+                preferredMaxLayoutWidth = bounds.width - (textInsets.left + textInsets.right)
+            }
+        }
+    }
+
 }
