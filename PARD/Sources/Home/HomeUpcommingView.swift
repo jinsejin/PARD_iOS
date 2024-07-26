@@ -189,7 +189,7 @@ extension HomeUpcommingView {
         guard let upcomingDate else { return }
      
         eventTitleLabel.text = upcomingEvents[0].content
-        dDayLabel.text = "D - \(String(describing: upcomingEvents[0].remaingDay))"
+        dDayLabel.text = "D-\(String(describing: upcomingEvents[0].remaingDay))"
         eventLocationLabel.text = eventLocationLabelSetup( upcomingEvents[0].contentsLocation)
         eventDateLabel.text = formattedDateString(from: upcomingDate)
         eventTypeLabel.text = upcomingEvents[0].part
