@@ -17,9 +17,12 @@ class UserInfoPolicyViewController: UIViewController {
             if isTapAgreeButton {
                 agreeButton.tintColor = UIColor.pard.primaryBlue
                 agreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
+                nextBottomButton.isEnabled = true
             } else {
                 agreeButton.tintColor = UIColor.pard.gray30
                 agreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
+                nextBottomButton.isEnabled = false
+                nextBottomButton.backgroundColor = .pard.gray30
             }
         }
     }
@@ -85,8 +88,10 @@ class UserInfoPolicyViewController: UIViewController {
     
     private lazy var nextBottomButton = BottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
         view.addSubview($0)
+        $0.isEnabled = false
+        $0.backgroundColor = .pard.blackBackground
         $0.layer.masksToBounds = true
-        $0.backgroundColor = UIColor.pard.gray30
+        $0.layer.cornerRadius = 8
     }
     
     private lazy var secondCheckAgreeButton = UIButton().then {
@@ -232,6 +237,7 @@ extension UserInfoPolicyViewController {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
         }
+        
         nextBottomButton.snp.makeConstraints{ make in
             make.centerX.equalToSuperview()
             make.width.equalTo(327)
