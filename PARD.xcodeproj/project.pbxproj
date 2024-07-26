@@ -268,19 +268,19 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		21A685782B9C8930006F6D9E /* AppleLogin */ = {
+		21A685782B9C8930006F6D9E /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */,
 				21702BFC2C353E0C00134681 /* GoogleLoginManager.swift */,
 			);
-			path = AppleLogin;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		90C007AE2B95D0C30056D724 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				21A685782B9C8930006F6D9E /* AppleLogin */,
+				21A685782B9C8930006F6D9E /* Login */,
 				90C007B62B95D1A10056D724 /* Views */,
 				90C007B72B95D1A80056D724 /* ViewControllers */,
 			);

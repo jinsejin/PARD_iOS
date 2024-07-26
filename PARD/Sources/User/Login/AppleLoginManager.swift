@@ -46,8 +46,13 @@ extension MainLoginViewController: ASAuthorizationControllerDelegate {
                     break
                 }
             }
-            let userInfoPolicyViewController = UserInfoPolicyViewController()
-            self.navigationController?.pushViewController(userInfoPolicyViewController, animated: true)
+            let emailAddress = userEmail
+            print("email Address = \(emailAddress ?? "failed")")
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            UserDefaults.standard.setValue(emailAddress, forKey: "userEmail")
+            postLogin(with: emailAddress ?? "google login failed")
+            let userInfoViewController = UserInfoPolicyViewController()
+            self.navigationController?.pushViewController(userInfoViewController, animated: true)
         }
     }
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
