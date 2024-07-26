@@ -22,7 +22,6 @@ class UserInfoPolicyViewController: UIViewController {
                 agreeButton.tintColor = UIColor.pard.gray30
                 agreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
                 nextBottomButton.isEnabled = false
-                nextBottomButton.backgroundColor = .pard.gray30
             }
         }
     }
@@ -86,7 +85,7 @@ class UserInfoPolicyViewController: UIViewController {
         )
     }
     
-    private lazy var nextBottomButton = BottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
+    private lazy var nextBottomButton = NextBottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
         view.addSubview($0)
         $0.isEnabled = false
         $0.backgroundColor = .pard.blackBackground
@@ -180,15 +179,13 @@ class UserInfoPolicyViewController: UIViewController {
     }
     
     func showToast(message : String, font: UIFont) {
-        guard let view = self.view else { return } // Ensure the view is available
+        guard let view = self.view else { return }
             let toastBar = ToastBarBuilder()
                 .setMessage("서비스 이용약관에 동의해주세요.")
-                .setSuperview(view) // Set the superview
+                .setSuperview(view)
                 .setWidth(343)
                 .setHeight(52)
                 .build()
-            
-            // Add the tooltip to the view
             toastBar.setUpToastBarUIInSuperView()
     }
 }

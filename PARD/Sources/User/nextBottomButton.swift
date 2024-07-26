@@ -5,6 +5,7 @@
 //  Created by 진세진 on 7/26/24.
 //
 import UIKit
+import PARD_DesignSystem
 
 final class NextBottomButton: UIView {
     private let button = UIButton()
