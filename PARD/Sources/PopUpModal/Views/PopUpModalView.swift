@@ -58,8 +58,12 @@ final class PopUpModalView: UIView {
         if let imageName = image, !imageName.isEmpty {
             self.bodyImageView.image = UIImage(named: imageName)
             self.bodyImageView.isHidden = false
+            self.bodyLabel.isHidden = true
+            self.contentLabel.isHidden = true
         } else {
             self.bodyImageView.isHidden = true
+            self.bodyLabel.isHidden = false
+            self.contentLabel.isHidden = false
         }
         self.contentLabel.text = content
         self.dismissAction = dismissAction
