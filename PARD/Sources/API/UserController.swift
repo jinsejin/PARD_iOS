@@ -73,6 +73,8 @@ func getUsersMe() {
                 UserDefaults.standard.setValue(user.totalBonus, forKey: "userTotalBonus")
                 UserDefaults.standard.setValue(user.totalMinus, forKey: "userTotalMinus")
                 UserDefaults.standard.setValue(user.pangoolPoint, forKey: "pangoolPoint")
+                print("🥶 \(user.totalBonus) // \(UserDefaults.standard.string(forKey: "userTotalBonus"))")
+                print("🥶 \(user.totalMinus) // \(UserDefaults.standard.string(forKey: "userTotalMinus"))")
             } catch {
                 print("🚨 Decoding Error:", error)
             }
