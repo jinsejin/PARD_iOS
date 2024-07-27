@@ -36,14 +36,13 @@ class MyScoreViewController: UIViewController {
     private func loadData() {
         getRankTop3 { [weak self] ranks in
             guard let self = self else { return }
+            getRankMe()
             DispatchQueue.main.async {
                 RankManager.shared.rankList = ranks ?? []
                 self.updateUIWithRanks()
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            getRankMe()
-        }
+    
     }
     
     private func loadToReasonData() {
