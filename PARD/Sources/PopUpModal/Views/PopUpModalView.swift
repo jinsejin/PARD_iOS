@@ -96,8 +96,7 @@ final class PopUpModalView: UIView {
         layer.cornerRadius = 8
         layer.borderColor = UIColor.GradientColor.gra.cgColor
         layer.borderWidth = 1
-
-        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         buttonsStackView.spacing = 16
         buttonsStackView.distribution = .fillEqually
         buttonsStackView.axis = .horizontal
@@ -108,7 +107,7 @@ final class PopUpModalView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 32
         stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalSpacing
         
         addSubview(stackView)
         
