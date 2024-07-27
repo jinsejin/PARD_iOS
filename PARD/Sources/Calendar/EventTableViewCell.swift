@@ -33,16 +33,16 @@ class EventTableViewCell: UITableViewCell {
     }
     
     private let dateLabel = UILabel().then { label in
-        label.font = .pardFont.body5
+        label.font = .pardFont.body4
     }
     
     private let locationLabel = UILabel().then { label in
-        label.font = .pardFont.body5
+        label.font = .pardFont.body4
     }
     
     private let stackView = UIStackView().then { stak in
         stak.axis = .vertical
-        stak.spacing = 3
+        stak.spacing = 4
     }
     
     override func layoutSubviews() {
