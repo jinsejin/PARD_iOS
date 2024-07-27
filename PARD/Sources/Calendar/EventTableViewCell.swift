@@ -157,7 +157,6 @@ class EventTableViewCell: UITableViewCell {
             return ""
         }
     }
-//    
     
     private func eventLocationLabelSetup(_ location : String) -> String{
         if location != "" {
