@@ -38,6 +38,7 @@ class EventTableViewCell: UITableViewCell {
     
     private let stackView = UIStackView().then { stak in
         stak.axis = .vertical
+        stak.spacing = 3
     }
     
     override func layoutSubviews() {
@@ -72,8 +73,7 @@ class EventTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
             make.width.equalTo(45)
-            make.height.equalTo(25)
-            make.bottom.equalTo(stackView.snp.top).offset(-16)
+            make.height.equalTo(22)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -84,12 +84,13 @@ class EventTableViewCell: UITableViewCell {
         dDayLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(23)
             make.trailing.equalToSuperview().offset(-24)
-            make.bottom.equalTo(stackView.snp.top).offset(-19)
         }
         
         stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.bottom.equalToSuperview().offset(-20)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(16)
         }
     }
     
@@ -105,7 +106,10 @@ class EventTableViewCell: UITableViewCell {
             from : dateFromString(schedule.date) ?? Date()
         )
         dateLabel.text = "일시 : \(date)"
-        locationLabel.text = "장소 : \(schedule.contentsLocation)"
+        
+        locationLabel.text = eventLocationLabelSetup(
+            schedule.contentsLocation
+        )
         
         if schedule.remaingDay < 0 {
             titleLabel.textColor = .pard.gray30
@@ -124,6 +128,15 @@ class EventTableViewCell: UITableViewCell {
     func categoryLabelConfigure(textColor : UIColor, backGroundColor : UIColor) {
         categoryLabel.textColor = textColor
         categoryLabel.backgroundColor = backGroundColor
+    }
+    
+    private func eventLocationLabelSetup(_ location : String) -> String{
+        if location != "" {
+            return "장소 : \(location)"
+        } else {
+            locationLabel.isHidden = true
+            return ""
+        }
     }
     
     private func dateFromString(_ dateString: String) -> Date? {

@@ -307,8 +307,7 @@ class MyPageViewController: UIViewController {
                 }))
             .show(on: self)
     }
-    
-    // UserDefaults에 있는 값 모두 삭제하기
+
     private func clearUserDefaults(completion: @escaping () -> Void) {
         DispatchQueue.global().async {
             let defaults = UserDefaults.standard
@@ -316,7 +315,6 @@ class MyPageViewController: UIViewController {
                 defaults.removePersistentDomain(forName: appDomain)
             }
             
-            // 모든 UserDefaults를 명시적으로 동기화
             defaults.synchronize()
             print("All UserDefaults have been cleared")
             DispatchQueue.main.async {
