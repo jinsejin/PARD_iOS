@@ -20,6 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         postLogin(with: userEmail)
         window?.windowScene = windowScene
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getUsersMe()
+            getRankMe()
+        }
 
 //        window?.rootViewController = UINavigationController(rootViewController: SplashViewController())
         setRootViewController()

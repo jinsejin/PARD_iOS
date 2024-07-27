@@ -45,7 +45,6 @@
 		2123A97D2BA73634009C60BF /* QrReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2123A97C2BA73634009C60BF /* QrReaderView.swift */; };
 		2123A97F2BA73640009C60BF /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2123A97E2BA73640009C60BF /* ReaderViewController.swift */; };
 		2128D7942B9991B6000F573C /* PardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2128D7932B9991B6000F573C /* PardTextField.swift */; };
-		21702BF12C3458A100134681 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF02C3458A100134681 /* APICaller.swift */; };
 		21702BF32C345AAD00134681 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF22C345AAD00134681 /* UserController.swift */; };
 		21702BF52C345ABA00134681 /* ScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF42C345ABA00134681 /* ScheduleController.swift */; };
 		21702BF72C345AC600134681 /* ReasonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21702BF62C345AC600134681 /* ReasonController.swift */; };
@@ -111,7 +110,6 @@
 		2123A97C2BA73634009C60BF /* QrReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrReaderView.swift; sourceTree = "<group>"; };
 		2123A97E2BA73640009C60BF /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewController.swift; sourceTree = "<group>"; };
 		2128D7932B9991B6000F573C /* PardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PardTextField.swift; sourceTree = "<group>"; };
-		21702BF02C3458A100134681 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		21702BF22C345AAD00134681 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		21702BF42C345ABA00134681 /* ScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleController.swift; sourceTree = "<group>"; };
 		21702BF62C345AC600134681 /* ReasonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonController.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 		21702BEF2C34589400134681 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				21702BF02C3458A100134681 /* APICaller.swift */,
 				21702BF22C345AAD00134681 /* UserController.swift */,
 				21702BF42C345ABA00134681 /* ScheduleController.swift */,
 				21702BF62C345AC600134681 /* ReasonController.swift */,
@@ -644,7 +641,6 @@
 				2106ADB12B92D6A000CDA462 /* SplashViewController.swift in Sources */,
 				0DC5CE0A2BA0B9D1007A21E4 /* NSMutableAttributedStringExtension.swift in Sources */,
 				90C007D02B95D2BF0056D724 /* MyPageViewController.swift in Sources */,
-				21702BF12C3458A100134681 /* APICaller.swift in Sources */,
 				0DCB46CB2C535B81007006C0 /* nextBottomButton.swift in Sources */,
 				90C007CE2B95D2B40056D724 /* HomeViewController.swift in Sources */,
 				2106ADAD2B92D6A000CDA462 /* AppDelegate.swift in Sources */,
