@@ -17,7 +17,7 @@ class EventTableViewCell: UITableViewCell {
         label.layer.borderColor = UIColor.GradientColor.gra.cgColor
         label.layer.masksToBounds = true
     }
-    
+   
     private let titleLabel = UILabel().then { label in
         label.textAlignment = .center
         label.font = .pardFont.head2
@@ -26,6 +26,10 @@ class EventTableViewCell: UITableViewCell {
     private let dDayLabel = UILabel().then { label in
         label.font = .pardFont.body5
         label.textColor = .pard.white100
+    }
+    
+    private let contentLabel = UILabel().then { label in
+        label.font = .pardFont.body5
     }
     
     private let dateLabel = UILabel().then { label in
@@ -61,6 +65,7 @@ class EventTableViewCell: UITableViewCell {
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
         
+        stackView.addArrangedSubview(contentLabel)
         stackView.addArrangedSubview(dateLabel)
         stackView.addArrangedSubview(locationLabel)
         
@@ -100,6 +105,14 @@ class EventTableViewCell: UITableViewCell {
     }
     
     func labelConfigure(with schedule: ScheduleModel) {
+        if schedule.contentsLocation != "" {
+            contentLabel.isHidden = true
+            locationLabel.isHidden = false
+        } else {
+            contentLabel.isHidden = false
+            locationLabel.isHidden = true
+        }
+            
         categoryLabel.text = schedule.part
         titleLabel.text = schedule.title
         let date = formattedDateString(
@@ -111,15 +124,19 @@ class EventTableViewCell: UITableViewCell {
             schedule.contentsLocation
         )
         
+        contentLabel.text = schedule.content
+        
         if schedule.remaingDay < 0 {
             titleLabel.textColor = .pard.gray30
             dateLabel.textColor = .pard.gray30
             locationLabel.textColor = .pard.gray30
+            contentLabel.textColor = .pard.gray30
             dDayLabel.text = ""
         } else {
             titleLabel.textColor = .pard.gray10
             dateLabel.textColor = .pard.gray10
             locationLabel.textColor = .pard.gray10
+            contentLabel.textColor = .pard.gray10
             dDayLabel.text = "D-\(schedule.remaingDay)"
         }
         
@@ -129,6 +146,15 @@ class EventTableViewCell: UITableViewCell {
         categoryLabel.textColor = textColor
         categoryLabel.backgroundColor = backGroundColor
     }
+    
+//    private func eventContentLabelSetup(_ content : String) -> String{
+//        if content != "" {
+//            return content
+//        } else {
+//            return ""
+//        }
+//    }
+//    
     
     private func eventLocationLabelSetup(_ location : String) -> String{
         if location != "" {
