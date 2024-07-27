@@ -29,15 +29,16 @@ class EventTableViewCell: UITableViewCell {
     }
     
     private let dateLabel = UILabel().then { label in
-        label.font = .pardFont.body5
+        label.font = .pardFont.body4
     }
     
     private let locationLabel = UILabel().then { label in
-        label.font = .pardFont.body5
+        label.font = .pardFont.body4
     }
     
     private let stackView = UIStackView().then { stak in
         stak.axis = .vertical
+        stak.spacing = 4
     }
     
     override func layoutSubviews() {
@@ -89,7 +90,7 @@ class EventTableViewCell: UITableViewCell {
         
         stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(24)
-            make.bottom.equalToSuperview().offset(-20)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(16)
         }
     }
     
