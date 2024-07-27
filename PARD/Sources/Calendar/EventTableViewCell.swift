@@ -124,7 +124,10 @@ class EventTableViewCell: UITableViewCell {
             schedule.contentsLocation
         )
         
-        contentLabel.text = schedule.content
+        contentLabel.text = eventContentLabelSetup(
+            schedule.content, 
+            schedule.part
+        )
         
         if schedule.remaingDay < 0 {
             titleLabel.textColor = .pard.gray30
@@ -147,13 +150,13 @@ class EventTableViewCell: UITableViewCell {
         categoryLabel.backgroundColor = backGroundColor
     }
     
-//    private func eventContentLabelSetup(_ content : String) -> String{
-//        if content != "" {
-//            return content
-//        } else {
-//            return ""
-//        }
-//    }
+    private func eventContentLabelSetup(_ content: String,_ part: String) -> String{
+        if content != "" {
+            return "\(part) \(content)"
+        } else {
+            return ""
+        }
+    }
 //    
     
     private func eventLocationLabelSetup(_ location : String) -> String{
