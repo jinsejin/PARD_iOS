@@ -160,6 +160,7 @@ class HomeUpcommingView : UIView {
                     self?.labelSetup()
                 case .failure(_):
                     self?.scheduleData = []
+                    self?.showNoUpcomingEvents()
                 }
             }
         }
@@ -181,7 +182,7 @@ extension HomeUpcommingView {
     
     private func labelSetup() {
         isUpcomingevent()
-        if upcomingEvents.isEmpty {
+        if upcomingEvents.isEmpty || scheduleData.isEmpty {
             showNoUpcomingEvents()
             return
         }
