@@ -437,7 +437,7 @@ class MyScoreViewController: UIViewController {
         
         
         let partPointsLabel = UILabel().then {
-            $0.text = "파트 포인트"
+            $0.text = "파드 포인트"
             $0.font = UIFont.pardFont.body2
             $0.textColor = .pard.gray10
             $0.textAlignment = .center
