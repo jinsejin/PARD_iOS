@@ -124,7 +124,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.backgroundColor = .pard.blackBackground
         let label = UILabel()
         label.textColor = .pard.white100
-        label.font = .pardFont.head2
+        label.font = .pardFont.head1
         label.text = section == 0 ? "다가오는 일정" : "지난 일정"
         headerView.addSubview(label)
         label.snp.makeConstraints { make in
@@ -153,7 +153,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130  // 각 셀의 높이를 150으로 설정
+        return 130
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
