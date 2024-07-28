@@ -34,9 +34,15 @@ class MyScoreViewController: UIViewController {
     }
   
     private func loadData() {
+        getRankMe { [weak self] success in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.updateUIWithRanks()
+            }
+        }
+
         getRankTop3 { [weak self] ranks in
             guard let self = self else { return }
-            getRankMe()
             DispatchQueue.main.async {
                 RankManager.shared.rankList = ranks ?? []
                 self.updateUIWithRanks()
@@ -634,7 +640,6 @@ extension MyScoreViewController {
         setupTextLabel()
         loadData()
         loadToReasonData()
-        
     }
     
     

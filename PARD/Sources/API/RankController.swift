@@ -41,7 +41,7 @@ func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
     task.resume()
 }
 
-func getRankMe() {
+func getRankMe(completion: @escaping ([Rank]?) -> Void) {
     if let urlLink = URL(string: url + "/rank/me") {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: urlLink) { data, response, error in
@@ -70,8 +70,8 @@ func getRankMe() {
                 UserDefaults.standard.setValue(userRank.totalRanking, forKey: "totalRanking")
                 
                 // MARK: - debuging을 위한 코드입니다.
-                print("---> \(userRank.partRanking)")
-                print("---> \(userRank.totalRanking)")
+//                print("---> \(userRank.partRanking)")
+//                print("---> \(userRank.totalRanking)")
                 
             } catch {
                 print("🚨 Decoding Error:", error)
@@ -106,11 +106,11 @@ func getTotalRank() {
                 print("✅ Success: \(totalRankList)")
                 
                 // MARK: - Debugging code
-                for totalRank in totalRankList {
-                    print("---> \(totalRank.name)")
-                    print("---> \(totalRank.part)")
-                    print("---> \(totalRank.totalBonus)")
-                }
+//                for totalRank in totalRankList {
+//                    print("---> \(totalRank.name)")
+//                    print("---> \(totalRank.part)")
+//                    print("---> \(totalRank.totalBonus)")
+//                }
                 
             } catch {
                 print("🚨 Decoding Error:", error)
@@ -147,11 +147,11 @@ func getTotalRank(completion: @escaping (Bool) -> Void) {
                 print("✅ Success: \(totalRankList)")
                 
                 // MARK: - Debugging code
-                for totalRank in totalRankList {
-                    print("---> \(totalRank.name)")
-                    print("---> \(totalRank.part)")
-                    print("---> \(totalRank.totalBonus)")
-                }
+//                for totalRank in totalRankList {
+//                    print("---> \(totalRank.name)")
+//                    print("---> \(totalRank.part)")
+//                    print("---> \(totalRank.totalBonus)")
+//                }
                 
                 completion(true)
             } catch {
