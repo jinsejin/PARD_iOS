@@ -94,6 +94,7 @@ class MyScoreViewController: UIViewController {
             rank2 = RankManager.shared.rankList[1]
             rank3 = RankManager.shared.rankList[2]
         } else {
+            
             print("Not enough data in rankList")
         }
         setupRankingMedals()
