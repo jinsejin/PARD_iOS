@@ -19,6 +19,12 @@ class HomeUpcommingView : UIView {
         $0.textColor = .pard.white100
     }
     
+    private let stackView = UIStackView().then {
+        $0.alignment = .leading
+        $0.axis = .vertical
+        $0.spacing = 4
+    }
+    
     private lazy var moreButton = UIButton().then {
         $0.setTitle("더보기", for: .normal)
         $0.titleLabel?.font = .pardFont.caption2
@@ -63,6 +69,11 @@ class HomeUpcommingView : UIView {
         $0.font = .pardFont.body3
     }
     
+    private let contentLabel = UILabel().then {
+        $0.textColor = .pard.white100
+        $0.font = .pardFont.body3
+    }
+    
     private let eventDateLabel = UILabel().then {
         $0.textColor = .pard.white100
         $0.font = .pardFont.body3
@@ -88,10 +99,13 @@ class HomeUpcommingView : UIView {
         addSubview(separator)
         addSubview(eventTypeLabel)
         addSubview(eventTitleLabel)
-        addSubview(eventDateLabel)
-        addSubview(eventLocationLabel)
+        addSubview(stackView)
         addSubview(dDayLabel)
         addSubview(noUpcomingEventsLabel)
+        
+        stackView.addArrangedSubview(contentLabel)
+        stackView.addArrangedSubview(eventDateLabel)
+        stackView.addArrangedSubview(eventLocationLabel)
         
         upcommingLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -126,17 +140,10 @@ class HomeUpcommingView : UIView {
             make.trailing.equalToSuperview().offset(-24)
         }
         
-        eventDateLabel.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
             make.top.equalTo(eventTypeLabel.snp.bottom).offset(9)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
-        }
-        
-        eventLocationLabel.snp.makeConstraints { make in
-            make.top.equalTo(eventDateLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.bottom.equalToSuperview().offset(-20)
         }
         
         noUpcomingEventsLabel.snp.makeConstraints { make in
@@ -178,6 +185,7 @@ extension HomeUpcommingView {
         dDayLabel.isHidden = true
         eventLocationLabel.isHidden = true
         eventDateLabel.isHidden = true
+        contentLabel.isHidden = true
    }
     
     private func labelSetup() {
@@ -194,8 +202,19 @@ extension HomeUpcommingView {
         dDayLabel.text = "D-\(String(describing: upcomingEvents[0].remaingDay))"
 
         eventLocationLabel.text = eventLocationLabelSetup( upcomingEvents[0].contentsLocation)
+        contentLabel.text = eventContentLabelSetup(upcomingEvents[0].content, upcomingEvents[0].part)
         eventDateLabel.text = formattedDateString(from: upcomingDate)
         eventTypeLabel.text = upcomingEvents[0].part
+        
+    }
+    
+    private func eventContentLabelSetup(_ content : String, _ part : String ) -> String {
+        if content != "" {
+            return "\(part) \(content)"
+        } else {
+            contentLabel.isHidden = true
+            return ""
+        }
     }
     
     private func eventLocationLabelSetup(_ location : String) -> String{

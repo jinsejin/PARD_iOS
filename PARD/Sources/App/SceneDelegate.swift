@@ -20,8 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         postLogin(with: userEmail)
         window?.windowScene = windowScene
-
-//        window?.rootViewController = UINavigationController(rootViewController: SplashViewController())
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            getUsersMe()
+        }
         setRootViewController()
         window?.makeKeyAndVisible()
     }
