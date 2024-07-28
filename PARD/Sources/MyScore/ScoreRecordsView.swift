@@ -11,16 +11,32 @@ import UIKit
 
 class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     private var scoreRecords: [ReasonPardnerShip] = []
-    private var collectionView: UICollectionView!
+    var collectionView : UICollectionView
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupCollectionView()
+       let layout = UICollectionViewFlowLayout()
+       layout.scrollDirection = .horizontal
+       layout.minimumLineSpacing = 0
+       layout.minimumInteritemSpacing = 0
+       layout.itemSize = CGSize(width: 144, height: 136)
+
+       collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+       super.init(frame: frame)
+       setupCollectionView()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupCollectionView()
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !scoreRecords.isEmpty {
+            print("스코어 레코드 변수에 데이터가 들어 있습니다 ☺️☺️")
+            setupCollectionView()
+        } else {
+            print("스코어 레코드 변수에 데이터가 들어있지 않습니다 🤪")
+        }
     }
     
     private func setupCollectionView() {
