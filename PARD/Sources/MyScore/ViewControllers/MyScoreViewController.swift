@@ -6,10 +6,37 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 import PARD_DesignSystem
 
 class MyScoreViewController: UIViewController {
-    private let pardnerShipLabel = UILabel()
+    private let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    private let questionImageButton = UIButton().then {
+        $0.setImage(UIImage(named: "myscore-question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
+    }
+    
+    private let contentView = UIView()
+    private let medalView = UIView()
+    private let rankView = UIView()
+    private let scoreStatusView = UIView()
+    private let scoreRecordView = UIView()
+    private let pardnerShipLabel = UILabel().then { label in
+        label.text = "🏆 PARDNERSHIP TOP 3 🏆"
+        label.font = UIFont.pardFont.head2
+        label.textColor = UIColor.GradientColor.gra
+        label.textAlignment = .center
+    }
+    let labelContainerView = UIView().then { label in
+        label.backgroundColor = .clear
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.GradientColor.gra.cgColor
+        label.layer.cornerRadius = 18
+    }
     private let scoreRecordsView = ScoreRecordsView()
     private var toolTipView: ToolTIpViewInMyScore?
     private var scoreRecords: [ReasonPardnerShip] = []
@@ -102,37 +129,41 @@ class MyScoreViewController: UIViewController {
     
     private func setupTextLabel() {
         let padding: CGFloat = 8
-        let labelContainerView = UIView()
-        labelContainerView.backgroundColor = .clear
-        view.addSubview(labelContainerView)
-        
-        pardnerShipLabel.text = "🏆 PARDNERSHIP TOP 3 🏆"
-        pardnerShipLabel.font = UIFont.pardFont.head2
-        pardnerShipLabel.textColor = UIColor(patternImage: gradientImage())
-        pardnerShipLabel.textAlignment = .center
+        contentView.addSubview(labelContainerView)
         labelContainerView.addSubview(pardnerShipLabel)
         
-        pardnerShipLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding))
-        }
-        
-        labelContainerView.layer.borderWidth = 1
-        labelContainerView.layer.borderColor = UIColor(patternImage: gradientImage()).cgColor
-        labelContainerView.layer.cornerRadius = 18
-        
         labelContainerView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(230 + padding * 2)
             $0.height.equalTo(36)
         }
+        
+        pardnerShipLabel.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding))
+        }
+    }
+    
+    private func setUpScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.height.equalToSuperview()
+        }
+
     }
     
     private func setupRankingMedals() {
         guard let rank1 = rank1, let rank2 = rank2, let rank3 = rank3 else { return }
         
         let goldRingImageView = UIImageView(image: UIImage(named: "goldRing"))
-        view.addSubview(goldRingImageView)
+        contentView.addSubview(goldRingImageView)
         
         let goldRankLabel = UILabel().then {
             $0.text = "1"
@@ -140,7 +171,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .white
         }
-        view.addSubview(goldRankLabel)
+        contentView.addSubview(goldRankLabel)
         
         let goldPartLabel = UILabel().then {
             $0.text = "\(rank1.part)"
@@ -148,7 +179,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
         }
-        view.addSubview(goldPartLabel)
+        contentView.addSubview(goldPartLabel)
         
         let goldNameLabel = UILabel().then {
             $0.text = "\(rank1.name)"
@@ -156,10 +187,10 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
-        view.addSubview(goldNameLabel)
+        contentView.addSubview(goldNameLabel)
         
         let silverRingImageView = UIImageView(image: UIImage(named: "silverRing"))
-        view.addSubview(silverRingImageView)
+        contentView.addSubview(silverRingImageView)
         
         let silverRankLabel = UILabel().then {
             $0.text = "2"
@@ -167,7 +198,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .white
         }
-        view.addSubview(silverRankLabel)
+        contentView.addSubview(silverRankLabel)
         
         let silverPartLabel = UILabel().then {
             $0.text = "\(rank2.part)"
@@ -175,7 +206,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
         }
-        view.addSubview(silverPartLabel)
+        contentView.addSubview(silverPartLabel)
         
         let silverNameLabel = UILabel().then {
             $0.text = "\(rank2.name)"
@@ -183,10 +214,10 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
-        view.addSubview(silverNameLabel)
+        contentView.addSubview(silverNameLabel)
         
         let bronzeRingImageView = UIImageView(image: UIImage(named: "bronzeRing"))
-        view.addSubview(bronzeRingImageView)
+        contentView.addSubview(bronzeRingImageView)
         
         let bronzeRankLabel = UILabel().then {
             $0.text = "3"
@@ -194,7 +225,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .white
         }
-        view.addSubview(bronzeRankLabel)
+        contentView.addSubview(bronzeRankLabel)
         
         let bronzePartLabel = UILabel().then {
             $0.text = "\(rank3.part)"
@@ -202,7 +233,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
         }
-        view.addSubview(bronzePartLabel)
+        contentView.addSubview(bronzePartLabel)
         
         let bronzeNameLabel = UILabel().then {
             $0.text = "\(rank3.name)"
@@ -210,10 +241,10 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
-        view.addSubview(bronzeNameLabel)
+        contentView.addSubview(bronzeNameLabel)
         
         goldRingImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(181)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(22)
             $0.width.height.equalTo(40)
         }
@@ -224,17 +255,18 @@ class MyScoreViewController: UIViewController {
         }
         
         goldPartLabel.snp.makeConstraints {
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
             $0.centerX.equalTo(goldNameLabel.snp.centerX)
             $0.bottom.equalTo(goldNameLabel.snp.top).offset(-2)
         }
         
         goldNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(197)
+            $0.top.equalTo(goldPartLabel.snp.bottom).offset(2)
             $0.leading.equalToSuperview().offset(70)
         }
         
         silverRingImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(181)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
 //            $0.trailing.equalToSuperview().offset(-197)
             $0.leading.equalToSuperview().offset(146)
 
@@ -247,17 +279,18 @@ class MyScoreViewController: UIViewController {
         }
         
         silverPartLabel.snp.makeConstraints {
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
             $0.centerX.equalTo(silverNameLabel.snp.centerX)
             $0.bottom.equalTo(silverNameLabel.snp.top).offset(-2)
         }
         
         silverNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(197)
+            $0.top.equalTo(silverPartLabel.snp.bottom).offset(2)
             $0.leading.equalToSuperview().offset(194)
         }
         
         bronzeRingImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(181)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
             $0.trailing.equalToSuperview().offset(-81)
             $0.width.height.equalTo(40)
         }
@@ -268,17 +301,18 @@ class MyScoreViewController: UIViewController {
         }
         
         bronzePartLabel.snp.makeConstraints {
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
             $0.centerX.equalTo(bronzeNameLabel.snp.centerX)
             $0.bottom.equalTo(bronzeNameLabel.snp.top).offset(-2)
         }
         
         bronzeNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(197)
+            $0.top.equalTo(bronzePartLabel.snp.bottom).offset(2)
             $0.trailing.equalToSuperview().offset(-36)
         }
         
         let goldCrownImageView = UIImageView(image: UIImage(named: "gold"))
-        view.addSubview(goldCrownImageView)
+        contentView.addSubview(goldCrownImageView)
         
         goldCrownImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(32)
@@ -287,7 +321,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let silverCrownImageView = UIImageView(image: UIImage(named: "silver"))
-        view.addSubview(silverCrownImageView)
+        contentView.addSubview(silverCrownImageView)
         
         silverCrownImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(156)
@@ -296,7 +330,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let bronzeCrownImageView = UIImageView(image: UIImage(named: "bronze"))
-        view.addSubview(bronzeCrownImageView)
+        contentView.addSubview(bronzeCrownImageView)
         
         bronzeCrownImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-91)
@@ -312,13 +346,12 @@ class MyScoreViewController: UIViewController {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(patternImage: gradientImage()).cgColor
         }
-        view.addSubview(myScoreBorderView)
+        contentView.addSubview(myScoreBorderView)
         
         myScoreBorderView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(245)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(89)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(view.snp.centerX).offset(-12)
-//            $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
         
@@ -328,13 +361,12 @@ class MyScoreViewController: UIViewController {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor(patternImage: gradientImage()).cgColor
         }
-        view.addSubview(totalScoreBorderView)
+        contentView.addSubview(totalScoreBorderView)
         
         totalScoreBorderView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(245)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(89)
             $0.leading.equalTo(view.snp.centerX).offset(12)
             $0.trailing.equalToSuperview().offset(-24)
-//            $0.width.equalTo(155.5)
             $0.height.equalTo(68)
         }
         
@@ -344,7 +376,7 @@ class MyScoreViewController: UIViewController {
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
         }
-        view.addSubview(rankingButton)
+        contentView.addSubview(rankingButton)
         
         rankingButton.snp.makeConstraints {
             $0.centerX.equalTo(totalScoreBorderView.snp.centerX).offset(33)
@@ -366,7 +398,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
-        view.addSubview(myScoreLabel)
+        contentView.addSubview(myScoreLabel)
         
         myScoreLabel.snp.makeConstraints {
             $0.top.equalTo(myScoreBorderView.snp.top).offset(12)
@@ -379,7 +411,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .white
         }
-        view.addSubview(myRankLabel)
+        contentView.addSubview(myRankLabel)
         
         myRankLabel.snp.makeConstraints {
             $0.top.equalTo(myScoreLabel.snp.bottom).offset(8)
@@ -392,7 +424,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
         }
-        view.addSubview(totalScoreLabel)
+        contentView.addSubview(totalScoreLabel)
         
         totalScoreLabel.snp.makeConstraints {
             $0.top.equalTo(totalScoreBorderView.snp.top).offset(12)
@@ -405,7 +437,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .white
         }
-        view.addSubview(totalRankLabel)
+        contentView.addSubview(totalRankLabel)
         
         totalRankLabel.snp.makeConstraints {
             $0.top.equalTo(totalScoreLabel.snp.bottom).offset(8)
@@ -420,10 +452,10 @@ class MyScoreViewController: UIViewController {
             $0.textColor = .white
             $0.textAlignment = .left
         }
-        view.addSubview(scoreStatusLabel)
+        contentView.addSubview(scoreStatusLabel)
         
         scoreStatusLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(367)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(211)
             $0.leading.equalToSuperview().offset(28)
             $0.trailing.equalToSuperview().offset(260)
         }
@@ -432,7 +464,7 @@ class MyScoreViewController: UIViewController {
             $0.backgroundColor = UIColor.pard.blackCard
             $0.layer.cornerRadius = 8
         }
-        view.addSubview(scoreStatusView)
+        contentView.addSubview(scoreStatusView)
         
         scoreStatusView.snp.makeConstraints {
             $0.top.equalTo(scoreStatusLabel.snp.bottom).offset(16)
@@ -532,20 +564,6 @@ class MyScoreViewController: UIViewController {
             $0.top.equalTo(penaltyPointsLabel.snp.bottom).offset(8)
             $0.centerX.equalToSuperview()
         }
-        
-        let questionImageButton = UIButton().then {
-            $0.setImage(UIImage(named: "myscore-question-line")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        view.addSubview(questionImageButton)
-        
-        questionImageButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(257)
-            $0.top.equalToSuperview().offset(538)
-            $0.width.equalTo(14)
-            $0.height.equalTo(14)
-        }
-        
-        questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
     }
     
     @objc private func tappedQuestionButton() {
@@ -561,7 +579,7 @@ class MyScoreViewController: UIViewController {
             let toolTip = ToolTIpViewInMyScore()
             view.addSubview(toolTip)
             toolTip.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(563)
+                make.top.equalTo(questionImageButton.snp.bottom).offset(8)
                 make.leading.equalToSuperview().offset(45)
                 make.trailing.equalToSuperview().offset(-18)
                 make.height.equalTo(200)
@@ -581,7 +599,11 @@ class MyScoreViewController: UIViewController {
             $0.textColor = .white
             $0.textAlignment = .left
         }
-        view.addSubview(scoreRecordsTitleLabel)
+        contentView.addSubview(scoreRecordsTitleLabel)
+        
+        
+        
+        questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
         
         let scorePolicyLabel = UILabel().then {
             $0.text = "점수정책 확인하기"
@@ -590,44 +612,43 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .right
             $0.isUserInteractionEnabled = true
         }
-        view.addSubview(scorePolicyLabel)
         
-        let questionImageView = UIImageView(image: UIImage(named: "questionImageMark"))
-        view.addSubview(questionImageView)
         
         let scorePolicyTapGesture = UITapGestureRecognizer(target: self, action: #selector(scorePolicyTapped))
         scorePolicyLabel.addGestureRecognizer(scorePolicyTapGesture)
         
+        contentView.addSubview(scorePolicyLabel)
+        contentView.addSubview(questionImageButton)
+        contentView.addSubview(scoreRecordsView)
+        scoreRecordsView.layer.cornerRadius = 12
+        scoreRecordsView.layer.masksToBounds = true
+        scoreRecordsView.configure(with: scoreRecords)
+        
+        // Constraints for title label, question image, and policy label
         scoreRecordsTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(531)
+            $0.top.equalTo(labelContainerView.snp.bottom).offset(375)
             $0.leading.equalToSuperview().offset(28)
-            $0.trailing.equalToSuperview().offset(-280)
         }
         
-        questionImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(538)
-            $0.leading.equalToSuperview().offset(257)
+        questionImageButton.snp.makeConstraints {
+            $0.centerY.equalTo(scoreRecordsTitleLabel)
+            $0.trailing.equalTo(scorePolicyLabel.snp.leading).offset(-2)
+            $0.width.height.equalTo(14) // Adjust size as needed
         }
         
         scorePolicyLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(537)
-            $0.leading.equalToSuperview().offset(273)
+            $0.centerY.equalTo(scoreRecordsTitleLabel)
+            $0.leading.equalTo(questionImageButton.snp.trailing).offset(2)
+            $0.trailing.equalToSuperview().offset(-28)
         }
-        
-        view.addSubview(scoreRecordsView)
         
         scoreRecordsView.snp.makeConstraints {
             $0.top.equalTo(scoreRecordsTitleLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(136)
         }
-        
-        scoreRecordsView.layer.cornerRadius = 12
-        scoreRecordsView.layer.masksToBounds = true
-        
-        scoreRecordsView.configure(with: scoreRecords)
     }
-    
+
     @objc private func rankingButtonTapped() {
         let rankingViewController = RankingViewController()
         navigationController?.pushViewController(rankingViewController, animated: true)
@@ -651,10 +672,11 @@ class MyScoreViewController: UIViewController {
 extension MyScoreViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpScrollView()
         removeTabBarFAB(bool: true)
         view.backgroundColor = .pard.blackBackground
-        setNavigation()
         setupTextLabel()
+        setNavigation()
         loadData()
         loadToReasonData()
     }
