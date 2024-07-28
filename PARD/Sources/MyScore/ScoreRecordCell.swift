@@ -6,17 +6,26 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class ScoreRecordCell: UICollectionViewCell {
     static let identifier = "ScoreRecordCell"
-    
-    let tagLabel = UILabel()
-    let titleLabel = UILabel()
-    let dateLabel = UILabel()
-    let pointsLabel = UILabel()
-    let backgroundCardView = UIView()
-    let separatorView = UIView()
-    let redDotView = UIView()
+    private let tagView = UIView().then { view in
+        view.layer.cornerRadius = 8
+        view.layer.borderWidth = 1
+        view.layer.masksToBounds = true
+    }
+    private let tagLabel = UILabel().then { label in
+        label.font = UIFont.pardFont.body2
+        label.textAlignment = .center
+    }
+    private let titleLabel = UILabel()
+    private let dateLabel = UILabel()
+    private let pointsLabel = UILabel()
+    private let backgroundCardView = UIView()
+    private let separatorView = UIView()
+    private let redDotView = UIView()
     
     
     override init(frame: CGRect) {
@@ -41,13 +50,6 @@ class ScoreRecordCell: UICollectionViewCell {
         redDotView.isHidden = true 
         contentView.addSubview(redDotView)
         
-        
-        tagLabel.font = UIFont.pardFont.body2
-        tagLabel.textAlignment = .center
-        tagLabel.layer.cornerRadius = 8
-        tagLabel.layer.borderWidth = 1
-        tagLabel.layer.masksToBounds = true
-        
         titleLabel.font = UIFont.pardFont.body4
         titleLabel.textColor = .pard.gray10
         titleLabel.textAlignment = .center
@@ -64,20 +66,26 @@ class ScoreRecordCell: UICollectionViewCell {
         separatorView.backgroundColor = .pard.gray30
         contentView.addSubview(separatorView)
         
-        backgroundCardView.addSubview(tagLabel)
+        backgroundCardView.addSubview(tagView)
+        tagView.addSubview(tagLabel)
         backgroundCardView.addSubview(titleLabel)
         backgroundCardView.addSubview(dateLabel)
         backgroundCardView.addSubview(pointsLabel)
-        
+ 
         backgroundCardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        tagLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundCardView).offset(24)
-            make.centerX.equalTo(backgroundCardView)
-            make.width.equalTo(56)
+        tagView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(24)
+            make.centerX.equalToSuperview()
             make.height.equalTo(24)
+        }
+        tagLabel.snp.makeConstraints { make in
+            make.top.equalTo(tagView.snp.top).offset(2)
+            make.leading.equalTo(tagView.snp.leading).offset(12)
+            make.trailing.equalTo(tagView.snp.trailing).offset(-12)
+            make.bottom.equalTo(tagView.snp.bottom).offset(-2)
         }
         redDotView.snp.makeConstraints { make in
             make.top.equalTo(backgroundCardView).offset(13)
@@ -120,13 +128,13 @@ class ScoreRecordCell: UICollectionViewCell {
         redDotView.isHidden = !isFirstItem
 
         if record.reason == "벌점" {
-            tagLabel.layer.borderColor = UIColor.pard.errorRed.cgColor
+            tagView.layer.borderColor = UIColor.pard.errorRed.cgColor
             tagLabel.textColor = .pard.errorRed
-            tagLabel.backgroundColor = .clear
+            tagView.backgroundColor = .clear
         } else {
-            tagLabel.layer.borderColor = UIColor.pard.primaryPurple.cgColor
+            tagView.layer.borderColor = UIColor.pard.primaryPurple.cgColor
             tagLabel.textColor = .pard.primaryPurple
-            tagLabel.backgroundColor = .clear
+            tagView.backgroundColor = .clear
         }
     }
     
