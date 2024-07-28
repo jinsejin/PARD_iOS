@@ -11,6 +11,11 @@ import Then
 
 class ScoreRecordCell: UICollectionViewCell {
     static let identifier = "ScoreRecordCell"
+    private let stackView = UIStackView().then { stack in
+        stack.axis = .horizontal
+        stack.spacing = 3
+        stack.alignment = .center
+    }
     private let tagView = UIView().then { view in
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 1
@@ -37,7 +42,7 @@ class ScoreRecordCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func uiConfigure() {
         contentView.backgroundColor = .clear
         
         backgroundCardView.backgroundColor = .pard.blackCard
@@ -47,7 +52,7 @@ class ScoreRecordCell: UICollectionViewCell {
         
         redDotView.backgroundColor = .pard.errorRed
         redDotView.layer.cornerRadius = 3
-        redDotView.isHidden = true 
+        redDotView.isHidden = true
         contentView.addSubview(redDotView)
         
         titleLabel.font = UIFont.pardFont.body4
@@ -66,11 +71,16 @@ class ScoreRecordCell: UICollectionViewCell {
         separatorView.backgroundColor = .pard.gray30
         contentView.addSubview(separatorView)
         
+        stackView.addArrangedSubview(dateLabel)
+        stackView.addArrangedSubview(pointsLabel)
+    }
+    
+    private func setupUI() {
+        uiConfigure()
         backgroundCardView.addSubview(tagView)
         tagView.addSubview(tagLabel)
         backgroundCardView.addSubview(titleLabel)
-        backgroundCardView.addSubview(dateLabel)
-        backgroundCardView.addSubview(pointsLabel)
+        backgroundCardView.addSubview(stackView)
  
         backgroundCardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -99,23 +109,10 @@ class ScoreRecordCell: UICollectionViewCell {
             make.trailing.equalTo(backgroundCardView).offset(-12)
             make.height.equalTo(36)
         }
-        
-        dateLabel.snp.makeConstraints { make in
+
+        stackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalTo(backgroundCardView).offset(28)
-        }
-        
-        pointsLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.top)
-            make.leading.equalTo(dateLabel.snp.trailing).offset(1)
-            make.trailing.equalTo(backgroundCardView).offset(-28)
-        }
-        
-        separatorView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.width.equalTo(1)
+            make.centerX.equalToSuperview()
         }
     }
     
