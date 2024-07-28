@@ -441,6 +441,26 @@ class MyScoreViewController: UIViewController {
             $0.height.equalTo(92)
         }
         
+        let partPointsView = UIView().then {
+            $0.backgroundColor = .clear
+        }
+        scoreStatusView.addSubview(partPointsView)
+
+        let penaltyPointsView = UIView().then {
+            $0.backgroundColor = .clear
+        }
+        
+        scoreStatusView.addSubview(penaltyPointsView)
+
+        partPointsView.snp.makeConstraints {
+            $0.leading.top.bottom.equalToSuperview()
+            $0.width.equalTo(scoreStatusView).multipliedBy(0.5)
+        }
+
+        penaltyPointsView.snp.makeConstraints {
+            $0.trailing.top.bottom.equalToSuperview()
+            $0.width.equalTo(scoreStatusView).multipliedBy(0.5)
+        }
         
         let partPointsLabel = UILabel().then {
             $0.text = "파드 포인트"
@@ -448,13 +468,14 @@ class MyScoreViewController: UIViewController {
             $0.textColor = .pard.gray10
             $0.textAlignment = .center
         }
-        scoreStatusView.addSubview(partPointsLabel)
+        partPointsView.addSubview(partPointsLabel)
+
         
         partPointsLabel.snp.makeConstraints {
-            $0.top.equalTo(scoreStatusView.snp.top).offset(24)
-            $0.leading.equalTo(scoreStatusView.snp.leading).offset(54.5)
-            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-217.5)
+            $0.top.equalToSuperview().offset(24)
+            $0.centerX.equalToSuperview()
         }
+
         
         let partPointsValueLabel = UILabel().then {
             $0.text = "+\(UserDefaults.standard.string(forKey: "userTotalBonus") ?? "10")점"
@@ -464,14 +485,12 @@ class MyScoreViewController: UIViewController {
             $0.adjustsFontSizeToFitWidth = true
             $0.minimumScaleFactor = 0.5
         }
-        scoreStatusView.addSubview(partPointsValueLabel)
-        
+        partPointsView.addSubview(partPointsValueLabel)
+
         partPointsValueLabel.snp.makeConstraints {
-            $0.top.equalTo(scoreStatusView.snp.top).offset(48)
-            $0.leading.equalTo(scoreStatusView.snp.leading).offset(65)
-            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-228)
+            $0.top.equalTo(partPointsLabel.snp.bottom).offset(8)
+            $0.centerX.equalToSuperview()
         }
-        
         let separatorView = UIView().then {
             $0.backgroundColor = .pard.gray30
         }
@@ -493,13 +512,7 @@ class MyScoreViewController: UIViewController {
             $0.adjustsFontSizeToFitWidth = true
             $0.minimumScaleFactor = 0.5
         }
-        scoreStatusView.addSubview(penaltyPointsLabel)
-        
-        penaltyPointsLabel.snp.makeConstraints {
-            $0.top.equalTo(scoreStatusView.snp.top).offset(24)
-            $0.leading.equalTo(scoreStatusView.snp.leading).offset(234.5)
-            $0.trailing.equalTo(scoreStatusView.snp.trailing).offset(-71.5)
-        }
+        penaltyPointsView.addSubview(penaltyPointsLabel)
         
         let penaltyPointsValueLabel = UILabel().then {
             $0.text = "-\(UserDefaults.standard.string(forKey: "userTotalMinus") ?? "10")점"
@@ -508,12 +521,16 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .center
             
         }
-        scoreStatusView.addSubview(penaltyPointsValueLabel)
+        penaltyPointsView.addSubview(penaltyPointsValueLabel)
         
+        penaltyPointsLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(24)
+            $0.centerX.equalToSuperview()
+        }
+
         penaltyPointsValueLabel.snp.makeConstraints {
             $0.top.equalTo(penaltyPointsLabel.snp.bottom).offset(8)
-            $0.width.equalTo(50)
-            $0.centerX.equalTo(penaltyPointsLabel)
+            $0.centerX.equalToSuperview()
         }
         
         let questionImageButton = UIButton().then {
