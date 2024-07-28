@@ -40,7 +40,10 @@ func getReason(completion: @escaping ([ReasonPardnerShip]) -> Void) {
                 let reasonArray = try decoder.decode([ReasonPardnerShip].self, from: JSONdata)
                 print("✅ 성공: Reason")
                 completion(reasonArray)
+                
             }
+            
+            
         } catch {
             print("🚨 디코딩 에러:", error)
         }
