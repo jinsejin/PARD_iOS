@@ -22,10 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             getUsersMe()
-            getRankMe()
         }
-
-//        window?.rootViewController = UINavigationController(rootViewController: SplashViewController())
         setRootViewController()
         window?.makeKeyAndVisible()
     }
