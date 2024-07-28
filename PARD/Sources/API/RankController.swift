@@ -8,7 +8,7 @@
 import UIKit
 
 func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
-    guard let url = URL(string: url + "/rank/top3") else {
+    guard let url = URL(string: url + "/rank/top3?generation=\(userGeneration)") else {
         print("Invalid URL")
         completion(nil)
         return
@@ -121,7 +121,7 @@ func getTotalRank() {
 }
 
 func getTotalRank(completion: @escaping (Bool) -> Void) {
-    if let urlLink = URL(string: url + "/rank/total") {
+    if let urlLink = URL(string: url + "/rank/total?generation=\(userGeneration)") {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: urlLink) { data, response, error in
             if let error = error {
