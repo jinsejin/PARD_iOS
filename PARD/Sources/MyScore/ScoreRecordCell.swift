@@ -91,12 +91,14 @@ class ScoreRecordCell: UICollectionViewCell {
             make.centerX.equalToSuperview()
             make.height.equalTo(24)
         }
+        
         tagLabel.snp.makeConstraints { make in
             make.top.equalTo(tagView.snp.top).offset(2)
             make.leading.equalTo(tagView.snp.leading).offset(12)
             make.trailing.equalTo(tagView.snp.trailing).offset(-12)
             make.bottom.equalTo(tagView.snp.bottom).offset(-2)
         }
+        
         redDotView.snp.makeConstraints { make in
             make.top.equalTo(backgroundCardView).offset(13)
             make.leading.equalTo(backgroundCardView).offset(29)

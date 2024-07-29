@@ -21,10 +21,6 @@ class MyScoreViewController: UIViewController {
     }
     
     private let contentView = UIView()
-    private let medalView = UIView()
-    private let rankView = UIView()
-    private let scoreStatusView = UIView()
-    private let scoreRecordView = UIView()
     private let pardnerShipLabel = UILabel().then { label in
         label.text = "🏆 PARDNERSHIP TOP 3 🏆"
         label.font = UIFont.pardFont.head2
@@ -37,7 +33,7 @@ class MyScoreViewController: UIViewController {
         label.layer.borderColor = UIColor.GradientColor.gra.cgColor
         label.layer.cornerRadius = 18
     }
-    private let scoreRecordsView = ScoreRecordsView()
+    private var scoreRecordsView = ScoreRecordsView()
     private var toolTipView: ToolTIpViewInMyScore?
     private var scoreRecords: [ReasonPardnerShip] = []
     private var rank1: Rank?
@@ -75,16 +71,20 @@ class MyScoreViewController: UIViewController {
                 self.updateUIWithRanks()
             }
         }
+        
+        loadToReasonData()
     
     }
     
     private func loadToReasonData() {
-        ReasonManager.shared.fetchReasons { [weak self] reasons in
+        getReason { [weak self] reasons in
             guard let self = self else { return }
-            self.scoreRecords = reasons
-            print("loadToReasonData  : \(scoreRecords)")
+            DispatchQueue.main.async {
+                self.scoreRecords = reasons
+                self.scoreRecordsView.configure(with: reasons)
+                print("데이터 로드 완료: \(self.scoreRecords)")
+            }
         }
-        
     }
     
     
@@ -601,8 +601,7 @@ class MyScoreViewController: UIViewController {
             $0.textAlignment = .left
         }
         contentView.addSubview(scoreRecordsTitleLabel)
-        
-        
+
         
         questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
         
@@ -679,7 +678,8 @@ extension MyScoreViewController {
         setupTextLabel()
         setNavigation()
         loadData()
-        loadToReasonData()
+        
+    
     }
     
     
