@@ -64,19 +64,27 @@ class MyScoreViewController: UIViewController {
             }
         }
 
-        getRankTop3 { [weak self] ranks in
+        getRankTop3 { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                RankManager.shared.rankList = ranks ?? []
-                self.updateUIWithRanks()
+            switch result {
+            case .success(let ranks) :
+                print("진진지니진ㄴ니니닝ㄹㄴㄹㄴㅇㅎㅁㅁㅇㄴㄹㄴㅁㄹㄹㅇㅇㄹ")
+                DispatchQueue.main.async {
+                    RankManager.shared.rankList = ranks
+                    self.updateUIWithRanks()
+                    self.setupRankingMedals()
+                }
+            case .failure(let error) :
+                DispatchQueue.main.async {
+                    self.isNotUser()
+                    self.setupRankingMedals()
+                }
+                print(error.localizedDescription)
+                break
             }
+            
         }
         
-        loadToReasonData()
-    
-    }
-    
-    private func loadToReasonData() {
         getReason { [weak self] reasons in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -87,20 +95,14 @@ class MyScoreViewController: UIViewController {
         }
     }
     
-    
     private func updateUIWithRanks() {
         if RankManager.shared.rankList.count >= 3 {
             rank1 = RankManager.shared.rankList[0]
             rank2 = RankManager.shared.rankList[1]
             rank3 = RankManager.shared.rankList[2]
         } else {
-            
-            print("Not enough data in rankList")
+            print("Not enough data in rankList or not register your id")
         }
-        setupRankingMedals()
-        setupScoreView()
-        setupScoreStatusView()
-        setupScoreRecordsView()
     }
 
     private func setNavigation() {
@@ -160,9 +162,17 @@ class MyScoreViewController: UIViewController {
 
     }
     
+    private func isNotUser() {
+        if RankManager.shared.rankList.isEmpty {
+            print("파웅우루루루루루룰")
+            RankManager.shared.rankList = [Rank.init(part: "PARD", name: "팡울이")]
+            rank1 = RankManager.shared.rankList[0]
+            rank2 = RankManager.shared.rankList[0]
+            rank3 = RankManager.shared.rankList[0]
+        }
+    }
+    
     private func setupRankingMedals() {
-        guard let rank1 = rank1, let rank2 = rank2, let rank3 = rank3 else { return }
-        
         let goldRingImageView = UIImageView(image: UIImage(named: "goldRing"))
         contentView.addSubview(goldRingImageView)
         
@@ -175,7 +185,7 @@ class MyScoreViewController: UIViewController {
         contentView.addSubview(goldRankLabel)
         
         let goldPartLabel = UILabel().then {
-            $0.text = "\(rank1.part)"
+            $0.text = "\(rank1?.part ?? "PARD")"
             $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
@@ -183,7 +193,7 @@ class MyScoreViewController: UIViewController {
         contentView.addSubview(goldPartLabel)
         
         let goldNameLabel = UILabel().then {
-            $0.text = "\(rank1.name)"
+            $0.text = "\(rank1?.name ?? "팡울이")"
             $0.font = UIFont.pardFont.body4
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
@@ -202,7 +212,7 @@ class MyScoreViewController: UIViewController {
         contentView.addSubview(silverRankLabel)
         
         let silverPartLabel = UILabel().then {
-            $0.text = "\(rank2.part)"
+            $0.text = "\(rank2?.part ?? "PARD")"
             $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
@@ -210,7 +220,7 @@ class MyScoreViewController: UIViewController {
         contentView.addSubview(silverPartLabel)
         
         let silverNameLabel = UILabel().then {
-            $0.text = "\(rank2.name)"
+            $0.text = "\(rank2?.name ?? "팡울이")"
             $0.font = UIFont.pardFont.body4
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
@@ -229,7 +239,7 @@ class MyScoreViewController: UIViewController {
         contentView.addSubview(bronzeRankLabel)
         
         let bronzePartLabel = UILabel().then {
-            $0.text = "\(rank3.part)"
+            $0.text = "\(rank3?.part ?? "PARD")"
             $0.font = UIFont.pardFont.body2
             $0.textAlignment = .center
             $0.textColor = .pard.gray30
@@ -237,7 +247,7 @@ class MyScoreViewController: UIViewController {
         contentView.addSubview(bronzePartLabel)
         
         let bronzeNameLabel = UILabel().then {
-            $0.text = "\(rank3.name)"
+            $0.text = "\(rank3?.name ?? "팡울이")"
             $0.font = UIFont.pardFont.body4
             $0.textAlignment = .center
             $0.textColor = .pard.gray10
@@ -345,7 +355,7 @@ class MyScoreViewController: UIViewController {
             $0.backgroundColor = UIColor.pard.blackCard
             $0.layer.cornerRadius = 8
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(patternImage: gradientImage()).cgColor
+            $0.layer.borderColor = UIColor.GradientColor.gra.cgColor
         }
         contentView.addSubview(myScoreBorderView)
         
@@ -360,7 +370,7 @@ class MyScoreViewController: UIViewController {
             $0.backgroundColor = UIColor.pard.blackCard
             $0.layer.cornerRadius = 8
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(patternImage: gradientImage()).cgColor
+            $0.layer.borderColor = UIColor.GradientColor.gra.cgColor
         }
         contentView.addSubview(totalScoreBorderView)
         
@@ -653,20 +663,6 @@ class MyScoreViewController: UIViewController {
         let rankingViewController = RankingViewController()
         navigationController?.pushViewController(rankingViewController, animated: true)
     }
-    
-    private func gradientImage() -> UIImage {
-        let gradientLayer = CAGradientLayer().then {
-            $0.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-            $0.colors = [UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1).cgColor, UIColor(red: 123/255, green: 63/255, blue: 239/255, alpha: 1).cgColor]
-            $0.startPoint = CGPoint(x: 0, y: 0)
-            $0.endPoint = CGPoint(x: 1, y: 1)
-        }
-        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
 }
 
 extension MyScoreViewController {
@@ -678,6 +674,9 @@ extension MyScoreViewController {
         setupTextLabel()
         setNavigation()
         loadData()
+        setupScoreView()
+        setupScoreStatusView()
+        setupScoreRecordsView()
         
     
     }

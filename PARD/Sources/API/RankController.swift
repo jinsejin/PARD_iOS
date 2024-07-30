@@ -7,10 +7,17 @@
 
 import UIKit
 
-func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
+enum RankTop3FetchError: Error {
+    case invalidURL
+    case requestFailed
+    case noData
+    case decodingError(Error)
+}
+
+func getRankTop3(completion: @escaping (Result<[Rank], RankTop3FetchError>) -> Void) {
     guard let url = URL(string: url + "/rank/top3?generation=\(userGeneration)") else {
         print("Invalid URL")
-        completion(nil)
+        completion(.failure(.invalidURL))
         return
     }
 
@@ -18,13 +25,13 @@ func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
     let task = session.dataTask(with: url) { data, response, error in
         if let error = error {
             print("🚨 Error:", error)
-            completion(nil)
+            completion(.failure(.requestFailed))
             return
         }
 
         guard let jsonData = data else {
             print("🚨 Error: No data received")
-            completion(nil)
+            completion(.failure(.noData))
             return
         }
 
@@ -32,10 +39,10 @@ func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
             let decoder = JSONDecoder()
             let ranks = try decoder.decode([Rank].self, from: jsonData)
             print("✅ \(ranks)")
-            completion(ranks)
+            completion(.success(ranks))
         } catch {
             print("🚨 Decoding Error:", error)
-            completion(nil)
+            completion(.failure(.decodingError(error)))
         }
     }
     task.resume()
