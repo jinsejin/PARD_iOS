@@ -61,6 +61,7 @@ class MyScoreViewController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.updateUIWithRanks()
+                self.setupScoreView()
             }
         }
 
@@ -68,7 +69,6 @@ class MyScoreViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let ranks) :
-                print("진진지니진ㄴ니니닝ㄹㄴㄹㄴㅇㅎㅁㅁㅇㄴㄹㄴㅁㄹㄹㅇㅇㄹ")
                 DispatchQueue.main.async {
                     RankManager.shared.rankList = ranks
                     self.updateUIWithRanks()
@@ -278,9 +278,7 @@ class MyScoreViewController: UIViewController {
         
         silverRingImageView.snp.makeConstraints {
             $0.top.equalTo(labelContainerView.snp.bottom).offset(25)
-//            $0.trailing.equalToSuperview().offset(-197)
             $0.leading.equalToSuperview().offset(146)
-
             $0.width.height.equalTo(40)
         }
         
@@ -351,6 +349,7 @@ class MyScoreViewController: UIViewController {
     }
     
     private func setupScoreView() {
+        print(UserDefaults.standard.string(forKey: "partRanking") ?? "위")
         let myScoreBorderView = UIView().then {
             $0.backgroundColor = UIColor.pard.blackCard
             $0.layer.cornerRadius = 8
