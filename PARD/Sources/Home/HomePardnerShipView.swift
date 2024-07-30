@@ -97,7 +97,6 @@ class HomePardnerShipView : UIView {
     }
     
     @objc private func tappedmoreButton() {
-        getUsersMe()
         let myScoreViewController = MyScoreViewController()
         viewController?.navigationController?.pushViewController(myScoreViewController, animated: true)
     }

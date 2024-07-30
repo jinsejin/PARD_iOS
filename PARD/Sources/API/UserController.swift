@@ -63,8 +63,6 @@ func getUsersMe() {
                 // JSON 데이터를 User 구조체로 디코딩
                 let user = try decoder.decode(User.self, from: JSONdata)
                 print("✅ Success: \(user)")
-
-                // userRole에서 "ROLE_" 부분을 제거
                 DispatchQueue.global().async {
                     let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
                     UserDefaults.standard.set(user.name, forKey: "userName")
@@ -127,77 +125,4 @@ func deleteUser(userEmail: String) {
         }
     }
     task.resume()
-}
-
-
-class UserCheckManager {
-    static let shared = UserCheckManager()
-    var isNotUser : Bool = false
-    init() {
-        DispatchQueue.main.async {
-            self.getUsers()
-        }
-        
-    }
-    
-    private func getUsers() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.getUsersMe { [weak self] value in
-                guard let self = self else { return }
-                self.isNotUser = value
-            }
-        }
-    }
-    
-    func getUsersMe(completion : @escaping (Bool)-> Void) {
-        if let urlLink = URL(string: url + "/users/me") {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: urlLink) { data, response, error in
-                if let error = error {
-                    print("🚨 Error:", error)
-                    completion(true)
-                    return
-                }
-                guard let JSONdata = data, !JSONdata.isEmpty else {
-                    print("🚨 [getuserMe] Error: No data or empty data")
-                    completion(true)
-                    return
-                }
-                
-                // 응답 데이터를 문자열로 변환하여 출력
-                if let dataString = String(data: JSONdata, encoding: .utf8) {
-                    print("Response Data String: \(dataString)")
-                    completion(true)
-                } else {
-                    print("🚨 Error: Unable to convert data to string")
-                    completion(true)
-                }
-                let decoder = JSONDecoder()
-                do {
-                    // JSON 데이터를 User 구조체로 디코딩
-                    let user = try decoder.decode(User.self, from: JSONdata)
-                    print("✅ Success: \(user)")
-
-                    // userRole에서 "ROLE_" 부분을 제거
-                    DispatchQueue.global().async {
-                        let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
-                        UserDefaults.standard.set(user.name, forKey: "userName")
-                        UserDefaults.standard.set(user.part, forKey: "userPart")
-                        UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")
-                        UserDefaults.standard.set(user.generation, forKey: "userGeneration")
-                        UserDefaults.standard.setValue(user.totalBonus, forKey: "userTotalBonus")
-                        UserDefaults.standard.setValue(user.totalMinus, forKey: "userTotalMinus")
-                        UserDefaults.standard.setValue(user.pangoolPoint, forKey: "pangoolPoint")
-                        print("🥶 \(user.totalBonus) // \(String(describing: UserDefaults.standard.string(forKey: "userTotalBonus")))")
-                        print("🥶 \(user.totalMinus) // \(String(describing: UserDefaults.standard.string(forKey: "userTotalMinus")))")
-                    }
-                   
-                } catch {
-                    print("🚨 Decoding Error:", error)
-                    completion(true)
-                }
-            }
-            task.resume()
-        }
-    }
 }
