@@ -6,12 +6,27 @@
 //
 
 import UIKit
-
-import UIKit
+import Then
+import SnapKit
 
 class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     private var scoreRecords: [ReasonPardnerShip] = []
     var collectionView : UICollectionView
+    private let unRegisterView = UIView().then { view in
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 8.0
+        view.backgroundColor = .pard.blackCard
+    }
+    private let unResgiterLabel = UILabel().then { label in
+        label.text = "파드에 등록되지 않은 이메일 이거나\n 혹은 파드너십 및 벌점 목록이 비어있습니다."
+        label.numberOfLines = 2
+        label.textColor = .pard.gray10
+        label.textAlignment = .center
+        label.font = .pardFont.body6
+        label.setLineSpacing(spacing: 10)
+    }
+    
+    
     
     override init(frame: CGRect) {
        let layout = UICollectionViewFlowLayout()
@@ -31,11 +46,10 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if !scoreRecords.isEmpty {
-            print("스코어 레코드 변수에 데이터가 들어 있습니다 ☺️☺️")
+        if scoreRecords.isEmpty {
             setupCollectionView()
         } else {
-            print("스코어 레코드 변수에 데이터가 들어있지 않습니다 🤪")
+            setupCollectionView()
         }
     }
     
@@ -56,19 +70,36 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         collectionView.layer.masksToBounds = true
         
         addSubview(collectionView)
+        addSubview(unRegisterView)
+        unRegisterView.addSubview(unResgiterLabel)
         
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        unRegisterView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        unResgiterLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
     }
 
     func configure(with records: [ReasonPardnerShip]) {
         self.scoreRecords = records
         print("✅ ScoreRecordsView - Configure: \(records)")
+        if records.isEmpty {
+            collectionView.isHidden = true
+            unRegisterView.isHidden = false
+            unResgiterLabel.isHidden = false
+        } else {
+            collectionView.isHidden = false
+            unRegisterView.isHidden = true
+            unResgiterLabel.isHidden = true
+        }
         collectionView.reloadData()
     }
     
