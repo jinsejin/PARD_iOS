@@ -32,13 +32,13 @@ extension UILabel {
 extension UILabel {
     func setLineSpacing(spacing: CGFloat) {
         guard let text = text else { return }
-        
-        let attributeString = NSMutableAttributedString(string: text)
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = spacing
-        attributeString.addAttribute(.paragraphStyle,
-                                     value: style,
-                                     range: NSRange(location: 0, length: attributeString.length))
-        attributedText = attributeString
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+        paragraphStyle.alignment = .center
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+
+        self.attributedText = attributedString
     }
 }

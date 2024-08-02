@@ -196,6 +196,16 @@ extension UserInfoPolicyViewController {
         setUpUI()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             getUsersMe()
+            getRankMe { rank in
+                if let rank = rank {
+                    DispatchQueue.main.async {
+                        print("Success: getRankMe!!")
+                        UserDefaults.standard.setValue(rank.partRanking, forKey: "partRanking")
+                        UserDefaults.standard.setValue(rank.totalRanking, forKey: "totalRanking")
+                    }
+                }
+                
+            }
         }
     }
     
