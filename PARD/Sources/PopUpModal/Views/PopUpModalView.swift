@@ -52,7 +52,7 @@ final class PopUpModalView: UIView {
         dismissAction: (() -> Void)?
     ) {
         self.titleLabel.text = title
-        self.titleLabel.textColor = .GradientColor.gra
+        self.titleLabel.textColor = UIColor.gradientColor.gra
         self.bodyLabel.text = body
         self.bodyLabel.textColor = .pard.white100
         if let imageName = image, !imageName.isEmpty {
@@ -94,7 +94,7 @@ final class PopUpModalView: UIView {
         addGestureRecognizer(UITapGestureRecognizer())
         backgroundColor = .pard.blackBackground
         layer.cornerRadius = 8
-        layer.borderColor = UIColor.GradientColor.gra.cgColor
+        layer.borderColor = UIColor.gradientColor.gra.cgColor
         layer.borderWidth = 1
         
         buttonsStackView.spacing = 16
@@ -127,7 +127,7 @@ final class PopUpModalView: UIView {
 
     private func setupButtons() {
         configureButtonAppearance(button: cancelButton, backgroundColor: .pard.blackCard, titleColor: .pard.white100, action: #selector(didTapLeftButton))
-        configureButtonAppearance(button: confirmButton, backgroundColor: .GradientColor.gra, titleColor: .pard.white100, action: #selector(didTapRightButton))
+        configureButtonAppearance(button: confirmButton, backgroundColor: .gradientColor.gra, titleColor: .pard.white100, action: #selector(didTapRightButton))
     }
 
     private func setupLabels() {

@@ -14,7 +14,7 @@ class EventTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.layer.cornerRadius = 4
         label.layer.borderWidth = 1.0
-        label.layer.borderColor = UIColor.GradientColor.gra.cgColor
+        label.layer.borderColor = UIColor.gradientColor.gra.cgColor
         label.layer.masksToBounds = true
     }
    

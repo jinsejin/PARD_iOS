@@ -45,7 +45,7 @@ class HomeUpcommingView : UIView {
         $0.font = .pardFont.body2
         $0.textAlignment = .center
         $0.textColor = .pard.white100
-        $0.backgroundColor = .GradientColor.gra
+
         $0.layer.cornerRadius = 4
         $0.layer.masksToBounds = true
     }
@@ -107,6 +107,7 @@ class HomeUpcommingView : UIView {
         stackView.addArrangedSubview(eventDateLabel)
         stackView.addArrangedSubview(eventLocationLabel)
         
+        eventTypeLabel.backgroundColor = .gradientColor.gra
         upcommingLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
