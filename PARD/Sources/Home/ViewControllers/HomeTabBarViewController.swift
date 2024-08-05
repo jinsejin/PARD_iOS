@@ -4,14 +4,13 @@
 //
 //  Created by 김민섭 on 3/4/24.
 //
-
 import UIKit
 
 class HomeTabBarViewController: UITabBarController {
     let floatingButton = UIButton().then { button in
         button.isHidden = false
         button.layer.cornerRadius = 40
-        button.backgroundColor = .GradientColor.gra
+        button.backgroundColor = .gradientColor.gra
         button.setImage(UIImage(named: "scan")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
     }
@@ -93,7 +92,7 @@ class HomeTabBarViewController: UITabBarController {
             tabBar.standardAppearance = appearance
         }
         
-        tabBar.tintColor = .GradientColor.gra
+        tabBar.tintColor = .gradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
     }
     
@@ -124,7 +123,7 @@ extension HomeTabBarViewController : UITabBarControllerDelegate {
         if let tabBarItemIndex = tabBarController.viewControllers?.firstIndex(of: viewController) {
             if tabBarItemIndex == 0 {
                 floatingButton.isEnabled = true
-                floatingButton.backgroundColor = .GradientColor.gra
+                floatingButton.backgroundColor = .gradientColor(frame: floatingButton.bounds)
             } else {
                 floatingButton.isEnabled = false
                 floatingButton.backgroundColor = .pard.gray30

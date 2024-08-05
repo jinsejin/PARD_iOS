@@ -22,7 +22,7 @@ final class NextBottomButton: UIView {
     public var isEnabled: Bool = true {
         didSet {
             button.isEnabled = isEnabled
-            button.backgroundColor = isEnabled ? .GradientColor.gra : .pard.gray30
+            button.backgroundColor = isEnabled ? .gradientColor.gra : .pard.gray30
         }
     }
     
@@ -45,7 +45,7 @@ final class NextBottomButton: UIView {
         button.titleLabel?.font = font
         button.setTitleColor(.pard.white100, for: .normal)
         button.setTitleColor(.pard.white100, for: .disabled)
-        button.backgroundColor = isEnabled ? .GradientColor.gra : .pard.gray30
+        button.backgroundColor = isEnabled ? .gradientColor.gra : .pard.gray30
         button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: self.topAnchor),

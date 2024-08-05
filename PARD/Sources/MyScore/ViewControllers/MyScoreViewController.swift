@@ -24,13 +24,13 @@ class MyScoreViewController: UIViewController {
     private let pardnerShipLabel = UILabel().then { label in
         label.text = "🏆 PARDNERSHIP TOP 3 🏆"
         label.font = UIFont.pardFont.head2
-        label.textColor = UIColor.GradientColor.gra
+        label.textColor = UIColor.gradientColor.gra
         label.textAlignment = .center
     }
     let labelContainerView = UIView().then { label in
         label.backgroundColor = .clear
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.GradientColor.gra.cgColor
+        label.layer.borderColor = UIColor.gradientColor.gra.cgColor
         label.layer.cornerRadius = 18
     }
     private var scoreRecordsView = ScoreRecordsView()

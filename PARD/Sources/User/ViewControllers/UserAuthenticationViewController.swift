@@ -66,7 +66,7 @@ class UserAuthenticationViewController: UIViewController, UITextFieldDelegate {
         let notiColorText = UILabel().then {
             $0.text = "PARD 등록에 사용한 전화번호"
             $0.font = .pardFont.body4
-            $0.textColor = .GradientColor.gra
+            $0.textColor = .gradientColor.gra
         }
         let notiText2 = UILabel().then {
             $0.text = "를 입력해주세요."
