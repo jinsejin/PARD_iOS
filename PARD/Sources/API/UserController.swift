@@ -63,18 +63,19 @@ func getUsersMe() {
                 // JSON 데이터를 User 구조체로 디코딩
                 let user = try decoder.decode(User.self, from: JSONdata)
                 print("✅ Success: \(user)")
-
-                // userRole에서 "ROLE_" 부분을 제거
-                let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
-                UserDefaults.standard.set(user.name, forKey: "userName")
-                UserDefaults.standard.set(user.part, forKey: "userPart")
-                UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")
-                UserDefaults.standard.set(user.generation, forKey: "userGeneration")
-                UserDefaults.standard.setValue(user.totalBonus, forKey: "userTotalBonus")
-                UserDefaults.standard.setValue(user.totalMinus, forKey: "userTotalMinus")
-                UserDefaults.standard.setValue(user.pangoolPoint, forKey: "pangoolPoint")
-                print("🥶 \(user.totalBonus) // \(UserDefaults.standard.string(forKey: "userTotalBonus"))")
-                print("🥶 \(user.totalMinus) // \(UserDefaults.standard.string(forKey: "userTotalMinus"))")
+                DispatchQueue.global().async {
+                    let roleWithoutPrefix = user.role.replacingOccurrences(of: "ROLE_", with: "")
+                    UserDefaults.standard.set(user.name, forKey: "userName")
+                    UserDefaults.standard.set(user.part, forKey: "userPart")
+                    UserDefaults.standard.set(roleWithoutPrefix, forKey: "userRole")
+                    UserDefaults.standard.set(user.generation, forKey: "userGeneration")
+                    UserDefaults.standard.setValue(user.totalBonus, forKey: "userTotalBonus")
+                    UserDefaults.standard.setValue(user.totalMinus, forKey: "userTotalMinus")
+                    UserDefaults.standard.setValue(user.pangoolPoint, forKey: "pangoolPoint")
+                    print("🥶 \(user.totalBonus) // \(String(describing: UserDefaults.standard.string(forKey: "userTotalBonus")))")
+                    print("🥶 \(user.totalMinus) // \(String(describing: UserDefaults.standard.string(forKey: "userTotalMinus")))")
+                }
+               
             } catch {
                 print("🚨 Decoding Error:", error)
             }
@@ -125,4 +126,3 @@ func deleteUser(userEmail: String) {
     }
     task.resume()
 }
-
