@@ -36,10 +36,20 @@ class UserInfoPolicyViewController: UIViewController {
         $0.layer.masksToBounds = true
     }
     
-    private let backButton = UIBarButtonItem().then {
-        $0.image = UIImage(systemName: "chevron.backward")
-        $0.tintColor = .white
-    }
+//    private let backButton = UIBarButtonItem().then {
+//        $0.image = UIImage(systemName: "chevron.backward")
+//        $0.tintColor = .white
+//    }
+    private let backButton: UIBarButtonItem = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        button.tintColor = .white
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0) // 왼쪽 여백을 10으로 설정
+        
+        let barButtonItem = UIBarButtonItem(customView: button)
+        return barButtonItem
+    }()
+
     
     private lazy var agreeButton = UIButton().then {
         let intervalSpacing = 4.0
@@ -57,6 +67,7 @@ class UserInfoPolicyViewController: UIViewController {
         $0.imageEdgeInsets = .init(top: 0, left: -halfIntervalSpacing, bottom: 0, right: halfIntervalSpacing)
         $0.titleEdgeInsets = .init(top: 0, left: halfIntervalSpacing, bottom: 0, right: -halfIntervalSpacing)
         $0.backgroundColor = .clear
+        $0.titleLabel?.font = .pardFont.head2
         $0.addTarget(self, action: #selector(tapAgreeButton), for: .touchUpInside)
     }
     
@@ -119,7 +130,11 @@ class UserInfoPolicyViewController: UIViewController {
         
         navigationItem.title = "이용약관"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pardFont.head2,
+            .foregroundColor: UIColor.pard.white100
+        ]
+        navigationController?.navigationBar.titleTextAttributes = attributes
         backButton.target = self
         backButton.action = #selector(tapBackButton)
         navigationItem.leftBarButtonItem = backButton
