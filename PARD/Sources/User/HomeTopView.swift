@@ -9,18 +9,12 @@ import UIKit
 import SnapKit
 import Then
 
-
-
 // - MARK: 원하는 View Class 사용하면 됩니다. (이름도 알맞게 변경, 추가해서 사용해주세요)
 class HomeTopView : UIView {
-    
     private var toolTipView: ToolTipView?
+    private weak var viewController : UIViewController?
     private let reuseIdentifier = "StatusCell"
-    private var isSelected : Bool = false {
-        didSet {
-            
-        }
-    }
+    private var isSelected : Bool = false
     
     private let nameLabel = UILabel().then {
         
@@ -58,6 +52,12 @@ class HomeTopView : UIView {
     
     
     private let currentPangulImage = UIImageView()
+    
+    convenience init(viewController: UIViewController) {
+        self.init(frame: .zero)
+        self.viewController = viewController
+        setUpUI()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -118,11 +118,12 @@ class HomeTopView : UIView {
     }
     
     @objc private func tappedQuestionButton() {
+        guard let viewController = self.viewController else { return }
         toolTipView = TooltipBuilder()
             .setMessage("저는 파드 포인트와 출석 점수를 먹고 자라는 ")
             .setMessage2("'팡울이'")
             .setMessage3("예요.\n오늘도 PARD에서 저와 함께 성장해가요! ☺️")
-            .setSuperview(self)
+            .setSuperview(viewController.tabBarController?.view ?? UIView())
             .setTargetView(questionimageButton)
             .setOffset(8)
             .build()
@@ -139,7 +140,7 @@ extension HomeTopView : UICollectionViewDelegate, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let dataModel = UserDataInHome.userDatas[indexPath.row]
-        cell.configureLabelUI(text: dataModel.userData)
+        cell.configureLabelUI(text: dataModel.userData, indexing: indexPath.row)
         return cell
     }
 }
@@ -175,8 +176,16 @@ class StatusCollectionViewCell : UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func configureLabelUI(text string : String) {
+    func configureLabelUI(text string : String, indexing indexPath : Int) {
         statusLabel.text = string
+        if indexPath == 0 {
+            contentView.backgroundColor = .pard.primaryBlue
+        } else if indexPath == 1 {
+            contentView.backgroundColor = .gradientColor(frame: contentView.bounds)
+        } else {
+            contentView.backgroundColor = .pard.primaryPurple
+        }
+        
     }
     
     private func setUpUI() {
@@ -187,16 +196,16 @@ class StatusCollectionViewCell : UICollectionViewCell {
         }
     }
     func updateUI() {
-            let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"
-            let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"
-            let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "oh"
-           
-            UserDataInHome.updateUserData(with: [
-                "\(userGeneration)기",
-                userPart,
-                userRole
-            ])
-        }
+        let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"
+        let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"
+        let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "oh"
+       
+        UserDataInHome.updateUserData(with: [
+            "\(userGeneration)기",
+            userPart,
+            userRole
+        ])
+    }
 }
 
 // - TODO: 이후 서버 연동시에 유저에게 알맞은 해당 데이터를 넣어야 합니다.
