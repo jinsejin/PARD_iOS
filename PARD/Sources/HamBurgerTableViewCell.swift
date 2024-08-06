@@ -21,7 +21,7 @@ class HamBurgerTableViewCell: UITableViewCell {
     }
     private let pardNotionView = UIView()
     var index: Int = 0
-    weak var delegate : MenuTableViewCellButtonTapedDelegate?
+    weak var delegate: MenuTableViewCellButtonTapedDelegate?
     
     private var isTapedButton = false {
         didSet {
@@ -39,30 +39,15 @@ class HamBurgerTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
-    
-    private var tapRecognizer: UITapGestureRecognizer!
-    
-    
-    @objc private func handleCellTap() {
-        let urlString: String
-        if subtitleLabel.text == "인스타 그램" {
-            urlString = "https://www.instagram.com/official_pard_/"
-        } else if subtitleLabel.text == "웹 사이트" {
-            urlString = "https://we-pard.com/"
-        } else {
-            return
-        }
-        
-        if let url = URL(string: urlString) {
-            delegate?.cellTapped(with: url)
-        }
-    }
+    private lazy var tapRecognizer: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTapButton))
+        return recognizer
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "menuTableView")
         self.backgroundColor = .pard.blackCard
         setUpComponent()
-        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleCellTap))
         self.addGestureRecognizer(tapRecognizer)
     }
     
@@ -81,13 +66,14 @@ class HamBurgerTableViewCell: UITableViewCell {
     
     @objc private func didTapButton() {
         isTapedButton.toggle()
-        
         self.delegate?.cellButtonTaped(index: index, isHiddenView: isTapedButton)
         contentView.addSubview(pardNotionView)
         pardNotionView.snp.makeConstraints { make in
         }
     }
+    
 }
+
 
 // - MARK: setUp UI
 extension HamBurgerTableViewCell {

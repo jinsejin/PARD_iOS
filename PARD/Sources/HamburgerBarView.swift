@@ -59,7 +59,7 @@ extension HamburgerBarView {
     }
 }
 
-extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
+extension HamburgerBarView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MenuTable.menuTableModel[section].count
     }
@@ -69,7 +69,7 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierInTableView, for: indexPath) as? HamBurgerTableViewCell  else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierInTableView, for: indexPath) as? HamBurgerTableViewCell else {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
@@ -78,7 +78,7 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
         
         let menu = MenuTable.menuTableModel[indexPath.section][indexPath.row]
         if indexPath.row == 0 && indexPath.section == 0 {
-            cell.configureCell(text: menu.subtitle, image: menu.imageNamed, isHiddenButton: false ,at: indexPath)
+            cell.configureCell(text: menu.subtitle, image: menu.imageNamed, isHiddenButton: false, at: indexPath)
             cell.index = indexPath.row
             cell.delegate = self
         } else {
@@ -86,7 +86,7 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
         }
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let customView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         customView.configureLabel(title: MenuTable.menuTableModel[section][0].title)
@@ -102,13 +102,13 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
         if section == 0 && selectedNotionView {
             let pardNotionView = PardNotionLinkView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
             return pardNotionView
-          } else {
+        } else {
             return nil
-          }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 && selectedNotionView{
+        if section == 0 && selectedNotionView {
             return 288
         } else {
             return 0
@@ -119,9 +119,9 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
         return 60
     }
 }
-// - MARK: HamburgerBarView 
-extension HamburgerBarView : MenuTableViewCellButtonTapedDelegate {
-    func cellButtonTaped(index: Int, isHiddenView : Bool) {
+
+extension HamburgerBarView: MenuTableViewCellButtonTapedDelegate {
+    func cellButtonTaped(index: Int, isHiddenView: Bool) {
         menuTableView.beginUpdates()
         selectedNotionView = isHiddenView
         menuTableView.endUpdates()
