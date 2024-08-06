@@ -26,9 +26,9 @@ class SplashViewController: UIViewController {
     
     func showMainViewController() {
         if UserDefaults.standard.bool(forKey: "isLoggedIn") {
-            navigationController?.pushViewController(UserInfoPolicyViewController(), animated: true)
+            navigationController?.pushViewController(HomeTabBarViewController(), animated: true)
         } else {
-            navigationController?.pushViewController(UserInfoPolicyViewController(), animated: true)
+            navigationController?.pushViewController(MainLoginViewController(), animated: true)
         }
     }
     
@@ -48,6 +48,7 @@ class SplashViewController: UIViewController {
     }
     
     private func setUpUI() {
+        view.backgroundColor = .pard.blackBackground
         view.addSubview(semiTitleLabel)
         view.addSubview(pardLabelImageView)
         view.addSubview(pardMainImageView)
