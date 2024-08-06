@@ -180,8 +180,8 @@ class HomeUpcommingView : UIView {
 extension HomeUpcommingView {
     private func showNoUpcomingEvents() {
         noUpcomingEventsLabel.isHidden = false
-        eventTypeLabel.isHidden = true
         eventTypeLabel.backgroundColor = .pard.blackCard
+        eventTypeLabel.isHidden = true
         eventTitleLabel.isHidden = true
         dDayLabel.isHidden = true
         eventLocationLabel.isHidden = true
