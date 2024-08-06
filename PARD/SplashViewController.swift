@@ -48,6 +48,7 @@ class SplashViewController: UIViewController {
     }
     
     private func setUpUI() {
+        view.backgroundColor = .pard.blackBackground
         view.addSubview(semiTitleLabel)
         view.addSubview(pardLabelImageView)
         view.addSubview(pardMainImageView)

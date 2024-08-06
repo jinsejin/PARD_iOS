@@ -136,7 +136,7 @@ extension HamburgerBarView: MenuTableViewCellButtonTapedDelegate {
 // - MARK: HamburgerBar HeaderView
 class HeaderView : UIView {
     private let label = UILabel().then { label in
-        label.textColor = .GradientColor.gra
+        label.textColor = .gradientColor.gra
         label.textAlignment = .center
     }
     
@@ -180,7 +180,7 @@ extension MenuTable {
             MenuTable(title: "피드백", subtitle: "세미나 구글폼", imageNamed: "googleForm")
         ],
         [
-            MenuTable(title: "공식채널", subtitle: "인스타 그램", imageNamed: "instargram"),
+            MenuTable(title: "공식채널", subtitle: "인스타그램", imageNamed: "instargram"),
             MenuTable(title: "공식채널", subtitle: "웹 사이트", imageNamed: "pardLogoInMenu")
         ]
    ]

@@ -34,13 +34,16 @@ func getReason(completion: @escaping ([ReasonPardnerShip]) -> Void) {
         let decoder = JSONDecoder()
         do {
             if let reason = try? decoder.decode(ReasonPardnerShip.self, from: JSONdata) {
-                print("✅ 성공: Reason")
+                print("✅ 성공: GetReason")
                 completion([reason])
             } else {
                 let reasonArray = try decoder.decode([ReasonPardnerShip].self, from: JSONdata)
-                print("✅ 성공: Reason")
+                print("✅ 성공: Reasons")
                 completion(reasonArray)
+                
             }
+            
+            
         } catch {
             print("🚨 디코딩 에러:", error)
         }

@@ -7,10 +7,17 @@
 
 import UIKit
 
-func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
+enum RankTop3FetchError: Error {
+    case invalidURL
+    case requestFailed
+    case noData
+    case decodingError(Error)
+}
+
+func getRankTop3(completion: @escaping (Result<[Rank], RankTop3FetchError>) -> Void) {
     guard let url = URL(string: url + "/rank/top3?generation=\(userGeneration)") else {
         print("Invalid URL")
-        completion(nil)
+        completion(.failure(.invalidURL))
         return
     }
 
@@ -18,13 +25,13 @@ func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
     let task = session.dataTask(with: url) { data, response, error in
         if let error = error {
             print("🚨 Error:", error)
-            completion(nil)
+            completion(.failure(.requestFailed))
             return
         }
 
         guard let jsonData = data else {
             print("🚨 Error: No data received")
-            completion(nil)
+            completion(.failure(.noData))
             return
         }
 
@@ -32,26 +39,28 @@ func getRankTop3(completion: @escaping ([Rank]?) -> Void) {
             let decoder = JSONDecoder()
             let ranks = try decoder.decode([Rank].self, from: jsonData)
             print("✅ \(ranks)")
-            completion(ranks)
+            completion(.success(ranks))
         } catch {
             print("🚨 Decoding Error:", error)
-            completion(nil)
+            completion(.failure(.decodingError(error)))
         }
     }
     task.resume()
 }
 
-func getRankMe(completion: @escaping ([Rank]?) -> Void) {
+func getRankMe(completion: @escaping (UserRank?) -> Void) {
     if let urlLink = URL(string: url + "/rank/me") {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: urlLink) { data, response, error in
             if let error = error {
                 print("🚨 Error:", error)
+                completion(nil)
                 return
             }
             
             guard let JSONdata = data, !JSONdata.isEmpty else {
                 print("🚨 [getuserMe] Error: No data or empty data")
+                completion(nil)
                 return
             }
             
@@ -60,16 +69,15 @@ func getRankMe(completion: @escaping ([Rank]?) -> Void) {
                 print("Response Data String: \(dataString)")
             } else {
                 print("🚨 Error: Unable to convert data to string")
+                completion(nil)
             }
             
             let decoder = JSONDecoder()
             do {
                 let userRank = try decoder.decode(UserRank.self, from: JSONdata)
                 print("✅ Success: \(userRank)")
-                UserDefaults.standard.setValue(userRank.partRanking, forKey: "partRanking")
-                UserDefaults.standard.setValue(userRank.totalRanking, forKey: "totalRanking")
-                
-                // MARK: - debuging을 위한 코드입니다.
+                completion(userRank)
+                // MARK: debuging을 위한 코드입니다.
 //                print("---> \(userRank.partRanking)")
 //                print("---> \(userRank.totalRanking)")
                 

@@ -63,7 +63,6 @@ class ScheduleDataList {
                 return
             }
             
-            // Logging the response data as string (optional)
             if let dataString = String(data: data, encoding: .utf8) {
                 print("✅ Get Schedule Response Data String: \(dataString)")
             }
@@ -81,9 +80,6 @@ class ScheduleDataList {
         
         task.resume()
     }
-//    func getData() {
-//
-//    }
 }
 
 enum ScheduleFetchError: Error {
