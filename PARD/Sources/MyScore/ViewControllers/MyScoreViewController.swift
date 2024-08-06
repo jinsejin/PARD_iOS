@@ -585,6 +585,8 @@ class MyScoreViewController: UIViewController {
         toggleToolTip()
     }
     
+    private var backgroundTapGesture: UITapGestureRecognizer?
+
     private func toggleToolTip() {
         if toolTipView == nil {
             let toolTip = ToolTIpViewInMyScore()
@@ -596,12 +598,29 @@ class MyScoreViewController: UIViewController {
                 make.height.equalTo(200)
             }
             toolTipView = toolTip
-        } else {
-            toolTipView?.removeFromSuperview()
-            toolTipView = nil
+            
+            backgroundTapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+            backgroundTapGesture?.cancelsTouchesInView = false
+            view.addGestureRecognizer(backgroundTapGesture!)
+            
+            toolTipView?.isUserInteractionEnabled = true
+            let toolTipTapGesture = UITapGestureRecognizer(target: self, action: #selector(dummyAction))
+            toolTipView?.addGestureRecognizer(toolTipTapGesture)
         }
     }
     
+    @objc private func backgroundTapped() {
+        toolTipView?.removeFromSuperview()
+        toolTipView = nil
+        
+        if let gesture = backgroundTapGesture {
+            view.removeGestureRecognizer(gesture)
+        }
+    }
+    
+    @objc private func dummyAction() {
+        
+    }
     
     private func setupScoreRecordsView() {
         let scoreRecordsTitleLabel = UILabel().then {
