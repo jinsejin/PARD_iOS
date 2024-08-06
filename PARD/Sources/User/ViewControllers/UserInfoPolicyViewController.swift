@@ -57,7 +57,7 @@ class UserInfoPolicyViewController: UIViewController {
         $0.setTitle("서비스 이용약관 전체 동의", for: .normal)
         $0.setTitleColor(UIColor.pard.white100, for: .normal)
         $0.setImage(
-            UIImage(systemName: "checkmark.square.fill")?
+            UIImage(named: "checkBox")?
             .withTintColor(UIColor.pard.gray30),
             for: .normal
         )
@@ -90,7 +90,7 @@ class UserInfoPolicyViewController: UIViewController {
         configureButton(
             $0,
             title: "개인정보 수집 및 이용동의 (필수)",
-            image: UIImage(systemName: "checkmark"),
+            image: UIImage(named: "checkMark"),
             target: self ,
             action: #selector(firstTapCheckAgree)
         )
@@ -105,7 +105,7 @@ class UserInfoPolicyViewController: UIViewController {
         configureButton(
             $0,
             title: "서비스 이용약관(필수)",
-            image: UIImage(systemName: "checkmark"),
+            image: UIImage(named: "checkMark"),
             target: self ,
             action: #selector(secondTapCheckAgree)
         )
