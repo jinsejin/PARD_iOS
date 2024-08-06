@@ -23,16 +23,15 @@ class MyPageViewController: UIViewController {
             view.addSubview(scrollView)
             scrollView.addSubview(contentView)
             
-            // Add all your UI elements to the contentView
             contentView.addSubview(myPageLabel)
             contentView.addSubview(feedbackView)
             feedbackView.addSubview(feedbackLabel)
             feedbackView.layer.insertSublayer(gradientLayer(), at: 0)
             feedbackView.addSubview(feedbackActionLabel)
             feedbackView.addSubview(feedbackActionView)
-            feedbackActionView.addSubview(feedbackActionLabel)
-            feedbackActionView.addSubview(feedbackArrowImageView)
-            feedbackActionView.addSubview(feedbackArrowImageView2)
+            feedbackView.addSubview(feedbackActionLabel)
+            feedbackView.addSubview(feedbackArrowImageView)
+            feedbackView.addSubview(feedbackArrowImageView2)
             
             contentView.addSubview(infoView)
             infoView.addSubview(statusStackView)
@@ -76,7 +75,8 @@ class MyPageViewController: UIViewController {
         
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.width.height.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalTo(deleteAccountArrowButton.snp.bottom).offset(10)
         }
         
         myPageLabel.snp.makeConstraints { make in
@@ -102,26 +102,18 @@ class MyPageViewController: UIViewController {
             make.centerY.equalTo(feedbackView.snp.centerY)
         }
         
-        
-        feedbackActionView.snp.makeConstraints { make in
-            make.trailing.equalTo(feedbackView.snp.trailing).offset(24)
-            make.centerY.equalTo(feedbackView.snp.centerY)
-        }
-        
         feedbackArrowImageView.snp.makeConstraints { make in
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.leading.equalTo(feedbackActionLabel.snp.trailing).offset(16)
-            make.top.equalTo(feedbackActionView.snp.top).offset(33)
-            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+            make.leading.equalTo(feedbackActionLabel.snp.trailing).offset(2)
+            make.centerY.equalTo(feedbackView.snp.centerY)
         }
         
         feedbackArrowImageView2.snp.makeConstraints { make in
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.leading.equalTo(feedbackArrowImageView.snp.trailing).offset(1)
-            make.top.equalTo(feedbackActionView.snp.top).offset(33)
-            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+            make.leading.equalTo(feedbackArrowImageView.snp.trailing).offset(-10)
+            make.centerY.equalTo(feedbackView.snp.centerY)
         }
         
         infoView.snp.makeConstraints { make in
@@ -406,7 +398,6 @@ class MyPageViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -416,7 +407,6 @@ class MyPageViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.right")
         imageView.tintColor = .white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -424,7 +414,6 @@ class MyPageViewController: UIViewController {
     
     private let feedbackActionView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
