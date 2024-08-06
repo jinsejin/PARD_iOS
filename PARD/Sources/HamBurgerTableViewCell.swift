@@ -45,7 +45,7 @@ class HamBurgerTableViewCell: UITableViewCell {
     
     @objc private func handleCellTap() {
         let urlString: String
-        if subtitleLabel.text == "인스타 그램" {
+        if subtitleLabel.text == "인스타그램" {
             urlString = "https://www.instagram.com/official_pard_/"
         } else if subtitleLabel.text == "웹 사이트" {
             urlString = "https://we-pard.com/"
