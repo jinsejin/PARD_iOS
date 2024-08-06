@@ -164,7 +164,7 @@ class StatusCollectionViewCell : UICollectionViewCell {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .GradientColor.gra
+        contentView.backgroundColor = .gradientColor.gra
         contentView.layer.cornerRadius = 12.0
         contentView.layer.masksToBounds = true
         setUpUI()

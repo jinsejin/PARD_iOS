@@ -354,7 +354,7 @@ class MyScoreViewController: UIViewController {
             $0.backgroundColor = UIColor.pard.blackCard
             $0.layer.cornerRadius = 8
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.GradientColor.gra.cgColor
+            $0.layer.borderColor = UIColor.gradientColor.gra.cgColor
         }
         contentView.addSubview(myScoreBorderView)
         
@@ -369,7 +369,7 @@ class MyScoreViewController: UIViewController {
             $0.backgroundColor = UIColor.pard.blackCard
             $0.layer.cornerRadius = 8
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.GradientColor.gra.cgColor
+            $0.layer.borderColor = UIColor.gradientColor.gra.cgColor
         }
         contentView.addSubview(totalScoreBorderView)
         

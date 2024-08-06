@@ -26,9 +26,9 @@ class SplashViewController: UIViewController {
     
     func showMainViewController() {
         if UserDefaults.standard.bool(forKey: "isLoggedIn") {
-            navigationController?.pushViewController(HomeTabBarViewController(), animated: true)
+            navigationController?.pushViewController(UserInfoPolicyViewController(), animated: true)
         } else {
-            navigationController?.pushViewController(MainLoginViewController(), animated: true)
+            navigationController?.pushViewController(UserInfoPolicyViewController(), animated: true)
         }
     }
     

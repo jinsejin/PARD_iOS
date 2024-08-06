@@ -78,7 +78,7 @@ class UserInfoPolicyViewController: UIViewController {
     private lazy var firstCheckAgreeButton = UIButton().then {
         configureButton(
             $0,
-            title: "개인정보 수집및 이용동의(필수)",
+            title: "개인정보 수집 및 이용동의 (필수)",
             image: UIImage(systemName: "checkmark"),
             target: self ,
             action: #selector(firstTapCheckAgree)
@@ -93,7 +93,7 @@ class UserInfoPolicyViewController: UIViewController {
     private lazy var secondCheckAgreeButton = UIButton().then {
         configureButton(
             $0,
-            title: "서비스 이용 약관(필수)",
+            title: "서비스 이용약관(필수)",
             image: UIImage(systemName: "checkmark"),
             target: self ,
             action: #selector(secondTapCheckAgree)
@@ -128,9 +128,9 @@ class UserInfoPolicyViewController: UIViewController {
     
     private func setUpserviceInfoLabelText() {
         serviceInfoLabel.attributedText = NSMutableAttributedString()
-            .regular(string: "서비스 이용 및 이용을 위해 \n", fontSize: 14, fontColor: .pard.gray30)
+            .regular(string: "서비스 가입 및 이용을 위해 \n", fontSize: 14, fontColor: .pard.gray30)
             .blueHighlight("서비스 이용약관", font: .pardFont.body4)
-            .regular(string: "에 동의하세요.", fontSize: 14, fontColor: .pard.gray30)
+            .regular(string: "에 동의해주세요.", fontSize: 14, fontColor: .pard.gray30)
     }
     
     private func configureButton(_ button: UIButton, title: String, image: UIImage?, target: Any?, action: Selector) {
