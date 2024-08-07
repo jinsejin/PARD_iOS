@@ -20,53 +20,63 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .pard.blackBackground
     }
     private func setupUI() {
-            view.addSubview(scrollView)
-            scrollView.addSubview(contentView)
-            
-            contentView.addSubview(myPageLabel)
-            contentView.addSubview(feedbackView)
-            feedbackView.addSubview(feedbackLabel)
-            feedbackView.layer.insertSublayer(gradientLayer(), at: 0)
-            feedbackView.addSubview(feedbackActionLabel)
-            feedbackView.addSubview(feedbackActionView)
-            feedbackView.addSubview(feedbackActionLabel)
-            feedbackView.addSubview(feedbackArrowImageView)
-            feedbackView.addSubview(feedbackArrowImageView2)
-            
-            contentView.addSubview(infoView)
-            infoView.addSubview(statusStackView)
-            contentView.addSubview(infoLabel)
-            
-            statusLabel2.backgroundColor = UIColor(patternImage: gradientImage())
-            statusStackView.addArrangedSubview(statusLabel1)
-            statusStackView.addArrangedSubview(statusLabel2)
-            statusStackView.addArrangedSubview(statusLabel3)
-            contentView.addSubview(nameLabel)
-            
-            contentView.addSubview(settingsLabel)
-            contentView.addSubview(notificationSettingView)
-            notificationSettingView.addSubview(notificationSettingLabel)
-            notificationSettingView.addSubview(notificationSwitch)
-            
-            contentView.addSubview(usageGuideLabel)
-            contentView.addSubview(usageGuideView)
-            usageGuideView.addSubview(privacyPolicyLabel)
-            usageGuideView.addSubview(termsOfServiceLabel)
-            usageGuideView.addSubview(personalInfoArrowView)
-            usageGuideView.addSubview(serviceInfoArrowView)
-            usageGuideView.addSubview(personalInfoArrowButton)
-            usageGuideView.addSubview(serviceInfoArrowButton)
-            
-            contentView.addSubview(accountLabel)
-            contentView.addSubview(accountView)
-            accountView.addSubview(logoutLabel)
-            accountView.addSubview(deleteAccountLabel)
-            
-            accountView.addSubview(logoutArrowView)
-            accountView.addSubview(deleteAccountArrowView)
-            accountView.addSubview(logoutArrowButton)
-            accountView.addSubview(deleteAccountArrowButton)
-        }
+        view.addSubview(myPageLabel)
+        
+        view.addSubview(feedbackView)
+        feedbackView.addSubview(feedbackLabel)
+        feedbackView.layer.insertSublayer(gradientLayer(), at: 0)
+        feedbackView.addSubview(feedbackActionLabel)
+        feedbackView.addSubview(feedbackActionView)
+        feedbackActionView.addSubview(feedbackActionLabel)
+        feedbackActionView.addSubview(feedbackArrowImageView)
+        feedbackActionView.addSubview(feedbackArrowImageView2)
+        
+        view.addSubview(infoView)
+        infoView.addSubview(statusStackView)
+        view.addSubview(infoLabel)
+        
+        statusLabel2.backgroundColor = UIColor(patternImage: gradientImage())
+        statusStackView.addArrangedSubview(statusLabel1)
+        statusStackView.addArrangedSubview(statusLabel2)
+        statusStackView.addArrangedSubview(statusLabel3)
+        view.addSubview(nameLabel)
+        
+        view.addSubview(settingsLabel)
+        view.addSubview(notificationSettingView)
+        notificationSettingView.addSubview(notificationSettingLabel)
+        notificationSettingView.addSubview(notificationSwitch)
+        
+        view.addSubview(usageGuideLabel)
+        view.addSubview(usageGuideView)
+        usageGuideView.addSubview(privacyPolicyLabel)
+        usageGuideView.addSubview(termsOfServiceLabel)
+        usageGuideView.addSubview(personalInfoArrowView)
+        usageGuideView.addSubview(serviceInfoArrowView)
+        usageGuideView.addSubview(personalInfoArrowButton)
+        usageGuideView.addSubview(serviceInfoArrowButton)
+        
+        view.addSubview(accountLabel)
+        view.addSubview(accountView)
+        accountView.addSubview(logoutLabel)
+        accountView.addSubview(deleteAccountLabel)
+        
+        accountView.addSubview(logoutArrowView)
+        accountView.addSubview(deleteAccountArrowView)
+        accountView.addSubview(logoutArrowButton)
+        accountView.addSubview(deleteAccountArrowButton)
+        
+        let privacyPolicyTopHalf = UIView()
+        let termsOfServiceBottomHalf = UIView()
+        
+        let logoutTopHalf = UIView()
+        let deleteAccountBottomHalf = UIView()
+        
+        usageGuideView.addSubview(privacyPolicyTopHalf)
+        usageGuideView.addSubview(termsOfServiceBottomHalf)
+        
+        accountView.addSubview(logoutTopHalf)
+        accountView.addSubview(deleteAccountBottomHalf)
+    }
     
     private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
@@ -256,6 +266,54 @@ class MyPageViewController: UIViewController {
         serviceInfoArrowButton.addTarget(self, action: #selector(aboutServiceTapped), for: .touchUpInside)
         logoutArrowButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
         deleteAccountArrowButton.addTarget(self, action: #selector(deleteAccountTapped), for: .touchUpInside)
+        
+        // 개인정보 처리방침 뷰에 제스처 추가
+        let personalInfoTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(personalInfoTapped))
+        let personalInfoView = UIView()
+        personalInfoView.addGestureRecognizer(personalInfoTapGestureRecognizer)
+        personalInfoView.isUserInteractionEnabled = true
+        usageGuideView.addSubview(personalInfoView)
+        
+        personalInfoView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(usageGuideView)
+            make.bottom.equalTo(usageGuideView.snp.centerY)
+        }
+        
+        // 서비스 이용약관 뷰에 제스처 추가
+        let serviceInfoTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(aboutServiceTapped))
+        let serviceInfoView = UIView()
+        serviceInfoView.addGestureRecognizer(serviceInfoTapGestureRecognizer)
+        serviceInfoView.isUserInteractionEnabled = true
+        usageGuideView.addSubview(serviceInfoView)
+        
+        serviceInfoView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(usageGuideView)
+            make.top.equalTo(usageGuideView.snp.centerY)
+        }
+        
+        // 로그아웃 뷰에 제스처 추가
+        let logoutTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoutTapped))
+        let logoutView = UIView()
+        logoutView.addGestureRecognizer(logoutTapGestureRecognizer)
+        logoutView.isUserInteractionEnabled = true
+        accountView.addSubview(logoutView)
+        
+        logoutView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(accountView)
+            make.bottom.equalTo(accountView.snp.centerY)
+        }
+        
+        // 계정 탈퇴 뷰에 제스처 추가
+        let deleteAccountTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountTapped))
+        let deleteAccountView = UIView()
+        deleteAccountView.addGestureRecognizer(deleteAccountTapGestureRecognizer)
+        deleteAccountView.isUserInteractionEnabled = true
+        accountView.addSubview(deleteAccountView)
+        
+        deleteAccountView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(accountView)
+            make.top.equalTo(accountView.snp.centerY)
+        }
     }
     
     @objc private func feedbackViewTapped() {
