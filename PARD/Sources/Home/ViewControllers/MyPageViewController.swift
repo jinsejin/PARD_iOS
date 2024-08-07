@@ -79,57 +79,65 @@ class MyPageViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalToSuperview()
-            make.bottom.equalTo(deleteAccountArrowButton.snp.bottom).offset(10)
-        }
+        //        contentView.snp.makeConstraints { make in
+        //            make.edges.equalToSuperview()
+        //            make.width.equalToSuperview()
+        //            make.bottom.equalTo(deleteAccountArrowButton.snp.bottom).offset(10)
+        //        }
         
         myPageLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(48)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(view.snp.top).offset(58)
+            make.left.equalTo(view.snp.left).offset(151)
+            make.right.equalTo(view.snp.right).offset(-151)
         }
         
         feedbackView.snp.makeConstraints { make in
-            make.left.equalTo(contentView.snp.left)
-            make.right.equalTo(contentView.snp.right)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
             make.height.equalTo(76)
             make.top.equalTo(myPageLabel.snp.bottom).offset(26)
         }
         
         feedbackLabel.snp.makeConstraints { make in
+            make.top.equalTo(feedbackView.snp.top).offset(16)
             make.leading.equalTo(feedbackView.snp.leading).offset(24)
-            make.centerY.equalTo(feedbackView.snp.centerY)
-           
+            make.bottom.equalTo(feedbackView.snp.bottom).offset(-16)
         }
         
         feedbackActionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(feedbackLabel.snp.trailing).offset(25)
+            make.leading.equalTo(feedbackView.snp.leading).offset(290)
+            make.top.equalTo(feedbackActionView.snp.top).offset(31)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-31)
+        }
+        
+        
+        feedbackActionView.snp.makeConstraints { make in
+            make.trailing.equalTo(feedbackView.snp.trailing).offset(-24)
             make.centerY.equalTo(feedbackView.snp.centerY)
         }
+        
         
         feedbackArrowImageView.snp.makeConstraints { make in
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.leading.equalTo(feedbackActionLabel.snp.trailing).offset(2)
-            make.centerY.equalTo(feedbackView.snp.centerY)
+            make.leading.equalTo(feedbackView.snp.leading).offset(357)
+            make.top.equalTo(feedbackActionView.snp.top).offset(33)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+            
         }
         
         feedbackArrowImageView2.snp.makeConstraints { make in
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.leading.equalTo(feedbackArrowImageView.snp.trailing).offset(-10)
-            make.centerY.equalTo(feedbackView.snp.centerY)
+            make.leading.equalTo(feedbackView.snp.leading).offset(363)
+            make.top.equalTo(feedbackActionView.snp.top).offset(33)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
         }
         
         infoView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(236)
-            make.left.equalTo(contentView.snp.left).offset(24)
-            make.right.equalTo(contentView.snp.right).offset(-24)
+            make.top.equalTo(view.snp.top).offset(236)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         infoLabel.snp.makeConstraints { make in
@@ -140,6 +148,7 @@ class MyPageViewController: UIViewController {
         statusStackView.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.top).offset(20)
             make.leading.equalTo(infoView.snp.leading).offset(24)
+            //            make.trailing.equalTo(infoView.snp.trailing).offset(-100)
             make.bottom.equalTo(infoView.snp.bottom).offset(-52)
         }
         
@@ -156,9 +165,9 @@ class MyPageViewController: UIViewController {
         }
         
         notificationSettingView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(388)
-            make.left.equalTo(contentView.snp.left).offset(24)
-            make.right.equalTo(contentView.snp.right).offset(-24)
+            make.top.equalTo(view.snp.top).offset(388)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         notificationSettingLabel.snp.makeConstraints { make in
@@ -180,9 +189,9 @@ class MyPageViewController: UIViewController {
         }
         
         usageGuideView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(494)
-            make.left.equalTo(contentView.snp.left).offset(24)
-            make.right.equalTo(contentView.snp.right).offset(-24)
+            make.top.equalTo(view.snp.top).offset(494)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         privacyPolicyLabel.snp.makeConstraints { make in
@@ -222,9 +231,9 @@ class MyPageViewController: UIViewController {
         }
         
         accountView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(646)
-            make.left.equalTo(contentView.snp.left).offset(24)
-            make.right.equalTo(contentView.snp.right).offset(-24)
+            make.top.equalTo(view.snp.top).offset(646)
+            make.left.equalTo(view.snp.left).offset(24)
+            make.right.equalTo(view.snp.right).offset(-24)
         }
         
         logoutLabel.snp.makeConstraints { make in
@@ -256,6 +265,7 @@ class MyPageViewController: UIViewController {
             make.edges.equalTo(deleteAccountArrowView).inset(-10)
         }
     }
+
     
     private func setupGestureRecognizers() {
         let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
