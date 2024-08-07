@@ -10,12 +10,11 @@ import SnapKit
 import Then
 
 class HomeViewController: UIViewController {
-    private let topView = HomeTopView().then { view in
+    private lazy var topView = HomeTopView(viewController: self).then { view in
         view.backgroundColor = .pard.blackCard
         view.layer.cornerRadius = 40.0
         view.roundCorners(corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 40)
         view.layer.masksToBounds = true
-        
     }
     
     private lazy var pardnerShipView = HomePardnerShipView(viewController: self).then {
