@@ -15,10 +15,18 @@ class UserInfoPolicyViewController: UIViewController {
     private var isTapAgreeButton : Bool = false {
         didSet {
             if isTapAgreeButton {
+                agreeButton.setImage(
+                    UIImage(named: "checkBox_fill"),
+                    for: .normal
+                )
                 agreeButton.tintColor = UIColor.pard.primaryBlue
                 agreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
                 nextBottomButton.isEnabled = true
             } else {
+                agreeButton.setImage(
+                    UIImage(named: "checkBox"),
+                    for: .normal
+                )
                 agreeButton.tintColor = UIColor.pard.gray30
                 agreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
                 nextBottomButton.isEnabled = false
@@ -36,10 +44,10 @@ class UserInfoPolicyViewController: UIViewController {
         $0.layer.masksToBounds = true
     }
     
-//    private let backButton = UIBarButtonItem().then {
-//        $0.image = UIImage(systemName: "chevron.backward")
-//        $0.tintColor = .white
-//    }
+    //    private let backButton = UIBarButtonItem().then {
+    //        $0.image = UIImage(systemName: "chevron.backward")
+    //        $0.tintColor = .white
+    //    }
     private let backButton: UIBarButtonItem = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
@@ -49,7 +57,7 @@ class UserInfoPolicyViewController: UIViewController {
         let barButtonItem = UIBarButtonItem(customView: button)
         return barButtonItem
     }()
-
+    
     
     private lazy var agreeButton = UIButton().then {
         let intervalSpacing = 4.0
@@ -57,8 +65,7 @@ class UserInfoPolicyViewController: UIViewController {
         $0.setTitle("서비스 이용약관 전체 동의", for: .normal)
         $0.setTitleColor(UIColor.pard.white100, for: .normal)
         $0.setImage(
-            UIImage(named: "checkBox")?
-            .withTintColor(UIColor.pard.gray30),
+            UIImage(named: "checkBox"),
             for: .normal
         )
         $0.tintColor = UIColor.pard.gray30
@@ -85,7 +92,7 @@ class UserInfoPolicyViewController: UIViewController {
         $0.alignment = .leading
     }
     
-
+    
     private lazy var firstCheckAgreeButton = UIButton().then {
         configureButton(
             $0,
@@ -115,9 +122,7 @@ class UserInfoPolicyViewController: UIViewController {
         $0.setTitle("서비스 이용약관 전체 동의", for: .normal)
         $0.setTitleColor(UIColor.pard.white100, for: .normal)
         $0.setImage(
-            UIImage(systemName: "checkmark.square.fill")?
-            .withTintColor(UIColor.pard.gray30),
-            for: .normal
+            UIImage(named: "checkBox_fill"), for: .normal
         )
         $0.semanticContentAttribute = .forceLeftToRight
         $0.backgroundColor = .clear
@@ -192,13 +197,13 @@ class UserInfoPolicyViewController: UIViewController {
     
     func showToast(message : String, font: UIFont) {
         guard let view = self.view else { return }
-            let toastBar = ToastBarBuilder()
-                .setMessage("서비스 이용약관에 동의해주세요.")
-                .setSuperview(view)
-                .setWidth(343)
-                .setHeight(52)
-                .build()
-            toastBar.setUpToastBarUIInSuperView()
+        let toastBar = ToastBarBuilder()
+            .setMessage("서비스 이용약관에 동의해주세요.")
+            .setSuperview(view)
+            .setWidth(343)
+            .setHeight(52)
+            .build()
+        toastBar.setUpToastBarUIInSuperView()
     }
 }
 
