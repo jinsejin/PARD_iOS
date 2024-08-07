@@ -38,8 +38,9 @@ class HomeTabBarViewController: UITabBarController {
     private func setUpTabbarView() {
         let homeViewController = HomeViewController()
         homeViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home")?.withRenderingMode(.automatic), tag: 0)
-        homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
+        homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         homeViewController.tabBarItem.selectedImage = UIImage(named: "home")?.withTintColor(.pard.primaryBlue)
+        homeViewController.tabBarController?.tabBar.itemPositioning = .centered
         
         let myPageViewController = MyPageViewController()
         myPageViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "person")?.withTintColor(.pard.gray30), tag: 1)
@@ -50,18 +51,64 @@ class HomeTabBarViewController: UITabBarController {
         let navigationMypage = UINavigationController(rootViewController: myPageViewController)
         setViewControllers([navigationHome, navigationMypage], animated: false)
         
+        let tabBarAppearance = UITabBarAppearance()
+        configureTabBarAppearance(tabBarAppearance: tabBarAppearance)
+
+        tabBar.standardAppearance = tabBarAppearance
+        if #available(iOS 15.0, *) {
+            tabBar.scrollEdgeAppearance = tabBarAppearance
+        }
+        
+        let isCompactDevice = isCompactDeviceWithHomeButton()
+        for item in tabBar.items ?? [] {
+            if !isCompactDevice {
+                item.imageInsets = UIEdgeInsets(top: 20, left: 0, bottom: -20, right: 0)
+            } else {
+                self.tabBar.itemPositioning = .centered
+            }
+        }
+
+
         setUpfloatingQRButton()
         setUpTabBarAppearance()
     }
     
+    private func isCompactDeviceWithHomeButton() -> Bool {
+            let smallDeviceScreenSizes: [CGSize] = [
+                CGSize(width: 320, height: 568), // iPhone SE (1st gen)
+                CGSize(width: 375, height: 667), // iPhone SE (2nd gen)
+                CGSize(width: 414, height: 736)  // iPhone 6,7,8
+            ]
+            let screenSize = UIScreen.main.bounds.size
+            return smallDeviceScreenSizes.contains { $0 == screenSize || CGSize(width: $0.height, height: $0.width) == screenSize }
+        }
+    
+    private func configureTabBarAppearance(tabBarAppearance: UITabBarAppearance) {
+        let itemAppearance = UITabBarItemAppearance()
+        itemAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 0)
+        itemAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 0)
+
+        tabBarAppearance.stackedLayoutAppearance = itemAppearance
+    }
+
+    
     private func setUpfloatingQRButton() {
         self.view.addSubview(floatingButton)
-                
-        floatingButton.snp.makeConstraints { make in
-            make.width.height.equalTo(80)
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.snp.bottom).offset(-24)
+        let isCompactDevice = isCompactDeviceWithHomeButton()
+        if !isCompactDevice {
+            floatingButton.snp.makeConstraints { make in
+                make.width.height.equalTo(80)
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(view.snp.bottom).offset(-34)
+            }
+        } else {
+            floatingButton.snp.makeConstraints { make in
+                make.width.height.equalTo(80)
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(view.snp.bottom).offset(-24)
+            }
         }
+        
                 
         floatingButton.addTarget(self, action: #selector(floatingQRButtonTapped), for: .touchUpInside)
     }
