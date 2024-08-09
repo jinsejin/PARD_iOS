@@ -142,7 +142,15 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     private func setUpTabBarLayout() {
-        tabBar.layer.cornerRadius = 20
+        let maskPath = UIBezierPath(
+           roundedRect: tabBar.bounds,
+           byRoundingCorners: [.topLeft, .topRight],
+           cornerRadii: CGSize(width: 20, height: 20)
+        )
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = maskPath.cgPath
+        tabBar.layer.mask = maskLayer
         tabBar.layer.masksToBounds = true
         tabBar.itemWidth = 18
         tabBar.itemPositioning = .centered
