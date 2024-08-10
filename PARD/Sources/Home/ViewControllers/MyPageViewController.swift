@@ -172,7 +172,7 @@ class MyPageViewController: UIViewController {
         
         notificationSettingLabel.snp.makeConstraints { make in
             make.centerY.equalTo(notificationSettingView)
-//            make.leading.equalTo(notificationSettingView.snp.leading).offset(24)
+            make.leading.equalTo(notificationSettingView.snp.leading).offset(24)
             make.top.equalTo(notificationSettingView.snp.top).offset(16)
             make.bottom.equalTo(notificationSettingView.snp.bottom).offset(-16)
             
