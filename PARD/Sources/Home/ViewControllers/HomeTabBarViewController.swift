@@ -21,6 +21,7 @@ class HomeTabBarViewController: UITabBarController {
         self.navigationController?.navigationBar.isHidden = false
         setUpTabbarView()
         setUpTabBarLayout()
+        setUpTabBarAppearance()
         setUpTabBarItems()
         delegate = self
     }
@@ -68,7 +69,6 @@ class HomeTabBarViewController: UITabBarController {
             }
         }
         setUpfloatingQRButton()
-        setUpTabBarAppearance()
     }
     
     private func isCompactDeviceWithHomeButton() -> Bool {
@@ -126,7 +126,6 @@ class HomeTabBarViewController: UITabBarController {
         itemAppearance.normal.iconColor = .pard.gray30
         itemAppearance.selected.iconColor = .pard.primaryBlue
         
-        
         if #available(iOS 15.0, *) {
             appearance.stackedLayoutAppearance = itemAppearance
             appearance.inlineLayoutAppearance = itemAppearance
@@ -134,23 +133,21 @@ class HomeTabBarViewController: UITabBarController {
             tabBar.standardAppearance = appearance
             tabBar.scrollEdgeAppearance = appearance
         } else {
+            appearance.stackedLayoutAppearance = itemAppearance
+            appearance.inlineLayoutAppearance = itemAppearance
+            appearance.compactInlineLayoutAppearance = itemAppearance
             tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
         }
         
+        
+        tabBar.backgroundColor = .pard.blackCard
         tabBar.tintColor = .gradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
     }
     
     private func setUpTabBarLayout() {
-        let maskPath = UIBezierPath(
-           roundedRect: tabBar.bounds,
-           byRoundingCorners: [.topLeft, .topRight],
-           cornerRadii: CGSize(width: 20, height: 20)
-        )
-        
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = maskPath.cgPath
-        tabBar.layer.mask = maskLayer
+        tabBar.layer.cornerRadius = 20
         tabBar.layer.masksToBounds = true
         tabBar.itemWidth = 18
         tabBar.itemPositioning = .centered
