@@ -382,7 +382,7 @@ class MyScoreViewController: UIViewController {
         }
         
         let rankingButton = UIButton(type: .system).then {
-            $0.setTitle("전체랭킹 확인하기", for: .normal)
+            $0.setTitle("전체 랭킹 확인하기", for: .normal)
             $0.setTitleColor(.pard.gray30, for: .normal)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
@@ -396,7 +396,7 @@ class MyScoreViewController: UIViewController {
             $0.height.equalTo(18)
         }
         
-        let attributedString = NSMutableAttributedString(string: "전체랭킹 확인하기", attributes: [
+        let attributedString = NSMutableAttributedString(string: "전체 랭킹 확인하기", attributes: [
             .font: UIFont.pardFont.body1,
             .foregroundColor: UIColor.pard.gray30
         ])
@@ -635,7 +635,7 @@ class MyScoreViewController: UIViewController {
         questionImageButton.addTarget(self, action: #selector(tappedQuestionButton), for: .touchUpInside)
         
         let scorePolicyLabel = UILabel().then {
-            $0.text = "점수정책 확인하기"
+            $0.text = "점수 정책 확인하기"
             $0.font = UIFont.pardFont.body2
             $0.textColor = .pard.primaryBlue
             $0.textAlignment = .right
