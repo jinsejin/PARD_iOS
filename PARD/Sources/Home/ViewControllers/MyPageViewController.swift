@@ -172,7 +172,7 @@ class MyPageViewController: UIViewController {
         
         notificationSettingLabel.snp.makeConstraints { make in
             make.centerY.equalTo(notificationSettingView)
-            make.leading.equalTo(notificationSettingView.snp.leading).offset(24)
+//            make.leading.equalTo(notificationSettingView.snp.leading).offset(24)
             make.top.equalTo(notificationSettingView.snp.top).offset(16)
             make.bottom.equalTo(notificationSettingView.snp.bottom).offset(-16)
             
@@ -602,10 +602,22 @@ class MyPageViewController: UIViewController {
     
     private let notificationSwitch: UISwitch = {
         let toggleSwitch = UISwitch()
-        toggleSwitch.onTintColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
-        toggleSwitch.addTarget(self, action: #selector(openNotificationSettings), for: .touchUpInside)
+        
+        toggleSwitch.transform = CGAffineTransform(scaleX: 0.80, y: 0.80)
+        
+        toggleSwitch.onTintColor = UIColor.clear // onTintColor는 사용하지 않음
+        toggleSwitch.backgroundColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 0.4)
+        toggleSwitch.layer.cornerRadius = toggleSwitch.frame.height / 1.75
+        toggleSwitch.clipsToBounds = true
+        
+        toggleSwitch.thumbTintColor = UIColor.pard.primaryBlue
+        
+        // 액션 추가
+        toggleSwitch.addTarget(self, action: #selector(notificationSwitchChanged), for: .valueChanged)
+        
         return toggleSwitch
     }()
+
     
     @objc private func notificationSwitchChanged() {
         
