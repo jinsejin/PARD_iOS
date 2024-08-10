@@ -265,7 +265,7 @@ class MyPageViewController: UIViewController {
             make.edges.equalTo(deleteAccountArrowView).inset(-10)
         }
     }
-
+    
     
     private func setupGestureRecognizers() {
         let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
@@ -370,7 +370,7 @@ class MyPageViewController: UIViewController {
                 }))
             .show(on: self)
     }
-
+    
     private func clearUserDefaults(completion: @escaping () -> Void) {
         DispatchQueue.global().async {
             let defaults = UserDefaults.standard
@@ -442,12 +442,23 @@ class MyPageViewController: UIViewController {
     
     private let feedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "운영진에게 전달하고 싶은 의견이 있나요?\n피드백 창구를 활용해보세요!"
         label.textColor = .white
         label.textAlignment = .left
+        
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        label.setLineSpacing(spacing: 5)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        
+        let attributedString = NSMutableAttributedString(
+            string: "운영진에게 전달하고 싶은 의견이 있나요?\n피드백 창구를 활용해보세요!",
+            attributes: [
+                .paragraphStyle: paragraphStyle
+            ]
+        )
+        label.attributedText = attributedString
+        
         return label
     }()
     
