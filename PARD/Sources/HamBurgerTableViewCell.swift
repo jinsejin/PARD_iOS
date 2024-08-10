@@ -97,6 +97,31 @@ extension HamBurgerTableViewCell {
         subtitleLabel.text = text
         index = cellIndexPath.row
         button.isHidden = isHiddenButton
+        
+        imageViewInCell.snp.removeConstraints()
+        subtitleLabel.snp.removeConstraints()
+        
+        if text == "PARD 노션" {
+            imageViewInCell.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.leading.equalTo(self.snp.leading).offset(20)
+            }
+            
+            subtitleLabel.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.leading.equalTo(imageViewInCell.snp.trailing).offset(10)
+            }
+        } else {
+            imageViewInCell.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.leading.equalTo(self.snp.leading).offset(24)
+            }
+            
+            subtitleLabel.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.leading.equalTo(imageViewInCell.snp.trailing).offset(10)
+            }
+        }
     }
     
     private func setUpComponent() {
