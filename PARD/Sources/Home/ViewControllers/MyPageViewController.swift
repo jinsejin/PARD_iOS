@@ -313,7 +313,6 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(accountView.snp.centerY)
         }
         
-        // 계정 탈퇴 뷰에 제스처 추가
         let deleteAccountTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountTapped))
         let deleteAccountView = UIView()
         deleteAccountView.addGestureRecognizer(deleteAccountTapGestureRecognizer)
