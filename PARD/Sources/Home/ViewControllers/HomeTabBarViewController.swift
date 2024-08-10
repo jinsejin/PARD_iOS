@@ -10,6 +10,10 @@ class HomeTabBarViewController: UITabBarController {
     let floatingButton = UIButton().then { button in
         button.isHidden = false
         button.layer.cornerRadius = 40
+        button.layer.shadowColor = UIColor.pard.white100.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowRadius = 3
         button.backgroundColor = .gradientColor.gra
         button.setImage(UIImage(named: "scan")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
