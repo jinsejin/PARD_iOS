@@ -18,11 +18,11 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         view.backgroundColor = .pard.blackCard
     }
     private let unResgiterLabel = UILabel().then { label in
-        label.text = "파드에 등록되지 않은 이메일 이거나\n 혹은 파드너십 및 벌점 목록이 비어있습니다."
+        label.text = "파드에 등록되지 않은 이메일이거나\n파드너십 및 벌점 목록이 비어있습니다."
         label.numberOfLines = 2
         label.textColor = .pard.gray10
         label.textAlignment = .center
-        label.font = .pardFont.body6
+        label.font = .pardFont.body2
         label.setLineSpacing(spacing: 10)
     }
     
