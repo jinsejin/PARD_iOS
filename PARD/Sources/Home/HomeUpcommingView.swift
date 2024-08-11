@@ -107,7 +107,7 @@ class HomeUpcommingView : UIView {
         stackView.addArrangedSubview(eventDateLabel)
         stackView.addArrangedSubview(eventLocationLabel)
         
-        eventTypeLabel.backgroundColor = .gradientColor.gra
+        
         upcommingLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(24)
@@ -206,6 +206,7 @@ extension HomeUpcommingView {
         contentLabel.text = eventContentLabelSetup(upcomingEvents[0].content, upcomingEvents[0].part)
         eventDateLabel.text = formattedDateString(from: upcomingDate)
         eventTypeLabel.text = upcomingEvents[0].part
+        eventTypeLabel.backgroundColor = .gradientColor.gra
         
     }
     
