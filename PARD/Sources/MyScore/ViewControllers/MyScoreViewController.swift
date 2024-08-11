@@ -549,7 +549,7 @@ class MyScoreViewController: UIViewController {
         
         let penaltyPointsLabel = UILabel().then {
             $0.text = "벌점"
-            $0.font = UIFont.pardFont.body3
+            $0.font = UIFont.pardFont.body2
             $0.textColor = .pard.gray10
             $0.textAlignment = .center
             $0.adjustsFontSizeToFitWidth = true
