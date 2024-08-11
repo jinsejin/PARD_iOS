@@ -38,6 +38,7 @@ extension ReaderViewController {
                             .add(title: "출석 체크")
                             .add(content: "유효하지 않은 QR 코드입니다.\n다시 시도해주세요.")
                             .add(button: .confirm(title: "확인", action: {
+                                self.navigationController?.pushViewController(HomeTabBarViewController(), animated: false)
                             }))
                             .show(on: self)
                     }
@@ -47,6 +48,7 @@ extension ReaderViewController {
                             .add(title: "출석 체크")
                             .add(image: "alreadyAttendance")
                             .add(button: .confirm(title: "세미나 입장하기", action: {
+                                self.navigationController?.pushViewController(HomeTabBarViewController(), animated: false)
                             }))
                             .show(on: self)
                     }
@@ -56,6 +58,7 @@ extension ReaderViewController {
                             .add(title: "출석 체크")
                             .add(image: "late")
                             .add(button: .confirm(title: "다음부터 안그럴게요", action: {
+                                self.navigationController?.pushViewController(HomeTabBarViewController(), animated: false)
                             }))
                             .show(on: self)
                     }
@@ -65,6 +68,8 @@ extension ReaderViewController {
                             .add(title: "출석 체크")
                             .add(image: "complete")
                             .add(button: .confirm(title: "세미나 입장하기", action: {
+                                self.navigationController?.pushViewController(HomeTabBarViewController(), animated: false)
+                                
                             }))
                             .show(on: self)
                     }
