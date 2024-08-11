@@ -74,7 +74,7 @@ extension HamburgerBarView: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 1)
+        cell.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 0.5)
         
         let menu = MenuTable.menuTableModel[indexPath.section][indexPath.row]
         if indexPath.row == 0 && indexPath.section == 0 {
@@ -86,11 +86,16 @@ extension HamburgerBarView: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let customView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         customView.configureLabel(title: MenuTable.menuTableModel[section][0].title)
-        customView.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 1)
+        customView.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 0.5)
         return customView
     }
     
@@ -138,6 +143,7 @@ class HeaderView : UIView {
     private let label = UILabel().then { label in
         label.textColor = .gradientColor.gra
         label.textAlignment = .center
+        label.font = UIFont.pardFont.body6
     }
     
     override init(frame: CGRect) {
@@ -180,8 +186,8 @@ extension MenuTable {
             MenuTable(title: "피드백", subtitle: "세미나 구글폼", imageNamed: "googleForm")
         ],
         [
-            MenuTable(title: "공식채널", subtitle: "인스타그램", imageNamed: "instargram"),
-            MenuTable(title: "공식채널", subtitle: "웹 사이트", imageNamed: "pardLogoInMenu")
+            MenuTable(title: "공식 채널", subtitle: "인스타그램", imageNamed: "instargram"),
+            MenuTable(title: "공식 채널", subtitle: "웹사이트", imageNamed: "pardLogoInMenu")
         ]
    ]
 }
