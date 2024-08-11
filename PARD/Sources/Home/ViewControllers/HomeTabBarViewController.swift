@@ -38,7 +38,7 @@ class HomeTabBarViewController: UITabBarController {
     private func setUpTabbarView() {
         let homeViewController = HomeViewController()
         homeViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home")?.withRenderingMode(.automatic), tag: 0)
-        homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
         homeViewController.tabBarItem.selectedImage = UIImage(named: "home")?.withTintColor(.pard.primaryBlue)
         homeViewController.tabBarController?.tabBar.itemPositioning = .centered
         
@@ -67,8 +67,6 @@ class HomeTabBarViewController: UITabBarController {
                 self.tabBar.itemPositioning = .centered
             }
         }
-
-
         setUpfloatingQRButton()
         setUpTabBarAppearance()
     }
@@ -99,13 +97,13 @@ class HomeTabBarViewController: UITabBarController {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-34)
+                make.bottom.equalTo(view.snp.bottom).offset(-24)
             }
         } else {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-24)
+                make.bottom.equalTo(view.snp.bottom).offset(-14)
             }
         }
         
@@ -159,7 +157,7 @@ class HomeTabBarViewController: UITabBarController {
 extension UITabBar {
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         var sizeThatFits = super.sizeThatFits(size)
-        let ratio: CGFloat = 0.15
+        let ratio: CGFloat = 0.07
         sizeThatFits.height = UIScreen.main.bounds.height * ratio
         return sizeThatFits
     }
