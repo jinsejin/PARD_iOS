@@ -10,6 +10,10 @@ class HomeTabBarViewController: UITabBarController {
     let floatingButton = UIButton().then { button in
         button.isHidden = false
         button.layer.cornerRadius = 40
+        button.layer.shadowColor = UIColor.pard.white100.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowRadius = 3
         button.backgroundColor = .gradientColor.gra
         button.setImage(UIImage(named: "scan")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
@@ -21,6 +25,7 @@ class HomeTabBarViewController: UITabBarController {
         self.navigationController?.navigationBar.isHidden = false
         setUpTabbarView()
         setUpTabBarLayout()
+        setUpTabBarAppearance()
         setUpTabBarItems()
         delegate = self
     }
@@ -38,7 +43,7 @@ class HomeTabBarViewController: UITabBarController {
     private func setUpTabbarView() {
         let homeViewController = HomeViewController()
         homeViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home")?.withRenderingMode(.automatic), tag: 0)
-        homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
         homeViewController.tabBarItem.selectedImage = UIImage(named: "home")?.withTintColor(.pard.primaryBlue)
         homeViewController.tabBarController?.tabBar.itemPositioning = .centered
         
@@ -67,10 +72,7 @@ class HomeTabBarViewController: UITabBarController {
                 self.tabBar.itemPositioning = .centered
             }
         }
-
-
         setUpfloatingQRButton()
-        setUpTabBarAppearance()
     }
     
     private func isCompactDeviceWithHomeButton() -> Bool {
@@ -99,13 +101,13 @@ class HomeTabBarViewController: UITabBarController {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-34)
+                make.bottom.equalTo(view.snp.bottom).offset(-24)
             }
         } else {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-24)
+                make.bottom.equalTo(view.snp.bottom).offset(-14)
             }
         }
         
@@ -128,7 +130,6 @@ class HomeTabBarViewController: UITabBarController {
         itemAppearance.normal.iconColor = .pard.gray30
         itemAppearance.selected.iconColor = .pard.primaryBlue
         
-        
         if #available(iOS 15.0, *) {
             appearance.stackedLayoutAppearance = itemAppearance
             appearance.inlineLayoutAppearance = itemAppearance
@@ -136,9 +137,15 @@ class HomeTabBarViewController: UITabBarController {
             tabBar.standardAppearance = appearance
             tabBar.scrollEdgeAppearance = appearance
         } else {
+            appearance.stackedLayoutAppearance = itemAppearance
+            appearance.inlineLayoutAppearance = itemAppearance
+            appearance.compactInlineLayoutAppearance = itemAppearance
             tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
         }
         
+        
+        tabBar.backgroundColor = .pard.blackCard
         tabBar.tintColor = .gradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
     }
@@ -159,7 +166,7 @@ class HomeTabBarViewController: UITabBarController {
 extension UITabBar {
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         var sizeThatFits = super.sizeThatFits(size)
-        let ratio: CGFloat = 0.15
+        let ratio: CGFloat = 0.07
         sizeThatFits.height = UIScreen.main.bounds.height * ratio
         return sizeThatFits
     }
