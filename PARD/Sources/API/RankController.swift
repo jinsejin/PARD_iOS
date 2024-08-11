@@ -78,9 +78,8 @@ func getRankMe(completion: @escaping (UserRank?) -> Void) {
                 print("✅ Success: \(userRank)")
                 completion(userRank)
                 // MARK: debuging을 위한 코드입니다.
-//                print("---> \(userRank.partRanking)")
-//                print("---> \(userRank.totalRanking)")
-                
+                // print("---> \(userRank.partRanking)")
+                // print("---> \(userRank.totalRanking)")
             } catch {
                 print("🚨 Decoding Error:", error)
             }
@@ -119,7 +118,6 @@ func getTotalRank() {
 //                    print("---> \(totalRank.part)")
 //                    print("---> \(totalRank.totalBonus)")
 //                }
-                
             } catch {
                 print("🚨 Decoding Error:", error)
             }
