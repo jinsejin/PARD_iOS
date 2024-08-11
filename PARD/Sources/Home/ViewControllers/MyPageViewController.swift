@@ -20,9 +20,11 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .pard.blackBackground
     }
     private func setupUI() {
-        view.addSubview(myPageLabel)
+        scrollView.addSubview(contentView)
         
-        view.addSubview(feedbackView)
+        contentView.addSubview(myPageLabel)
+        
+        contentView.addSubview(feedbackView)
         feedbackView.addSubview(feedbackLabel)
         feedbackView.layer.insertSublayer(gradientLayer(), at: 0)
         feedbackView.addSubview(feedbackActionLabel)
@@ -31,23 +33,23 @@ class MyPageViewController: UIViewController {
         feedbackActionView.addSubview(feedbackArrowImageView)
         feedbackActionView.addSubview(feedbackArrowImageView2)
         
-        view.addSubview(infoView)
+        contentView.addSubview(infoView)
         infoView.addSubview(statusStackView)
-        view.addSubview(infoLabel)
+        contentView.addSubview(infoLabel)
         
         statusLabel2.backgroundColor = UIColor(patternImage: gradientImage())
         statusStackView.addArrangedSubview(statusLabel1)
         statusStackView.addArrangedSubview(statusLabel2)
         statusStackView.addArrangedSubview(statusLabel3)
-        view.addSubview(nameLabel)
+        contentView.addSubview(nameLabel)
         
-        view.addSubview(settingsLabel)
-        view.addSubview(notificationSettingView)
+        contentView.addSubview(settingsLabel)
+        contentView.addSubview(notificationSettingView)
         notificationSettingView.addSubview(notificationSettingLabel)
         notificationSettingView.addSubview(notificationSwitch)
         
-        view.addSubview(usageGuideLabel)
-        view.addSubview(usageGuideView)
+        contentView.addSubview(usageGuideLabel)
+        contentView.addSubview(usageGuideView)
         usageGuideView.addSubview(privacyPolicyLabel)
         usageGuideView.addSubview(termsOfServiceLabel)
         usageGuideView.addSubview(personalInfoArrowView)
@@ -55,8 +57,8 @@ class MyPageViewController: UIViewController {
         usageGuideView.addSubview(personalInfoArrowButton)
         usageGuideView.addSubview(serviceInfoArrowButton)
         
-        view.addSubview(accountLabel)
-        view.addSubview(accountView)
+        contentView.addSubview(accountLabel)
+        contentView.addSubview(accountView)
         accountView.addSubview(logoutLabel)
         accountView.addSubview(deleteAccountLabel)
         
@@ -79,21 +81,24 @@ class MyPageViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        //        contentView.snp.makeConstraints { make in
-        //            make.edges.equalToSuperview()
-        //            make.width.equalToSuperview()
-        //            make.bottom.equalTo(deleteAccountArrowButton.snp.bottom).offset(10)
-        //        }
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+        }
         
         myPageLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(58)
-            make.left.equalTo(view.snp.left).offset(151)
-            make.right.equalTo(view.snp.right).offset(-151)
+            make.top.equalTo(contentView.snp.top).offset(0)
+            make.left.equalTo(contentView.snp.left).offset(151)
+            make.right.equalTo(contentView.snp.right).offset(-151)
         }
         
         feedbackView.snp.makeConstraints { make in
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(contentView.snp.right)
             make.height.equalTo(76)
             make.top.equalTo(myPageLabel.snp.bottom).offset(26)
         }
@@ -105,39 +110,36 @@ class MyPageViewController: UIViewController {
         }
         
         feedbackActionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(feedbackView.snp.leading).offset(290)
-            make.top.equalTo(feedbackActionView.snp.top).offset(31)
-            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-31)
+            make.leading.equalTo(feedbackActionView.snp.leading).offset(0)
+            make.top.equalTo(feedbackActionView.snp.top).offset(0)
+            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(0)
         }
-        
         
         feedbackActionView.snp.makeConstraints { make in
             make.trailing.equalTo(feedbackView.snp.trailing).offset(-24)
             make.centerY.equalTo(feedbackView.snp.centerY)
+            make.width.equalTo(80)
+            make.height.equalTo(20)
         }
-        
         
         feedbackArrowImageView.snp.makeConstraints { make in
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.leading.equalTo(feedbackView.snp.leading).offset(357)
-            make.top.equalTo(feedbackActionView.snp.top).offset(33)
-            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
-            
+            make.leading.equalTo(feedbackActionView.snp.trailing).offset(-10)
+            make.centerY.equalTo(feedbackActionView.snp.centerY)
         }
         
         feedbackArrowImageView2.snp.makeConstraints { make in
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.leading.equalTo(feedbackView.snp.leading).offset(363)
-            make.top.equalTo(feedbackActionView.snp.top).offset(33)
-            make.bottom.equalTo(feedbackActionView.snp.bottom).offset(-33)
+            make.leading.equalTo(feedbackArrowImageView.snp.trailing).offset(-8)
+            make.centerY.equalTo(feedbackActionView.snp.centerY)
         }
         
         infoView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(236)
-            make.left.equalTo(view.snp.left).offset(24)
-            make.right.equalTo(view.snp.right).offset(-24)
+            make.top.equalTo(feedbackView.snp.bottom).offset(66)
+            make.left.equalTo(contentView.snp.left).offset(24)
+            make.right.equalTo(contentView.snp.right).offset(-24)
         }
         
         infoLabel.snp.makeConstraints { make in
@@ -148,10 +150,8 @@ class MyPageViewController: UIViewController {
         statusStackView.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.top).offset(20)
             make.leading.equalTo(infoView.snp.leading).offset(24)
-            //            make.trailing.equalTo(infoView.snp.trailing).offset(-100)
             make.bottom.equalTo(infoView.snp.bottom).offset(-52)
         }
-        
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.top).offset(52)
@@ -161,13 +161,13 @@ class MyPageViewController: UIViewController {
         
         settingsLabel.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.bottom).offset(24)
-            make.leading.equalTo(infoView.snp.leading)
+            make.leading.equalTo(contentView.snp.leading).offset(24)
         }
         
         notificationSettingView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(388)
-            make.left.equalTo(view.snp.left).offset(24)
-            make.right.equalTo(view.snp.right).offset(-24)
+            make.top.equalTo(settingsLabel.snp.bottom).offset(8)
+            make.left.equalTo(contentView.snp.left).offset(24)
+            make.right.equalTo(contentView.snp.right).offset(-24)
         }
         
         notificationSettingLabel.snp.makeConstraints { make in
@@ -175,7 +175,6 @@ class MyPageViewController: UIViewController {
             make.leading.equalTo(notificationSettingView.snp.leading).offset(24)
             make.top.equalTo(notificationSettingView.snp.top).offset(16)
             make.bottom.equalTo(notificationSettingView.snp.bottom).offset(-16)
-            
         }
         
         notificationSwitch.snp.makeConstraints { make in
@@ -185,13 +184,13 @@ class MyPageViewController: UIViewController {
         
         usageGuideLabel.snp.makeConstraints { make in
             make.top.equalTo(notificationSettingView.snp.bottom).offset(24)
-            make.leading.equalTo(infoView.snp.leading)
+            make.leading.equalTo(contentView.snp.leading).offset(24)
         }
         
         usageGuideView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(494)
-            make.left.equalTo(view.snp.left).offset(24)
-            make.right.equalTo(view.snp.right).offset(-24)
+            make.top.equalTo(usageGuideLabel.snp.bottom).offset(8)
+            make.left.equalTo(contentView.snp.left).offset(24)
+            make.right.equalTo(contentView.snp.right).offset(-24)
         }
         
         privacyPolicyLabel.snp.makeConstraints { make in
@@ -204,7 +203,6 @@ class MyPageViewController: UIViewController {
             make.top.equalTo(usageGuideView.snp.top).offset(61)
             make.leading.equalTo(usageGuideView.snp.leading).offset(24)
             make.bottom.equalTo(usageGuideView.snp.bottom).offset(-17)
-            
         }
         
         personalInfoArrowView.snp.makeConstraints { make in
@@ -227,13 +225,14 @@ class MyPageViewController: UIViewController {
         
         accountLabel.snp.makeConstraints { make in
             make.top.equalTo(usageGuideView.snp.bottom).offset(24)
-            make.leading.equalTo(infoView.snp.leading)
+            make.leading.equalTo(contentView.snp.leading).offset(24)
         }
         
         accountView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(646)
-            make.left.equalTo(view.snp.left).offset(24)
-            make.right.equalTo(view.snp.right).offset(-24)
+            make.top.equalTo(accountLabel.snp.bottom).offset(8)
+            make.left.equalTo(contentView.snp.left).offset(24)
+            make.right.equalTo(contentView.snp.right).offset(-24)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-24) // 마지막 뷰에 맞춰 contentView 크기 조정
         }
         
         logoutLabel.snp.makeConstraints { make in
@@ -261,11 +260,12 @@ class MyPageViewController: UIViewController {
             make.centerY.equalTo(deleteAccountLabel)
             make.trailing.equalTo(accountView.snp.trailing).offset(-24)
         }
+        
         deleteAccountArrowButton.snp.makeConstraints { make in
             make.edges.equalTo(deleteAccountArrowView).inset(-10)
         }
     }
-    
+
     
     private func setupGestureRecognizers() {
         let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
@@ -313,6 +313,7 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(accountView.snp.centerY)
         }
         
+        // 계정 탈퇴 뷰에 제스처 추가
         let deleteAccountTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountTapped))
         let deleteAccountView = UIView()
         deleteAccountView.addGestureRecognizer(deleteAccountTapGestureRecognizer)
@@ -606,7 +607,7 @@ class MyPageViewController: UIViewController {
         
         toggleSwitch.onTintColor = UIColor.clear // onTintColor는 사용하지 않음
         toggleSwitch.backgroundColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 0.4)
-        toggleSwitch.layer.cornerRadius = toggleSwitch.frame.height / 1.75
+        toggleSwitch.layer.cornerRadius = toggleSwitch.frame.height / 1.5
         toggleSwitch.clipsToBounds = true
         
         toggleSwitch.thumbTintColor = UIColor.pard.primaryBlue
@@ -817,9 +818,11 @@ extension MyPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
+        view.addSubview(scrollView)
         setupUI()
         setupConstraints()
         setupGestureRecognizers()
+        
     }
     
     override func viewDidLayoutSubviews() {
