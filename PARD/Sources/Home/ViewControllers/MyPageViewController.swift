@@ -401,9 +401,7 @@ class MyPageViewController: UIViewController {
                 // userDefault에 있는 정보 모두 clear
                 self.clearUserDefaults()
                 
-                // 로그인 화면으로 다시 돌아가기
                 self.clearUserDefaults {
-                    // 로그인 화면으로 다시 돌아가기
                     DispatchQueue.main.async {
                         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                             sceneDelegate.setRootViewController()
