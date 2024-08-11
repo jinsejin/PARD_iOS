@@ -12,24 +12,32 @@ import SnapKit
 
 // - MARK: 개인 정보 ViewController
 class UserInfoPolicyViewController: UIViewController {
-    private var isTapAgreeButton : Bool = false {
+    private var isTapAllAgreeButton : Bool = false {
         didSet {
-            if isTapAgreeButton {
-                agreeButton.setImage(
-                    UIImage(named: "checkBox_fill"),
-                    for: .normal
-                )
-                agreeButton.tintColor = UIColor.pard.primaryBlue
-                agreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
-                nextBottomButton.isEnabled = true
+            if isTapAllAgreeButton {
+                configureForSelectedAgreeButton()
             } else {
-                agreeButton.setImage(
-                    UIImage(named: "checkBox"),
-                    for: .normal
-                )
-                agreeButton.tintColor = UIColor.pard.gray30
-                agreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
-                nextBottomButton.isEnabled = false
+                configureForDeselectedAgreeButton()
+            }
+        }
+    }
+    
+    private var isTapPersonalAgreeButton : Bool = false {
+        didSet {
+            if isTapPersonalAgreeButton {
+                setForSelectedPersonalAgreeButton()
+            } else {
+                setForNotSelectedPersonalAgreeButton()
+            }
+        }
+    }
+    
+    private var isTapServiceAgreeButton : Bool = false {
+        didSet {
+            if isTapServiceAgreeButton {
+                setForSelectedServiceAgreeButton()
+            } else {
+                setForNotSelectedServiceAgreeButton()
             }
         }
     }
@@ -43,11 +51,7 @@ class UserInfoPolicyViewController: UIViewController {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
-    
-    //    private let backButton = UIBarButtonItem().then {
-    //        $0.image = UIImage(systemName: "chevron.backward")
-    //        $0.tintColor = .white
-    //    }
+  
     private let backButton: UIBarButtonItem = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
@@ -175,19 +179,57 @@ class UserInfoPolicyViewController: UIViewController {
     }
     
     @objc private func tapAgreeButton() {
-        isTapAgreeButton.toggle()
+        isTapAllAgreeButton.toggle()
+        
+        if isTapPersonalAgreeButton == true && isTapServiceAgreeButton == false {
+            isTapServiceAgreeButton.toggle()
+        } else if isTapServiceAgreeButton == true && isTapPersonalAgreeButton == false {
+            isTapPersonalAgreeButton.toggle()
+        } else {
+            isTapPersonalAgreeButton.toggle()
+            isTapServiceAgreeButton.toggle()
+        }
     }
     
     @objc private func firstTapCheckAgree() {
-        
+        isTapPersonalAgreeButton.toggle()
+        if isTapPersonalAgreeButton {
+            guard let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-fc37c472e47941d3958765587b57e21f?pvs=4") else {
+               return
+            }
+
+            if UIApplication.shared.canOpenURL(url) {
+               UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        if isTapServiceAgreeButton && isTapPersonalAgreeButton {
+            isTapAllAgreeButton = true
+        } else {
+            isTapAllAgreeButton = false
+        }
     }
     
     @objc private func secondTapCheckAgree() {
+        isTapServiceAgreeButton.toggle()
+        if isTapServiceAgreeButton {
+            guard let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0?pvs=4") else {
+               return
+            }
+
+            if UIApplication.shared.canOpenURL(url) {
+               UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
         
+        if isTapServiceAgreeButton && isTapPersonalAgreeButton {
+            isTapAllAgreeButton = true
+        } else {
+            isTapAllAgreeButton = false
+        }
     }
     
     @objc private func changeBottomEnable() {
-        if isTapAgreeButton {
+        if isTapAllAgreeButton {
             let viewController = HomeTabBarViewController()
             navigationController?.pushViewController(viewController, animated: true)
         } else {
@@ -268,5 +310,48 @@ extension UserInfoPolicyViewController {
             make.height.equalTo(56)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-80)
         }
+    }
+}
+
+// MARK: AgrreeButton State Functions
+extension UserInfoPolicyViewController {
+    // - All AgreeButton State -
+    private func configureForSelectedAgreeButton() {
+        agreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
+        agreeButton.setImage(UIImage(systemName: "checkmark.square.fill")?.withTintColor(UIColor.pard.primaryBlue), for: .normal)
+        agreeButton.tintColor = UIColor.pard.primaryBlue
+        nextBottomButton.isEnabled = true
+      
+    }
+    
+    private func configureForDeselectedAgreeButton() {
+        agreeButton.setTitleColor(UIColor.pard.white100, for: .normal)
+        agreeButton.setImage(UIImage(systemName: "checkmark.square.fill")?.withTintColor(UIColor.pard.gray30), for: .normal)
+        agreeButton.tintColor = UIColor.pard.gray30
+        nextBottomButton.isEnabled = false
+    }
+    
+    // - ServiceAgreeButton State -
+    private func setForSelectedPersonalAgreeButton() {
+        
+        firstCheckAgreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
+        firstCheckAgreeButton.setImage(UIImage(named: "checkMark")?.withTintColor(UIColor.pard.primaryBlue), for: .normal)
+    }
+    
+    private func setForNotSelectedPersonalAgreeButton() {
+        firstCheckAgreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
+        firstCheckAgreeButton.setImage(UIImage(named: "checkMark")?.withTintColor(UIColor.pard.gray10), for: .normal)
+    }
+    
+    // - ServiceAgreeButton state -
+    private func setForSelectedServiceAgreeButton() {
+        
+        secondCheckAgreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
+        secondCheckAgreeButton.setImage(UIImage(named: "checkMark")?.withTintColor(UIColor.pard.primaryBlue), for: .normal)
+    }
+    
+    private func setForNotSelectedServiceAgreeButton() {
+        secondCheckAgreeButton.setTitleColor(UIColor.pard.gray10, for: .normal)
+        secondCheckAgreeButton.setImage(UIImage(named: "checkMark")?.withTintColor(UIColor.pard.gray10), for: .normal)
     }
 }

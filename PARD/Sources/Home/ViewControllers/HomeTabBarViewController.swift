@@ -10,6 +10,10 @@ class HomeTabBarViewController: UITabBarController {
     let floatingButton = UIButton().then { button in
         button.isHidden = false
         button.layer.cornerRadius = 40
+        button.layer.shadowColor = UIColor.pard.white100.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowRadius = 3
         button.backgroundColor = .gradientColor.gra
         button.setImage(UIImage(named: "scan")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
@@ -21,6 +25,7 @@ class HomeTabBarViewController: UITabBarController {
         self.navigationController?.navigationBar.isHidden = false
         setUpTabbarView()
         setUpTabBarLayout()
+        setUpTabBarAppearance()
         setUpTabBarItems()
         delegate = self
     }
@@ -68,7 +73,6 @@ class HomeTabBarViewController: UITabBarController {
             }
         }
         setUpfloatingQRButton()
-        setUpTabBarAppearance()
     }
     
     private func isCompactDeviceWithHomeButton() -> Bool {
@@ -114,7 +118,7 @@ class HomeTabBarViewController: UITabBarController {
     @objc private func floatingQRButtonTapped() {
         print("tapped qr code page")
         let QRVC = ReaderViewController()
-        navigationController?.pushViewController(QRVC, animated: true)
+        navigationController?.pushViewController(QRVC, animated: false)
     }
     
     private func setUpTabBarAppearance() {
@@ -126,7 +130,6 @@ class HomeTabBarViewController: UITabBarController {
         itemAppearance.normal.iconColor = .pard.gray30
         itemAppearance.selected.iconColor = .pard.primaryBlue
         
-        
         if #available(iOS 15.0, *) {
             appearance.stackedLayoutAppearance = itemAppearance
             appearance.inlineLayoutAppearance = itemAppearance
@@ -134,9 +137,15 @@ class HomeTabBarViewController: UITabBarController {
             tabBar.standardAppearance = appearance
             tabBar.scrollEdgeAppearance = appearance
         } else {
+            appearance.stackedLayoutAppearance = itemAppearance
+            appearance.inlineLayoutAppearance = itemAppearance
+            appearance.compactInlineLayoutAppearance = itemAppearance
             tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
         }
         
+        
+        tabBar.backgroundColor = .pard.blackCard
         tabBar.tintColor = .gradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
     }

@@ -18,6 +18,8 @@ class HamBurgerTableViewCell: UITableViewCell {
     private let subtitleLabel = UILabel().then { label in
         label.textAlignment = .center
         label.textColor = .pard.gray10
+        label.font = UIFont.pardFont.body4
+        
     }
     private let pardNotionView = UIView()
     var index: Int = 0
@@ -44,20 +46,61 @@ class HamBurgerTableViewCell: UITableViewCell {
         return recognizer
     }()
     
-    @objc private func handleCellTap() {
-        let urlString: String
-        if subtitleLabel.text == "인스타그램" {
-            urlString = "https://www.instagram.com/official_pard_/"
-        } else if subtitleLabel.text == "웹 사이트" {
-            urlString = "https://we-pard.com/"
-        } else {
+    @objc func handleCellTap() {
+        let urlString: String?
+        
+        switch subtitleLabel.text {
+        case "PARD 노션":
+            didTapButton()
             return
+        case "세미나 구글폼":
+            urlString = "https://we-pard.notion.site/a2739c33900847fd95ba4346cd4f4e24?pvs=4"
+        case "인스타그램":
+            urlString = "https://www.instagram.com/official_pard_/"
+        case "웹사이트":
+            urlString = "https://we-pard.com/"
+        default:
+            urlString = nil
         }
         
-        if let url = URL(string: urlString) {
+        if let urlString = urlString, let url = URL(string: urlString) {
             delegate?.cellTapped(with: url)
         }
     }
+
+
+    
+    @objc func didTapButton() {
+        let urlString: String?
+        
+        switch subtitleLabel.text {
+        case "PARD 노션":
+            isTapedButton.toggle()
+            self.delegate?.cellButtonTaped(index: index, isHiddenView: isTapedButton)
+            contentView.addSubview(pardNotionView)
+            pardNotionView.snp.makeConstraints { make in
+                // Add constraints if needed
+            }
+            return // 여기서 종료
+        
+        case "세미나 구글폼":
+            urlString = "https://we-pard.notion.site/a2739c33900847fd95ba4346cd4f4e24?pvs=4"
+            
+        case "인스타그램":
+            urlString = "https://www.instagram.com/official_pard_/"
+            
+        case "웹사이트":
+            urlString = "https://we-pard.com/"
+            
+        default:
+            urlString = nil
+        }
+        
+        if let urlString = urlString, let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "menuTableView")
@@ -76,14 +119,6 @@ class HamBurgerTableViewCell: UITableViewCell {
             self.backgroundColor = .pard.gray30.withAlphaComponent(0.7)
         } else {
             self.backgroundColor = .pard.blackCard
-        }
-    }
-    
-    @objc private func didTapButton() {
-        isTapedButton.toggle()
-        self.delegate?.cellButtonTaped(index: index, isHiddenView: isTapedButton)
-        contentView.addSubview(pardNotionView)
-        pardNotionView.snp.makeConstraints { make in
         }
     }
     
@@ -122,6 +157,7 @@ extension HamBurgerTableViewCell {
                 make.leading.equalTo(imageViewInCell.snp.trailing).offset(10)
             }
         }
+        self.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 0.5)
     }
     
     private func setUpComponent() {
@@ -142,4 +178,5 @@ extension HamBurgerTableViewCell {
             make.trailing.equalToSuperview().offset(-20)
         }
     }
+    
 }
