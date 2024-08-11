@@ -90,6 +90,7 @@ class RankingViewController: UIViewController {
     }
 
     @objc func backButtonTapped() {
+        removeTabBarFAB(bool: true)
         navigationController?.popViewController(animated: true)
     }
     

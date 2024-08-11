@@ -696,10 +696,12 @@ extension MyScoreViewController {
         setupScoreView()
         setupScoreStatusView()
         setupScoreRecordsView()
-        
-    
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        removeTabBarFAB(bool: true)
+    }
     
     private func removeTabBarFAB(bool : Bool) {
         tabBarController?.setTabBarVisible(visible: !bool, animated: false)
