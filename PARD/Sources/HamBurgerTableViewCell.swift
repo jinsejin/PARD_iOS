@@ -45,6 +45,7 @@ class HamBurgerTableViewCell: UITableViewCell {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTapButton))
         return recognizer
     }()
+
     
     @objc func handleCellTap() {
         let urlString: String?
@@ -117,6 +118,8 @@ class HamBurgerTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         if selected {
             self.backgroundColor = .pard.gray30.withAlphaComponent(0.7)
+            self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 1000) // 구분선 숨기기
+
         } else {
             self.backgroundColor = .pard.blackCard
         }
