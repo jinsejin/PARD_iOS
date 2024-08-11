@@ -19,7 +19,7 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.showMainViewController()
         }
     }
@@ -66,9 +66,6 @@ class SplashViewController: UIViewController {
             make.centerY.equalToSuperview()
         }
     }
-    
-    
-    
     
     
     // MARK: - Pard Design System 사용 방법을 알려주기 위한 코드들 입니다.

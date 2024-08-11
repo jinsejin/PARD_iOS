@@ -265,7 +265,7 @@ class MyPageViewController: UIViewController {
             make.edges.equalTo(deleteAccountArrowView).inset(-10)
         }
     }
-
+    
     
     private func setupGestureRecognizers() {
         let feedbackTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(feedbackViewTapped))
@@ -313,7 +313,6 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(accountView.snp.centerY)
         }
         
-        // 계정 탈퇴 뷰에 제스처 추가
         let deleteAccountTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountTapped))
         let deleteAccountView = UIView()
         deleteAccountView.addGestureRecognizer(deleteAccountTapGestureRecognizer)
@@ -370,7 +369,7 @@ class MyPageViewController: UIViewController {
                 }))
             .show(on: self)
     }
-
+    
     private func clearUserDefaults(completion: @escaping () -> Void) {
         DispatchQueue.global().async {
             let defaults = UserDefaults.standard
@@ -442,12 +441,23 @@ class MyPageViewController: UIViewController {
     
     private let feedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "운영진에게 전달하고 싶은 의견이 있나요?\n피드백 창구를 활용해보세요!"
         label.textColor = .white
         label.textAlignment = .left
+        
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        label.setLineSpacing(spacing: 5)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        
+        let attributedString = NSMutableAttributedString(
+            string: "운영진에게 전달하고 싶은 의견이 있나요?\n피드백 창구를 활용해보세요!",
+            attributes: [
+                .paragraphStyle: paragraphStyle
+            ]
+        )
+        label.attributedText = attributedString
+        
         return label
     }()
     
@@ -591,10 +601,22 @@ class MyPageViewController: UIViewController {
     
     private let notificationSwitch: UISwitch = {
         let toggleSwitch = UISwitch()
-        toggleSwitch.onTintColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 1)
-        toggleSwitch.addTarget(self, action: #selector(openNotificationSettings), for: .touchUpInside)
+        
+        toggleSwitch.transform = CGAffineTransform(scaleX: 0.80, y: 0.80)
+        
+        toggleSwitch.onTintColor = UIColor.clear // onTintColor는 사용하지 않음
+        toggleSwitch.backgroundColor = UIColor(red: 82/255, green: 98/255, blue: 245/255, alpha: 0.4)
+        toggleSwitch.layer.cornerRadius = toggleSwitch.frame.height / 1.75
+        toggleSwitch.clipsToBounds = true
+        
+        toggleSwitch.thumbTintColor = UIColor.pard.primaryBlue
+        
+        // 액션 추가
+        toggleSwitch.addTarget(self, action: #selector(notificationSwitchChanged), for: .valueChanged)
+        
         return toggleSwitch
     }()
+
     
     @objc private func notificationSwitchChanged() {
         
