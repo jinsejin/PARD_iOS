@@ -116,7 +116,7 @@ class HomeTabBarViewController: UITabBarController {
     @objc private func floatingQRButtonTapped() {
         print("tapped qr code page")
         let QRVC = ReaderViewController()
-        navigationController?.pushViewController(QRVC, animated: true)
+        navigationController?.pushViewController(QRVC, animated: false)
     }
     
     private func setUpTabBarAppearance() {
