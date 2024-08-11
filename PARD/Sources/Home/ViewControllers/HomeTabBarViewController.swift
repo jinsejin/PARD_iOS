@@ -110,8 +110,6 @@ class HomeTabBarViewController: UITabBarController {
                 make.bottom.equalTo(view.snp.bottom).offset(-14)
             }
         }
-        
-                
         floatingButton.addTarget(self, action: #selector(floatingQRButtonTapped), for: .touchUpInside)
     }
     

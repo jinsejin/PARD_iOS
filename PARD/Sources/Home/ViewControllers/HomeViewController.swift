@@ -66,7 +66,6 @@ class HomeViewController: UIViewController {
                 UIApplication.shared.open(url)
             }
         }
-        
     }
     
     @objc private func menuButtonTapped() {
