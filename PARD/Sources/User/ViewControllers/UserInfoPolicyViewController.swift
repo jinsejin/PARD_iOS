@@ -230,8 +230,12 @@ class UserInfoPolicyViewController: UIViewController {
     
     @objc private func changeBottomEnable() {
         if isTapAllAgreeButton {
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
             let viewController = HomeTabBarViewController()
-            navigationController?.pushViewController(viewController, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            
         } else {
             showToast(message: "서비스 이용약관에 동의해주세요.", font: UIFont.pardFont.body4)
         }
