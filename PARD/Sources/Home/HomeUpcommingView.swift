@@ -103,7 +103,7 @@ class HomeUpcommingView : UIView {
         addSubview(dDayLabel)
         addSubview(noUpcomingEventsLabel)
         
-        stackView.addArrangedSubview(contentLabel)
+//        stackView.addArrangedSubview(contentLabel)
         stackView.addArrangedSubview(eventDateLabel)
         stackView.addArrangedSubview(eventLocationLabel)
         
