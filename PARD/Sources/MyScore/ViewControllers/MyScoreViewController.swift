@@ -521,7 +521,12 @@ class MyScoreViewController: UIViewController {
 
         
         let partPointsValueLabel = UILabel().then {
-            $0.text = "+\(UserDefaults.standard.string(forKey: "userTotalBonus") ?? "10")점"
+            let bonus = UserDefaults.standard.string(forKey: "userTotalBonus") ?? "0"
+            if userRole.contains("ADMIN"){
+                $0.text = "-"
+            } else {
+                $0.text = "+\(bonus)점"
+            }
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.primaryGreen
             $0.textAlignment = .center
@@ -558,7 +563,12 @@ class MyScoreViewController: UIViewController {
         penaltyPointsView.addSubview(penaltyPointsLabel)
         
         let penaltyPointsValueLabel = UILabel().then {
-            $0.text = "-\(UserDefaults.standard.string(forKey: "userTotalMinus") ?? "10")점"
+            let minus = UserDefaults.standard.string(forKey: "userTotalMinus") ?? "0"
+            if userRole.contains("ADMIN"){
+                $0.text = "-"
+            } else {
+                $0.text = "+\(minus)점"
+            }
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.errorRed
             $0.textAlignment = .center

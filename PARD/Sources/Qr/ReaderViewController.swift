@@ -17,7 +17,10 @@ class ReaderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 0.6)
+        view.backgroundColor = .clear
+        readerView = QrReaderView()
+        readerView.delegate = self
+        view.addSubview(readerView)
         setAttribute()
         setupLayouts()
         readerView.start()
@@ -40,77 +43,63 @@ class ReaderViewController: UIViewController {
         readerView = QrReaderView()
         readerView.delegate = self
         view.addSubview(readerView)
+        
         titleLabel.text = "테두리 안에 출석 QR코드를 인식해주세요."
         titleLabel.font = UIFont.pardFont.head2
         titleLabel.textColor = .pard.blackBackground
         view.addSubview(titleLabel)
-        outlineIcon.image = UIImage(named: "qr_outline")
+        
+        outlineIcon.image = UIImage(named: "qr_background")
+        outlineIcon.contentMode = .scaleAspectFit
         view.addSubview(outlineIcon)
+        
         cancelButton.setImage(UIImage(named: "cancelButton"), for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         view.addSubview(cancelButton)
     }
     
     func setupLayouts() {
-        readerView.snp.makeConstraints{ make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(280)
+        readerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        titleLabel.snp.makeConstraints{ make in
-            make.bottom.equalTo(readerView.snp.top).offset(-28)
-            make.centerX.equalToSuperview()
+        
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(outlineIcon.snp.centerX)
+            make.top.equalTo(232)
         }
-        outlineIcon.snp.makeConstraints{ make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+        
+        outlineIcon.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        cancelButton.snp.makeConstraints{ make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(readerView.snp.bottom).offset(80)
+        
+        cancelButton.snp.makeConstraints { make in
+            make.centerX.equalTo(outlineIcon.snp.centerX)
+            make.top.equalTo(626)
+            make.width.height.equalTo(50)
         }
+        
+        // zPosition은 위에 쌓을 때의 순서. 즉, outlineIcon위에 cancelButton, titleLabel이 있음
+        outlineIcon.layer.zPosition = 0
+        cancelButton.layer.zPosition = 1
+        titleLabel.layer.zPosition = 1
     }
     
     @objc func cancelButtonTapped() {
-        print("button Tapped")
-        
         self.navigationController?.popViewController(animated: true)
-//        if let tabBarController = self.tabBarController {
-//            tabBarController.selectedIndex = 0
-//        }
     }
 }
 
 extension ReaderViewController: ReaderViewDelegate {
     func readerComplete(status: ReaderStatus) {
         
-        var title = ""
-        var message = ""
         switch status {
         case let .success(code):
-//            getValidQR(with: code)
-//            ModalBuilder()
-//                .add(title: "출석 체크")
-//                .add(image: "alreadyAttendance")
-//                .add(button: .confirm(title: "확인", action: {
-//                }))
-//                .show(on: self)
             guard let code = code else {
                 break
             }
             getValidQR(with: code)
-        case .fail:
-            title = "에러"
-            message = "QR코드 or 바코드를 인식하지 못했습니다.\n다시 시도해주세요."
-        case let .stop(isButtonTap):
-            if isButtonTap {
-                title = "알림"
-                message = "바코드 읽기를 멈추었습니다."
-                // self.titleLabel.isSelected = readerView.isRunning
-            } else {
-                // self.titleLabel.isSelected = readerView.isRunning
-                return
-            }
+        case .fail: break
+        case let .stop(isButtonTap): break
         }
     }
 }
