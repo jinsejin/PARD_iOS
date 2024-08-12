@@ -191,14 +191,12 @@ extension HomeUpcommingView {
     
     private func labelSetup() {
         isUpcomingevent()
-        if upcomingEvents.isEmpty || scheduleData.isEmpty {
-            showNoUpcomingEvents()
-            return
-        }
+//        if upcomingEvents.isEmpty || scheduleData.isEmpty {
+//            showNoUpcomingEvents()
+//            return
+//        }
         let upcomingDate = dateFromString(upcomingEvents[0].date)
         guard let upcomingDate else { return }
-     
-
         eventTitleLabel.text = upcomingEvents[0].content
         dDayLabel.text = "D-\(String(describing: upcomingEvents[0].remaingDay))"
 
@@ -235,15 +233,17 @@ extension HomeUpcommingView {
     }
     
     private func dateFromString(_ dateString: String) -> Date? {
-       let dateFormatter = DateFormatter()
-       dateFormatter.locale = Locale(identifier: "ko_KR")
-       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-       return dateFormatter.date(from: dateString)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS"
+        return dateFormatter.date(from: dateString)
     }
 
     private func formattedDateString(from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         dateFormatter.dateFormat = "일시 : MM월 dd일 EEEE HH:mm"
         return dateFormatter.string(from: date)
     }
