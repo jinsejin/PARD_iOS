@@ -809,8 +809,8 @@
 				CODE_SIGN_ENTITLEMENTS = PARD/PARD.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 3XQ8HFGAQN;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S65HTAH6VL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PARD/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"camera access\"";
@@ -824,8 +824,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.one.ram2.PARD-iOS";
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pard.pardOfficial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -843,8 +843,8 @@
 				CODE_SIGN_ENTITLEMENTS = PARD/PARD.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 3XQ8HFGAQN;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S65HTAH6VL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PARD/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"camera access\"";
@@ -858,8 +858,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.one.ram2.PARD-iOS";
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pard.pardOfficial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
