@@ -164,6 +164,7 @@ class HomeUpcommingView : UIView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let schedules):
+                    print("sucess getDataSchedules")
                     self?.scheduleData = schedules
                     self?.labelSetup()
                 case .failure(_):
@@ -173,7 +174,6 @@ class HomeUpcommingView : UIView {
             }
         }
     }
-   
 }
 
 // MARK: 서버에서 받아온 데이터 UI에 입히기 및 데이터 필터
@@ -191,15 +191,19 @@ extension HomeUpcommingView {
     
     private func labelSetup() {
         isUpcomingevent()
-//        if upcomingEvents.isEmpty || scheduleData.isEmpty {
-//            showNoUpcomingEvents()
-//            return
-//        }
+        print(String(describing: upcomingEvents[0].remaingDay))
+        if upcomingEvents.isEmpty || scheduleData.isEmpty {
+           
+            showNoUpcomingEvents()
+            return
+        }
         let upcomingDate = dateFromString(upcomingEvents[0].date)
-        guard let upcomingDate else { return }
-        eventTitleLabel.text = upcomingEvents[0].content
+        guard let upcomingDate else {
+            return
+        }
+        eventTitleLabel.text = upcomingEvents[0].title
         dDayLabel.text = "D-\(String(describing: upcomingEvents[0].remaingDay))"
-
+        
         eventLocationLabel.text = eventLocationLabelSetup( upcomingEvents[0].contentsLocation)
         contentLabel.text = eventContentLabelSetup(upcomingEvents[0].content, upcomingEvents[0].part)
         eventDateLabel.text = formattedDateString(from: upcomingDate)
@@ -236,7 +240,11 @@ extension HomeUpcommingView {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.timeZone = TimeZone(abbreviation: "KST")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS"
+        if dateString.contains(".") {
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS"
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        }
         return dateFormatter.date(from: dateString)
     }
 
