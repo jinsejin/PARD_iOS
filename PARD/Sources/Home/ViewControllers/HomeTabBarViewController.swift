@@ -100,13 +100,13 @@ class HomeTabBarViewController: UITabBarController {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-34)
+                make.bottom.equalTo(view.snp.bottom).offset(-40)
             }
         } else {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-14)
+                make.bottom.equalTo(view.snp.bottom).offset(-10)
             }
         }
         floatingButton.addTarget(self, action: #selector(floatingQRButtonTapped), for: .touchUpInside)
