@@ -115,7 +115,7 @@ class UserInfoPolicyViewController: UIViewController {
     private lazy var secondCheckAgreeButton = UIButton().then {
         configureButton(
             $0,
-            title: "서비스 이용약관(필수)",
+            title: "서비스 이용약관 (필수)",
             image: UIImage(named: "checkMark"),
             target: self ,
             action: #selector(secondTapCheckAgree)
