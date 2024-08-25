@@ -100,7 +100,7 @@ class UserInfoPolicyViewController: UIViewController {
     private lazy var firstCheckAgreeButton = UIButton().then {
         configureButton(
             $0,
-            title: "개인정보 수집 및 이용동의 (필수)",
+            title: "개인정보 수집 및 이용 동의 (필수)",
             image: UIImage(named: "checkMark"),
             target: self ,
             action: #selector(firstTapCheckAgree)
@@ -115,7 +115,7 @@ class UserInfoPolicyViewController: UIViewController {
     private lazy var secondCheckAgreeButton = UIButton().then {
         configureButton(
             $0,
-            title: "서비스 이용약관(필수)",
+            title: "서비스 이용약관 (필수)",
             image: UIImage(named: "checkMark"),
             target: self ,
             action: #selector(secondTapCheckAgree)
