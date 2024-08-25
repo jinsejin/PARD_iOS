@@ -142,7 +142,6 @@ class HomeTabBarViewController: UITabBarController {
             tabBar.scrollEdgeAppearance = appearance
         }
         
-        
         tabBar.backgroundColor = .pard.blackCard
         tabBar.tintColor = .gradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
