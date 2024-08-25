@@ -163,6 +163,7 @@ class HomeTabBarViewController: UITabBarController {
 extension UITabBar {
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         var sizeThatFits = super.sizeThatFits(size)
+        let ratio: CGFloat = 0.073
         sizeThatFits.height = UIScreen.main.bounds.height * ratio
         return sizeThatFits
     }
