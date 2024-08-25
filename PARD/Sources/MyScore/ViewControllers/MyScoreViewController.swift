@@ -82,7 +82,6 @@ class MyScoreViewController: UIViewController {
                 print(error.localizedDescription)
                 break
             }
-            
         }
         
         getReason { [weak self] reasons in
