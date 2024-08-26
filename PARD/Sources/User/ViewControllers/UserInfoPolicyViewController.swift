@@ -193,15 +193,7 @@ class UserInfoPolicyViewController: UIViewController {
     
     @objc private func firstTapCheckAgree() {
         isTapPersonalAgreeButton.toggle()
-        if isTapPersonalAgreeButton {
-            guard let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-fc37c472e47941d3958765587b57e21f?pvs=4") else {
-               return
-            }
-
-            if UIApplication.shared.canOpenURL(url) {
-               UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
+       
         if isTapServiceAgreeButton && isTapPersonalAgreeButton {
             isTapAllAgreeButton = true
         } else {
@@ -211,15 +203,6 @@ class UserInfoPolicyViewController: UIViewController {
     
     @objc private func secondTapCheckAgree() {
         isTapServiceAgreeButton.toggle()
-        if isTapServiceAgreeButton {
-            guard let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0?pvs=4") else {
-               return
-            }
-
-            if UIApplication.shared.canOpenURL(url) {
-               UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
         
         if isTapServiceAgreeButton && isTapPersonalAgreeButton {
             isTapAllAgreeButton = true
