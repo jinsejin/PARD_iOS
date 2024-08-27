@@ -12,7 +12,7 @@ struct ScheduleModel: Codable {
     let title: String
     let date: String
     let content: String
-    let part: String
+    var part: String
     let contentsLocation: String
     let notice: Bool
     let remaingDay: Int
