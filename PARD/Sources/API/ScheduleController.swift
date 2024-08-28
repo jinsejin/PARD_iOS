@@ -26,7 +26,7 @@ func getSchedule(for viewController: CalendarViewController) {
                     var schedules = try decoder.decode([ScheduleModel].self, from: JSONdata)
                     print("✅ Success: \(schedules)")
                 
-                    // "파트"라는 문자가 포함된 경우 이를 제거
+                    // "파트"라는 문자가 포함된 경우 제거
                     for index in schedules.indices {
                         schedules[index].part = schedules[index].part.replacingOccurrences(of: "파트", with: "")
                     }
