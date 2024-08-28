@@ -8,6 +8,7 @@
 import UIKit
 
 class HamburgerBarView: UIView {
+    private var headerView: HeaderView?
     private let identifierInTableView = "menuTableView"
     private lazy var menuTableView = UITableView().then { tableView in
         tableView.backgroundColor = .pard.blackCard
@@ -72,7 +73,7 @@ extension HamburgerBarView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifierInTableView, for: indexPath) as? HamBurgerTableViewCell else {
             return UITableViewCell()
         }
-        cell.selectionStyle = .none
+        cell.selectionStyle = .default
         cell.delegate = self
         cell.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 0.5)
         
@@ -86,17 +87,30 @@ extension HamburgerBarView: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let customView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         customView.configureLabel(title: MenuTable.menuTableModel[section][0].title)
         customView.layer.addBorder(edges: [.bottom], color: .pard.gray30, thickness: 0.5)
+        
+        if section == 0 {
+            headerView = customView
+        }
+        
         return customView
+    }
+    
+    func updateHeaderViewVisibility(isHidden: Bool) {
+        headerView?.layer.sublayers?.forEach { sublayer in
+            if sublayer.backgroundColor == UIColor.pard.gray30.cgColor {
+                sublayer.isHidden = isHidden
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

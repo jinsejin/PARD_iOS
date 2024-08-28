@@ -19,8 +19,8 @@ class HamBurgerTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.textColor = .pard.gray10
         label.font = UIFont.pardFont.body4
-        
     }
+    
     private let pardNotionView = UIView()
     var index: Int = 0
     weak var delegate: MenuTableViewCellButtonTapedDelegate?
@@ -29,11 +29,35 @@ class HamBurgerTableViewCell: UITableViewCell {
         didSet {
             if isTapedButton {
                 button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+                self.backgroundColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+                
+                self.layer.sublayers?.forEach { sublayer in
+                    if sublayer.backgroundColor == UIColor.pard.gray30.cgColor {
+                        sublayer.isHidden = true
+                    }
+                }
+                
+                if let parentView = self.superview?.superview as? HamburgerBarView {
+                    parentView.updateHeaderViewVisibility(isHidden: true)
+                }
+                
             } else {
                 button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+                self.backgroundColor = .pard.blackCard
+                
+                self.layer.sublayers?.forEach { sublayer in
+                    if sublayer.backgroundColor == UIColor.pard.gray30.cgColor {
+                        sublayer.isHidden = false
+                    }
+                }
+                
+                if let parentView = self.superview?.superview as? HamburgerBarView {
+                    parentView.updateHeaderViewVisibility(isHidden: false)
+                }
             }
         }
     }
+
     
     private lazy var button = UIButton().then { button in
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
@@ -45,7 +69,7 @@ class HamBurgerTableViewCell: UITableViewCell {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTapButton))
         return recognizer
     }()
-
+    
     
     @objc func handleCellTap() {
         let urlString: String?
@@ -68,8 +92,8 @@ class HamBurgerTableViewCell: UITableViewCell {
             delegate?.cellTapped(with: url)
         }
     }
-
-
+    
+    
     
     @objc func didTapButton() {
         let urlString: String?
@@ -80,10 +104,9 @@ class HamBurgerTableViewCell: UITableViewCell {
             self.delegate?.cellButtonTaped(index: index, isHiddenView: isTapedButton)
             contentView.addSubview(pardNotionView)
             pardNotionView.snp.makeConstraints { make in
-                // Add constraints if needed
             }
-            return // 여기서 종료
-        
+            return
+            
         case "세미나 구글폼":
             urlString = "https://we-pard.notion.site/a2739c33900847fd95ba4346cd4f4e24?pvs=4"
             
@@ -101,7 +124,7 @@ class HamBurgerTableViewCell: UITableViewCell {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "menuTableView")
@@ -116,15 +139,29 @@ class HamBurgerTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
         if selected {
-            self.backgroundColor = .pard.gray30.withAlphaComponent(0.7)
-            self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 1000) // 구분선 숨기기
-
+            self.backgroundColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            
+            // PARD 노션 셀의 구분선 숨기기
+            self.layer.sublayers?.forEach { sublayer in
+                if sublayer.backgroundColor == UIColor.pard.gray30.cgColor {
+                    sublayer.isHidden = true
+                }
+            }
+            
         } else {
             self.backgroundColor = .pard.blackCard
+            
+            // PARD 노션 셀의 구분선 다시 보이기
+            self.layer.sublayers?.forEach { sublayer in
+                if sublayer.backgroundColor == UIColor.pard.gray30.cgColor {
+                    sublayer.isHidden = false
+                }
+            }
         }
     }
-    
+
 }
 
 
