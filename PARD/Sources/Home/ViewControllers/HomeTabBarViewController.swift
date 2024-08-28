@@ -76,14 +76,14 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     private func isCompactDeviceWithHomeButton() -> Bool {
-            let smallDeviceScreenSizes: [CGSize] = [
-                CGSize(width: 320, height: 568), // iPhone SE (1st gen)
-                CGSize(width: 375, height: 667), // iPhone SE (2nd gen)
-                CGSize(width: 414, height: 736)  // iPhone 6,7,8
-            ]
-            let screenSize = UIScreen.main.bounds.size
-            return smallDeviceScreenSizes.contains { $0 == screenSize || CGSize(width: $0.height, height: $0.width) == screenSize }
-        }
+        let smallDeviceScreenSizes: [CGSize] = [
+            CGSize(width: 320, height: 568), // iPhone SE (1st gen)
+            CGSize(width: 375, height: 667), // iPhone SE (2nd gen)
+            CGSize(width: 414, height: 736)  // iPhone 6,7,8
+        ]
+        let screenSize = UIScreen.main.bounds.size
+        return smallDeviceScreenSizes.contains { $0 == screenSize || CGSize(width: $0.height, height: $0.width) == screenSize }
+    }
     
     private func configureTabBarAppearance(tabBarAppearance: UITabBarAppearance) {
         let itemAppearance = UITabBarItemAppearance()
@@ -92,7 +92,6 @@ class HomeTabBarViewController: UITabBarController {
 
         tabBarAppearance.stackedLayoutAppearance = itemAppearance
     }
-
     
     private func setUpfloatingQRButton() {
         self.view.addSubview(floatingButton)
@@ -101,13 +100,13 @@ class HomeTabBarViewController: UITabBarController {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-34)
+                make.bottom.equalTo(view.snp.bottom).offset(-40)
             }
         } else {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.snp.bottom).offset(-14)
+                make.bottom.equalTo(view.snp.bottom).offset(-10)
             }
         }
         floatingButton.addTarget(self, action: #selector(floatingQRButtonTapped), for: .touchUpInside)
@@ -150,6 +149,7 @@ class HomeTabBarViewController: UITabBarController {
     private func setUpTabBarLayout() {
         tabBar.layer.cornerRadius = 20
         tabBar.layer.masksToBounds = true
+        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         tabBar.itemWidth = 18
         tabBar.itemPositioning = .centered
     }
@@ -163,7 +163,7 @@ class HomeTabBarViewController: UITabBarController {
 extension UITabBar {
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         var sizeThatFits = super.sizeThatFits(size)
-        let ratio: CGFloat = 0.07
+        let ratio: CGFloat = 0.073
         sizeThatFits.height = UIScreen.main.bounds.height * ratio
         return sizeThatFits
     }
