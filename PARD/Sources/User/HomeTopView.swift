@@ -140,7 +140,7 @@ extension HomeTopView : UICollectionViewDelegate, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let dataModel = UserDataInHome.userDatas[indexPath.row]
-        cell.configureLabelUI(text: dataModel.userData, indexing: indexPath.row)
+        cell.configureLabelUI(text: dataModel.userData, indexPath: indexPath.row)
         return cell
     }
 }
@@ -150,61 +150,52 @@ extension HomeTopView : UICollectionViewDelegateFlowLayout {
         let modelText = UserDataInHome.userDatas[indexPath.row]
         let tempLabel = UILabel()
         tempLabel.text = modelText.userData
-        tempLabel.frame.size = tempLabel.intrinsicContentSize
-        let itemWidth = tempLabel.frame.width + 20.0
-        
+        tempLabel.font = UIFont.pardFont.body1.withSize(12)
+        tempLabel.sizeToFit()
+        let itemWidth = tempLabel.frame.width + 24
+
         return CGSize(width: itemWidth, height: collectionView.bounds.height)
-        }
+    }
 }
 
 class StatusCollectionViewCell : UICollectionViewCell {
-    private let statusLabel = UILabel().then {
+    private let statusLabel = PaddedLabel().then {
         $0.textColor = .pard.white100
         $0.font = .pardFont.body1.withSize(12)
-        $0.frame.size = $0.intrinsicContentSize
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = true
+        $0.textInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
     }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .gradientColor.gra
-        contentView.layer.cornerRadius = 12.0
+        contentView.backgroundColor = .pard.blackCard
+        contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         setUpUI()
-        updateUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    func configureLabelUI(text string : String, indexing indexPath : Int) {
-        statusLabel.text = string
-        if indexPath == 0 {
-            contentView.backgroundColor = .pard.primaryBlue
-        } else if indexPath == 1 {
-            contentView.backgroundColor = .gradientColor(frame: contentView.bounds)
-        } else {
-            contentView.backgroundColor = .pard.primaryPurple
+    func configureLabelUI(text: String, indexPath: Int) {
+        statusLabel.text = text
+        switch indexPath {
+        case 0:
+            statusLabel.backgroundColor = UIColor.pard.primaryBlue
+        case 1:
+            statusLabel.backgroundColor = UIColor.gradientColor(frame: contentView.bounds)
+        default:
+            statusLabel.backgroundColor = UIColor.pard.primaryPurple
         }
-        
     }
     
     private func setUpUI() {
         contentView.addSubview(statusLabel)
         statusLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
+            $0.edges.equalToSuperview() 
         }
-    }
-    func updateUI() {
-        let userPart = UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"
-        let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"
-        let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "oh"
-       
-        UserDataInHome.updateUserData(with: [
-            "\(userGeneration)기",
-            userPart,
-            userRole
-        ])
     }
 }
 
@@ -216,7 +207,7 @@ struct UserDataInHome {
 extension UserDataInHome {
     static var userDatas = [
         UserDataInHome(userData: "\(UserDefaults.standard.string(forKey: "userGeneration") ?? "oh")기"),
-        UserDataInHome(userData: UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"),
+        UserDataInHome(userData: UserDefaults.standard.string(forKey: "userPart") ?? "디자인 파트"),
         UserDataInHome(userData: UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"),
     ]
     static func updateUserData(with newUserData: [String]) {
