@@ -164,8 +164,8 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
             separatorView.backgroundColor = UIColor.pard.gray30
             cell.contentView.addSubview(separatorView)
             separatorView.snp.makeConstraints { make in
-                make.leading.equalTo(cell.contentView.snp.leading).offset(0)
-                make.trailing.equalTo(cell.contentView.snp.trailing).offset(0)
+                make.leading.equalTo(cell.contentView.snp.leading).offset(8)
+                make.trailing.equalTo(cell.contentView.snp.trailing).offset(-8)
                 make.bottom.equalTo(cell.contentView.snp.bottom)
                 make.height.equalTo(1)
             }
