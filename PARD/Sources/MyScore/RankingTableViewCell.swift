@@ -49,9 +49,9 @@ class RankingTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        backgroundColor = .pard.blackCard
+        backgroundColor = .pard.blackBackground
         contentView.backgroundColor = .pard.blackCard
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = 0
         contentView.layer.masksToBounds = true
         
         contentView.addSubview(rankView)
