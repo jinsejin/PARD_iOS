@@ -89,7 +89,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
     }
 
     func configure(with records: [ReasonPardnerShip]) {
-        self.scoreRecords = records
+        self.scoreRecords = records.reversed()
         print("✅ ScoreRecordsView - Configure: \(records)")
         if records.isEmpty {
             collectionView.isHidden = true
