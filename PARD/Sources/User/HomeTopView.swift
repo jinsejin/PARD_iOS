@@ -207,7 +207,7 @@ struct UserDataInHome {
 extension UserDataInHome {
     static var userDatas = [
         UserDataInHome(userData: "\(UserDefaults.standard.string(forKey: "userGeneration") ?? "oh")기"),
-        UserDataInHome(userData: UserDefaults.standard.string(forKey: "userPart") ?? "디자인 파트"),
+        UserDataInHome(userData: UserDefaults.standard.string(forKey: "userPart") ?? "잡파트"),
         UserDataInHome(userData: UserDefaults.standard.string(forKey: "userRole") ?? "간식요정"),
     ]
     static func updateUserData(with newUserData: [String]) {
