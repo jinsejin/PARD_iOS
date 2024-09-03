@@ -33,7 +33,7 @@ class RankingViewController: UIViewController {
         let horizontalPadding: CGFloat = 16
 
         let labelContainerView = UIView()
-        labelContainerView.backgroundColor = .pard.blackCard
+        labelContainerView.backgroundColor = .clear
         labelContainerView.layer.borderWidth = 1
         labelContainerView.layer.borderColor = UIColor.gradientColor.gra.cgColor
         labelContainerView.layer.cornerRadius = 18
@@ -74,7 +74,7 @@ class RankingViewController: UIViewController {
         }
         
         tableView.rowHeight = 68
-        tableView.layer.cornerRadius = 10
+//        tableView.layer.cornerRadius = 10
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         tableView.layer.masksToBounds = true
     }
@@ -164,21 +164,30 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
             separatorView.backgroundColor = UIColor.pard.gray30
             cell.contentView.addSubview(separatorView)
             separatorView.snp.makeConstraints { make in
-                make.leading.equalTo(cell.contentView.snp.leading)
-                make.trailing.equalTo(cell.contentView.snp.trailing)
+                make.leading.equalTo(cell.contentView.snp.leading).offset(8)
+                make.trailing.equalTo(cell.contentView.snp.trailing).offset(-8)
                 make.bottom.equalTo(cell.contentView.snp.bottom)
                 make.height.equalTo(1)
             }
         }
-       
+
         if indexPath.row == 0 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            cell.contentView.layer.masksToBounds = true
         }
         
         if indexPath.row == rankingData.count - 1 {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            cell.contentView.layer.masksToBounds = true
+        }
+        
+        if indexPath.row != 0 && indexPath.row != rankingData.count - 1 {
+            cell.contentView.layer.cornerRadius = 0
+            cell.contentView.layer.masksToBounds = false
         }
     }
+
+
 }
