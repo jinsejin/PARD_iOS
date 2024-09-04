@@ -697,7 +697,6 @@ extension MyScoreViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpScrollView()
-        removeTabBarFAB(bool: true)
         view.backgroundColor = .pard.blackBackground
         setupTextLabel()
         setNavigation()
@@ -709,16 +708,12 @@ extension MyScoreViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     private func removeTabBarFAB(bool : Bool) {
-        tabBarController?.setTabBarVisible(visible: !bool, animated: false)
+        self.tabBarController?.setTabBarVisible(visible: !bool, animated: false)
         if let tabBarViewController = tabBarController as? HomeTabBarViewController {
             tabBarViewController.floatingButton.isHidden = bool
         }

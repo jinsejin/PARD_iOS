@@ -95,6 +95,7 @@ extension CalendarViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
         self.tabBarController?.tabBar.isHidden = false
     }
