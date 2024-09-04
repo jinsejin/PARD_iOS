@@ -45,8 +45,6 @@ let userRole = UserDefaults.standard.string(forKey: "userRole") ?? "failed"
 let userGeneration = UserDefaults.standard.string(forKey: "userGeneration") ?? "failed"
 let totalBonus = UserDefaults.standard.integer(forKey: "userTotalBonus")
 let totalMinus = UserDefaults.standard.double(forKey: "userTotalMinus")
-let partRanking = UserDefaults.standard.integer(forKey: "partRanking")
-let totalRanking = UserDefaults.standard.integer(forKey: "totalRanking")
 let pangoolPoint = UserDefaults.standard.float(forKey: "pangoolPoint") 
 
 // MARK: - rank 데이터 관리
