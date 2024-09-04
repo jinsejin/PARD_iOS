@@ -166,7 +166,7 @@ extension UITabBar {
         let isCompactDevice = isCompactDeviceWithHomeButton()
         var ratio: CGFloat = 0.073
         if !isCompactDevice {
-             ratio = 0.083
+             ratio = 0.088
         }
         sizeThatFits.height = UIScreen.main.bounds.height * ratio
         return sizeThatFits
