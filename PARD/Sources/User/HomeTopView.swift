@@ -162,7 +162,7 @@ class StatusCollectionViewCell : UICollectionViewCell {
     private let statusLabel = PaddedLabel().then {
         $0.textColor = .pard.white100
         $0.font = .pardFont.body1.withSize(12)
-        $0.layer.cornerRadius = 10
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
         $0.textInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
     }
@@ -170,7 +170,7 @@ class StatusCollectionViewCell : UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .pard.blackCard
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = true
         setUpUI()
     }
