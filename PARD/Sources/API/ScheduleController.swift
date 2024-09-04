@@ -15,6 +15,34 @@ func getSchedule(for viewController: CalendarViewController) {
                 print("🚨 Error:", error)
                 return
             }
+//            if let JSONdata = data {
+//                // 응답 데이터를 문자열로 변환하여 출력
+//                if let dataString = String(data: JSONdata, encoding: .utf8) {
+//                    print("✅ Get Schedule Response Data String: \(dataString)")
+//                }
+//                
+//                let decoder = JSONDecoder()
+//                do {
+//                    var schedules = try decoder.decode([ScheduleModel].self, from: JSONdata)
+//                    print("✅ Success: \(schedules)")
+//                
+//                    // "파트"라는 문자가 포함된 경우 제거
+//                    for index in schedules.indices {
+//                        schedules[index].part = schedules[index].part.replacingOccurrences(of: "파트", with: "")
+//                    }
+//                    
+//                    // userEffect와 일치하는 일정만 필터링
+//                    let userEffect = UserDefaults.standard.string(forKey: "userPart") ?? "iOS" // 여기에 userEffect에 해당하는 값을 설정하세요.
+//                    let filteredSchedules = schedules.filter { $0.part == userEffect }
+//
+//                    DispatchQueue.main.async {
+//                        viewController.schedules = filteredSchedules
+//                        viewController.updateEvents()
+//                    }
+//                } catch {
+//                    print("🚨 Decoding Error:", error)
+//                }
+//            }
             if let JSONdata = data {
                 // 응답 데이터를 문자열로 변환하여 출력
                 if let dataString = String(data: JSONdata, encoding: .utf8) {
@@ -31,14 +59,21 @@ func getSchedule(for viewController: CalendarViewController) {
                         schedules[index].part = schedules[index].part.replacingOccurrences(of: "파트", with: "")
                     }
                     
+                    // userEffect에 있는 파트와 일치하거나 "전체"인 일정만 필터링
+                    let userEffects = UserDefaults.standard.string(forKey: "userPart") ?? "iOS"
+                    let filteredSchedules = schedules.filter { userEffects.contains($0.part) || $0.part == "전체" }
+
                     DispatchQueue.main.async {
-                        viewController.schedules = schedules
+                        viewController.schedules = filteredSchedules
                         viewController.updateEvents()
                     }
                 } catch {
                     print("🚨 Decoding Error:", error)
                 }
             }
+
+
+
         }
         task.resume()
     }
