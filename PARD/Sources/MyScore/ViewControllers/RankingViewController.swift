@@ -123,6 +123,7 @@ extension RankingViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         removeTabBarFAB(bool: true)
     }
     
@@ -130,6 +131,7 @@ extension RankingViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.standardAppearance = appearance
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func removeTabBarFAB(bool : Bool) {
