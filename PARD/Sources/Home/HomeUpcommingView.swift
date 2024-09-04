@@ -33,6 +33,11 @@ class HomeUpcommingView : UIView {
         $0.addTarget(self, action: #selector(tappedmoreButton), for: .touchUpInside)
     }
     
+    private lazy var transparentButtonForMore = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.addTarget(self, action: #selector(tappedmoreButton), for: .touchUpInside)
+    }
+
     private let noUpcomingEventsLabel = UILabel().then {
         $0.text = "다가오는 일정이 없어요."
         $0.font = .pardFont.body4
@@ -102,8 +107,9 @@ class HomeUpcommingView : UIView {
         addSubview(stackView)
         addSubview(dDayLabel)
         addSubview(noUpcomingEventsLabel)
+        addSubview(transparentButtonForMore)
         
-//        stackView.addArrangedSubview(contentLabel)
+        //        stackView.addArrangedSubview(contentLabel)
         stackView.addArrangedSubview(eventDateLabel)
         stackView.addArrangedSubview(eventLocationLabel)
         
@@ -116,6 +122,10 @@ class HomeUpcommingView : UIView {
         moreButton.snp.makeConstraints { make in
             make.centerY.equalTo(upcommingLabel)
             make.trailing.equalToSuperview().offset(-24)
+        }
+        
+        transparentButtonForMore.snp.makeConstraints { make in
+            make.edges.equalTo(moreButton).inset(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10))
         }
         
         separator.snp.makeConstraints { make in
