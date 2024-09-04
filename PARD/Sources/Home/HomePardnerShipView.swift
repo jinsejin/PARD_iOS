@@ -25,6 +25,11 @@ class HomePardnerShipView : UIView {
         $0.addTarget(self, action: #selector(tappedmoreButton), for: .touchUpInside)
     }
     
+    private lazy var transparentButton = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.addTarget(self, action: #selector(tappedmoreButton), for: .touchUpInside)
+    }
+    
     private let podPointLabel = UILabel().then {
         $0.text = "파드 포인트"
         $0.textColor = .pard.gray10
@@ -133,7 +138,12 @@ class HomePardnerShipView : UIView {
         addSubview(topStackView)
         addSubview(separator)
         addSubview(bottomStackView)
-      
+        addSubview(transparentButton)
+        
+        transparentButton.snp.makeConstraints { make in
+            make.edges.equalTo(moreButton).inset(-10)
+        }
+        
         topStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(22)
             make.leading.equalToSuperview().offset(24)
