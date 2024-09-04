@@ -97,14 +97,23 @@ class UserInfoPolicyViewController: UIViewController {
     }
     
     
+    // 체크박스를 위한 버튼
     private lazy var firstCheckAgreeButton = UIButton().then {
-        configureButton(
-            $0,
-            title: "개인정보 수집 및 이용 동의 (필수)",
-            image: UIImage(named: "checkMark"),
-            target: self ,
-            action: #selector(firstTapCheckAgree)
-        )
+        $0.setImage(UIImage(named: "checkMark"), for: .normal)
+        $0.tintColor = UIColor.pard.gray10
+        $0.backgroundColor = .clear
+        $0.addTarget(self, action: #selector(firstTapCheckAgree), for: .touchUpInside)
+    }
+
+    // 텍스트를 위한 버튼
+    private lazy var firstAgreeTextButton = UIButton().then {
+        $0.setTitle("개인정보 수집 및 이용 동의 (필수)", for: .normal)
+        $0.setUnderline()
+        $0.setTitleColor(UIColor.pard.gray10, for: .normal)
+        $0.titleLabel?.font = UIFont.pardFont.caption1
+        $0.backgroundColor = .clear
+        $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(openPersonalInfoLink), for: .touchUpInside)
     }
     
     private lazy var nextBottomButton = NextBottomButton(title: "다음", didTapHandler: changeBottomEnable, font: .pardFont.head1).then {
@@ -113,13 +122,21 @@ class UserInfoPolicyViewController: UIViewController {
     }
     
     private lazy var secondCheckAgreeButton = UIButton().then {
-        configureButton(
-            $0,
-            title: "서비스 이용약관 (필수)",
-            image: UIImage(named: "checkMark"),
-            target: self ,
-            action: #selector(secondTapCheckAgree)
-        )
+        $0.setImage(UIImage(named: "checkMark"), for: .normal)
+        $0.tintColor = UIColor.pard.gray10
+        $0.backgroundColor = .clear
+        $0.addTarget(self, action: #selector(secondTapCheckAgree), for: .touchUpInside)
+    }
+
+    // 두 번째 텍스트 버튼
+    private lazy var secondAgreeTextButton = UIButton().then {
+        $0.setTitle("서비스 이용약관 (필수)", for: .normal)
+        $0.setUnderline()
+        $0.setTitleColor(UIColor.pard.gray10, for: .normal)
+        $0.titleLabel?.font = UIFont.pardFont.caption1
+        $0.backgroundColor = .clear
+        $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(openServiceInfoLink), for: .touchUpInside)
     }
     
     private lazy var checkImgaeButton = UIButton().then {
@@ -157,23 +174,6 @@ class UserInfoPolicyViewController: UIViewController {
             .regular(string: "에 동의해주세요.", fontSize: 14, fontColor: .pard.gray30)
     }
     
-    private func configureButton(_ button: UIButton, title: String, image: UIImage?, target: Any?, action: Selector) {
-        let intervalSpacing = 8.0
-        let halfIntervalSpacing = intervalSpacing / 2
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont.pardFont.caption1
-        button.setUnderline()
-        button.setTitleColor(UIColor.pard.gray10, for: .normal)
-        button.setImage(image, for: .normal)
-        button.tintColor = UIColor.pard.gray30
-        button.semanticContentAttribute = .forceLeftToRight
-        button.backgroundColor = .clear
-        button.addTarget(target, action: action, for: .touchUpInside)
-        button.contentEdgeInsets = .init(top: 0, left: 8.0 / 2, bottom: 0, right: 8.0)
-        button.imageEdgeInsets = .init(top: 0, left: -halfIntervalSpacing, bottom: 0, right: halfIntervalSpacing)
-        button.titleEdgeInsets = .init(top: 0, left: halfIntervalSpacing, bottom: 0, right: -halfIntervalSpacing)
-    }
-    
     @objc private func tapBackButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -193,21 +193,33 @@ class UserInfoPolicyViewController: UIViewController {
     
     @objc private func firstTapCheckAgree() {
         isTapPersonalAgreeButton.toggle()
-       
-        if isTapServiceAgreeButton && isTapPersonalAgreeButton {
+        
+        if isTapServiceAgreeButton && isTapPersonalAgreeButton{
             isTapAllAgreeButton = true
         } else {
             isTapAllAgreeButton = false
         }
     }
-    
+
+    @objc private func openPersonalInfoLink() {
+        if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-fc37c472e47941d3958765587b57e21f") {
+            UIApplication.shared.open(url)
+        }
+    }
+
     @objc private func secondTapCheckAgree() {
         isTapServiceAgreeButton.toggle()
         
-        if isTapServiceAgreeButton && isTapPersonalAgreeButton {
+        if isTapServiceAgreeButton && isTapPersonalAgreeButton{
             isTapAllAgreeButton = true
         } else {
             isTapAllAgreeButton = false
+        }
+    }
+
+    @objc private func openServiceInfoLink() {
+        if let url = URL(string: "https://www.notion.so/we-pard/Pard-APP-74f6a4d8383d4e4993f28e9463b0d9b0") {
+            UIApplication.shared.open(url)
         }
     }
     
@@ -258,15 +270,19 @@ extension UserInfoPolicyViewController {
         }
     }
     
+    // - MARK: setUp UI
     private func setUpUI() {
         view.addSubview(serviceInfoLabel)
         view.addSubview(agreeButton)
         view.addSubview(agreeView)
-        agreeView.addSubview(stackView)
         view.addSubview(nextBottomButton)
-        stackView.addArrangedSubview(firstCheckAgreeButton)
-        stackView.addArrangedSubview(secondCheckAgreeButton)
         
+        agreeView.addSubview(firstCheckAgreeButton)
+        agreeView.addSubview(firstAgreeTextButton)
+        agreeView.addSubview(secondCheckAgreeButton)
+        agreeView.addSubview(secondAgreeTextButton)
+        
+        // 제약 조건 설정
         setUpNavigaiton()
         setUpserviceInfoLabelText()
         
@@ -276,22 +292,46 @@ extension UserInfoPolicyViewController {
             make.height.equalTo(68)
             make.width.equalTo(327)
         }
+        
         agreeButton.snp.makeConstraints { make in
             make.top.equalTo(serviceInfoLabel.snp.bottom).offset(48)
             make.leading.equalTo(serviceInfoLabel.snp.leading)
         }
+        
         agreeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(agreeButton.snp.bottom).offset(10)
-            make.height.equalTo(104)
             make.width.equalTo(327)
-        }
-        stackView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
+            make.height.equalTo(104)
         }
         
-        nextBottomButton.snp.makeConstraints{ make in
+        firstCheckAgreeButton.snp.makeConstraints { make in
+            make.leading.equalTo(agreeView.snp.leading).offset(16)
+            make.top.equalTo(agreeView.snp.top).offset(20)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        
+        firstAgreeTextButton.snp.makeConstraints { make in
+            make.leading.equalTo(firstCheckAgreeButton.snp.trailing).offset(4)
+            make.centerY.equalTo(firstCheckAgreeButton.snp.centerY)
+            make.trailing.equalTo(agreeView.snp.trailing).offset(-16)
+        }
+        
+        secondCheckAgreeButton.snp.makeConstraints { make in
+            make.leading.equalTo(agreeView.snp.leading).offset(16)
+            make.top.equalTo(firstCheckAgreeButton.snp.bottom).offset(10)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        
+        secondAgreeTextButton.snp.makeConstraints { make in
+            make.leading.equalTo(secondCheckAgreeButton.snp.trailing).offset(4)
+            make.centerY.equalTo(secondCheckAgreeButton.snp.centerY)
+            make.trailing.equalTo(agreeView.snp.trailing).offset(-16)
+        }
+        
+        nextBottomButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(327)
             make.height.equalTo(56)
@@ -320,7 +360,6 @@ extension UserInfoPolicyViewController {
     
     // - ServiceAgreeButton State -
     private func setForSelectedPersonalAgreeButton() {
-        
         firstCheckAgreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
         firstCheckAgreeButton.setImage(UIImage(named: "checkMark")?.withTintColor(UIColor.pard.primaryBlue), for: .normal)
     }
@@ -332,7 +371,6 @@ extension UserInfoPolicyViewController {
     
     // - ServiceAgreeButton state -
     private func setForSelectedServiceAgreeButton() {
-        
         secondCheckAgreeButton.setTitleColor(UIColor.pard.primaryBlue, for: .normal)
         secondCheckAgreeButton.setImage(UIImage(named: "checkMark")?.withTintColor(UIColor.pard.primaryBlue), for: .normal)
     }
