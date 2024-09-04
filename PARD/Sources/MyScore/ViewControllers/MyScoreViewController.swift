@@ -712,6 +712,11 @@ extension MyScoreViewController {
         removeTabBarFAB(bool: true)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     private func removeTabBarFAB(bool : Bool) {
         tabBarController?.setTabBarVisible(visible: !bool, animated: false)
         if let tabBarViewController = tabBarController as? HomeTabBarViewController {
