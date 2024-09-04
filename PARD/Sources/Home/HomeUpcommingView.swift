@@ -174,8 +174,12 @@ class HomeUpcommingView : UIView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let schedules):
-                    print("sucess getDataSchedules")
-                    self?.scheduleData = schedules
+                    print("success getDataSchedules")
+                    var mutableSchedules = schedules  // schedules를 var로 복사
+                    for index in mutableSchedules.indices {
+                        mutableSchedules[index].part = mutableSchedules[index].part.replacingOccurrences(of: "파트", with: "")
+                    }
+                    self?.scheduleData = mutableSchedules
                     self?.labelSetup()
                 case .failure(_):
                     self?.scheduleData = []

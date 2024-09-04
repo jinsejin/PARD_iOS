@@ -163,9 +163,23 @@ class HomeTabBarViewController: UITabBarController {
 extension UITabBar {
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
         var sizeThatFits = super.sizeThatFits(size)
-        let ratio: CGFloat = 0.073
+        let isCompactDevice = isCompactDeviceWithHomeButton()
+        var ratio: CGFloat = 0.073
+        if !isCompactDevice {
+             ratio = 0.083
+        }
         sizeThatFits.height = UIScreen.main.bounds.height * ratio
         return sizeThatFits
+    }
+    
+    private func isCompactDeviceWithHomeButton() -> Bool {
+        let smallDeviceScreenSizes: [CGSize] = [
+            CGSize(width: 320, height: 568), // iPhone SE (1st gen)
+            CGSize(width: 375, height: 667), // iPhone SE (2nd gen)
+            CGSize(width: 414, height: 736)  // iPhone 6,7,8
+        ]
+        let screenSize = UIScreen.main.bounds.size
+        return smallDeviceScreenSizes.contains { $0 == screenSize || CGSize(width: $0.height, height: $0.width) == screenSize }
     }
 }
 

@@ -26,19 +26,26 @@ func getSchedule(for viewController: CalendarViewController) {
                     var schedules = try decoder.decode([ScheduleModel].self, from: JSONdata)
                     print("✅ Success: \(schedules)")
                 
-                    // "파트"라는 문자가 포함된 경우 이를 제거
+                    // "파트"라는 문자가 포함된 경우 제거
                     for index in schedules.indices {
                         schedules[index].part = schedules[index].part.replacingOccurrences(of: "파트", with: "")
                     }
                     
+                    // userEffect에 있는 파트와 일치하거나 "전체"인 일정만 필터링
+                    let userEffects = UserDefaults.standard.string(forKey: "userPart") ?? "iOS"
+                    let filteredSchedules = schedules.filter { userEffects.contains($0.part) || $0.part == "전체" }
+
                     DispatchQueue.main.async {
-                        viewController.schedules = schedules
+                        viewController.schedules = filteredSchedules
                         viewController.updateEvents()
                     }
                 } catch {
                     print("🚨 Decoding Error:", error)
                 }
             }
+
+
+
         }
         task.resume()
     }

@@ -90,10 +90,12 @@ extension CalendarViewController {
         navigationController?.navigationBar.standardAppearance = previousAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
         removeTabBarFAB(bool: false)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
     }
     

@@ -72,7 +72,7 @@ class HomeTopView : UIView {
     func getPangulImg() {
         let totalPangul = Float(totalBonus) + pangoolPoint
         let imageName : String
-        switch totalBonus {
+        switch totalPangul {
         case 0..<26:
             imageName = "level1"
         case 26..<51:
