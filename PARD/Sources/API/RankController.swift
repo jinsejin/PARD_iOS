@@ -38,7 +38,7 @@ func getRankTop3(completion: @escaping (Result<[Rank], RankTop3FetchError>) -> V
         do {
             let decoder = JSONDecoder()
             let ranks = try decoder.decode([Rank].self, from: jsonData)
-            print("✅ \(ranks)")
+            print("✅ ranks = \(ranks)")
             completion(.success(ranks))
         } catch {
             print("🚨 Decoding Error:", error)
@@ -77,9 +77,17 @@ func getRankMe(completion: @escaping (UserRank?) -> Void) {
                 let userRank = try decoder.decode(UserRank.self, from: JSONdata)
                 print("✅ Success: \(userRank)")
                 completion(userRank)
-                // MARK: debuging을 위한 코드입니다.
-                // print("---> \(userRank.partRanking)")
-                // print("---> \(userRank.totalRanking)")
+                
+                // 서버에서 받아온 데이터를 UserDefaults에 저장
+                UserDefaults.standard.set(userRank.partRanking, forKey: "partRanking")
+                UserDefaults.standard.set(userRank.totalRanking, forKey: "totalRanking")
+
+                // 디버깅을 위한 코드
+                let partRanking = UserDefaults.standard.integer(forKey: "partRanking")
+                let totalRanking = UserDefaults.standard.integer(forKey: "totalRanking")
+                print("Stored partRanking: \(partRanking)")
+                print("Stored totalRanking: \(totalRanking)")
+                
             } catch {
                 print("🚨 Decoding Error:", error)
             }
@@ -87,6 +95,7 @@ func getRankMe(completion: @escaping (UserRank?) -> Void) {
         task.resume()
     }
 }
+
 
 func getTotalRank() {
     if let urlLink = URL(string: url + "/rank/total") {
