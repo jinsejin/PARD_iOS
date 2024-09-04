@@ -92,9 +92,9 @@ class MyPageViewController: UIViewController {
         
         myPageLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(0)
-            make.left.equalTo(contentView.snp.left).offset(151)
-            make.right.equalTo(contentView.snp.right).offset(-151)
+            make.centerX.equalTo(contentView)
         }
+
         
         feedbackView.snp.makeConstraints { make in
             make.left.equalTo(contentView.snp.left)
@@ -232,7 +232,7 @@ class MyPageViewController: UIViewController {
             make.top.equalTo(accountLabel.snp.bottom).offset(8)
             make.left.equalTo(contentView.snp.left).offset(24)
             make.right.equalTo(contentView.snp.right).offset(-24)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-24) // 마지막 뷰에 맞춰 contentView 크기 조정
+            make.bottom.equalTo(contentView.snp.bottom).offset(-24) 
         }
         
         logoutLabel.snp.makeConstraints { make in
@@ -289,7 +289,6 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(usageGuideView.snp.centerY)
         }
         
-        // 서비스 이용약관 뷰에 제스처 추가
         let serviceInfoTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(aboutServiceTapped))
         let serviceInfoView = UIView()
         serviceInfoView.addGestureRecognizer(serviceInfoTapGestureRecognizer)
@@ -301,7 +300,6 @@ class MyPageViewController: UIViewController {
             make.top.equalTo(usageGuideView.snp.centerY)
         }
         
-        // 로그아웃 뷰에 제스처 추가
         let logoutTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoutTapped))
         let logoutView = UIView()
         logoutView.addGestureRecognizer(logoutTapGestureRecognizer)
@@ -313,7 +311,6 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(accountView.snp.centerY)
         }
         
-        // 계정 탈퇴 뷰에 제스처 추가
         let deleteAccountTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountTapped))
         let deleteAccountView = UIView()
         deleteAccountView.addGestureRecognizer(deleteAccountTapGestureRecognizer)
