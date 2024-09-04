@@ -395,6 +395,17 @@ class MyScoreViewController: UIViewController {
             $0.height.equalTo(18)
         }
         
+        
+        let transparentButton = UIButton().then {
+            $0.backgroundColor = .clear
+            $0.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
+        }
+        contentView.addSubview(transparentButton)
+        
+        transparentButton.snp.makeConstraints {
+            $0.edges.equalTo(rankingButton).inset(UIEdgeInsets(top: -15, left: -10, bottom: -15, right: -10))
+        }
+        
         let attributedString = NSMutableAttributedString(string: "전체 랭킹 확인하기", attributes: [
             .font: UIFont.pardFont.body1,
             .foregroundColor: UIColor.pard.gray30
