@@ -195,9 +195,8 @@ extension HomeUpcommingView {
     
     private func labelSetup() {
         isUpcomingevent()
-        print(String(describing: upcomingEvents[0].remaingDay))
+//        print(String(describing: upcomingEvents[0].remaingDay))
         if upcomingEvents.isEmpty || scheduleData.isEmpty {
-           
             showNoUpcomingEvents()
             return
         }
@@ -212,7 +211,15 @@ extension HomeUpcommingView {
         contentLabel.text = eventContentLabelSetup(upcomingEvents[0].content, upcomingEvents[0].part)
         eventDateLabel.text = formattedDateString(from: upcomingDate)
         eventTypeLabel.text = upcomingEvents[0].part
-        eventTypeLabel.backgroundColor = .gradientColor.gra
+        if upcomingEvents[0].remaingDay == 0 {
+            eventTypeLabel.backgroundColor = .gradientColor.gra
+        } else {
+            eventTypeLabel.backgroundColor = .pard.blackCard
+            eventTypeLabel.layer.borderWidth = 1.0
+            eventTypeLabel.layer.borderColor = UIColor.gradientColor(frame: eventTypeLabel.bounds).cgColor
+            eventTypeLabel.textColor = UIColor.gradientColor(frame: eventTypeLabel.bounds)
+        }
+      
         
     }
     
