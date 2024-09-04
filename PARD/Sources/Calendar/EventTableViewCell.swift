@@ -129,7 +129,7 @@ class EventTableViewCell: UITableViewCell {
             schedule.part
         )
         
-        if schedule.remaingDay < 0 {
+        if schedule.remaingDay <= 0 {
             titleLabel.textColor = .pard.gray30
             dateLabel.textColor = .pard.gray30
             locationLabel.textColor = .pard.gray30
