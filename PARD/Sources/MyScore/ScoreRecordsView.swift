@@ -27,7 +27,6 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
     }
     
     
-    
     override init(frame: CGRect) {
        let layout = UICollectionViewFlowLayout()
        layout.scrollDirection = .horizontal
