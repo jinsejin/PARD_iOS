@@ -123,7 +123,7 @@ extension RankingViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
     }
     
@@ -135,7 +135,6 @@ extension RankingViewController {
     }
     
     private func removeTabBarFAB(bool : Bool) {
-        tabBarController?.setTabBarVisible(visible: !bool, animated: false)
         if let tabBarViewController = tabBarController as? HomeTabBarViewController {
             tabBarViewController.floatingButton.isHidden = bool
         }
