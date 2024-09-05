@@ -152,7 +152,7 @@ class EventTableViewCell: UITableViewCell {
     
     private func eventContentLabelSetup(_ content: String,_ part: String) -> String{
         if content != "" {
-            return "\(part) \(content)"
+            return "\(part) : \(content)"
         } else {
             return ""
         }
